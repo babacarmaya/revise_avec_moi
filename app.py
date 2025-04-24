@@ -217,6 +217,11 @@ def mathematiques_terminale():
 def histoire_terminale():
     return render_template('cours/histoire/histoire_terminal.html')
 
+@app.route('/cours/histoire/chapitre1')
+@login_required
+def histoire_chapitre1():
+    return render_template('cours/histoire/chapitre1._terminal.html')
+
 @app.route('/cours/anglais/terminale')
 @login_required
 def anglais_terminale():
