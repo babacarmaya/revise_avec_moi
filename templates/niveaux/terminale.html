@@ -1,0 +1,40 @@
+<!-- premiere.html (et pareil pour seconde.html et terminale.html) -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="class-header">
+    <h1>Classe de Terminale</h1>
+</div>
+
+<div class="subjects-grid">
+    <a href="{{ url_for('mathematiques_terminale') }}" class="subject-card math">
+        <h2>Mathématiques</h2>
+        <p>accéder aux cours</p>
+    </a>
+
+    <a href="{{ url_for('physique_chimie_terminale') }}" class="subject-card physics">
+        <h2>Physique-Chimie</h2>
+        <p>accéder aux cours</p>
+    </a>
+
+    <a href="{{ url_for('svt_terminale') }}" class="subject-card svt">
+        <h2>SVT</h2>
+        <p>accéder aux cours</p>
+    </a>
+
+    <a href="{{ url_for('histoire_terminale') }}" class="subject-card history">
+        <h2>histoire</h2>
+        <p>accéder aux cours</p>
+    </a>
+
+    <a href="{{ url_for('anglais_terminale') }}" class="subject-card english">
+        <h2>Anglais</h2>
+        <p>accéder aux cours</p>
+    </a>
+
+    <a href="{{ url_for('philo_terminale') }}" class="subject-card philosophy">
+        <h2>Philosophie</h2>
+        <p>accéder aux cours</p>
+    </a>
+</div>
+{% endblock %}

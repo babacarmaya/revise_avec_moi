@@ -1,0 +1,28 @@
+<!-- login.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card">
+        <h1>Connexion</h1>
+        
+        <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+            <div class="form-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-field">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="auth-button">Se connecter</button>
+            
+            <p class="auth-link">
+                Pas encore inscrit ? <a href="{{ url_for('register') }}">S'inscrire</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

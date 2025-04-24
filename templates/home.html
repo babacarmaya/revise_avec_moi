@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Bienvenue sur<br>Révise Avec Moi</h1>
+        <div class="floating-icons">
+            <img src="{{ url_for('static', filename='images/icons/star.png') }}" class="icon star" alt="étoile">
+            <img src="{{ url_for('static', filename='images/icons/book.png') }}" class="icon book" alt="livre">
+            <img src="{{ url_for('static', filename='images/icons/pencil.png') }}" class="icon pencil" alt="crayon">
+            <img src="{{ url_for('static', filename='images/icons/globe.png') }}" class="icon globe" alt="globe">
+        </div>
+    </div>
+</div>
+
+<div class="levels-section">
+    <div class="level-card">
+        <h2>Seconde</h2>
+        <a href="{{ url_for('seconde') }}" class="access-button">accéder aux cours</a>
+    </div>
+    
+    <div class="level-card">
+        <h2>Première</h2>
+        <a href="{{ url_for('premiere') }}" class="access-button">accéder aux cours</a>
+    </div>
+    
+    <div class="level-card">
+        <h2>Terminale</h2>
+        <a href="{{ url_for('terminale') }}" class="access-button">accéder aux cours</a>
+    </div>
+</div>
+{% endblock %}

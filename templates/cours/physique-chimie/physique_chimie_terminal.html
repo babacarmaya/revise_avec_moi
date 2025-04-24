@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="philo-container">
+    <header class="philo-header">
+        <div class="header-content">
+            <h1>Physique-Chimie Terminale</h1>
+            <p class="header-description">Programme officiel</p>
+        </div>
+        <div class="global-progress">
+            <div class="progress-stats">
+                <span class="progress-percentage">0%</span>
+                <span class="progress-label">de progression</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="domains-container">
+        <!-- PARTIE CHIMIE -->
+        <h2 class="section-title">CHIMIE</h2>
+
+        <!-- Chapitre 1 : Chimie Organique -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Chapitre 1 : Chimie Organique</h2>
+                <span class="domain-progress">0/2 leçons</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">1.1</div>
+                    <div class="chapter-content">
+                        <h3>Les alcools et les polyalcools</h3>
+                        <div class="chapter-progress">
+                            <button class="btn-start">Commencer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">1.2</div>
+                    <div class="chapter-content">
+                        <h3>Les amines</h3>
+                        <div class="chapter-progress">
+                            <button class="btn-start">Commencer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapitre 2 : Acides et Bases -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Chapitre 2 : Acides et Bases</h2>
+                <span class="domain-progress">0/5 leçons</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">2.1</div>
+                    <div class="chapter-content">
+                        <h3>Généralités sur les acides et les bases en solutions aqueuses</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">2.2</div>
+                    <div class="chapter-content">
+                        <h3>Les acides carboxyliques et dérivés</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">2.3</div>
+                    <div class="chapter-content">
+                        <h3>Les acides α-aminés</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">2.4</div>
+                    <div class="chapter-content">
+                        <h3>Les acides forts – Les bases fortes</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">2.5</div>
+                    <div class="chapter-content">
+                        <h3>Acides faibles – Bases faibles et couples acide/base</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE PHYSIQUE -->
+        <h2 class="section-title">PHYSIQUE</h2>
+
+        <!-- Chapitre 3 : Mécanique et Mouvements -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Chapitre 3 : Mécanique et Mouvements</h2>
+                <span class="domain-progress">0/3 leçons</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">3.1</div>
+                    <div class="chapter-content">
+                        <h3>Oscillations mécaniques libres</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">3.2</div>
+                    <div class="chapter-content">
+                        <h3>Mouvement du centre d'inertie d'un solide</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">3.3</div>
+                    <div class="chapter-content">
+                        <h3>Mouvements dans les champs uniformes</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapitre 4 : Électricité et Circuits -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Chapitre 4 : Électricité et Circuits</h2>
+                <span class="domain-progress">0/3 leçons</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">4.1</div>
+                    <div class="chapter-content">
+                        <h3>Puissance en régime sinusoïdal</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">4.2</div>
+                    <div class="chapter-content">
+                        <h3>Résonance d'intensité d'un circuit RLC série</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">4.3</div>
+                    <div class="chapter-content">
+                        <h3>Circuit RLC série en régime sinusoïdal forcé</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapitre 5 : Physique Nucléaire -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Chapitre 5 : Physique Nucléaire</h2>
+                <span class="domain-progress">0/2 leçons</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">5.1</div>
+                    <div class="chapter-content">
+                        <h3>Réactions nucléaires spontanées</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">5.2</div>
+                    <div class="chapter-content">
+                        <h3>Réactions nucléaires provoquées</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapitre 6 : Ondes et Optique -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Chapitre 6 : Ondes et Optique</h2>
+                <span class="domain-progress">0/2 leçons</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">6.1</div>
+                    <div class="chapter-content">
+                        <h3>Modèle ondulatoire de la lumière</h3>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">6.2</div>
+                    <div class="chapter-content">
+                        <h3>Champ magnétique</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

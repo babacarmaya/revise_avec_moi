@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    <h2>Quiz sur {{ quiz.course.title }}</h2>
+    
+    <div id="questions">
+        {% for question in quiz.questions %}
+        <div class="question-card">
+            <h3>{{ question.question }}</h3>
+            <div class="options">
+                {% for option in question.options %}
+                <label class="option">
+                    <input type="radio" name="q{{ loop.parent.index }}" value="{{ option }}">
+                    {{ option }}
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <button id="submitQuiz" class="btn btn-primary">
+        Soumettre les réponses
+    </button>
+</div>
+{% endblock %}

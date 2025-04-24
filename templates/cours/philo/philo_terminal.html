@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="philo-container">
+    <!-- En-tête de la page -->
+    <header class="philo-header">
+        <div class="header-content">
+            <h1>Philosophie Terminale</h1>
+            <p class="header-description">Programme officiel de philosophie pour la classe de terminale</p>
+        </div>
+        <div class="global-progress">
+            <div class="progress-stats">
+                <span class="progress-percentage">0%</span>
+                <span class="progress-label">de progression</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteneur principal des domaines -->
+    <div class="domains-container">
+        <!-- Domaine I -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Domaine I : La réflexion philosophique</h2>
+                <span class="domain-progress">0/4 chapitres</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">01</div>
+                    <div class="chapter-content">
+                        <h3>Les origines et la spécifique de la réflexion philosophique</h3>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Origines</span>
+                            <span class="topic-tag">Réflexion</span>
+                            <span class="topic-tag">Philosophie</span>
+                        </div>
+                        <div class="chapter-progress">
+                            <div class="progress-indicator">
+                                <i class="fas fa-book-reader"></i>
+                                <span>Non commencé</span>
+                            </div>
+                            <button class="btn-start" onclick="window.location.href='{{ url_for('philo_chapitre1') }}'">
+                                start
+                            </button>                              
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">02</div>
+                    <div class="chapter-content">
+                        <h3>Les grandes interrogations philosophiques</h3>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Questions</span>
+                            <span class="topic-tag">Réflexion</span>
+                        </div>
+                        <div class="chapter-progress">
+                            <div class="progress-indicator">
+                                <i class="fas fa-lock"></i>
+                                <span>Verrouillé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">03</div>
+                    <div class="chapter-content">
+                        <h3>Les enjeux, finalités et perspective philosophique</h3>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Enjeux</span>
+                            <span class="topic-tag">Finalités</span>
+                        </div>
+                        <div class="chapter-progress">
+                            <div class="progress-indicator">
+                                <i class="fas fa-lock"></i>
+                                <span>Verrouillé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">04</div>
+                    <div class="chapter-content">
+                        <h3>L'idée d'une philosophie africaine</h3>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Afrique</span>
+                            <span class="topic-tag">Culture</span>
+                        </div>
+                        <div class="chapter-progress">
+                            <div class="progress-indicator">
+                                <i class="fas fa-lock"></i>
+                                <span>Verrouillé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Domaine II -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Domaine II : La vie sociale</h2>
+                <span class="domain-progress">0/5 chapitres</span>
+            </div>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">05</div>
+                    <div class="chapter-content">
+                        <h3>Nature et Culture & Le Langage</h3>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Nature</span>
+                            <span class="topic-tag">Culture</span>
+                            <span class="topic-tag">Langage</span>
+                        </div>
+                        <div class="chapter-progress">
+                            <div class="progress-indicator">
+                                <i class="fas fa-lock"></i>
+                                <span>Verrouillé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ajoutez les chapitres 6-9 de la même manière -->
+            </div>
+        </section>
+
+        <!-- Domaine III -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Domaine III : Épistémologie</h2>
+                <span class="domain-progress">0/4 chapitres</span>
+            </div>
+            <div class="chapters-grid">
+                <!-- Chapitres 10-13 -->
+            </div>
+        </section>
+
+        <!-- Domaine IV -->
+        <section class="domain-section">
+            <div class="domain-header">
+                <h2>Domaine IV : Esthétique</h2>
+                <span class="domain-progress">0/2 chapitres</span>
+            </div>
+            <div class="chapters-grid">
+                <!-- Chapitres 14-15 -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Barre latérale de navigation rapide -->
+    <nav class="quick-nav">
+        <ul>
+            <li><a href="#domaine-1" class="active">Domaine I</a></li>
+            <li><a href="#domaine-2">Domaine II</a></li>
+            <li><a href="#domaine-3">Domaine III</a></li>
+            <li><a href="#domaine-4">Domaine IV</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Gestion du scroll pour la navigation rapide
+    const navLinks = document.querySelectorAll('.quick-nav a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Gestion des boutons "Commencer"
+    const startButtons = document.querySelectorAll('.btn-start');
+    
+    startButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const chapterCard = this.closest('.chapter-card');
+            const chapterTitle = chapterCard.querySelector('h3').textContent;
+            // Ici, vous pouvez ajouter la logique pour commencer un chapitre
+            console.log(`Commencer le chapitre : ${chapterTitle}`);
+        });
+    });
+});
+</script>
+{% endblock %}

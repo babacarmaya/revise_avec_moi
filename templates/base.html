@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Révise Avec Moi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dark-mode.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-switch.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </div>
+        </label>
+    </div>
+    <!-- Conteneur des notifications toast -->
+    <div class="toast-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="toast-notification {{ category }}">
+                        <div class="toast-content">
+                            {% if category == 'success' %}
+                                <i class="fas fa-check-circle"></i>
+                            {% elif category == 'error' %}
+                                <i class="fas fa-exclamation-circle"></i>
+                            {% else %}
+                                <i class="fas fa-info-circle"></i>
+                            {% endif %}
+                            <div class="message">{{ message }}</div>
+                        </div>
+                        <div class="progress"></div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Logo" class="logo">
+                </a>
+            </div>
+            
+            {% if 'user_id' in session %}
+                <nav class="main-nav">
+                    {% if request.endpoint != 'home' %}
+                        <a href="{{ url_for('home') }}">Accueil</a>
+                    {% endif %}
+
+                    {% if session['niveau'] == 'seconde' and request.endpoint != 'seconde' %}
+                        <a href="{{ url_for('seconde') }}">Mes cours</a>
+                    {% elif session['niveau'] == 'premiere' and request.endpoint != 'premiere' %}
+                        <a href="{{ url_for('premiere') }}">Mes cours</a>
+                    {% elif session['niveau'] == 'terminale' and request.endpoint != 'terminale' %}
+                        <a href="{{ url_for('terminale') }}">Mes cours</a>
+                    {% endif %}
+                </nav>
+
+                <div class="user-menu">
+                    <div class="user-menu-trigger">
+                        <i class="fas fa-user"></i>
+                        <span class="user-name">{{ session.get('prenom', 'Utilisateur') }}</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <a href="{{ url_for('logout') }}">
+                            <i class="fas fa-exchange-alt"></i> Changer de compte
+                        </a>
+                        <a href="{{ url_for('profile') }}">
+                            <i class="fas fa-user"></i> Mon Profil
+                        </a>
+                        <a href="{{ url_for('logout') }}" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Révise Avec Moi - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <!-- Script pour les notifications -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notifications = document.querySelectorAll('.toast-notification');
+            
+            notifications.forEach(notification => {
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.5s forwards';
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 500);
+                }, 3000);
+            });
+
+            // Gestion du menu utilisateur
+            const userMenuTrigger = document.querySelector('.user-menu-trigger');
+            const userDropdown = document.querySelector('.user-dropdown');
+
+            if (userMenuTrigger) {
+                userMenuTrigger.addEventListener('click', () => {
+                    userDropdown.classList.toggle('active');
+                });
+
+                // Ferme le menu lors d'un clic à l'extérieur
+                document.addEventListener('click', (e) => {
+                    if (!userMenuTrigger.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('darkmode-toggle');
+            if(toggle) {
+                console.log('Toggle trouvé !');
+                
+                toggle.addEventListener('click', () => {
+                    console.log('Click détecté !');
+                    if (toggle.checked) {
+                        document.body.style.backgroundColor = '#1a1a1a';
+                        document.body.style.color = '#ffffff';
+                    } else {
+                        document.body.style.backgroundColor = '#ffffff';
+                        document.body.style.color = '#333333';
+                    }
+                });
+            } else {
+                console.log('Toggle non trouvé');
+            }
+        });
+        </script>
+</body>
+</body>
+</html>

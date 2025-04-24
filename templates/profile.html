@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container">
+    <!-- En-tête du profil -->
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="profile-info">
+            <h1>{{ user.prenom }} {{ user.nom }}</h1>
+            <p class="level-badge">Niveau : {{ user.niveau|title }}</p>
+            <p class="join-date">Membre depuis {{ user.date_inscription.strftime('%d %B %Y') }}</p>
+        </div>
+    </div>
+
+    <!-- Statistiques -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Quiz Complétés</h3>
+            <p>{{ total_quizzes }}</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-star"></i>
+            <h3>Score Moyen</h3>
+            <p>{{ "%.1f"|format(average_score) }}%</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-medal"></i>
+            <h3>Badges Gagnés</h3>
+            <p>{{ user.badges|length }}</p>
+        </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="profile-section">
+        <h2>Mes Badges</h2>
+        <div class="badges-grid">
+            {% if user.badges %}
+                {% for badge in user.badges %}
+                <div class="badge-card">
+                    <i class="fas {{ badge.image_url }}"></i>
+                    <h3>{{ badge.nom }}</h3>
+                    <p>{{ badge.description }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-data">Pas encore de badges gagnés</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Derniers résultats -->
+    <div class="profile-section">
+        <h2>Derniers Résultats</h2>
+        <div class="results-list">
+            {% if recent_results %}
+                {% for result in recent_results %}
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>{{ result.quiz.titre }}</h3>
+                        <p>{{ result.date_completion.strftime('%d/%m/%Y') }}</p>
+                    </div>
+                    <div class="result-score">
+                        <span class="score">{{ result.score }}%</span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-data">Pas encore de quiz complétés</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Dans votre profile.html -->
+<div class="settings-box">
+    <h3>Paramètres d'affichage</h3>
+    <div class="dark-mode-toggle">
+        <span>Mode sombre</span>
+        <label class="switch">
+            <input type="checkbox" id="darkmode-toggle">
+            <span class="switch-slider"></span>
+        </label>
+    </div>
+</div>
+
+
+
+    <!-- Boutons d'action -->
+    <div class="profile-actions">
+        <a href="#" class="btn-edit">
+            <i class="fas fa-edit"></i> Modifier le profil
+        </a>
+        <a href="{{ url_for('logout') }}" class="btn-logout">
+            <i class="fas fa-sign-out-alt"></i> Déconnexion
+        </a>
+    </div>
+</div>
+{% endblock %}
