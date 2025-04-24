@@ -3,93 +3,181 @@
 {% block content %}
 <div class="course-container">
     <!-- En-tête du chapitre -->
-    <div class="chapter-header">
-        <div class="chapter-number">Chap 1</div>
-        <h1>Les Origines de la Philosophie</h1>
-        <div class="chapter-meta">
-            <span><i class="fas fa-clock"></i> 30 minutes </span>
-            <span><i class="fas fa-book"></i>  Introduction</span>
+    <div class="chapter-container">
+        <div class="chapter-header">
+            <div class="chapter-number">Chap 1</div>
+            <h1 class="chapter-title">Les Origines de la Philosophie</h1>
+            <div class="chapter-info">
+                <span>30 minutes</span>
+                <span>Introduction</span>
+            </div>
         </div>
-    </div>
     </div>
 
     <!-- Introduction interactive -->
-    <div class="chapter-introduction">
-        <div class="intro-card">
-            <h2>Objectifs du chapitre</h2>
-            <ul class="objectives-list">
-                <li><i class="fas fa-check-circle"></i> Comprendre les origines de la philosophie</li>
-                <li><i class="fas fa-check-circle"></i> Distinguer la philosophie des autres modes de pensée</li>
-                <li><i class="fas fa-check-circle"></i> Saisir l'évolution de la pensée philosophique</li>
-                <li><i class="fas fa-check-circle"></i> Appréhender les différentes définitions de la philosophie</li>
-            </ul>
-        </div>
-
-        <div class="question-box">
-            <h3>Question de réflexion</h3>
-            <p>Pourquoi l'homme a-t-il besoin de philosopher ?</p>
-        </div>
+    <div class="objectives-section">
+        <h2 class="objectives-title">Objectifs du chapitre</h2>
+        <ul class="objectives-list">
+            <li>Comprendre les origines de la philosophie</li>
+            <li>Distinguer la philosophie des autres modes de pensée</li>
+            <li>Saisir l'évolution de la pensée philosophique</li>
+            <li>Appréhender les différentes définitions de la philosophie</li>
+        </ul>
     </div>
 
+    <div class="reflection-section">
+        <h2 class="reflection-title">Question de réflexion</h2>
+        <p class="reflection-question">Pourquoi l'homme a-t-il besoin de philosopher ?</p>
+    </div>
+</div>
     <!-- Section 1: La Naissance de la Philosophie -->
-    <section class="course-section">
+    
+
+    
+    <div class="philosophy-birth-section">
         <h2>1. La Naissance de la Philosophie</h2>
-        
-        <div class="concept-card">
-            <div class="card-header">
-                <i class="fas fa-lightbulb"></i>
-                <h3>Le "Miracle Grec"</h3>
+    
+        <div class="miracle-grec-box">
+            <h3>Le "Miracle Grec"</h3>
+            <p class="introduction">La philosophie naît en Grèce antique au VIème siècle av. J.-C., marquant une rupture fondamentale avec les explications mythiques et religieuses du monde. Ce moment historique est appelé le "Miracle Grec" car il représente un tournant majeur dans la pensée humaine.</p>
+            
+            <div class="explanation-box">
+                <h4>Pourquoi parle-t-on de "miracle" ?</h4>
+                <ul>
+                    <li>Pour la première fois dans l'histoire, l'homme cherche à expliquer le monde par la raison plutôt que par les mythes</li>
+                    <li>C'est une révolution intellectuelle qui pose les bases de la pensée rationnelle</li>
+                    <li>Ce changement s'opère dans un temps et un lieu précis : la Grèce antique</li>
+                </ul>
             </div>
-            <div class="card-content">
-                <p>La philosophie naît en Grèce antique au VIème siècle av. J.-C., marquant une rupture avec les explications mythiques et religieuses du monde.</p>
+    
+            <div class="timeline-detailed">
+                <h4>Évolution Chronologique</h4>
                 
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="date">VIème siècle av. J.-C.</div>
-                        <div class="event">École de Milet</div>
-                        <div class="description">Première école philosophique avec Thalès</div>
+                <div class="timeline-item">
+                    <div class="date">VIème siècle av. J.-C.</div>
+                    <div class="event">
+                        <h5>École de Milet</h5>
+                        <p><strong>Fondateur :</strong> Thalès de Milet</p>
+                        <p><strong>Innovation :</strong> Première tentative d'explication rationnelle du monde</p>
+                        <p><strong>Concept clé :</strong> Recherche du principe premier (archè) de toutes choses</p>
+                        <ul>
+                            <li>Pour Thalès, tout vient de l'eau</li>
+                            <li>Pour Anaximandre, c'est l'infini</li>
+                            <li>Pour Anaximène, c'est l'air</li>
+                        </ul>
                     </div>
-                    <div class="timeline-item">
-                        <div class="date">Vème siècle av. J.-C.</div>
-                        <div class="event">Période Socratique</div>
-                        <div class="description">La philosophie "descend du ciel sur la terre"</div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="date">Vème siècle av. J.-C.</div>
+                    <div class="event">
+                        <h5>Période Socratique</h5>
+                        <p><strong>Innovation :</strong> "La philosophie descend du ciel sur la terre"</p>
+                        <p><strong>Signification :</strong> La réflexion se tourne vers l'homme et la société</p>
+                        <ul>
+                            <li>Questionnement sur la nature de l'homme</li>
+                            <li>Réflexion sur la justice et la vertu</li>
+                            <li>Développement de la méthode dialectique</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="important-box">
-            <h4>À retenir</h4>
-            <ul>
-                <li>Passage du mythe à la raison</li>
-                <li>Recherche d'explications rationnelles</li>
-                <li>Naissance de la pensée critique</li>
-            </ul>
-        </div>
-
-        <!-- Mini-quiz -->
-        <div class="quiz-section">
-            <h4>Vérifions vos connaissances</h4>
-            <div class="quiz-question">
-                <p>Pourquoi parle-t-on de "miracle grec" ?</p>
-                <div class="quiz-options">
-                    <label class="option">
-                        <input type="radio" name="q1" value="a">
-                        <span>Apparition soudaine d'une pensée rationnelle</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="b">
-                        <span>Découverte de nouveaux territoires</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="c">
-                        <span>Invention de l'alphabet</span>
-                    </label>
+    
+            <div class="key-points-detailed">
+                <h4>À retenir : Les Trois Ruptures Fondamentales</h4>
+                
+                <div class="key-point">
+                    <h5>1. Passage du mythe à la raison</h5>
+                    <p>Abandon des explications divines au profit d'explications rationnelles. Les phénomènes naturels sont expliqués par des causes naturelles, non plus par l'intervention des dieux.</p>
+                </div>
+    
+                <div class="key-point">
+                    <h5>2. Recherche d'explications rationnelles</h5>
+                    <p>Développement d'une méthode de pensée basée sur l'observation, l'argumentation et la démonstration logique. Les philosophes cherchent à comprendre le "pourquoi" des choses.</p>
+                </div>
+    
+                <div class="key-point">
+                    <h5>3. Naissance de la pensée critique</h5>
+                    <p>Émergence d'une attitude intellectuelle nouvelle : questionnement systématique, remise en cause des opinions reçues, recherche de la vérité par le dialogue et la discussion.</p>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+    
+    <style>
+    .philosophy-birth-section {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .miracle-grec-box {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .introduction {
+        font-size: 1.1em;
+        line-height: 1.6;
+        color: #444;
+        margin-bottom: 25px;
+    }
+    
+    .explanation-box {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+    
+    .timeline-detailed {
+        margin: 30px 0;
+    }
+    
+    .timeline-item {
+        border-left: 3px solid #3498db;
+        padding-left: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .date {
+        color: #3498db;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .event h5 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+    
+    .key-points-detailed {
+        background: #f0f4f8;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+    
+    .key-point {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: white;
+        border-radius: 8px;
+    }
+    
+    .key-point h5 {
+        color: #3498db;
+        margin-bottom: 10px;
+    }
+    
+    .key-point p {
+        line-height: 1.5;
+        color: #555;
+    }
+    </style>
+    
     <!-- Styles spécifiques -->
     <style>
     .course-container {
@@ -388,6 +476,38 @@
     to { opacity: 1; }
 }
 </style>
+<style>
+    /* Reset du conteneur principal */
+
+    /* Conteneur pour le contenu centré */
+    .content-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* Appliquer aux sections qui doivent être centrées */
+    .objectives-section,
+    .reflection-section,
+    .course-section,
+    .quiz-container,
+    .definition-container,
+    .comparison-container,
+    .historical-timeline,
+    .philosopher-timeline {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    @media (max-width: 850px) {
+        .content-wrapper {
+            padding: 0 10px;
+        }
+    }
+    </style>
+    
+
 
 <script>
 // JavaScript pour les onglets
@@ -1318,6 +1438,80 @@ document.addEventListener('DOMContentLoaded', function() {
         .philosopher-milestone {
             min-width: 250px;
         }
+    }
+    .chapter-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .chapter-header {
+        background: linear-gradient(to right, #4b4f82, #38a3a5);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+    }
+    
+    .chapter-title {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+    }
+    
+    .chapter-info {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .objectives-section {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .objectives-title {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .objectives-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .objectives-list li {
+        margin: 10px 0;
+        padding-left: 25px;
+        position: relative;
+    }
+    
+    .objectives-list li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #38a3a5;
+    }
+    
+    .reflection-section {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .reflection-title {
+        color: #333;
+        margin-bottom: 15px;
+    }
+    
+    .reflection-question {
+        font-style: italic;
+        color: #666;
     }
     </style>
     
