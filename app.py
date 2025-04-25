@@ -195,7 +195,10 @@ def profile():
                          recent_results=recent_results)
 
 
- ########################################## Matiere terminale
+ ########################################## Matiere terminale ############################################################
+
+ #PHILO
+
 @app.route('/cours/philo/terminale')
 @login_required
 def philo_terminale():
@@ -206,21 +209,71 @@ def philo_terminale():
 def philo_chapitre1():
     return render_template('cours/philo/chapitre1._terminal.html')
 
+@app.route('/cours/philo/chapitre2')
+@login_required
+def philo_chapitre2():
+    return render_template('cours/philo/chapitre2._terminal.html')
 
+@app.route('/cours/philo/chapitre3')
+@login_required
+def philo_chapitre3():
+    return render_template('cours/philo/chapitre3._terminal.html')
+
+@app.route('/cours/philo/chapitre4')
+@login_required
+def philo_chapitre4():
+    return render_template('cours/philo/chapitre4._terminal.html')
+
+@app.route('/cours/philo/chapitre5')
+@login_required
+def philo_chapitre5():
+    return render_template('cours/philo/chapitre5._terminal.html')
+
+@app.route('/cours/philo/chapitre6')
+@login_required
+def philo_chapitre6():
+    return render_template('cours/philo/chapitre6._terminal.html')
+
+@app.route('/cours/philo/chapitre7')
+@login_required
+def philo_chapitre7():
+    return render_template('cours/philo/chapitre7._terminal.html')
+
+@app.route('/cours/philo/chapitre8')
+@login_required
+def philo_chapitre8():
+    return render_template('cours/philo/chapitre8._terminal.html')
+
+#PHILO
+
+#Mathématiques
 @app.route('/cours/mathematiques/terminale')
 @login_required
 def mathematiques_terminale():
     return render_template('cours/maths/maths_terminal.html')
 
+
+
+
+
+
+#Histoire
 @app.route('/cours/histoire/terminale')
 @login_required
 def histoire_terminale():
     return render_template('cours/histoire/histoire_terminal.html')
 
+
 @app.route('/cours/histoire/chapitre1')
 @login_required
 def histoire_chapitre1():
     return render_template('cours/histoire/chapitre1._terminal.html')
+
+@app.route('/cours/histoire/chapitre2')
+@login_required
+def histoire_chapitre2():
+    return render_template('cours/histoire/chapitre2._terminal.html')
+
 
 #Les conséquences et les règlements de la Seconde Guerre mondiale
 @app.route('/cours/histoire/chapitre3')
@@ -228,27 +281,98 @@ def histoire_chapitre1():
 def histoire_chapitre3():
     return render_template('cours/histoire/chapitre3._terminal.html')
 
-#type de commentaires
-@app.route('/cours/histoire/chapitre2')
+@app.route('/cours/histoire/chapitre4')
 @login_required
-def histoire_chapitre2():
-    return render_template('cours/histoire/chapitre2._terminal.html')
+def histoire_chapitre4():
+    return render_template('cours/histoire/chapitre4._terminal.html')
+
+@app.route('/cours/histoire/chapitre5')
+@login_required
+def histoire_chapitre5():
+    return render_template('cours/histoire/chapitre5._terminal.html')
+
+@app.route('/cours/histoire/chapitre6')
+@login_required
+def histoire_chapitre6():
+    return render_template('cours/histoire/chapitre6._terminal.html')
+
+@app.route('/cours/histoire/chapitre7')
+@login_required
+def histoire_chapitre7():
+    return render_template('cours/histoire/chapitre7._terminal.html')
+
+@app.route('/cours/histoire/chapitre8')
+@login_required
+def histoire_chapitre8():
+    return render_template('cours/histoire/chapitre8._terminal.html')
+
+
+#Histoire
+
+
+#Anglais 
 
 @app.route('/cours/anglais/terminale')
 @login_required
 def anglais_terminale():
     return render_template('cours/anglais/anglais_terminal.html')
 
+
 @app.route('/cours/Anglais/chapitre1')
 @login_required
 def anglais_chapitre1():
     return render_template('cours/anglais/chapitre1._terminal.html')
+
+@app.route('/cours/Anglais/chapitre2')
+@login_required
+def anglais_chapitre2():
+    return render_template('cours/anglais/chapitre2._terminal.html')
+
+@app.route('/cours/Anglais/chapitre3')
+@login_required
+def anglais_chapitre3():
+    return render_template('cours/anglais/chapitre3._terminal.html')
+
+@app.route('/cours/Anglais/chapitre4')
+@login_required
+def anglais_chapitre4():
+    return render_template('cours/anglais/chapitre4._terminal.html')
+
+@app.route('/cours/Anglais/chapitre5')
+@login_required
+def anglais_chapitre5():
+    return render_template('cours/anglais/chapitre5._terminal.html')
+
+@app.route('/cours/Anglais/chapitre6')
+@login_required
+def anglais_chapitre6():
+    return render_template('cours/anglais/chapitre6._terminal.html')
+
+@app.route('/cours/Anglais/chapitre7')
+@login_required
+def anglais_chapitre7():
+    return render_template('cours/anglais/chapitre7._terminal.html')
+
+@app.route('/cours/Anglais/chapitre8')
+@login_required
+def anglais_chapitre8():
+    return render_template('cours/anglais/chapitre8._terminal.html')
+
+
+#Anglais 
+
+
+
+
 
 
 @app.route('/cours/physique-chimie/terminale')
 @login_required
 def physique_chimie_terminale():
     return render_template('cours/physique-chimie/physique_chimie_terminal.html')
+
+
+
 
 @app.route('/cours/svt/terminale')
 @login_required
