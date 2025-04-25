@@ -227,6 +227,12 @@ def histoire_chapitre1():
 def anglais_terminale():
     return render_template('cours/anglais/anglais_terminal.html')
 
+@app.route('/cours/Anglais/chapitre1')
+@login_required
+def anglais_chapitre1():
+    return render_template('cours/anglais/chapitre1._terminal.html')
+
+
 @app.route('/cours/physique-chimie/terminale')
 @login_required
 def physique_chimie_terminale():
