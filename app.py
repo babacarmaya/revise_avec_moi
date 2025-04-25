@@ -222,6 +222,12 @@ def histoire_terminale():
 def histoire_chapitre1():
     return render_template('cours/histoire/chapitre1._terminal.html')
 
+#Les conséquences et les règlements de la Seconde Guerre mondiale
+@app.route('/cours/histoire/chapitre3')
+@login_required
+def histoire_chapitre3():
+    return render_template('cours/histoire/chapitre3._terminal.html')
+
 #type de commentaires
 @app.route('/cours/histoire/chapitre2')
 @login_required
