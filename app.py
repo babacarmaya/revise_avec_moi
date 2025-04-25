@@ -222,6 +222,12 @@ def histoire_terminale():
 def histoire_chapitre1():
     return render_template('cours/histoire/chapitre1._terminal.html')
 
+#type de commentaires
+@app.route('/cours/histoire/chapitre2')
+@login_required
+def histoire_chapitre2():
+    return render_template('cours/histoire/chapitre2._terminal.html')
+
 @app.route('/cours/anglais/terminale')
 @login_required
 def anglais_terminale():
