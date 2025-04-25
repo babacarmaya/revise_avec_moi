@@ -5,12 +5,9 @@
     <!-- Header -->
     <div class="chapter-header">
         <div class="content-wrapper">
-            <div class="chapter-number">English Grammar Mastery</div>
-            <h1 class="chapter-title">Complete English Tenses for Terminale S</h1>
-            <div class="chapter-info">
-                <span>Comprehensive Guide</span>
-                <span>For Senegalese Baccalauréat</span>
-            </div>
+            <div class="chapter-number" >English Grammar Mastery</div>
+            <h1 class="chapter-title"> English Tenses </h1>
+           
         </div>
     </div>
 
@@ -915,7 +912,7 @@
     --success-color: #48bb78;
     --warning-color: #ecc94b;
     --error-color: #f56565;
-    --text-primary: #2d3748;
+    --text-primary:rgb(255, 255, 255);
     --text-secondary: #4a5568;
     --background-light: #f7fafc;
     --background-white: #ffffff;
@@ -950,27 +947,91 @@ body {
     padding: var(--spacing-md);
 }
 
-/* En-tête du chapitre */
 .chapter-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .chapter-title {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: var(--spacing-sm);
+    color: #1e293b;
+    margin-bottom: 1rem;
 }
 
 .chapter-info {
+    color: #64748b;
+    font-size: 1.1rem;
     display: flex;
-    gap: var(--spacing-md);
-    font-size: 0.9rem;
-    opacity: 0.9;
+    gap: 1.5rem;
+}
+
+.grammar-title {
+    font-size: 1.8rem;
+    color: #334155;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.header-links {
+    color:.chapter-header {
+        background: linear-gradient(135deg,rgb(163, 162, 170), #06b6d4);
+        /* Ou une autre combinaison comme : */
+        /* background: linear-gradient(135deg, #3730a3, #0ea5e9); */
+        /* background: linear-gradient(135deg, #1e40af, #0284c7); */
+        
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        margin: 2rem auto;
+        max-width: 1200px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .chapter-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .chapter-info {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        display: flex;
+        gap: 1.5rem;
+    }
+    
+    /* Pour le texte "English Grammar Mastery" */
+    .grammar-title {
+        font-size: 1.8rem;
+        color: white;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        opacity: 0.9;
+    }
+    
+    /* Pour les liens/sous-titres */
+    .header-links {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .header-links:hover {
+        color: white;
+    } #64748b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header-links:hover {
+    color:rgb(187, 197, 211);
 }
 
 /* Cartes de contenu */
