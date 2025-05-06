@@ -3,30 +3,200 @@
 {% block content %}
 <div class="hero-section">
     <div class="hero-content">
-        <h1>Bienvenue sur<br>Révise Avec Moi</h1>
-        <div class="floating-icons">
-            <img src="{{ url_for('static', filename='images/icons/star.png') }}" class="icon star" alt="étoile">
-            <img src="{{ url_for('static', filename='images/icons/book.png') }}" class="icon book" alt="livre">
-            <img src="{{ url_for('static', filename='images/icons/pencil.png') }}" class="icon pencil" alt="crayon">
-            <img src="{{ url_for('static', filename='images/icons/globe.png') }}" class="icon globe" alt="globe">
-        </div>
+        <h1>Bienvenue<br>sur<br>Révise Avec Moi</h1>
     </div>
 </div>
 
 <div class="levels-section">
     <div class="level-card">
         <h2>Seconde</h2>
-        <a href="{{ url_for('seconde') }}" class="access-button">accéder aux cours</a>
+        <a href="{{ url_for('seconde') }}" class="access-button">accéder au cours</a>
     </div>
     
     <div class="level-card">
         <h2>Première</h2>
-        <a href="{{ url_for('premiere') }}" class="access-button">accéder aux cours</a>
+        <a href="{{ url_for('premiere') }}" class="access-button">accéder au cours</a>
     </div>
     
     <div class="level-card">
         <h2>Terminale</h2>
-        <a href="{{ url_for('terminale') }}" class="access-button">accéder aux cours</a>
+        <a href="{{ url_for('terminale') }}" class="access-button">accéder au cours</a>
     </div>
 </div>
+
+
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #3b4d8c 0%, #4a7ab7 100%);
+        --card-bg: #fff9f3;
+        --button-bg: #3b4d8c;
+        --text-color: #1a2342;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        overflow-x: hidden;
+    }
+
+    .hero-section {
+        background: var(--primary-gradient);
+        min-height: 70vh;
+        padding: 2rem;
+        position: relative;
+        border-radius: 0 0 30px 30px;
+        overflow: hidden;
+    }
+
+    .logo {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        color: white;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+
+    .user-button {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    .user-link {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+    }
+
+    .user-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: #3b4d8c;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        padding-top: 5rem;
+    }
+
+    h1 {
+        color: white;
+        font-size: 4rem;
+        font-weight: bold;
+        margin-left: 2rem;
+        line-height: 1.1;
+        max-width: 600px;
+    }
+
+    .floating-icons {
+        position: absolute;
+        right: 5%;
+        top: 20%;
+        width: 40%;
+        height: 60%;
+    }
+
+    .icon {
+        position: absolute;
+    }
+
+    .pencil {
+        width: 80px;
+        top: 10%;
+        left: 30%;
+        transform: rotate(15deg);
+    }
+
+    .globe {
+        width: 200px;
+        bottom: 0;
+        right: 0;
+    }
+
+    .small-square {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: #60a5fa;
+        top: 30%;
+        right: 40%;
+        transform: rotate(15deg);
+    }
+
+    .levels-section {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin: -50px 2rem 2rem;
+        position: relative;
+        z-index: 10;
+    }
+
+    .level-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        width: 25%;
+        min-width: 250px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        color: var(--text-color);
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .access-button {
+        display: inline-block;
+        background: var(--button-bg);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .access-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(59, 77, 140, 0.3);
+    }
+
+    .footer {
+        text-align: center;
+        padding: 1rem;
+        color: var(--text-color);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 3rem;
+        }
+
+        .level-card {
+            width: 80%;
+        }
+
+        .floating-icons {
+            width: 100%;
+            right: 0;
+        }
+    }
+</style>
 {% endblock %}
