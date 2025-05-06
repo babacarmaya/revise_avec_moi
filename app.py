@@ -373,14 +373,28 @@ def physique_chimie_terminale():
 
 
 
+### SVT
 
 @app.route('/cours/svt/terminale')
 @login_required
 def svt_terminale():
-    if session.get('niveau') != 'terminale':
-        flash("Vous n'avez pas accès à ce contenu.", 'error')
-        return redirect(url_for('home'))
     return render_template('cours/svt/svt_terminal.html')
+
+@app.route('/cours/svt/chapitre1')
+@login_required
+def svt_chapitre1():
+    return render_template('cours/svt/chapitre1._terminal.html')
+
+@app.route('/cours/svt/chapitre2')
+@login_required
+def svt_chapitre2():
+    return render_template('cours/svt/chapitre2._terminal.html')
+
+@app.route('/cours/svt/chapitre3')
+@login_required
+def svt_chapitre3():
+    return render_template('cours/svt/chapitre3._terminal.html')
+
 
 
 
