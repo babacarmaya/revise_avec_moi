@@ -1,0 +1,1655 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Mathématiques - Analyse</div>
+        <h1 class="course-title">Primitives, Fonctions Logarithmiques et Exponentielles</h1>
+        <div class="course-subtitle">Comprendre et manipuler les fonctions fondamentales de l'analyse</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Point essentiel</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>Les primitives, les fonctions logarithmiques et exponentielles sont des notions fondamentales en analyse mathématique. Les primitives constituent la base du calcul intégral, tandis que les fonctions logarithmiques et exponentielles apparaissent dans de nombreux phénomènes naturels comme la croissance, la décroissance et les évolutions proportionnelles. Ces concepts sont essentiels pour modéliser des situations réelles en physique, biologie, économie et bien d'autres domaines.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Comprendre la notion de primitive d'une fonction</li>
+                        <li>Maîtriser les techniques de calcul des primitives usuelles</li>
+                        <li>Étudier les propriétés des fonctions logarithmiques</li>
+                        <li>Étudier les propriétés des fonctions exponentielles</li>
+                        <li>Résoudre des équations et inéquations avec logarithmes et exponentielles</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Dérivation des fonctions</li>
+                        <li>Étude des variations d'une fonction</li>
+                        <li>Limites et continuité</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>Ces fonctions sont utilisées pour :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">Modéliser la croissance d'une population</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Calculer des intérêts composés en économie</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Étudier la désintégration radioactive en physique</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Primitives -->
+    <div class="method-section">
+        <h2>1. Primitives d'une Fonction</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Définition et méthodes de calcul</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition d'une primitive</h4>
+                    <div class="concept-card">
+                        <p>Une fonction F est une primitive de la fonction f sur un intervalle I si, pour tout x de I, F'(x) = f(x).</p>
+                        <div class="important-note">
+                            <p>Si F est une primitive de f, alors toute fonction de la forme F + C, où C est une constante réelle, est aussi une primitive de f.</p>
+                        </div>
+                        <p>On note l'ensemble des primitives de f par :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">∫ f(x) dx = F(x) + C</span>, où C est une constante réelle</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Primitives usuelles</h4>
+                    <div class="summary-table">
+                        <div class="summary-row header">
+                            <div class="summary-cell">Fonction f(x)</div>
+                            <div class="summary-cell">Primitive F(x)</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">k (constante)</div>
+                            <div class="summary-cell">kx + C</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">x<sup>n</sup> (n ≠ -1)</div>
+                            <div class="summary-cell">x<sup>n+1</sup>/(n+1) + C</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">1/x</div>
+                            <div class="summary-cell">ln|x| + C</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">e<sup>x</sup></div>
+                            <div class="summary-cell">e<sup>x</sup> + C</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">sin(x)</div>
+                            <div class="summary-cell">-cos(x) + C</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">cos(x)</div>
+                            <div class="summary-cell">sin(x) + C</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Linéarité des primitives</h4>
+                    <div class="concept-card">
+                        <p>Les primitives respectent les propriétés de linéarité :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">∫ [f(x) + g(x)] dx = ∫ f(x) dx + ∫ g(x) dx</span></p>
+                            <p><span class="math-formula">∫ k·f(x) dx = k·∫ f(x) dx</span> (où k est une constante)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Calcul de primitives</h5>
+                        <div class="example">
+                            <p>Calculons une primitive de f(x) = 3x² + 2x - 5</p>
+                            <p>∫ (3x² + 2x - 5) dx = ∫ 3x² dx + ∫ 2x dx - ∫ 5 dx</p>
+                            <p>= 3·∫ x² dx + 2·∫ x dx - 5·∫ dx</p>
+                            <p>= 3·(x³/3) + 2·(x²/2) - 5x + C</p>
+                            <p>= x³ + x² - 5x + C</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Primitive d'une fonction composée</h4>
+                    <div class="concept-card">
+                        <p>Pour certaines fonctions composées, on peut utiliser la formule suivante :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">∫ u'(x)·v(u(x)) dx = ∫ v(u)·du</span></p>
+                        </div>
+                        <p>Cette méthode est particulièrement utile pour les fonctions de la forme u'(x)·f(u(x)).</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Primitive d'une fonction composée</h5>
+                        <div class="example">
+                            <p>Calculons une primitive de f(x) = (2x+1)·e<sup>x²+x</sup></p>
+                            <p>Posons u(x) = x² + x, alors u'(x) = 2x + 1</p>
+                            <p>f(x) = u'(x)·e<sup>u(x)</sup></p>
+                            <p>∫ f(x) dx = ∫ u'(x)·e<sup>u(x)</sup> dx = ∫ e<sup>u</sup> du = e<sup>u</sup> + C</p>
+                            <p>= e<sup>x²+x</sup> + C</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Calculer une primitive de f(x) = 2x³ - 3x + 4</div>
+                            <div class="practice-solution">
+                                <p>∫ (2x³ - 3x + 4) dx = 2·∫ x³ dx - 3·∫ x dx + 4·∫ dx</p>
+                                <p>= 2·(x⁴/4) - 3·(x²/2) + 4x + C</p>
+                                <p>= (x⁴/2) - (3x²/2) + 4x + C</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Déterminer la primitive F de f(x) = cos(2x) telle que F(0) = 3</div>
+                            <div class="practice-solution">
+                                <p>∫ cos(2x) dx = (1/2)·∫ cos(2x)·2 dx = (1/2)·sin(2x) + C</p>
+                                <p>F(0) = (1/2)·sin(0) + C = 0 + C = 3, donc C = 3</p>
+                                <p>F(x) = (1/2)·sin(2x) + 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fonction logarithme népérien -->
+    <div class="method-section">
+        <h2>2. Fonction Logarithme Népérien</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Définition, propriétés et représentation graphique</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition et domaine de définition</h4>
+                    <div class="concept-card">
+                        <p>La fonction logarithme népérien, notée ln, est définie comme la primitive de la fonction 1/x qui s'annule en 1 :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">ln(x) = ∫₁<sup>x</sup> (1/t) dt</span></p>
+                        </div>
+                        <p>Domaine de définition : ]0, +∞[</p>
+                        <div class="important-note">
+                            <p>La fonction ln est l'inverse de la fonction exponentielle : si y = ln(x), alors e<sup>y</sup> = x</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Propriétés fondamentales</h4>
+                    <div class="concept-card">
+                        <p>Pour tous réels strictement positifs a et b :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">ln(a·b) = ln(a) + ln(b)</span></p>
+                            <p><span class="math-formula">ln(a/b) = ln(a) - ln(b)</span></p>
+                            <p><span class="math-formula">ln(a<sup>n</sup>) = n·ln(a)</span> (n réel)</p>
+                            <p><span class="math-formula">ln(1) = 0</span></p>
+                            <p><span class="math-formula">ln(e) = 1</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Dérivée et primitive</h4>
+                    <div class="concept-card">
+                        <p>Dérivée : Pour tout x > 0, <span class="math-formula">(ln(x))' = 1/x</span></p>
+                        <p>Primitive : <span class="math-formula">∫ ln(x) dx = x·ln(x) - x + C</span></p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Étude de la fonction ln</h4>
+                    <div class="concept-card">
+                        <p><strong>Variations :</strong> La fonction ln est strictement croissante sur ]0, +∞[</p>
+                        <p><strong>Limites :</strong></p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">lim<sub>x→0⁺</sub> ln(x) = -∞</span></p>
+                            <p><span class="math-formula">lim<sub>x→+∞</sub> ln(x) = +∞</span></p>
+                        </div>
+                        <p><strong>Convexité :</strong> La fonction ln est concave sur ]0, +∞[ (sa dérivée seconde est négative)</p>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Représentation graphique</h5>
+                        <div class="image-placeholder">
+                            <p>[Courbe représentative de la fonction ln]</p>
+                            <p>La courbe passe par le point (1,0), admet l'axe des ordonnées comme asymptote verticale et croît très lentement vers +∞</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Équations et inéquations avec ln</h4>
+                    <div class="concept-card">
+                        <p>Pour résoudre des équations ou inéquations avec ln, on utilise souvent les propriétés suivantes :</p>
+                        <ul>
+                            <li>ln(a) = ln(b) ⟺ a = b (car ln est injective)</li>
+                            <li>ln(a) > ln(b) ⟺ a > b (car ln est strictement croissante)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Résolution d'équation</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation ln(x+1) - ln(x) = ln(2)</p>
+                            <p>ln((x+1)/x) = ln(2)</p>
+                            <p>(x+1)/x = 2</p>
+                            <p>x+1 = 2x</p>
+                            <p>1 = x</p>
+                            <p>La solution est x = 1</p>
+                        </div>
+                        
+                        <h5>Exemple : Résolution d'inéquation</h5>
+                        <div class="example">
+                            <p>Résolvons l'inéquation ln(x) > 2</p>
+                            <p>Comme ln est strictement croissante : ln(x) > 2 ⟺ x > e²</p>
+                            <p>L'ensemble des solutions est ]e², +∞[</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Résoudre l'équation ln(x²) = 2ln(x)</div>
+                            <div class="practice-solution">
+                                <p>ln(x²) = 2ln(x)</p>
+                                <p>2ln(x) = 2ln(x)</p>
+                                <p>Cette équation est vérifiée pour tout x > 0</p>
+                                <p>L'ensemble des solutions est ]0, +∞[</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Résoudre l'inéquation ln(x+1) < ln(3x)</div>
+                            <div class="practice-solution">
+                                <p>ln(x+1) < ln(3x)</p>
+                                <p>Comme ln est strictement croissante : x+1 < 3x</p>
+                                <p>1 < 2x</p>
+                                <p>1/2 < x</p>
+                                <p>L'ensemble des solutions est ]1/2, +∞[ ∩ ]0, +∞[ = ]1/2, +∞[</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fonction exponentielle -->
+    <div class="method-section">
+        <h2>3. Fonction Exponentielle</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Définition, propriétés et représentation graphique</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition et domaine de définition</h4>
+                    <div class="concept-card">
+                        <p>La fonction exponentielle, notée exp ou e<sup>x</sup>, est l'unique fonction f telle que :</p>
+                        <ul>
+                            <li>f'(x) = f(x) pour tout réel x</li>
+                            <li>f(0) = 1</li>
+                        </ul>
+                        <p>Domaine de définition : ℝ (ensemble des réels)</p>
+                        <div class="important-note">
+                            <p>La fonction exponentielle est l'inverse de la fonction logarithme népérien : si y = e<sup>x</sup>, alors ln(y) = x</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Propriétés fondamentales</h4>
+                    <div class="concept-card">
+                        <p>Pour tous réels a et b :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">e<sup>a+b</sup> = e<sup>a</sup>·e<sup>b</sup></span></p>
+                            <p><span class="math-formula">e<sup>a-b</sup> = e<sup>a</sup>/e<sup>b</sup></span></p>
+                            <p><span class="math-formula">(e<sup>a</sup>)<sup>b</sup> = e<sup>a·b</sup></span></p>
+                            <p><span class="math-formula">e<sup>0</sup> = 1</span></p>
+                            <p><span class="math-formula">e<sup>1</sup> = e ≈ 2,718</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Dérivée et primitive</h4>
+                    <div class="concept-card">
+                        <p>Dérivée : Pour tout x réel, <span class="math-formula">(e<sup>x</sup>)' = e<sup>x</sup></span></p>
+                        <p>Primitive : <span class="math-formula">∫ e<sup>x</sup> dx = e<sup>x</sup> + C</span></p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Étude de la fonction exponentielle</h4>
+                    <div class="concept-card">
+                        <p><strong>Variations :</strong> La fonction exponentielle est strictement croissante sur ℝ</p>
+                        <p><strong>Limites :</strong></p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">lim<sub>x→-∞</sub> e<sup>x</sup> = 0</span></p>
+                            <p><span class="math-formula">lim<sub>x→+∞</sub> e<sup>x</sup> = +∞</span></p>
+                        </div>
+                        <p><strong>Convexité :</strong> La fonction exponentielle est convexe sur ℝ (sa dérivée seconde est positive)</p>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Représentation graphique</h5>
+                        <div class="image-placeholder">
+                            <p>[Courbe représentative de la fonction exponentielle]</p>
+                            <p>La courbe passe par le point (0,1), admet l'axe des abscisses comme asymptote horizontale quand x tend vers -∞ et croît très rapidement vers +∞</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Équations et inéquations avec l'exponentielle</h4>
+                    <div class="concept-card">
+                        <p>Pour résoudre des équations ou inéquations avec l'exponentielle, on utilise souvent les propriétés suivantes :</p>
+                        <ul>
+                            <li>e<sup>a</sup> = e<sup>b</sup> ⟺ a = b (car exp est injective)</li>
+                            <li>e<sup>a</sup> > e<sup>b</sup> ⟺ a > b (car exp est strictement croissante)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Résolution d'équation</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation e<sup>2x</sup> = e<sup>x+1</sup></p>
+                            <p>Comme la fonction exponentielle est injective :</p>
+                            <p>2x = x+1</p>
+                            <p>x = 1</p>
+                            <p>La solution est x = 1</p>
+                        </div>
+                        
+                        <h5>Exemple : Résolution d'inéquation</h5>
+                        <div class="example">
+                            <p>Résolvons l'inéquation e<sup>x</sup> < 3</p>
+                            <p>Comme la fonction exponentielle est strictement croissante :</p>
+                            <p>e<sup>x</sup> < 3 ⟺ x < ln(3)</p>
+                            <p>L'ensemble des solutions est ]-∞, ln(3)[</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Résoudre l'équation e<sup>x²-4</sup> = 1</div>
+                            <div class="practice-solution">
+                                <p>e<sup>x²-4</sup> = 1</p>
+                                <p>e<sup>x²-4</sup> = e<sup>0</sup></p>
+                                <p>x²-4 = 0</p>
+                                <p>x² = 4</p>
+                                <p>x = ±2</p>
+                                <p>Les solutions sont x = -2 et x = 2</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Résoudre l'inéquation e<sup>x</sup> + e<sup>-x</sup> ≥ 2</div>
+                            <div class="practice-solution">
+                                <p>e<sup>x</sup> + e<sup>-x</sup> ≥ 2</p>
+                                <p>Posons f(x) = e<sup>x</sup> + e<sup>-x</sup></p>
+                                <p>f'(x) = e<sup>x</sup> - e<sup>-x</sup></p>
+                                <p>f'(x) = 0 ⟺ e<sup>x</sup> = e<sup>-x</sup> ⟺ e<sup>2x</sup> = 1 ⟺ 2x = 0 ⟺ x = 0</p>
+                                <p>f'(x) > 0 pour x > 0 et f'(x) < 0 pour x < 0</p>
+                                <p>Donc f admet un minimum en x = 0 et f(0) = e<sup>0</sup> + e<sup>-0</sup> = 1 + 1 = 2</p>
+                                <p>Ainsi, f(x) ≥ 2 pour tout x réel</p>
+                                <p>L'ensemble des solutions est ℝ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="method-section">
+        <h2>4. Applications et Modélisation</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Utilisation des fonctions logarithmiques et exponentielles</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Croissance exponentielle</h4>
+                    <div class="concept-card">
+                        <p>Un phénomène suit une croissance exponentielle lorsque son taux de variation est proportionnel à sa valeur actuelle.</p>
+                        <p>Mathématiquement, si y(t) représente la quantité au temps t, alors :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">y'(t) = k·y(t)</span> (où k > 0 est une constante)</p>
+                            <p>La solution de cette équation différentielle est : <span class="math-formula">y(t) = y₀·e<sup>kt</sup></span> (où y₀ est la valeur initiale)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Croissance d'une population</h5>
+                        <div class="example">
+                            <p>Une population de bactéries double toutes les 3 heures. Si la population initiale est de 1000 bactéries, combien y aura-t-il de bactéries après 9 heures ?</p>
+                            <p>La population suit une loi exponentielle : N(t) = N₀·e<sup>kt</sup></p>
+                            <p>Après 3 heures, N(3) = 2·N₀, donc N₀·e<sup>3k</sup> = 2·N₀</p>
+                            <p>e<sup>3k</sup> = 2, donc 3k = ln(2), et k = ln(2)/3</p>
+                            <p>Après 9 heures : N(9) = N₀·e<sup>9k</sup> = N₀·e<sup>9·ln(2)/3</sup> = N₀·e<sup>3·ln(2)</sup> = N₀·(e<sup>ln(2)</sup>)<sup>3</sup> = N₀·2³ = 1000·8 = 8000</p>
+                            <p>Il y aura 8000 bactéries après 9 heures.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Décroissance exponentielle</h4>
+                    <div class="concept-card">
+                        <p>Un phénomène suit une décroissance exponentielle lorsque son taux de variation est proportionnel à sa valeur actuelle, mais dans le sens opposé.</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">y'(t) = -k·y(t)</span> (où k > 0 est une constante)</p>
+                            <p>La solution de cette équation différentielle est : <span class="math-formula">y(t) = y₀·e<sup>-kt</sup></span> (où y₀ est la valeur initiale)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Désintégration radioactive</h5>
+                        <div class="example">
+                            <p>La demi-vie d'un élément radioactif est de 5730 ans (temps nécessaire pour que la moitié des atomes se désintègrent). Quelle proportion de l'élément restera après 11460 ans ?</p>
+                            <p>La quantité d'élément suit une loi de décroissance exponentielle : N(t) = N₀·e<sup>-kt</sup></p>
+                            <p>Après 5730 ans, N(5730) = N₀/2, donc N₀·e<sup>-5730k</sup> = N₀/2</p>
+                            <p>e<sup>-5730k</sup> = 1/2, donc -5730k = ln(1/2) = -ln(2), et k = ln(2)/5730</p>
+                            <p>Après 11460 ans : N(11460) = N₀·e<sup>-11460k</sup> = N₀·e<sup>-11460·ln(2)/5730</sup> = N₀·e<sup>-2·ln(2)</sup> = N₀·(e<sup>-ln(2)</sup>)<sup>2</sup> = N₀·(1/2)² = N₀/4</p>
+                            <p>Il restera 1/4 (soit 25%) de l'élément après 11460 ans.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Intérêts composés</h4>
+                    <div class="concept-card">
+                        <p>Lorsqu'un capital est placé à intérêts composés, sa valeur suit une croissance exponentielle.</p>
+                        <div class="formula-box">
+                            <p>Si un capital C₀ est placé à un taux d'intérêt annuel r (exprimé en décimal), sa valeur après t années est :</p>
+                            <p><span class="math-formula">C(t) = C₀·(1+r)<sup>t</sup></span></p>
+                            <p>Si les intérêts sont composés continuellement, la formule devient :</p>
+                            <p><span class="math-formula">C(t) = C₀·e<sup>rt</sup></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Calcul d'intérêts composés</h5>
+                        <div class="example">
+                            <p>Un capital de 1000€ est placé à un taux d'intérêt annuel de 5%. Quelle sera sa valeur après 10 ans ?</p>
+                            <p>C(10) = 1000·(1+0,05)<sup>10</sup> = 1000·1,05<sup>10</sup> ≈ 1000·1,629 = 1629€</p>
+                            <p>Le capital vaudra environ 1629€ après 10 ans.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Échelle logarithmique</h4>
+                    <div class="concept-card">
+                        <p>L'échelle logarithmique est utilisée pour représenter des données qui couvrent plusieurs ordres de grandeur.</p>
+                        <p>Applications courantes :</p>
+                        <ul>
+                            <li>Échelle de Richter pour les séismes (logarithme de l'amplitude)</li>
+                            <li>Décibels pour l'intensité sonore (logarithme de la puissance)</li>
+                            <li>pH pour l'acidité (logarithme négatif de la concentration en ions H⁺)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Échelle de pH</h5>
+                        <div class="example">
+                            <p>Le pH est défini par : pH = -log₁₀[H⁺], où [H⁺] est la concentration en ions hydrogène en mol/L.</p>
+                            <p>Si une solution a une concentration [H⁺] = 10⁻³ mol/L, son pH est :</p>
+                            <p>pH = -log₁₀(10⁻³) = -(-3) = 3</p>
+                            <p>Une solution de pH = 3 est acide (pH < 7).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Un capital de 2000€ est placé à un taux d'intérêt annuel de 3%. Au bout de combien d'années ce capital aura-t-il doublé ?</div>
+                            <div class="practice-solution">
+                                <p>On cherche t tel que C(t) = 2·C₀</p>
+                                <p>2000·(1+0,03)<sup>t</sup> = 2·2000</p>
+                                <p>(1,03)<sup>t</sup> = 2</p>
+                                <p>t·ln(1,03) = ln(2)</p>
+                                <p>t = ln(2)/ln(1,03) ≈ 0,693/0,0296 ≈ 23,4</p>
+                                <p>Le capital aura doublé au bout d'environ 23,4 ans.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. La population d'une ville augmente de 2% par an. En combien d'années la population aura-t-elle augmenté de 50% ?</div>
+                            <div class="practice-solution">
+                                <p>On cherche t tel que P(t) = 1,5·P₀</p>
+                                <p>P₀·(1+0,02)<sup>t</sup> = 1,5·P₀</p>
+                                <p>(1,02)<sup>t</sup> = 1,5</p>
+                                <p>t·ln(1,02) = ln(1,5)</p>
+                                <p>t = ln(1,5)/ln(1,02) ≈ 0,405/0,0198 ≈ 20,5</p>
+                                <p>La population aura augmenté de 50% au bout d'environ 20,5 ans.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="method-section">
+        <h2>Conclusion : Primitives, Fonctions Logarithmiques et Exponentielles</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Synthèse et applications</h3>
+            </div>
+            <div class="method-content">
+                <div class="conclusion-box">
+                    <h4>Points clés à retenir</h4>
+                    <div class="key-points-grid">
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Primitives</h5>
+                                <p>Les primitives sont essentielles pour le calcul intégral et permettent de déterminer l'aire sous une courbe.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Fonction logarithme</h5>
+                                <p>La fonction ln est strictement croissante sur ]0, +∞[, concave, et vérifie ln(a·b) = ln(a) + ln(b).</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Fonction exponentielle</h5>
+                                <p>La fonction exponentielle est strictement croissante sur ℝ, convexe, et vérifie e<sup>a+b</sup> = e<sup>a</sup>·e<sup>b</sup>.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Applications</h5>
+                                <p>Ces fonctions modélisent de nombreux phénomènes naturels et économiques comme la croissance, la décroissance et les intérêts composés.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Relations fondamentales</h4>
+                    <div class="concept-card">
+                        <p>Les fonctions logarithmiques et exponentielles sont intimement liées :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">ln(e<sup>x</sup>) = x</span> pour tout x réel</p>
+                            <p><span class="math-formula">e<sup>ln(x)</sup> = x</span> pour tout x > 0</p>
+                        </div>
+                        <p>Ces relations font de ces fonctions des outils puissants pour résoudre des équations et modéliser des phénomènes complexes.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Applications pratiques</h4>
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">📊</div>
+                            <h5>Sciences</h5>
+                            <p>Modélisation de phénomènes physiques, chimiques et biologiques : radioactivité, réactions chimiques, croissance de populations.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">💰</div>
+                            <h5>Économie</h5>
+                            <p>Calcul d'intérêts composés, modèles de croissance économique, dépréciation des actifs.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🔬</div>
+                            <h5>Mesures</h5>
+                            <p>Échelles logarithmiques pour mesurer des grandeurs très variables : décibels, magnitude des séismes, pH.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧮</div>
+                            <h5>Mathématiques</h5>
+                            <p>Résolution d'équations différentielles, calcul intégral, transformations de variables.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <p>"Les fonctions logarithmiques et exponentielles sont parmi les plus importantes en mathématiques, car elles permettent de modéliser des phénomènes où le taux de variation est proportionnel à la quantité présente."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ressources -->
+    <div class="resources-section">
+        <h2>Pour approfondir</h2>
+        
+        <div class="resources-grid">
+            <div class="resource">
+                <div class="resource-icon">📚</div>
+                <div class="resource-content">
+                    <h4>Exercices complémentaires</h4>
+                    <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                    <div class="download-box">
+                        <a href="#" class="download-button">
+                            <span class="download-icon">📥</span>
+                            <span class="download-text">Exercices sur les primitives et fonctions exponentielles</span>
+                        </a>
+                        <p class="download-info">PDF - 6 pages d'exercices avec corrigés</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🔍</div>
+                <div class="resource-content">
+                    <h4>Points à réviser</h4>
+                    <ul>
+                        <li>Les techniques de calcul des primitives</li>
+                        <li>Les propriétés des fonctions logarithmiques et exponentielles</li>
+                        <li>La résolution d'équations et inéquations avec ln et exp</li>
+                        <li>Les applications à la modélisation de phénomènes réels</li>
+                        <li>Les liens entre dérivation et primitives</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🎯</div>
+                <div class="resource-content">
+                    <h4>Préparation à l'examen</h4>
+                    <p>Les primitives, les fonctions logarithmiques et exponentielles sont des thèmes importants du programme de Terminale S.</p>
+                    <p>Points d'attention pour l'examen :</p>
+                    <ul>
+                        <li>Maîtriser le calcul des primitives usuelles</li>
+                        <li>Connaître les propriétés fondamentales de ln et exp</li>
+                        <li>Savoir résoudre des équations et inéquations avec ces fonctions</li>
+                        <li>Être capable d'appliquer ces notions à des problèmes concrets</li>
+                        <li>Comprendre les liens entre ces fonctions et leurs représentations graphiques</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🌐</div>
+                <div class="resource-content">
+                    <h4>Ressources en ligne</h4>
+                    <ul>
+                        <li><a href="#">Khan Academy : Primitives et fonctions exponentielles</a></li>
+                        <li><a href="#">Exo7 : Exercices corrigés sur les fonctions logarithmiques</a></li>
+                        <li><a href="#">Mathématiques Web : Cours interactif sur les primitives</a></li>
+                        <li><a href="#">YouTube : Vidéos explicatives sur les applications des exponentielles et logarithmes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    <style>
+        /* Variables pour les couleurs et les espacements */
+        
+        /* Styles spécifiques pour le discours rapporté */
+        .time-expression {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .time-expression:last-child {
+            border-bottom: none;
+        }
+        
+        .direct {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .indirect {
+            font-style: italic;
+            color: var(--semi-modal-color);
+        }
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --background-light: #f8f9fa;
+            --background-medium: #edf2f7;
+            --text-color: #333;
+            --text-light: #f8f9fa;
+            --border-radius: 8px;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --spacing-sm: 10px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            
+            /* Couleurs spécifiques */
+            --modal-color: #3498db;
+            --semi-modal-color: #9b59b6;
+            --negative-color: #e74c3c;
+            --neutral-color: #f39c12;
+            --positive-color: #2ecc71;
+        }
+        
+        /* Styles de base */
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* En-tête du cours */
+        .course-header {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            padding: var(--spacing-lg) 0;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .subject-tag {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .course-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            color: var(--text-light);
+        }
+        
+        .course-subtitle {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.9;
+        }
+        
+        .course-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .action-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button.primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .action-button.secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Alerte et introduction */
+        .alert-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--secondary-color);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .alert-box h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Points clés */
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .point-item {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .point-icon {
+            font-size: 1.8rem;
+            margin-right: var(--spacing-md);
+            color: var(--primary-color);
+        }
+        
+        .point-content {
+            flex: 1;
+        }
+        
+        .point-content h4 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        /* Liste de modaux */
+        .modal-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .modal-pill {
+            background-color: var(--modal-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .modal-pill.semi {
+            background-color: var(--semi-modal-color);
+        }
+        
+        /* Sections */
+        .method-section {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .method-section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: var(--spacing-sm);
+            position: relative;
+        }
+        
+        .method-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        /* Cards */
+        .method-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: var(--spacing-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .method-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+        
+        .method-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .method-content {
+            padding: var(--spacing-md);
+        }
+        
+        /* Colonnes */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+        
+        .two-columns-list {
+            columns: 2;
+            column-gap: var(--spacing-md);
+        }
+        
+        /* Règles de grammaire */
+        .grammar-rules {
+            margin: var(--spacing-md) 0;
+        }
+        
+        .grammar-rule {
+            display: flex;
+            margin-bottom: var(--spacing-md);
+            align-items: flex-start;
+        }
+        
+        .rule-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+        
+        .rule-content {
+            flex: 1;
+        }
+        
+        .rule-content h5 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        /* Exemples */
+        .examples-box {
+            background: var(--background-medium);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-sm) 0;
+        }
+        
+        .example {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .example:last-child {
+            margin-bottom: 0;
+        }
+        
+        .example-icon {
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+            margin-right: 5px;
+        }
+        
+        .example.correct .example-icon {
+            color: var(--success-color);
+        }
+        
+        .example.incorrect .example-icon {
+            color: var(--accent-color);
+        }
+        
+        .example-label {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+        
+        .example-note {
+            display: block;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .highlight {
+            background-color: rgba(52, 152, 219, 0.2);
+            padding: 0 3px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        /* Tableau des temps */
+        .tense-table {
+            margin: var(--spacing-md) 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .tense-row {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 2fr;
+        }
+        
+        .tense-row.header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .tense-row:not(.header) {
+            background-color: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .tense-row:nth-child(even):not(.header) {
+            background-color: var(--background-light);
+        }
+        
+        .tense-row:last-child {
+            border-bottom: none;
+        }
+        
+        .tense-cell {
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+        
+        /* Concept box */
+        .concept-card {
+            background: var(--background-medium);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .concept-card h5 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Info box */
+        .info-box {
+            background: #e8f4f8;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-md) 0;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .info-box h5 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Comparison table */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .comparison-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .comparison-header {
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: white;
+            text-align: center;
+        }
+        
+        .comparison-header.modal {
+            background-color: var(--modal-color);
+        }
+        
+        .comparison-header.semi-modal {
+            background-color: var(--semi-modal-color);
+        }
+        
+        .comparison-content {
+            padding: var(--spacing-md);
+            background: white;
+        }
+        
+        .comparison-content ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        /* Modal cards */
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .modal-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .modal-card.small {
+            font-size: 0.95rem;
+        }
+        
+        .modal-name {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .modal-content {
+            padding: var(--spacing-md);
+            background: white;
+        }
+        
+        .modal-examples {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Practice box */
+        .practice-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .practice-box h5 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .practice-items {
+            margin-top: var(--spacing-md);
+        }
+        
+        .practice-item {
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .practice-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .practice-question {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .practice-answer {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            border-left: 3px solid #dee2e6;
+        }
+        
+        .practice-solution {
+            padding-left: 15px;
+            border-left: 3px solid var(--success-color);
+            color: #2c3e50;
+        }
+        
+        .answer-blank {
+            display: inline-block;
+            width: 80px;
+            height: 1px;
+            border-bottom: 1px solid #666;
+            margin: 0 5px;
+        }
+        
+        /* Uses grid */
+        .uses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .use-card {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .use-icon {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        .use-card h5 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        .use-card p {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Conclusion */
+        .conclusion-box {
+            background: #e8f4f8;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-top: var(--spacing-md);
+        }
+        
+        .conclusion-box h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .key-point-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .key-point-content {
+            flex: 1;
+        }
+        
+        .key-point-content h5 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .key-point-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Summary table */
+        .summary-table {
+            margin: var(--spacing-md) 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .summary-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr;
+        }
+        
+        .summary-row.header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .summary-row:not(.header) {
+            background-color: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .summary-row:nth-child(even):not(.header) {
+            background-color: var(--background-light);
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-cell {
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+        
+        /* Tips */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .tip-icon {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        .tip-card h5 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        .tip-card p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Quote box */
+        .quote-box {
+            background: var(--background-medium);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            margin: var(--spacing-md) 0;
+            font-style: italic;
+        }
+        
+        .quote-box p {
+            margin: 0;
+        }
+        
+        /* Resources */
+        .resources-section {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .resources-section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: var(--spacing-sm);
+            position: relative;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .resource {
+            display: flex;
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .resource-icon {
+            font-size: 1.8rem;
+            margin-right: var(--spacing-md);
+            color: var(--primary-color);
+        }
+        
+        .resource-content {
+            flex: 1;
+        }
+        
+        .resource-content h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Download box */
+        .download-box {
+            background: var(--background-medium);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .download-button {
+            display: flex;
+            align-items: center;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .download-button:hover {
+            background: var(--secondary-color);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .download-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        
+        .download-info {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-md: 15px;
+                --spacing-lg: 25px;
+            }
+            
+            .course-title {
+                font-size: 2rem;
+            }
+            
+            .course-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .course-actions {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+            
+            .action-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .two-columns,
+            .comparison-table,
+            .modal-grid,
+            .tense-row,
+            .summary-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .tense-row.header,
+            .summary-row.header {
+                display: none;
+            }
+            
+            .resource {
+                flex-direction: column;
+            }
+            
+            .resource-icon {
+                margin-bottom: var(--spacing-sm);
+                margin-right: 0;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .method-card {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .method-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        
+        .method-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        
+        /* Accessibilité */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        
+        /* Impression */
+        @media print {
+            .method-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .course-header {
+                background: none;
+                color: black;
+                padding: 0;
+            }
+            
+            .subject-tag, .action-button {
+                display: none;
+            }
+            
+            .course-title {
+                color: black;
+                font-size: 24pt;
+            }
+            
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            
+            .method-header {
+                background: none;
+                color: black;
+                border-bottom: 1px solid #ddd;
+            }
+            
+            .modal-name, .comparison-header {
+                background: none !important;
+                color: black;
+                border: 1px solid #ddd;
+            }
+            
+            .highlight {
+                background: none;
+                text-decoration: underline;
+            }
+        }
+        </style> 
+{% endblock %}

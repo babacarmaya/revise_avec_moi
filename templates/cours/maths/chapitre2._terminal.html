@@ -1,0 +1,1788 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Mathématiques - Analyse</div>
+        <h1 class="course-title">Dérivation et Étude des Fonctions</h1>
+        <div class="course-subtitle">Analyser le comportement des fonctions grâce au calcul différentiel</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Point essentiel</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>La dérivation est un outil fondamental de l'analyse mathématique qui permet d'étudier les variations des fonctions et de déterminer leurs extremums. Associée à l'étude des limites et de la continuité, elle constitue la base de l'étude complète des fonctions. Ces concepts sont essentiels en mathématiques et dans de nombreuses applications scientifiques, économiques et techniques.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Comprendre la notion de dérivée et son interprétation géométrique</li>
+                        <li>Maîtriser les règles de dérivation et calculer des dérivées</li>
+                        <li>Étudier les variations d'une fonction à l'aide de sa dérivée</li>
+                        <li>Déterminer les extremums d'une fonction</li>
+                        <li>Réaliser une étude complète de fonction</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Limites et continuité des fonctions</li>
+                        <li>Fonctions de référence (polynômes, fonctions rationnelles, etc.)</li>
+                        <li>Représentation graphique des fonctions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>La dérivation est utilisée pour :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">Calculer des vitesses et des accélérations en physique</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Optimiser des coûts ou des profits en économie</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Modéliser des phénomènes de croissance en biologie</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notion de dérivée -->
+    <div class="method-section">
+        <h2>1. La Notion de Dérivée</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Définition et interprétation géométrique</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition de la dérivée</h4>
+                    <div class="concept-card">
+                        <p>La dérivée d'une fonction f en un point a est définie comme la limite du taux de variation de f entre a et a+h lorsque h tend vers 0 :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">f'(a) = lim<sub>h→0</sub> [f(a+h) - f(a)]/h</span></p>
+                        </div>
+                        <p>Cette limite, lorsqu'elle existe, représente le taux de variation instantané de la fonction au point a.</p>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Interprétation géométrique</h5>
+                        <div class="image-placeholder">
+                            <p>[Illustration de la tangente à une courbe]</p>
+                            <p>La dérivée f'(a) représente le coefficient directeur (ou pente) de la tangente à la courbe de f au point d'abscisse a.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Fonction dérivée</h4>
+                    <div class="concept-card">
+                        <p>La fonction dérivée de f, notée f', associe à chaque point x du domaine de dérivabilité la valeur de la dérivée en ce point.</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">f' : x ↦ f'(x)</span></p>
+                        </div>
+                        <div class="important-note">
+                            <p>Une fonction est dérivable en un point si et seulement si elle admet une tangente en ce point, c'est-à-dire si la limite définissant la dérivée existe.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Lien entre dérivabilité et continuité</h4>
+                    <div class="concept-card">
+                        <p>Si une fonction est dérivable en un point, alors elle est continue en ce point.</p>
+                        <div class="important-note">
+                            <p>La réciproque est fausse : une fonction peut être continue en un point sans y être dérivable.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de fonction continue mais non dérivable</h5>
+                        <div class="example">
+                            <p>La fonction valeur absolue f(x) = |x| est continue en 0 mais n'est pas dérivable en 0 car elle présente un "point anguleux" à l'origine.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercice d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">Calculer la dérivée de la fonction f(x) = x² au point x = 3 en utilisant la définition.</div>
+                            <div class="practice-solution">
+                                <p>f'(3) = lim<sub>h→0</sub> [(3+h)² - 3²]/h</p>
+                                <p>= lim<sub>h→0</sub> [9 + 6h + h² - 9]/h</p>
+                                <p>= lim<sub>h→0</sub> [6h + h²]/h</p>
+                                <p>= lim<sub>h→0</sub> [6 + h]</p>
+                                <p>= 6</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Règles de dérivation -->
+    <div class="method-section">
+        <h2>2. Règles de Dérivation</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Formules et techniques de calcul</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Dérivées des fonctions usuelles</h4>
+                    <div class="summary-table">
+                        <div class="summary-row header">
+                            <div class="summary-cell">Fonction f(x)</div>
+                            <div class="summary-cell">Dérivée f'(x)</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">k (constante)</div>
+                            <div class="summary-cell">0</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">x<sup>n</sup></div>
+                            <div class="summary-cell">n·x<sup>n-1</sup></div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">e<sup>x</sup></div>
+                            <div class="summary-cell">e<sup>x</sup></div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">ln(x)</div>
+                            <div class="summary-cell">1/x</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">sin(x)</div>
+                            <div class="summary-cell">cos(x)</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">cos(x)</div>
+                            <div class="summary-cell">-sin(x)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Opérations sur les dérivées</h4>
+                    <div class="concept-card">
+                        <p>Si u et v sont deux fonctions dérivables, alors :</p>
+                        <div class="formula-box">
+                            <p>Somme : <span class="math-formula">(u + v)' = u' + v'</span></p>
+                            <p>Produit : <span class="math-formula">(u × v)' = u' × v + u × v'</span></p>
+                            <p>Quotient : <span class="math-formula">(u/v)' = (u' × v - u × v')/v²</span> (si v ≠ 0)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Dérivée d'un produit</h5>
+                        <div class="example">
+                            <p>Calculons la dérivée de f(x) = x² · sin(x)</p>
+                            <p>f'(x) = (x²)' · sin(x) + x² · (sin(x))'</p>
+                            <p>f'(x) = 2x · sin(x) + x² · cos(x)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Dérivée d'une fonction composée</h4>
+                    <div class="concept-card">
+                        <p>Si f est dérivable en u(x) et u est dérivable en x, alors la fonction composée f∘u est dérivable en x et :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">(f∘u)'(x) = f'(u(x)) × u'(x)</span></p>
+                        </div>
+                        <p>Cette règle est souvent appelée "règle de la chaîne".</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Dérivée d'une fonction composée</h5>
+                        <div class="example">
+                            <p>Calculons la dérivée de g(x) = sin(x²)</p>
+                            <p>Ici, f(x) = sin(x) et u(x) = x²</p>
+                            <p>g'(x) = f'(u(x)) × u'(x) = cos(x²) × 2x = 2x · cos(x²)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Calculer la dérivée de f(x) = (3x² - 2x + 1) · e<sup>x</sup></div>
+                            <div class="practice-solution">
+                                <p>f'(x) = (3x² - 2x + 1)' · e<sup>x</sup> + (3x² - 2x + 1) · (e<sup>x</sup>)'</p>
+                                <p>f'(x) = (6x - 2) · e<sup>x</sup> + (3x² - 2x + 1) · e<sup>x</sup></p>
+                                <p>f'(x) = [(6x - 2) + (3x² - 2x + 1)] · e<sup>x</sup></p>
+                                <p>f'(x) = (3x² + 4x - 1) · e<sup>x</sup></p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Calculer la dérivée de g(x) = ln(x²+1)</div>
+                            <div class="practice-solution">
+                                <p>g'(x) = (ln)'(x²+1) × (x²+1)'</p>
+                                <p>g'(x) = 1/(x²+1) × 2x</p>
+                                <p>g'(x) = 2x/(x²+1)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étude des variations -->
+    <div class="method-section">
+        <h2>3. Étude des Variations d'une Fonction</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Utilisation de la dérivée pour déterminer les variations</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Théorème fondamental</h4>
+                    <div class="concept-card">
+                        <p>Soit f une fonction dérivable sur un intervalle I :</p>
+                        <ul>
+                            <li>Si f'(x) > 0 pour tout x ∈ I, alors f est strictement croissante sur I</li>
+                            <li>Si f'(x) < 0 pour tout x ∈ I, alors f est strictement décroissante sur I</li>
+                            <li>Si f'(x) = 0 pour tout x ∈ I, alors f est constante sur I</li>
+                        </ul>
+                        <div class="important-note">
+                            <p>Le signe de la dérivée détermine donc le sens de variation de la fonction.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Interprétation graphique</h5>
+                        <div class="image-placeholder">
+                            <p>[Illustration des variations d'une fonction]</p>
+                            <p>Une dérivée positive correspond à une tangente montante, une dérivée négative à une tangente descendante</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Méthode d'étude des variations</h4>
+                    <div class="method-steps">
+                        <div class="method-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Déterminer le domaine de définition</h5>
+                                <p>Identifier l'ensemble des valeurs de x pour lesquelles la fonction est définie.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Calculer la dérivée</h5>
+                                <p>Appliquer les règles de dérivation pour obtenir f'(x).</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>Étudier le signe de la dérivée</h5>
+                                <p>Résoudre l'inéquation f'(x) > 0 (ou f'(x) < 0) pour déterminer les intervalles où la fonction est croissante ou décroissante.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>Dresser le tableau de variations</h5>
+                                <p>Synthétiser les résultats dans un tableau montrant les variations de la fonction.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Points critiques et extremums</h4>
+                    <div class="concept-card">
+                        <p>Les points où la dérivée s'annule (f'(x) = 0) ou n'existe pas sont appelés points critiques.</p>
+                        <p>Ces points peuvent correspondre à des extremums (maximum ou minimum) de la fonction :</p>
+                        <ul>
+                            <li>Si f'(x) change de signe de + à - en passant par a, alors f admet un maximum local en a</li>
+                            <li>Si f'(x) change de signe de - à + en passant par a, alors f admet un minimum local en a</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Étude des variations</h5>
+                        <div class="example">
+                            <p>Étudions les variations de f(x) = x³ - 3x² + 2</p>
+                            <p>1. Domaine de définition : ℝ (tous les réels)</p>
+                            <p>2. Dérivée : f'(x) = 3x² - 6x = 3x(x - 2)</p>
+                            <p>3. Étude du signe de f'(x) :</p>
+                            <ul>
+                                <li>f'(x) s'annule pour x = 0 et x = 2</li>
+                                <li>Pour x < 0 : 3x < 0 et (x - 2) < 0, donc f'(x) > 0</li>
+                                <li>Pour 0 < x < 2 : 3x > 0 et (x - 2) < 0, donc f'(x) < 0</li>
+                                <li>Pour x > 2 : 3x > 0 et (x - 2) > 0, donc f'(x) > 0</li>
+                            </ul>
+                            <p>4. Tableau de variations :</p>
+                            <div class="image-placeholder">
+                                <p>[Tableau de variations montrant f croissante sur ]-∞, 0[, décroissante sur ]0, 2[ et croissante sur ]2, +∞[]</p>
+                            </div>
+                            <p>5. Conclusion : f admet un maximum local en x = 0 (f(0) = 2) et un minimum local en x = 2 (f(2) = -2)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercice d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">Étudier les variations de la fonction g(x) = x² - 4x + 3 sur ℝ.</div>
+                            <div class="practice-solution">
+                                <p>1. Domaine de définition : ℝ</p>
+                                <p>2. Dérivée : g'(x) = 2x - 4 = 2(x - 2)</p>
+                                <p>3. Étude du signe de g'(x) :</p>
+                                <ul>
+                                    <li>g'(x) s'annule pour x = 2</li>
+                                    <li>Pour x < 2 : g'(x) < 0, donc g est décroissante</li>
+                                    <li>Pour x > 2 : g'(x) > 0, donc g est croissante</li>
+                                </ul>
+                                <p>4. Tableau de variations : g décroît sur ]-∞, 2[ puis croît sur ]2, +∞[</p>
+                                <p>5. Conclusion : g admet un minimum global en x = 2 (g(2) = -1)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étude complète de fonctions -->
+    <div class="method-section">
+        <h2>4. Étude Complète de Fonctions</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Méthodologie pour l'analyse globale d'une fonction</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Démarche générale</h4>
+                    <div class="method-steps">
+                        <div class="method-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Domaine de définition</h5>
+                                <p>Déterminer l'ensemble des valeurs de x pour lesquelles la fonction est définie.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Parité et périodicité</h5>
+                                <p>Vérifier si la fonction est paire, impaire ou périodique pour simplifier l'étude.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>Limites aux bornes du domaine</h5>
+                                <p>Étudier le comportement de la fonction aux extrémités de son domaine et déterminer les asymptotes éventuelles.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>Dérivée et variations</h5>
+                                <p>Calculer la dérivée, étudier son signe et dresser le tableau de variations.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h5>Points particuliers</h5>
+                                <p>Déterminer les coordonn��es des extremums, des points d'inflexion et des intersections avec les axes.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h5>Représentation graphique</h5>
+                                <p>Tracer la courbe représentative de la fonction en utilisant toutes les informations recueillies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Asymptotes et branches infinies</h4>
+                    <div class="concept-card">
+                        <p>L'étude des limites permet de déterminer le comportement de la fonction à l'infini :</p>
+                        <ul>
+                            <li><strong>Asymptote horizontale</strong> : Si lim<sub>x→±∞</sub> f(x) = L (finie), alors la droite d'équation y = L est une asymptote horizontale</li>
+                            <li><strong>Asymptote verticale</strong> : Si lim<sub>x→a</sub> f(x) = ±∞, alors la droite d'équation x = a est une asymptote verticale</li>
+                            <li><strong>Asymptote oblique</strong> : Si lim<sub>x→±∞</sub> [f(x) - (ax + b)] = 0, alors la droite d'équation y = ax + b est une asymptote oblique</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Convexité et points d'inflexion</h4>
+                    <div class="concept-card">
+                        <p>La dérivée seconde f''(x) permet d'étudier la convexité de la fonction :</p>
+                        <ul>
+                            <li>Si f''(x) > 0 sur un intervalle I, alors f est convexe sur I (courbe "tournée vers le haut")</li>
+                            <li>Si f''(x) < 0 sur un intervalle I, alors f est concave sur I (courbe "tournée vers le bas")</li>
+                            <li>Si f''(a) = 0 et f'' change de signe en a, alors la courbe admet un point d'inflexion en x = a</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Interprétation graphique</h5>
+                        <div class="image-placeholder">
+                            <p>[Illustration de la convexité et des points d'inflexion]</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Exemple d'étude complète</h4>
+                    <div class="examples-box">
+                        <h5>Étude de la fonction f(x) = (x² - 1)/(x - 2)</h5>
+                        <div class="example">
+                            <p><strong>1. Domaine de définition</strong></p>
+                            <p>La fonction est définie pour tout x ≠ 2, donc Df = ℝ \ {2}</p>
+                            
+                            <p><strong>2. Limites et asymptotes</strong></p>
+                            <ul>
+                                <li>lim<sub>x→2⁻</sub> f(x) = -∞ et lim<sub>x→2⁺</sub> f(x) = +∞ : la droite x = 2 est une asymptote verticale</li>
+                                <li>
+                                    Pour x→±∞ :
+                                    <p>f(x) = (x² - 1)/(x - 2) = x + 2 + 3/(x - 2)</p>
+                                    <p>Donc lim<sub>x→±∞</sub> [f(x) - (x + 2)] = 0</p>
+                                    <p>La droite y = x + 2 est une asymptote oblique</p>
+                                </li>
+                            </ul>
+                            
+                            <p><strong>3. Dérivée et variations</strong></p>
+                            <p>f'(x) = [(x - 2)(2x) - (x² - 1)]/(x - 2)² = [2x² - 4x - x² + 1]/(x - 2)² = [x² - 4x + 1]/(x - 2)²</p>
+                            <p>Le numérateur peut s'écrire (x - 2)² - 3, donc f'(x) = 1 - 3/(x - 2)²</p>
+                            <p>Comme (x - 2)² > 0 pour x ≠ 2, le signe de f'(x) dépend de la comparaison entre 1 et 3/(x - 2)² :</p>
+                            <ul>
+                                <li>Si |x - 2| < √3, alors 3/(x - 2)² > 1 et f'(x) < 0</li>
+                                <li>Si |x - 2| > √3, alors 3/(x - 2)² < 1 et f'(x) > 0</li>
+                            </ul>
+                            <p>Donc f est croissante sur ]-∞, 2-√3[ et ]2+√3, +∞[, et décroissante sur ]2-√3, 2[ et ]2, 2+√3[</p>
+                            
+                            <p><strong>4. Points particuliers</strong></p>
+                            <ul>
+                                <li>f(0) = -1/2 (intersection avec l'axe des ordonnées)</li>
+                                <li>f(x) = 0 ⟺ x² - 1 = 0 ⟺ x = ±1 (intersections avec l'axe des abscisses)</li>
+                                <li>Extremums locaux en x = 2-√3 (maximum) et x = 2+√3 (minimum)</li>
+                            </ul>
+                            
+                            <p><strong>5. Tableau de variations</strong></p>
+                            <div class="image-placeholder">
+                                <p>[Tableau de variations montrant les variations de f]</p>
+                            </div>
+                            
+                            <p><strong>6. Représentation graphique</strong></p>
+                            <div class="image-placeholder">
+                                <p>[Courbe représentative de la fonction f]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercice d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">Faire l'étude complète de la fonction g(x) = x³ - 3x + 2 et tracer sa courbe représentative.</div>
+                            <div class="practice-solution">
+                                <p>1. Domaine de définition : ℝ</p>
+                                <p>2. Limites : lim<sub>x→-∞</sub> g(x) = -∞ et lim<sub>x→+∞</sub> g(x) = +∞</p>
+                                <p>3. Dérivée : g'(x) = 3x² - 3 = 3(x² - 1) = 3(x-1)(x+1)</p>
+                                <p>4. Variations : g'(x) s'annule pour x = -1 et x = 1</p>
+                                <ul>
+                                    <li>g est croissante sur ]-∞, -1[ et ]1, +∞[</li>
+                                    <li>g est décroissante sur ]-1, 1[</li>
+                                </ul>
+                                <p>5. Points particuliers :</p>
+                                <ul>
+                                    <li>g(-1) = -(-1)³ - 3(-1) + 2 = 1 + 3 + 2 = 6 (maximum local)</li>
+                                    <li>g(1) = 1³ - 3(1) + 2 = 1 - 3 + 2 = 0 (minimum local)</li>
+                                    <li>g s'annule pour x = 1 et pour une autre valeur proche de -2</li>
+                                </ul>
+                                <p>6. Convexité : g''(x) = 6x, donc g est concave sur ]-∞, 0[ et convexe sur ]0, +∞[</p>
+                                <p>7. Point d'inflexion en x = 0 (g(0) = 2)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications de la dérivation -->
+    <div class="method-section">
+        <h2>5. Applications de la Dérivation</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Problèmes d'optimisation et applications concrètes</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Problèmes d'optimisation</h4>
+                    <div class="concept-card">
+                        <p>La dérivation est un outil puissant pour résoudre des problèmes d'optimisation, c'est-à-dire pour déterminer les valeurs maximales ou minimales d'une grandeur.</p>
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Modéliser le problème</h5>
+                                    <p>Exprimer la grandeur à optimiser en fonction d'une variable.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Déterminer le domaine d'étude</h5>
+                                    <p>Identifier les contraintes et l'intervalle sur lequel la fonction est définie.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Calculer la dérivée</h5>
+                                    <p>Dériver la fonction et rechercher les points critiques.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Étudier les extremums</h5>
+                                    <p>Vérifier la nature des points critiques (maximum ou minimum) et comparer avec les valeurs aux bornes du domaine.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h5>Conclure</h5>
+                                    <p>Interpréter le résultat dans le contexte du problème initial.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Exemples d'applications</h4>
+                    <div class="examples-box">
+                        <h5>Exemple 1 : Problème de géométrie</h5>
+                        <div class="example">
+                            <p>On veut construire une boîte rectangulaire sans couvercle, de volume 32 cm³, en minimisant la quantité de matériau utilisée. Quelles doivent être les dimensions de la boîte ?</p>
+                            
+                            <p><strong>Résolution :</strong></p>
+                            <p>1. Soit x la longueur, y la largeur et h la hauteur de la boîte.</p>
+                            <p>2. Le volume est V = x·y·h = 32 cm³, donc h = 32/(x·y)</p>
+                            <p>3. La surface totale (sans couvercle) est S = x·y + 2x·h + 2y·h</p>
+                            <p>4. En remplaçant h : S = x·y + 2x·(32/(x·y)) + 2y·(32/(x·y)) = x·y + 64/y + 64/x</p>
+                            <p>5. Pour simplifier, posons x = y (base carrée). Alors S = x² + 128/x</p>
+                            <p>6. Dérivée : S'(x) = 2x - 128/x² = 2x³ - 128 / x²</p>
+                            <p>7. S'(x) = 0 ⟺ 2x³ = 128 ⟺ x³ = 64 ⟺ x = 4</p>
+                            <p>8. On vérifie que c'est bien un minimum (S''(x) > 0 pour x > 0)</p>
+                            <p>9. Donc h = 32/(4·4) = 2</p>
+                            <p>10. Les dimensions optimales sont : 4 cm × 4 cm × 2 cm</p>
+                        </div>
+                        
+                        <h5>Exemple 2 : Application économique</h5>
+                        <div class="example">
+                            <p>Une entreprise fabrique x articles par jour. Le coût de production est donné par C(x) = 0,01x² + 2x + 100 (en euros) et le prix de vente unitaire est de 10 euros. Combien d'articles doit-elle produire pour maximiser son bénéfice ?</p>
+                            
+                            <p><strong>Résolution :</strong></p>
+                            <p>1. La recette est R(x) = 10x</p>
+                            <p>2. Le bénéfice est B(x) = R(x) - C(x) = 10x - (0,01x² + 2x + 100) = -0,01x² + 8x - 100</p>
+                            <p>3. Dérivée : B'(x) = -0,02x + 8</p>
+                            <p>4. B'(x) = 0 ⟺ -0,02x + 8 = 0 ⟺ x = 400</p>
+                            <p>5. On vérifie que c'est bien un maximum (B''(x) = -0,02 < 0)</p>
+                            <p>6. L'entreprise doit donc produire 400 articles par jour pour maximiser son bénéfice.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Approximation linéaire</h4>
+                    <div class="concept-card">
+                        <p>La dérivée permet d'approximer une fonction au voisinage d'un point par sa tangente :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">f(a + h) ≈ f(a) + f'(a) · h</span> pour h petit</p>
+                        </div>
+                        <p>Cette approximation, appelée développement limité à l'ordre 1, est utile pour estimer des valeurs ou simplifier des calculs.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'approximation</h5>
+                        <div class="example">
+                            <p>Approximons √17 en utilisant la dérivée de f(x) = √x au voisinage de x = 16.</p>
+                            <p>f(16) = 4 et f'(16) = 1/(2√16) = 1/8</p>
+                            <p>√17 = f(17) ≈ f(16) + f'(16) · (17 - 16) = 4 + 1/8 = 4,125</p>
+                            <p>(La valeur exacte est environ 4,123)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercice d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">Un agriculteur dispose de 100 mètres de clôture pour entourer un terrain rectangulaire. Quelles dimensions doit avoir ce terrain pour que sa surface soit maximale ?</div>
+                            <div class="practice-solution">
+                                <p>1. Soit x la longueur et y la largeur du terrain.</p>
+                                <p>2. Le périmètre est 2x + 2y = 100, donc y = (100 - 2x)/2 = 50 - x</p>
+                                <p>3. La surface est S(x) = x·y = x·(50 - x) = 50x - x²</p>
+                                <p>4. Dérivée : S'(x) = 50 - 2x</p>
+                                <p>5. S'(x) = 0 ⟺ 50 - 2x = 0 ⟺ x = 25</p>
+                                <p>6. Donc y = 50 - 25 = 25</p>
+                                <p>7. Le terrain doit être un carré de 25 m × 25 m pour maximiser sa surface.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="method-section">
+        <h2>Conclusion : Dérivation et Étude des Fonctions</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Synthèse et applications</h3>
+            </div>
+            <div class="method-content">
+                <div class="conclusion-box">
+                    <h4>Points clés à retenir</h4>
+                    <div class="key-points-grid">
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Dérivée</h5>
+                                <p>La dérivée mesure le taux de variation instantané d'une fonction et correspond à la pente de la tangente à la courbe.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Règles de dérivation</h5>
+                                <p>Maîtriser les formules de dérivation des fonctions usuelles et les règles pour les opérations (somme, produit, quotient, composition).</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Variations</h5>
+                                <p>Le signe de la dérivée détermine le sens de variation de la fonction : croissante si f' > 0, décroissante si f' < 0.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Étude complète</h5>
+                                <p>L'étude d'une fonction combine l'analyse du domaine, des limites, des variations, des extremums et de la convexité.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Applications pratiques</h4>
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">📊</div>
+                            <h5>Modélisation</h5>
+                            <p>La dérivation permet de modéliser des phénomènes physiques comme la vitesse (dérivée de la position) et l'accélération (dérivée de la vitesse).</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">💰</div>
+                            <h5>Économie</h5>
+                            <p>En économie, les dérivées sont utilisées pour analyser les coûts marginaux, les revenus marginaux et maximiser les profits.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon"> 
+                                <div class="use-card">
+                                    <div class="use-icon">🔬</div>
+                                    <h5>Sciences</h5>
+                                    <p>Les dérivées sont essentielles en physique, chimie et biologie pour étudier les taux de variation et les équations différentielles.</p>
+                                </div>
+                                <div class="use-card">
+                                    <div class="use-icon">🏗️</div>
+                                    <h5>Ingénierie</h5>
+                                    <p>Les ingénieurs utilisent la dérivation pour optimiser des conceptions, analyser des structures et modéliser des systèmes dynamiques.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="subsection">
+                            <h4>Méthode générale pour l'étude d'une fonction</h4>
+                            <div class="method-steps">
+                                <div class="method-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h5>Domaine de définition</h5>
+                                        <p>Déterminer l'ensemble des valeurs pour lesquelles la fonction est définie.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h5>Limites et asymptotes</h5>
+                                        <p>Étudier le comportement de la fonction aux bornes du domaine et aux points de discontinuité.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h5>Dérivée et variations</h5>
+                                        <p>Calculer la dérivée, étudier son signe et dresser le tableau de variations.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h5>Convexité et points d'inflexion</h5>
+                                        <p>Étudier la dérivée seconde pour déterminer la convexité et les points d'inflexion.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">
+                                        <h5>Points particuliers</h5>
+                                        <p>Calculer les coordonnées des extremums et des intersections avec les axes.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">6</div>
+                                    <div class="step-content">
+                                        <h5>Représentation graphique</h5>
+                                        <p>Tracer la courbe en utilisant toutes les informations recueillies.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="quote-box">
+                            <p>"La dérivation est l'un des outils les plus puissants des mathématiques, permettant d'analyser comment les choses changent et d'optimiser des systèmes dans presque tous les domaines scientifiques."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Ressources -->
+            <div class="resources-section">
+                <h2>Pour approfondir</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource">
+                        <div class="resource-icon">📚</div>
+                        <div class="resource-content">
+                            <h4>Exercices complémentaires</h4>
+                            <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                            <div class="download-box">
+                                <a href="#" class="download-button">
+                                    <span class="download-icon">📥</span>
+                                    <span class="download-text">Exercices sur la dérivation et l'étude de fonctions</span>
+                                </a>
+                                <p class="download-info">PDF - 8 pages d'exercices avec corrigés</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource">
+                        <div class="resource-icon">🔍</div>
+                        <div class="resource-content">
+                            <h4>Points à réviser</h4>
+                            <ul>
+                                <li>Les formules de dérivation des fonctions usuelles</li>
+                                <li>Les règles de dérivation (somme, produit, quotient, composée)</li>
+                                <li>La méthode d'étude des variations d'une fonction</li>
+                                <li>La recherche des asymptotes et l'étude de la convexité</li>
+                                <li>Les techniques de résolution des problèmes d'optimisation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource">
+                        <div class="resource-icon">🎯</div>
+                        <div class="resource-content">
+                            <h4>Préparation à l'examen</h4>
+                            <p>La dérivation et l'étude des fonctions sont des thèmes majeurs du programme de Terminale S.</p>
+                            <p>Points d'attention pour l'examen :</p>
+                            <ul>
+                                <li>Maîtriser les techniques de calcul des dérivées</li>
+                                <li>Savoir mener une étude complète de fonction</li>
+                                <li>Être capable de résoudre des problèmes d'optimisation</li>
+                                <li>Interpréter graphiquement les résultats obtenus</li>
+                                <li>Faire le lien entre la dérivée et les variations de la fonction</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource">
+                        <div class="resource-icon">🌐</div>
+                        <div class="resource-content">
+                            <h4>Ressources en ligne</h4>
+                            <ul>
+                                <li><a href="#">Khan Academy : Dérivation et applications</a></li>
+                                <li><a href="#">Exo7 : Exercices corrigés sur l'étude de fonctions</a></li>
+                                <li><a href="#">Mathématiques Web : Cours interactif sur les dérivées</a></li>
+                                <li><a href="#">YouTube : Vidéos explicatives sur les problèmes d'optimisation</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            /* Variables pour les couleurs et les espacements */
+            
+            /* Styles spécifiques pour le discours rapporté */
+            .time-expression {
+                display: flex;
+                justify-content: space-between;
+                padding: 5px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .time-expression:last-child {
+                border-bottom: none;
+            }
+            
+            .direct {
+                font-weight: 500;
+                color: var(--primary-color);
+            }
+            
+            .indirect {
+                font-style: italic;
+                color: var(--semi-modal-color);
+            }
+            :root {
+                --primary-color: #3498db;
+                --secondary-color: #2980b9;
+                --accent-color: #e74c3c;
+                --success-color: #2ecc71;
+                --warning-color: #f39c12;
+                --background-light: #f8f9fa;
+                --background-medium: #edf2f7;
+                --text-color: #333;
+                --text-light: #f8f9fa;
+                --border-radius: 8px;
+                --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                --spacing-sm: 10px;
+                --spacing-md: 20px;
+                --spacing-lg: 30px;
+                
+                /* Couleurs spécifiques */
+                --modal-color: #3498db;
+                --semi-modal-color: #9b59b6;
+                --negative-color: #e74c3c;
+                --neutral-color: #f39c12;
+                --positive-color: #2ecc71;
+            }
+            
+            /* Styles de base */
+            body {
+                font-family: 'Inter', 'Segoe UI', sans-serif;
+                line-height: 1.6;
+                color: var(--text-color);
+                background-color: var(--background-light);
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* En-tête du cours */
+            .course-header {
+                background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+                color: white;
+                padding: var(--spacing-lg) 0;
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .content-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 var(--spacing-md);
+            }
+            
+            .subject-tag {
+                display: inline-block;
+                background-color: rgba(255, 255, 255, 0.2);
+                color: var(--text-light);
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                margin-bottom: var(--spacing-md);
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+            }
+            
+            .course-title {
+                font-size: 2.8rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+                line-height: 1.2;
+                color: var(--text-light);
+            }
+            
+            .course-subtitle {
+                font-size: 1.4rem;
+                font-weight: 400;
+                margin-bottom: var(--spacing-lg);
+                opacity: 0.9;
+            }
+            
+            .course-actions {
+                display: flex;
+                gap: var(--spacing-md);
+                margin-top: var(--spacing-md);
+            }
+            
+            .action-button {
+                display: inline-block;
+                padding: 10px 20px;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+            
+            .action-button.primary {
+                background-color: var(--accent-color);
+                color: white;
+            }
+            
+            .action-button.secondary {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+            
+            .action-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Alerte et introduction */
+            .alert-box {
+                background: #e3f2fd;
+                border-left: 4px solid var(--secondary-color);
+                padding: var(--spacing-md);
+                margin-bottom: var(--spacing-lg);
+                border-radius: var(--border-radius);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+            
+            .alert-box h3 {
+                color: var(--primary-color);
+                margin-bottom: var(--spacing-sm);
+                display: flex;
+                align-items: center;
+            }
+            
+            /* Points clés */
+            .key-points {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: var(--spacing-md);
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .point-item {
+                background: white;
+                border-radius: var(--border-radius);
+                padding: var(--spacing-md);
+                box-shadow: var(--card-shadow);
+                display: flex;
+                align-items: flex-start;
+            }
+            
+            .point-icon {
+                font-size: 1.8rem;
+                margin-right: var(--spacing-md);
+                color: var(--primary-color);
+            }
+            
+            .point-content {
+                flex: 1;
+            }
+            
+            .point-content h4 {
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+                color: var(--primary-color);
+            }
+            
+            /* Liste de modaux */
+            .modal-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: var(--spacing-sm);
+            }
+            
+            .modal-pill {
+                background-color: var(--modal-color);
+                color: white;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+            
+            .modal-pill.semi {
+                background-color: var(--semi-modal-color);
+            }
+            
+            /* Sections */
+            .method-section {
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .method-section h2 {
+                color: var(--primary-color);
+                font-size: 1.8rem;
+                margin-bottom: var(--spacing-md);
+                border-bottom: 2px solid var(--secondary-color);
+                padding-bottom: var(--spacing-sm);
+                position: relative;
+            }
+            
+            .method-section h2::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 80px;
+                height: 2px;
+                background-color: var(--accent-color);
+            }
+            
+            /* Cards */
+            .method-card {
+                background: white;
+                border-radius: var(--border-radius);
+                box-shadow: var(--card-shadow);
+                margin-bottom: var(--spacing-md);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                overflow: hidden;
+            }
+            
+            .method-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+            
+            .method-header {
+                background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+                color: white;
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius) var(--border-radius) 0 0;
+            }
+            
+            .method-header h3 {
+                margin: 0;
+                font-size: 1.4rem;
+                font-weight: 600;
+            }
+            
+            .method-content {
+                padding: var(--spacing-md);
+            }
+            
+            /* Colonnes */
+            .two-columns {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .two-columns-list {
+                columns: 2;
+                column-gap: var(--spacing-md);
+            }
+            
+            /* Règles de grammaire */
+            .grammar-rules {
+                margin: var(--spacing-md) 0;
+            }
+            
+            .grammar-rule {
+                display: flex;
+                margin-bottom: var(--spacing-md);
+                align-items: flex-start;
+            }
+            
+            .rule-number {
+                width: 30px;
+                height: 30px;
+                background: var(--primary-color);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-right: var(--spacing-md);
+                flex-shrink: 0;
+            }
+            
+            .rule-content {
+                flex: 1;
+            }
+            
+            .rule-content h5 {
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+                color: var(--primary-color);
+            }
+            
+            /* Exemples */
+            .examples-box {
+                background: var(--background-medium);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                margin: var(--spacing-sm) 0;
+            }
+            
+            .example {
+                margin-bottom: 10px;
+                position: relative;
+            }
+            
+            .example:last-child {
+                margin-bottom: 0;
+            }
+            
+            .example-icon {
+                display: inline-block;
+                width: 20px;
+                text-align: center;
+                margin-right: 5px;
+            }
+            
+            .example.correct .example-icon {
+                color: var(--success-color);
+            }
+            
+            .example.incorrect .example-icon {
+                color: var(--accent-color);
+            }
+            
+            .example-label {
+                font-weight: 500;
+                color: var(--primary-color);
+                margin-right: 8px;
+            }
+            
+            .example-note {
+                display: block;
+                font-size: 0.85rem;
+                color: #666;
+                font-style: italic;
+                margin-top: 2px;
+            }
+            
+            .highlight {
+                background-color: rgba(52, 152, 219, 0.2);
+                padding: 0 3px;
+                border-radius: 3px;
+                font-weight: 500;
+            }
+            
+            /* Tableau des temps */
+            .tense-table {
+                margin: var(--spacing-md) 0;
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--card-shadow);
+            }
+            
+            .tense-row {
+                display: grid;
+                grid-template-columns: 1fr 1.5fr 2fr;
+            }
+            
+            .tense-row.header {
+                background-color: var(--primary-color);
+                color: white;
+                font-weight: 600;
+            }
+            
+            .tense-row:not(.header) {
+                background-color: white;
+                border-bottom: 1px solid #dee2e6;
+            }
+            
+            .tense-row:nth-child(even):not(.header) {
+                background-color: var(--background-light);
+            }
+            
+            .tense-row:last-child {
+                border-bottom: none;
+            }
+            
+            .tense-cell {
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+            
+            /* Concept box */
+            .concept-card {
+                background: var(--background-medium);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                margin: var(--spacing-md) 0;
+            }
+            
+            .concept-card h5 {
+                color: var(--primary-color);
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            /* Info box */
+            .info-box {
+                background: #e8f4f8;
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                margin: var(--spacing-md) 0;
+                border-left: 4px solid var(--primary-color);
+            }
+            
+            .info-box h5 {
+                color: var(--primary-color);
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            /* Comparison table */
+            .comparison-table {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+            
+            .comparison-item {
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--card-shadow);
+            }
+            
+            .comparison-header {
+                padding: var(--spacing-sm) var(--spacing-md);
+                color: white;
+                text-align: center;
+            }
+            
+            .comparison-header.modal {
+                background-color: var(--modal-color);
+            }
+            
+            .comparison-header.semi-modal {
+                background-color: var(--semi-modal-color);
+            }
+            
+            .comparison-content {
+                padding: var(--spacing-md);
+                background: white;
+            }
+            
+            .comparison-content ul {
+                margin: 0;
+                padding-left: 20px;
+            }
+            
+            /* Modal cards */
+            .modal-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+            
+            .modal-card {
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--card-shadow);
+            }
+            
+            .modal-card.small {
+                font-size: 0.95rem;
+            }
+            
+            .modal-name {
+                background-color: var(--primary-color);
+                color: white;
+                padding: var(--spacing-sm) var(--spacing-md);
+                font-weight: 600;
+                text-align: center;
+                font-size: 1.1rem;
+            }
+            
+            .modal-content {
+                padding: var(--spacing-md);
+                background: white;
+            }
+            
+            .modal-examples {
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            /* Practice box */
+            .practice-box {
+                background: #f8f9fa;
+                border: 1px solid #dee2e6;
+                border-radius: var(--border-radius);
+                padding: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+            
+            .practice-box h5 {
+                color: var(--primary-color);
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .practice-items {
+                margin-top: var(--spacing-md);
+            }
+            
+            .practice-item {
+                margin-bottom: var(--spacing-md);
+                padding-bottom: var(--spacing-md);
+                border-bottom: 1px solid #dee2e6;
+            }
+            
+            .practice-item:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+            
+            .practice-question {
+                font-weight: 500;
+                margin-bottom: 8px;
+            }
+            
+            .practice-answer {
+                margin-bottom: 8px;
+                padding-left: 15px;
+                border-left: 3px solid #dee2e6;
+            }
+            
+            .practice-solution {
+                padding-left: 15px;
+                border-left: 3px solid var(--success-color);
+                color: #2c3e50;
+            }
+            
+            .answer-blank {
+                display: inline-block;
+                width: 80px;
+                height: 1px;
+                border-bottom: 1px solid #666;
+                margin: 0 5px;
+            }
+            
+            /* Uses grid */
+            .uses-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+            
+            .use-card {
+                background: white;
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                box-shadow: var(--card-shadow);
+            }
+            
+            .use-icon {
+                font-size: 1.5rem;
+                margin-bottom: var(--spacing-sm);
+                color: var(--primary-color);
+            }
+            
+            .use-card h5 {
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+                color: var(--primary-color);
+            }
+            
+            .use-card p {
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            /* Conclusion */
+            .conclusion-box {
+                background: #e8f4f8;
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                margin-top: var(--spacing-md);
+            }
+            
+            .conclusion-box h4 {
+                color: var(--primary-color);
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .key-points-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: var(--spacing-md);
+                margin-top: var(--spacing-md);
+            }
+            
+            .key-point {
+                display: flex;
+                align-items: flex-start;
+            }
+            
+            .key-point-icon {
+                font-size: 1.2rem;
+                margin-right: 10px;
+                color: var(--primary-color);
+            }
+            
+            .key-point-content {
+                flex: 1;
+            }
+            
+            .key-point-content h5 {
+                margin-top: 0;
+                margin-bottom: 5px;
+                color: var(--primary-color);
+            }
+            
+            .key-point-content p {
+                margin: 0;
+                font-size: 0.95rem;
+            }
+            
+            /* Summary table */
+            .summary-table {
+                margin: var(--spacing-md) 0;
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--card-shadow);
+            }
+            
+            .summary-row {
+                display: grid;
+                grid-template-columns: 1fr 2fr 2fr;
+            }
+            
+            .summary-row.header {
+                background-color: var(--primary-color);
+                color: white;
+                font-weight: 600;
+            }
+            
+            .summary-row:not(.header) {
+                background-color: white;
+                border-bottom: 1px solid #dee2e6;
+            }
+            
+            .summary-row:nth-child(even):not(.header) {
+                background-color: var(--background-light);
+            }
+            
+            .summary-row:last-child {
+                border-bottom: none;
+            }
+            
+            .summary-cell {
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+            
+            /* Tips */
+            .tips-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+            
+            .tip-card {
+                background: white;
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                box-shadow: var(--card-shadow);
+            }
+            
+            .tip-icon {
+                font-size: 1.5rem;
+                margin-bottom: var(--spacing-sm);
+                color: var(--primary-color);
+            }
+            
+            .tip-card h5 {
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+                color: var(--primary-color);
+            }
+            
+            .tip-card p {
+                margin: 0;
+                font-size: 0.95rem;
+            }
+            
+            /* Quote box */
+            .quote-box {
+                background: var(--background-medium);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                border-left: 4px solid var(--secondary-color);
+                margin: var(--spacing-md) 0;
+                font-style: italic;
+            }
+            
+            .quote-box p {
+                margin: 0;
+            }
+            
+            /* Resources */
+            .resources-section {
+                margin-top: var(--spacing-lg);
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .resources-section h2 {
+                color: var(--primary-color);
+                font-size: 1.8rem;
+                margin-bottom: var(--spacing-md);
+                border-bottom: 2px solid var(--secondary-color);
+                padding-bottom: var(--spacing-sm);
+                position: relative;
+            }
+            
+            .resources-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: var(--spacing-md);
+            }
+            
+            .resource {
+                display: flex;
+                background: white;
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                box-shadow: var(--card-shadow);
+            }
+            
+            .resource-icon {
+                font-size: 1.8rem;
+                margin-right: var(--spacing-md);
+                color: var(--primary-color);
+            }
+            
+            .resource-content {
+                flex: 1;
+            }
+            
+            .resource-content h4 {
+                color: var(--primary-color);
+                margin-top: 0;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            /* Download box */
+            .download-box {
+                background: var(--background-medium);
+                border-radius: var(--border-radius);
+                padding: var(--spacing-sm);
+                margin-top: var(--spacing-sm);
+            }
+            
+            .download-button {
+                display: flex;
+                align-items: center;
+                background: var(--primary-color);
+                color: white;
+                padding: 10px 15px;
+                border-radius: var(--border-radius);
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .download-button:hover {
+                background: var(--secondary-color);
+                text-decoration: none;
+                color: white;
+            }
+            
+            .download-icon {
+                font-size: 1.2rem;
+                margin-right: 10px;
+            }
+            
+            .download-info {
+                font-size: 0.85rem;
+                color: #666;
+                margin: 0;
+            }
+            
+            /* Responsive */
+            @media (max-width: 768px) {
+                :root {
+                    --spacing-md: 15px;
+                    --spacing-lg: 25px;
+                }
+                
+                .course-title {
+                    font-size: 2rem;
+                }
+                
+                .course-subtitle {
+                    font-size: 1.2rem;
+                }
+                
+                .course-actions {
+                    flex-direction: column;
+                    gap: var(--spacing-sm);
+                }
+                
+                .action-button {
+                    width: 100%;
+                    text-align: center;
+                }
+                
+                .two-columns,
+                .comparison-table,
+                .modal-grid,
+                .tense-row,
+                .summary-row {
+                    grid-template-columns: 1fr;
+                }
+                
+                .tense-row.header,
+                .summary-row.header {
+                    display: none;
+                }
+                
+                .resource {
+                    flex-direction: column;
+                }
+                
+                .resource-icon {
+                    margin-bottom: var(--spacing-sm);
+                    margin-right: 0;
+                }
+            }
+            
+            /* Animations */
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .method-card {
+                animation: fadeIn 0.5s ease-out forwards;
+            }
+            
+            .method-card:nth-child(2) {
+                animation-delay: 0.1s;
+            }
+            
+            .method-card:nth-child(3) {
+                animation-delay: 0.2s;
+            }
+            
+            /* Accessibilité */
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                }
+            }
+            
+            /* Impression */
+            @media print {
+                .method-card {
+                    break-inside: avoid;
+                    box-shadow: none;
+                    border: 1px solid #ddd;
+                }
+                
+                .course-header {
+                    background: none;
+                    color: black;
+                    padding: 0;
+                }
+                
+                .subject-tag, .action-button {
+                    display: none;
+                }
+                
+                .course-title {
+                    color: black;
+                    font-size: 24pt;
+                }
+                
+                a {
+                    text-decoration: none;
+                    color: black;
+                }
+                
+                .method-header {
+                    background: none;
+                    color: black;
+                    border-bottom: 1px solid #ddd;
+                }
+                
+                .modal-name, .comparison-header {
+                    background: none !important;
+                    color: black;
+                    border: 1px solid #ddd;
+                }
+                
+                .highlight {
+                    background: none;
+                    text-decoration: underline;
+                }
+            }
+            </style>    
+        {% endblock %}
+        
+                            

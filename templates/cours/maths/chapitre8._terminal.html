@@ -1,0 +1,2379 @@
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Mathématiques - Analyse</div>
+        <h1 class="course-title">Suites Numériques</h1>
+        <div class="course-subtitle">Définition, propriétés et applications des suites numériques</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Point essentiel</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>Les suites numériques sont des fonctions définies sur l'ensemble des entiers naturels et à valeurs réelles. Elles constituent un outil mathématique fondamental pour modéliser des phénomènes discrets, comme l'évolution d'une population, les intérêts composés, ou encore les approximations successives d'un nombre. En Terminale S, nous approfondirons l'étude des suites, notamment leurs comportements asymptotiques (convergence, divergence) et leurs applications.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Définir et manipuler différents types de suites numériques</li>
+                        <li>Étudier la monotonie et les variations des suites</li>
+                        <li>Déterminer la convergence ou la divergence d'une suite</li>
+                        <li>Calculer la limite d'une suite convergente</li>
+                        <li>Appliquer les suites à des problèmes concrets</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Fonctions numériques (continuité, dérivabilité)</li>
+                        <li>Calcul algébrique et manipulation d'inégalités</li>
+                        <li>Raisonnement par récurrence</li>
+                        <li>Notion de limite pour les fonctions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>Les suites numériques permettent de modéliser :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">L'évolution d'un capital placé à intérêts composés</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">La croissance d'une population</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Les méthodes d'approximation numérique (Newton, dichotomie)</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Les phénomènes de convergence vers un équilibre</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Généralités sur les suites -->
+    <div class="method-section">
+        <h2>1. Généralités sur les Suites Numériques</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Définition et notations</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Qu'est-ce qu'une suite numérique ?</h4>
+                    <div class="concept-card">
+                        <p>Une <strong>suite numérique</strong> est une fonction définie sur l'ensemble ℕ des entiers naturels (ou sur une partie de ℕ) et à valeurs dans ℝ.</p>
+                        
+                        <p>Formellement, une suite (u<sub>n</sub>) est une application u : ℕ → ℝ qui à tout entier naturel n associe un nombre réel u(n), noté u<sub>n</sub>.</p>
+                        
+                        <div class="formula-box">
+                            <p>u : ℕ → ℝ</p>
+                            <p>n ↦ u<sub>n</sub></p>
+                        </div>
+                        
+                        <p>Le nombre u<sub>n</sub> est appelé le <strong>terme d'indice n</strong> ou le <strong>terme de rang n</strong> de la suite.</p>
+                        
+                        <div class="important-note">
+                            <p>Contrairement aux fonctions usuelles, l'indice n d'une suite ne prend que des valeurs entières positives (ou à partir d'un certain entier).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de suites</h5>
+                        <div class="example">
+                            <p>La suite (u<sub>n</sub>) définie par u<sub>n</sub> = 2n + 3 pour tout n ∈ ℕ.</p>
+                            <p>Les premiers termes sont : u<sub>0</sub> = 3, u<sub>1</sub> = 5, u<sub>2</sub> = 7, u<sub>3</sub> = 9, ...</p>
+                        </div>
+                        <div class="example">
+                            <p>La suite (v<sub>n</sub>) définie par v<sub>n</sub> = (-1)<sup>n</sup> pour tout n ∈ ℕ.</p>
+                            <p>Les premiers termes sont : v<sub>0</sub> = 1, v<sub>1</sub> = -1, v<sub>2</sub> = 1, v<sub>3</sub> = -1, ...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Modes de définition d'une suite</h4>
+                    <div class="concept-card">
+                        <p>Il existe plusieurs façons de définir une suite numérique :</p>
+                        
+                        <p><strong>1. Définition explicite</strong> : on exprime u<sub>n</sub> directement en fonction de n.</p>
+                        <div class="formula-box">
+                            <p>u<sub>n</sub> = f(n) où f est une fonction définie sur ℕ</p>
+                        </div>
+                        <p>Exemple : u<sub>n</sub> = 3n² - 2n + 1</p>
+                        
+                        <p><strong>2. Définition par récurrence</strong> : on donne le premier terme u<sub>0</sub> (ou u<sub>1</sub>) et une relation permettant de calculer u<sub>n+1</sub> en fonction de u<sub>n</sub>.</p>
+                        <div class="formula-box">
+                            <p>u<sub>0</sub> (ou u<sub>1</sub>) donné</p>
+                            <p>u<sub>n+1</sub> = g(u<sub>n</sub>) pour tout n ≥ 0 (ou n ≥ 1)</p>
+                        </div>
+                        <p>Exemple : u<sub>0</sub> = 1 et u<sub>n+1</sub> = 2u<sub>n</sub> + 3 pour tout n ≥ 0</p>
+                        
+                        <p><strong>3. Définition par récurrence d'ordre supérieur</strong> : on exprime u<sub>n+1</sub> en fonction de plusieurs termes précédents.</p>
+                        <div class="formula-box">
+                            <p>u<sub>0</sub>, u<sub>1</sub>, ..., u<sub>k</sub> donnés</p>
+                            <p>u<sub>n+1</sub> = h(u<sub>n</sub>, u<sub>n-1</sub>, ..., u<sub>n-k+1</sub>) pour tout n ≥ k</p>
+                        </div>
+                        <p>Exemple : u<sub>0</sub> = 0, u<sub>1</sub> = 1 et u<sub>n+2</sub> = u<sub>n+1</sub> + u<sub>n</sub> pour tout n ≥ 0 (suite de Fibonacci)</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de modes de définition</h5>
+                        <div class="example">
+                            <p><strong>Définition explicite</strong> : La suite (u<sub>n</sub>) définie par u<sub>n</sub> = n/(n+1) pour tout n ≥ 1.</p>
+                            <p>Les premiers termes sont : u<sub>1</sub> = 1/2, u<sub>2</sub> = 2/3, u<sub>3</sub> = 3/4, ...</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>Définition par récurrence</strong> : La suite (v<sub>n</sub>) définie par v<sub>0</sub> = 1 et v<sub>n+1</sub> = 2v<sub>n</sub> pour tout n ≥ 0.</p>
+                            <p>Les premiers termes sont : v<sub>0</sub> = 1, v<sub>1</sub> = 2, v<sub>2</sub> = 4, v<sub>3</sub> = 8, ...</p>
+                            <p>On peut trouver une forme explicite : v<sub>n</sub> = 2<sup>n</sup></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Représentation graphique</h4>
+                    <div class="concept-card">
+                        <p>On peut représenter graphiquement une suite (u<sub>n</sub>) dans un repère orthonormé par l'ensemble des points de coordonnées (n, u<sub>n</sub>).</p>
+                        
+                        <p>Cette représentation permet de visualiser le comportement de la suite, notamment :</p>
+                        <ul>
+                            <li>Sa monotonie (croissance, décroissance)</li>
+                            <li>Ses variations (changements de monotonie)</li>
+                            <li>Sa convergence éventuelle</li>
+                        </ul>
+                        
+                        <div class="important-note">
+                            <p>Attention : contrairement aux fonctions continues, les points représentant une suite ne sont pas reliés par une courbe continue, car n ne prend que des valeurs entières.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Représentation graphique d'une suite</h5>
+                        <div class="image-placeholder">
+                            <p>[Illustration d'une représentation graphique de suite]</p>
+                            <p>Représentation graphique de la suite u<sub>n</sub> = n/(n+1)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Calculez les cinq premiers termes de la suite (u<sub>n</sub>) définie par u<sub>n</sub> = n² - 3n pour tout n ≥ 0.</div>
+                            <div class="practice-solution">
+                                <p>u<sub>0</sub> = 0² - 3×0 = 0</p>
+                                <p>u<sub>1</sub> = 1² - 3×1 = 1 - 3 = -2</p>
+                                <p>u<sub>2</sub> = 2² - 3×2 = 4 - 6 = -2</p>
+                                <p>u<sub>3</sub> = 3² - 3×3 = 9 - 9 = 0</p>
+                                <p>u<sub>4</sub> = 4² - 3×4 = 16 - 12 = 4</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Soit la suite (v<sub>n</sub>) définie par v<sub>0</sub> = 3 et v<sub>n+1</sub> = 2v<sub>n</sub> - 1 pour tout n ≥ 0. Calculez les quatre premiers termes de cette suite.</div>
+                            <div class="practice-solution">
+                                <p>v<sub>0</sub> = 3</p>
+                                <p>v<sub>1</sub> = 2v<sub>0</sub> - 1 = 2×3 - 1 = 6 - 1 = 5</p>
+                                <p>v<sub>2</sub> = 2v<sub>1</sub> - 1 = 2×5 - 1 = 10 - 1 = 9</p>
+                                <p>v<sub>3</sub> = 2v<sub>2</sub> - 1 = 2×9 - 1 = 18 - 1 = 17</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suites arithmétiques et géométriques -->
+    <div class="method-section">
+        <h2>2. Suites Arithmétiques et Géométriques</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Suites arithmétiques</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition et propriétés</h4>
+                    <div class="concept-card">
+                        <p>Une suite (u<sub>n</sub>) est une <strong>suite arithmétique</strong> s'il existe un nombre réel r tel que :</p>
+                        <div class="formula-box">
+                            <p>u<sub>n+1</sub> - u<sub>n</sub> = r pour tout n ∈ ℕ</p>
+                        </div>
+                        <p>Le nombre r est appelé la <strong>raison</strong> de la suite arithmétique.</p>
+                        
+                        <p><strong>Propriétés :</strong></p>
+                        <ul>
+                            <li>Une suite arithmétique est croissante si r > 0, décroissante si r < 0, constante si r = 0.</li>
+                            <li>La différence entre deux termes consécutifs est constante et égale à la raison r.</li>
+                            <li>Une suite arithmétique peut être définie par récurrence : u<sub>n+1</sub> = u<sub>n</sub> + r</li>
+                        </ul>
+                        
+                        <p><strong>Expression explicite :</strong></p>
+                        <div class="formula-box">
+                            <p>u<sub>n</sub> = u<sub>0</sub> + n×r</p>
+                            <p>ou</p>
+                            <p>u<sub>n</sub> = u<sub>p</sub> + (n-p)×r</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de suite arithmétique</h5>
+                        <div class="example">
+                            <p>Soit la suite (u<sub>n</sub>) définie par u<sub>0</sub> = 5 et u<sub>n+1</sub> = u<sub>n</sub> + 3 pour tout n ≥ 0.</p>
+                            <p>C'est une suite arithmétique de premier terme u<sub>0</sub> = 5 et de raison r = 3.</p>
+                            <p>Expression explicite : u<sub>n</sub> = 5 + 3n</p>
+                            <p>Les premiers termes sont : u<sub>0</sub> = 5, u<sub>1</sub> = 8, u<sub>2</sub> = 11, u<sub>3</sub> = 14, ...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Somme des termes</h4>
+                    <div class="concept-card">
+                        <p>La somme des (n+1) premiers termes d'une suite arithmétique (u<sub>k</sub>) de premier terme u<sub>0</sub> et de raison r est donnée par :</p>
+                        <div class="formula-box">
+                            <p>S<sub>n</sub> = u<sub>0</sub> + u<sub>1</sub> + u<sub>2</sub> + ... + u<sub>n</sub> = (n+1) × (u<sub>0</sub> + u<sub>n</sub>)/2</p>
+                        </div>
+                        <p>Cette formule peut aussi s'écrire :</p>
+                        <div class="formula-box">
+                            <p>S<sub>n</sub> = (n+1) × (2u<sub>0</sub> + nr)/2</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de calcul de somme</h5>
+                        <div class="example">
+                            <p>Calculons la somme S = 3 + 7 + 11 + 15 + ... + 99</p>
+                            <p>Il s'agit d'une suite arithmétique de premier terme u<sub>0</sub> = 3 et de raison r = 4.</p>
+                            <p>Le dernier terme est 99, donc u<sub>n</sub> = 99.</p>
+                            <p>On a u<sub>n</sub> = u<sub>0</sub> + nr = 3 + 4n = 99</p>
+                            <p>D'où 4n = 96, soit n = 24.</p>
+                            <p>La somme est donc S<sub>24</sub> = (24+1) × (3 + 99)/2 = 25 × 102/2 = 25 × 51 = 1275</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Suites géométriques</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition et propriétés</h4>
+                    <div class="concept-card">
+                        <p>Une suite (u<sub>n</sub>) est une <strong>suite géométrique</strong> s'il existe un nombre réel q non nul tel que :</p>
+                        <div class="formula-box">
+                            <p>u<sub>n+1</sub>/u<sub>n</sub> = q pour tout n ∈ ℕ</p>
+                        </div>
+                        <p>Le nombre q est appelé la <strong>raison</strong> de la suite géométrique.</p>
+                        
+                        <p><strong>Propriétés :</strong></p>
+                        <ul>
+                            <li>Une suite géométrique est strictement croissante si q > 1 ou si q < 0 et n pair.</li>
+                            <li>Une suite géométrique est strictement décroissante si 0 < q < 1 ou si q < 0 et n impair.</li>
+                            <li>Le quotient de deux termes consécutifs est constant et égal à la raison q.</li>
+                            <li>Une suite géométrique peut être définie par récurrence : u<sub>n+1</sub> = q × u<sub>n</sub></li>
+                        </ul>
+                        
+                        <p><strong>Expression explicite :</strong></p>
+                        <div class="formula-box">
+                            <p>u<sub>n</sub> = u<sub>0</sub> × q<sup>n</sup></p>
+                            <p>ou</p>
+                            <p>u<sub>n</sub> = u<sub>p</sub> × q<sup>n-p</sup></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de suite géométrique</h5>
+                        <div class="example">
+                            <p>Soit la suite (v<sub>n</sub>) définie par v<sub>0</sub> = 2 et v<sub>n+1</sub> = 3v<sub>n</sub> pour tout n ≥ 0.</p>
+                            <p>C'est une suite géométrique de premier terme v<sub>0</sub> = 2 et de raison q = 3.</p>
+                            <p>Expression explicite : v<sub>n</sub> = 2 × 3<sup>n</sup></p>
+                            <p>Les premiers termes sont : v<sub>0</sub> = 2, v<sub>1</sub> = 6, v<sub>2</sub> = 18, v<sub>3</sub> = 54, ...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Somme des termes</h4>
+                    <div class="concept-card">
+                        <p>La somme des (n+1) premiers termes d'une suite géométrique (u<sub>k</sub>) de premier terme u<sub>0</sub> et de raison q ≠ 1 est donnée par :</p>
+                        <div class="formula-box">
+                            <p>S<sub>n</sub> = u<sub>0</sub> + u<sub>1</sub> + u<sub>2</sub> + ... + u<sub>n</sub> = u<sub>0</sub> × (1 - q<sup>n+1</sup>)/(1 - q)</p>
+                        </div>
+                        <p>Si |q| < 1, alors lorsque n tend vers l'infini, la somme des termes de la suite géométrique converge vers :</p>
+                        <div class="formula-box">
+                            <p>S<sub>∞</sub> = u<sub>0</sub>/(1 - q)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de calcul de somme</h5>
+                        <div class="example">
+                            <p>Calculons la somme S = 5 + 10 + 20 + 40 + ... + 5 × 2<sup>10</sup></p>
+                            <p>Il s'agit d'une suite géométrique de premier terme u<sub>0</sub> = 5 et de raison q = 2.</p>
+                            <p>Le dernier terme est 5 × 2<sup>10</sup>, donc u<sub>n</sub> = 5 × 2<sup>10</sup>.</p>
+                            <p>On a u<sub>n</sub> = u<sub>0</sub> × q<sup>n</sup> = 5 × 2<sup>n</sup> = 5 × 2<sup>10</sup></p>
+                            <p>D'où n = 10.</p>
+                            <p>La somme est donc S<sub>10</sub> = 5 × (1 - 2<sup>11</sup>)/(1 - 2) = 5 × (1 - 2048)/(-1) = 5 × (2048 - 1) = 5 × 2047 = 10235</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Soit la suite (u<sub>n</sub>) définie par u<sub>0</sub> = 4 et u<sub>n+1</sub> = u<sub>n</sub> - 3 pour tout n ≥ 0.
+                                <br>a) Montrez que (u<sub>n</sub>) est une suite arithmétique et précisez sa raison.
+                                <br>b) Exprimez u<sub>n</sub> en fonction de n.
+                                <br>c) Calculez la somme S = u<sub>0</sub> + u<sub>1</sub> + ... + u<sub>10</sub>.
+                            </div>
+                            <div class="practice-solution">
+                                <p>a) On a u<sub>n+1</sub> - u<sub>n</sub> = -3 pour tout n ≥ 0.</p>
+                                <p>La différence entre deux termes consécutifs est constante, donc (u<sub>n</sub>) est une suite arithmétique de raison r = -3.</p>
+                                
+                                <p>b) Expression explicite : u<sub>n</sub> = u<sub>0</sub> + n×r = 4 + n×(-3) = 4 - 3n</p>
+                                
+                                <p>c) Somme des termes :</p>
+                                <p>S<sub>10</sub> = (10+1) × (u<sub>0</sub> + u<sub>10</sub>)/2</p>
+                                <p>u<sub>10</sub> = 4 - 3×10 = 4 - 30 = -26</p>
+                                <p>S<sub>10</sub> = 11 × (4 + (-26))/2 = 11 × (-22)/2 = 11 × (-11) = -121</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Soit la suite (v<sub>n</sub>) définie par v<sub>0</sub> = 1 et v<sub>n+1</sub> = 2v<sub>n</sub> pour tout n ≥ 0.
+                                <br>a) Montrez que (v<sub>n</sub>) est une suite géométrique et précisez sa raison.
+                                <br>b) Exprimez v<sub>n</sub> en fonction de n.
+                                <br>c) Calculez la somme S = v<sub>0</sub> + v<sub>1</sub> + ... + v<sub>8</sub>.
+                            </div>
+                            <div class="practice-solution">
+                                <p>a) On a v<sub>n+1</sub>/v<sub>n</sub> = 2 pour tout n ≥ 0.</p>
+                                <p>Le quotient entre deux termes consécutifs est constant, donc (v<sub>n</sub>) est une suite géométrique de raison q = 2.</p>
+                                
+                                <p>b) Expression explicite : v<sub>n</sub> = v<sub>0</sub> × q<sup>n</sup> = 1 × 2<sup>n</sup> = 2<sup>n</sup></p>
+                                
+                                <p>c) Somme des termes :</p>
+                                <p>S<sub>8</sub> = v<sub>0</sub> × (1 - q<sup>9</sup>)/(1 - q) = 1 × (1 - 2<sup>9</sup>)/(1 - 2) = (1 - 512)/(-1) = 512 - 1 = 511</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monotonie et variations des suites -->
+    <div class="method-section">
+        <h2>3. Monotonie et Variations des Suites</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Suites monotones</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définitions</h4>
+                    <div class="concept-card">
+                        <p>Soit (u<sub>n</sub>) une suite numérique définie pour n ≥ n<sub>0</sub>.</p>
+                        
+                        <p><strong>Suite croissante :</strong></p>
+                        <div class="formula-box">
+                            <p>(u<sub>n</sub>) est croissante si pour tout n ≥ n<sub>0</sub>, u<sub>n+1</sub> ≥ u<sub>n</sub></p>
+                        </div>
+                        
+                        <p><strong>Suite strictement croissante :</strong></p>
+                        <div class="formula-box">
+                            <p>(u<sub>n</sub>) est strictement croissante si pour tout n ≥ n<sub>0</sub>, u<sub>n+1</sub> > u<sub>n</sub></p>   
+                        </div>
+                        
+                        <p><strong>Suite décroissante :</strong></p>
+                        <div class="formula-box">
+                            <p>(u<sub>n</sub>) est décroissante si pour tout n ≥ n<sub>0</sub>, u<sub>n+1</sub> ≤ u<sub>n</sub></p>
+                        </div>
+                        
+                        <p><strong>Suite strictement décroissante :</strong></p>
+                        <div class="formula-box">
+                            <p>(u<sub>n</sub>) est strictement décroissante si pour tout n ≥ n<sub>0</sub>, u<sub>n+1</sub> < u<sub>n</sub></p>
+                        </div>
+                        
+                        <p><strong>Suite monotone :</strong></p>
+                        <p>Une suite est monotone si elle est soit croissante, soit décroissante.</p>
+                        
+                        <p><strong>Suite constante :</strong></p>
+                        <p>Une suite est constante si pour tout n ≥ n<sub>0</sub>, u<sub>n+1</sub> = u<sub>n</sub></p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de suites monotones</h5>
+                        <div class="example">
+                            <p>La suite (u<sub>n</sub>) définie par u<sub>n</sub> = 2n + 3 est strictement croissante car u<sub>n+1</sub> - u<sub>n</sub> = 2 > 0.</p>
+                        </div>
+                        <div class="example">
+                            <p>La suite (v<sub>n</sub>) définie par v<sub>n</sub> = 1/n pour n ≥ 1 est strictement décroissante car v<sub>n+1</sub> - v<sub>n</sub> = 1/(n+1) - 1/n = (n - (n+1))/(n(n+1)) = -1/(n(n+1)) < 0.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Méthodes pour étudier la monotonie</h4>
+                    <div class="concept-card">
+                        <p>Pour étudier la monotonie d'une suite (u<sub>n</sub>), on peut utiliser différentes méthodes :</p>
+                        
+                        <p><strong>1. Étude du signe de u<sub>n+1</sub> - u<sub>n</sub> :</strong></p>
+                        <ul>
+                            <li>Si u<sub>n+1</sub> - u<sub>n</sub> ≥ 0 pour tout n ≥ n<sub>0</sub>, alors la suite est croissante.</li>
+                            <li>Si u<sub>n+1</sub> - u<sub>n</sub> ≤ 0 pour tout n ≥ n<sub>0</sub>, alors la suite est décroissante.</li>
+                        </ul>
+                        
+                        <p><strong>2. Utilisation d'une fonction auxiliaire :</strong></p>
+                        <p>Si u<sub>n</sub> = f(n) où f est une fonction définie sur [n<sub>0</sub>, +∞[ :</p>
+                        <ul>
+                            <li>Si f est croissante sur [n<sub>0</sub>, +∞[, alors (u<sub>n</sub>) est croissante.</li>
+                            <li>Si f est décroissante sur [n<sub>0</sub>, +∞[, alors (u<sub>n</sub>) est décroissante.</li>
+                        </ul>
+                        
+                        <p><strong>3. Raisonnement par récurrence :</strong></p>
+                        <p>Pour une suite définie par récurrence u<sub>n+1</sub> = f(u<sub>n</sub>), on peut montrer par récurrence que :</p>
+                        <ul>
+                            <li>Si f est croissante et u<sub>1</sub> ≥ u<sub>0</sub>, alors la suite est croissante.</li>
+                            <li>Si f est croissante et u<sub>1</sub> ≤ u<sub>0</sub>, alors la suite est décroissante.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'étude de monotonie</h5>
+                        <div class="example">
+                            <p>Étudions la monotonie de la suite (u<sub>n</sub>) définie par u<sub>n</sub> = n/(n+1) pour n ≥ 1.</p>
+                            
+                            <p>Calculons u<sub>n+1</sub> - u<sub>n</sub> :</p>
+                            <p>u<sub>n+1</sub> - u<sub>n</sub> = (n+1)/(n+2) - n/(n+1)</p>
+                            <p>= ((n+1)(n+1) - n(n+2))/((n+2)(n+1))</p>
+                            <p>= (n² + 2n + 1 - n² - 2n)/((n+2)(n+1))</p>
+                            <p>= 1/((n+2)(n+1))</p>
+                            
+                            <p>Comme n ≥ 1, on a (n+2)(n+1) > 0, donc u<sub>n+1</sub> - u<sub>n</sub> > 0.</p>
+                            <p>La suite (u<sub>n</sub>) est donc strictement croissante.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Suites majorées et minorées</h4>
+                    <div class="concept-card">
+                        <p><strong>Suite majorée :</strong></p>
+                        <div class="formula-box">
+                            <p>Une suite (u<sub>n</sub>) est majorée s'il existe un réel M tel que pour tout n ≥ n<sub>0</sub>, u<sub>n</sub> ≤ M.</p>
+                            <p>M est appelé un majorant de la suite.</p>
+                        </div>
+                        
+                        <p><strong>Suite minorée :</strong></p>
+                        <div class="formula-box">
+                            <p>Une suite (u<sub>n</sub>) est minorée s'il existe un réel m tel que pour tout n ≥ n<sub>0</sub>, u<sub>n</sub> ≥ m.</p>
+                            <p>m est appelé un minorant de la suite.</p>
+                        </div>
+                        
+                        <p><strong>Suite bornée :</strong></p>
+                        <p>Une suite est bornée si elle est à la fois majorée et minorée.</p>
+                        
+                        <div class="important-note">
+                            <p>Une suite croissante est minorée par son premier terme.</p>
+                            <p>Une suite décroissante est majorée par son premier terme.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de suites majorées/minorées</h5>
+                        <div class="example">
+                            <p>La suite (u<sub>n</sub>) définie par u<sub>n</sub> = n/(n+1) pour n ≥ 1 est :</p>
+                            <p>- minorée par u<sub>1</sub> = 1/2 (car elle est croissante)</p>
+                            <p>- majorée par 1 (car u<sub>n</sub> = n/(n+1) < 1 pour tout n ≥ 1)</p>
+                            <p>Donc la suite est bornée.</p>
+                        </div>
+                        <div class="example">
+                            <p>La suite (v<sub>n</sub>) définie par v<sub>n</sub> = n² est :</p>
+                            <p>- minorée par 0 (car n² ≥ 0 pour tout n ≥ 0)</p>
+                            <p>- non majorée (car n² tend vers +∞ quand n tend vers +∞)</p>
+                            <p>Donc la suite n'est pas bornée.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Étudiez la monotonie de la suite (u<sub>n</sub>) définie par u<sub>n</sub> = (2n-1)/(n+2) pour n ≥ 1.</div>
+                            <div class="practice-solution">
+                                <p>Calculons u<sub>n+1</sub> - u<sub>n</sub> :</p>
+                                <p>u<sub>n+1</sub> - u<sub>n</sub> = (2(n+1)-1)/((n+1)+2) - (2n-1)/(n+2)</p>
+                                <p>= (2n+1)/(n+3) - (2n-1)/(n+2)</p>
+                                <p>= ((2n+1)(n+2) - (2n-1)(n+3))/((n+3)(n+2))</p>
+                                <p>= (2n²+5n+2 - 2n²-5n+3)/((n+3)(n+2))</p>
+                                <p>= (2n²+5n+2 - 2n²-5n+3)/((n+3)(n+2))</p>
+                                <p>= -1/((n+3)(n+2))</p>
+                                
+                                <p>Comme n ≥ 1, on a (n+3)(n+2) > 0, donc u<sub>n+1</sub> - u<sub>n</sub> < 0.</p>
+                                <p>La suite (u<sub>n</sub>) est donc strictement décroissante.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Soit la suite (v<sub>n</sub>) définie par v<sub>0</sub> = 1 et v<sub>n+1</sub> = (v<sub>n</sub> + 2)/3 pour tout n ≥ 0.
+                                <br>a) Montrez que pour tout n ≥ 0, v<sub>n</sub> < 1.
+                                <br>b) Montrez que la suite (v<sub>n</sub>) est croissante.
+                                <br>c) En déduire que la suite (v<sub>n</sub>) est convergente.
+                            </div>
+                            <div class="practice-solution">
+                                <p>a) Montrons par récurrence que v<sub>n</sub> < 1 pour tout n ≥ 0.</p>
+                                <p>- Pour n = 0 : v<sub>0</sub> = 1, donc v<sub>0</sub> ≤ 1 (mais pas strictement inférieur).</p>
+                                <p>- Supposons que v<sub>n</sub> < 1 pour un certain n ≥ 1.</p>
+                                <p>- Alors v<sub>n+1</sub> = (v<sub>n</sub> + 2)/3 < (1 + 2)/3 = 3/3 = 1.</p>
+                                <p>Donc v<sub>n</sub> < 1 pour tout n ≥ 1.</p>
+                                
+                                <p>b) Montrons que la suite est croissante.</p>
+                                <p>Calculons v<sub>n+1</sub> - v<sub>n</sub> :</p>
+                                <p>v<sub>n+1</sub> - v<sub>n</sub> = (v<sub>n</sub> + 2)/3 - v<sub>n</sub> = (v<sub>n</sub> + 2 - 3v<sub>n</sub>)/3 = (2 - 2v<sub>n</sub>)/3</p>
+                                <p>Comme v<sub>n</sub> < 1 pour tout n ≥ 1, on a 2 - 2v<sub>n</sub> > 2 - 2 = 0.</p>
+                                <p>Donc v<sub>n+1</sub> - v<sub>n</sub> > 0 pour tout n ≥ 1, et la suite est strictement croissante à partir du rang 1.</p>
+                                
+                                <p>c) La suite (v<sub>n</sub>) est strictement croissante à partir du rang 1 et majorée par 1.</p>
+                                <p>D'après le théorème de convergence des suites monotones bornées, la suite (v<sub>n</sub>) converge vers une limite l ≤ 1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Convergence et limites -->
+    <div class="method-section">
+        <h2>4. Convergence et Limites des Suites</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Convergence et divergence</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définitions</h4>
+                    <div class="concept-card">
+                        <p><strong>Convergence d'une suite :</strong></p>
+                        <div class="formula-box">
+                            <p>Une suite (u<sub>n</sub>) converge vers une limite l si pour tout ε > 0, il existe un rang N tel que pour tout n ≥ N, |u<sub>n</sub> - l| < ε.</p>
+                            <p>On note alors : lim u<sub>n</sub> = l ou u<sub>n</sub> → l quand n → +∞.</p>
+                        </div>
+                        
+                        <p><strong>Divergence d'une suite :</strong></p>
+                        <p>Une suite est divergente si elle n'est pas convergente.</p>
+                        
+                        <p><strong>Divergence vers +∞ :</strong></p>
+                        <div class="formula-box">
+                            <p>Une suite (u<sub>n</sub>) diverge vers +∞ si pour tout A > 0, il existe un rang N tel que pour tout n ≥ N, u<sub>n</sub> > A.</p>
+                            <p>On note alors : lim u<sub>n</sub> = +∞ ou u<sub>n</sub> → +∞ quand n → +∞.</p>
+                        </div>
+                        
+                        <p><strong>Divergence vers -∞ :</strong></p>
+                        <div class="formula-box">
+                            <p>Une suite (u<sub>n</sub>) diverge vers -∞ si pour tout A < 0, il existe un rang N tel que pour tout n ≥ N, u<sub>n</sub> < A.</p>
+                            <p>On note alors : lim u<sub>n</sub> = -∞ ou u<sub>n</sub> → -∞ quand n → +∞.</p>
+                        </div>
+                        
+                        <div class="important-note">
+                            <p>Une suite qui admet une limite finie est nécessairement bornée.</p>
+                            <p>La réciproque est fausse : une suite bornée n'est pas nécessairement convergente (exemple : la suite (-1)<sup>n</sup>).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de suites convergentes et divergentes</h5>
+                        <div class="example">
+                            <p>La suite (u<sub>n</sub>) définie par u<sub>n</sub> = 1/n pour n ≥ 1 converge vers 0.</p>
+                        </div>
+                        <div class="example">
+                            <p>La suite (v<sub>n</sub>) définie par v<sub>n</sub> = n² diverge vers +∞.</p>
+                        </div>
+                        <div class="example">
+                            <p>La suite (w<sub>n</sub>) définie par w<sub>n</sub> = (-1)<sup>n</sup> est bornée mais ne converge pas (elle oscille entre -1 et 1).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Théorèmes de convergence</h4>
+                    <div class="concept-card">
+                        <p><strong>Théorème de convergence des suites monotones :</strong></p>
+                        <div class="formula-box">
+                            <p>Toute suite croissante et majorée converge vers sa borne supérieure.</p>
+                            <p>Toute suite décroissante et minorée converge vers sa borne inférieure.</p>
+                        </div>
+                        
+                        <p><strong>Théorème des gendarmes (ou théorème d'encadrement) :</strong></p>
+                        <div class="formula-box">
+                            <p>Si (u<sub>n</sub>), (v<sub>n</sub>) et (w<sub>n</sub>) sont trois suites telles que :</p>
+                            <p>- pour tout n ≥ n<sub>0</sub>, u<sub>n</sub> ≤ v<sub>n</sub> ≤ w<sub>n</sub></p>
+                            <p>- lim u<sub>n</sub> = lim w<sub>n</sub> = l</p>
+                            <p>Alors lim v<sub>n</sub> = l</p>
+                        </div>
+                        
+                        <p><strong>Théorème de la limite monotone :</strong></p>
+                        <div class="formula-box">
+                            <p>Si (u<sub>n</sub>) est une suite croissante non majorée, alors lim u<sub>n</sub> = +∞.</p>
+                            <p>Si (u<sub>n</sub>) est une suite décroissante non minorée, alors lim u<sub>n</sub> = -∞.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'application des théorèmes</h5>
+                        <div class="example">
+                            <p>Soit la suite (u<sub>n</sub>) définie par u<sub>0</sub> = 1 et u<sub>n+1</sub> = (u<sub>n</sub> + 2)/3 pour tout n ≥ 0.</p>
+                            <p>Nous avons montré précédemment que cette suite est strictement croissante et majorée par 1.</p>
+                            <p>D'après le théorème de convergence des suites monotones, la suite (u<sub>n</sub>) converge vers une limite l ≤ 1.</p>
+                            <p>Pour déterminer cette limite, on utilise le fait que si u<sub>n</sub> → l, alors u<sub>n+1</sub> → l.</p>
+                            <p>On a u<sub>n+1</sub> = (u<sub>n</sub> + 2)/3, donc l = (l + 2)/3</p>
+                            <p>D'où 3l = l + 2, soit 2l = 2, donc l = 1.</p>
+                            <p>La suite (u<sub>n</sub>) converge donc vers 1.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Opérations sur les limites</h4>
+                    <div class="concept-card">
+                        <p>Soient (u<sub>n</sub>) et (v<sub>n</sub>) deux suites convergentes de limites respectives l et l'.</p>
+                        
+                        <p><strong>Somme :</strong></p>
+                        <div class="formula-box">
+                            <p>lim (u<sub>n</sub> + v<sub>n</sub>) = lim u<sub>n</sub> + lim v<sub>n</sub> = l + l'</p>
+                        </div>
+                        
+                        <p><strong>Produit :</strong></p>
+                        <div class="formula-box">
+                            <p>lim (u<sub>n</sub> × v<sub>n</sub>) = lim u<sub>n</sub> × lim v<sub>n</sub> = l × l'</p>
+                        </div>
+                        
+                        <p><strong>Quotient :</strong></p>
+                        <div class="formula-box">
+                            <p>Si lim v<sub>n</sub> ≠ 0, alors lim (u<sub>n</sub>/v<sub>n</sub>) = lim u<sub>n</sub>/lim v<sub>n</sub> = l/l'</p>
+                        </div>
+                        
+                        <p><strong>Composition avec une fonction continue :</strong></p>
+                        <div class="formula-box">
+                            <p>Si f est une fonction continue en l, alors lim f(u<sub>n</sub>) = f(lim u<sub>n</sub>) = f(l)</p>
+                        </div>
+                        
+                        <div class="important-note">
+                            <p>Ces règles s'étendent aux cas où les limites sont infinies, avec les règles habituelles de calcul sur les limites infinies.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de calcul de limite</h5>
+                        <div class="example">
+                            <p>Calculons la limite de la suite (u<sub>n</sub>) définie par u<sub>n</sub> = (3n² + 2n - 1)/(n² + 4) pour n ≥ 1.</p>
+                            
+                            <p>On peut diviser le numérateur et le dénominateur par n² :</p>
+                            <p>u<sub>n</sub> = (3 + 2/n - 1/n²)/(1 + 4/n²)</p>
+                            
+                            <p>Quand n tend vers +∞ :</p>
+                            <p>- 2/n tend vers 0</p>
+                            <p>- 1/n² tend vers 0</p>
+                            <p>- 4/n² tend vers 0</p>
+                            
+                            <p>Donc lim u<sub>n</sub> = 3/1 = 3</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Étudiez la convergence de la suite (u<sub>n</sub>) définie par u<sub>n</sub> = (2n + 3)/(5n - 1) pour n ≥ 1.</div>
+                            <div class="practice-solution">
+                                <p>Divisons le numérateur et le dénominateur par n :</p>
+                                <p>u<sub>n</sub> = (2 + 3/n)/(5 - 1/n)</p>
+                                
+                                <p>Quand n tend vers +∞ :</p>
+                                <p>- 3/n tend vers 0</p>
+                                <p>- 1/n tend vers 0</p>
+                                
+                                <p>Donc lim u<sub>n</sub> = 2/5 = 0,4</p>
+                                <p>La suite (u<sub>n</sub>) converge vers 2/5.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Soit la suite (v<sub>n</sub>) définie par v<sub>0</sub> = 2 et v<sub>n+1</sub> = √(v<sub>n</sub>) pour tout n ≥ 0.
+                                <br>a) Montrez que la suite (v<sub>n</sub>) est décroissante et minorée par 1.
+                                <br>b) En déduire que la suite (v<sub>n</sub>) converge et déterminez sa limite.
+                            </div>
+                            <div class="practice-solution">
+                                <p>a) Montrons par récurrence que v<sub>n</sub> ≥ 1 pour tout n ≥ 0.</p>
+                                <p>- Pour n = 0 : v<sub>0</sub> = 2 > 1, donc v<sub>0</sub> ≥ 1.</p>
+                                <p>- Supposons que v<sub>n</sub> ≥ 1 pour un certain n ≥ 0.</p>
+                                <p>- Alors v<sub>n+1</sub> = √(v<sub>n</sub>) ≥ √1 = 1.</p>
+                                <p>Donc v<sub>n</sub> ≥ 1 pour tout n ≥ 0.</p>
+                                
+                                <p>Montrons maintenant que la suite est décroissante.</p>
+                                <p>Pour n = 0 : v<sub>1</sub> = √(v<sub>0</sub>) = √2 ≈ 1,414 < 2 = v<sub>0</sub></p>
+                                <p>Supposons que v<sub>n</sub> ≤ v<sub>n-1</sub> pour un certain n ≥ 1.</p>
+                                <p>Alors v<sub>n+1</sub> = √(v<sub>n</sub>) ≤ √(v<sub>n-1</sub>) = v<sub>n</sub></p>
+                                <p>Donc la suite (v<sub>n</sub>) est décroissante.</p>
+                                
+                                <p>b) La suite (v<sub>n</sub>) est décroissante et minorée par 1, donc elle converge vers une limite l ≥ 1.</p>
+                                <p>Pour déterminer cette limite, on utilise le fait que si v<sub>n</sub> → l, alors v<sub>n+1</sub> → l.</p>
+                                <p>On a v<sub>n+1</sub> = √(v<sub>n</sub>), donc l = √l</p>
+                                <p>D'où l² = l, soit l(l - 1) = 0</p>
+                                <p>Comme l ≥ 1, on a l = 1.</p>
+                                <p>La suite (v<sub>n</sub>) converge donc vers 1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Limites usuelles et comparaisons</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Limites usuelles</h4>
+                    <div class="concept-card">
+                        <p>Voici quelques limites fondamentales à connaître :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Suite</div>
+                                <div class="summary-cell">Limite quand n → +∞</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">1/n<sup>p</sup> (p > 0)</div>
+                                <div class="summary-cell">0</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">n<sup>p</sup> (p > 0)</div>
+                                <div class="summary-cell">+∞</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">a<sup>n</sup> (a > 1)</div>
+                                <div class="summary-cell">+∞</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">a<sup>n</sup> (0 < a < 1)</div>
+                                <div class="summary-cell">0</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">n<sup>1/n</sup></div>
+                                <div class="summary-cell">1</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">n!/n<sup>n</sup></div>
+                                <div class="summary-cell">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'utilisation des limites usuelles</h5>
+                        <div class="example">
+                            <p>Calculons la limite de la suite (u<sub>n</sub>) définie par u<sub>n</sub> = (2<sup>n</sup>)/(3<sup>n</sup>) pour n ≥ 0.</p>
+                            <p>On peut réécrire u<sub>n</sub> = (2/3)<sup>n</sup></p>
+                            <p>Comme 0 < 2/3 < 1, on a lim (2/3)<sup>n</sup> = 0</p>
+                            <p>Donc lim u<sub>n</sub> = 0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Comparaison de suites</h4>
+                    <div class="concept-card">
+                        <p>Pour comparer le comportement asymptotique de deux suites (u<sub>n</sub>) et (v<sub>n</sub>), on peut étudier leur quotient ou leur différence.</p>
+                        
+                        <p><strong>Suites équivalentes :</strong></p>
+                        <div class="formula-box">
+                            <p>Les suites (u<sub>n</sub>) et (v<sub>n</sub>) sont équivalentes si lim (u<sub>n</sub>/v<sub>n</sub>) = 1.</p>
+                            <p>On note alors u<sub>n</sub> ~ v<sub>n</sub></p>
+                        </div>
+                        
+                        <p><strong>Suites négligeables :</strong></p>
+                        <div class="formula-box">
+                            <p>La suite (u<sub>n</sub>) est négligeable devant la suite (v<sub>n</sub>) si lim (u<sub>n</sub>/v<sub>n</sub>) = 0.</p>
+                            <p>On note alors u<sub>n</sub> = o(v<sub>n</sub>)</p>
+                        </div>
+                        
+                        <p><strong>Comparaison des ordres de grandeur :</strong></p>
+                        <div class="formula-box">
+                            <p>Pour n suffisamment grand :</p>
+                            <p>- Les fonctions exponentielles l'emportent sur les fonctions puissances : a<sup>n</sup> ≫ n<sup>p</sup> pour tout a > 1 et tout p > 0.</p>
+                            <p>- Les fonctions puissances l'emportent sur les fonctions logarithmiques : n<sup>p</sup> ≫ (ln n)<sup>q</sup> pour tout p > 0 et tout q > 0.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de comparaison de suites</h5>
+                        <div class="example">
+                            <p>Comparons les suites (u<sub>n</sub>) et (v<sub>n</sub>) définies par u<sub>n</sub> = n² et v<sub>n</sub> = 3n² + 2n pour n ≥ 1.</p>
+                            
+                            <p>Calculons le quotient u<sub>n</sub>/v<sub>n</sub> :</p>
+                            <p>u<sub>n</sub>/v<sub>n</sub> = n²/(3n² + 2n) = 1/(3 + 2/n)</p>
+                            
+                            <p>Quand n tend vers +∞, 2/n tend vers 0, donc lim (u<sub>n</sub>/v<sub>n</sub>) = 1/3</p>
+                            
+                            <p>Comme la limite n'est pas 1, les suites ne sont pas équivalentes.</p>
+                            <p>Comme la limite n'est pas 0, u<sub>n</sub> n'est pas négligeable devant v<sub>n</sub>.</p>
+                            <p>Les deux suites ont le même ordre de grandeur (n²).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Limites de suites récurrentes</h4>
+                    <div class="concept-card">
+                        <p>Pour déterminer la limite d'une suite définie par récurrence u<sub>n+1</sub> = f(u<sub>n</sub>), on peut utiliser les méthodes suivantes :</p>
+                        
+                        <p><strong>1. Si la suite est monotone et bornée :</strong></p>
+                        <p>Elle converge vers une limite l qui vérifie l'équation l = f(l).</p>
+                        
+                        <p><strong>2. Si f est contractante sur un intervalle I :</strong></p>
+                        <p>C'est-à-dire s'il existe k ∈ [0, 1[ tel que pour tout x, y ∈ I, |f(x) - f(y)| ≤ k|x - y|, alors :</p>
+                        <ul>
+                            <li>Si u<sub>0</sub> ∈ I et f(I) ⊂ I, la suite (u<sub>n</sub>) converge vers l'unique solution de l'équation l = f(l) dans I.</li>
+                        </ul>
+                        
+                        <p><strong>3. Méthode de dichotomie :</strong></p>
+                        <p>Si on peut montrer que la suite est encadrée entre deux suites convergentes de même limite, alors elle converge vers cette limite.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'étude de suite récurrente</h5>
+                        <div class="example">
+                            <p>Soit la suite (u<sub>n</sub>) définie par u<sub>0</sub> = 2 et u<sub>n+1</sub> = (u<sub>n</sub> + 3)/2 pour tout n ≥ 0.</p>
+                            
+                            <p>Étudions la monotonie :</p>
+                            <p>u<sub>1</sub> = (u<sub>0</sub> + 3)/2 = (2 + 3)/2 = 5/2 = 2,5 > 2 = u<sub>0</sub></p>
+                            <p>Supposons que u<sub>n</sub> > u<sub>n-1</sub> pour un certain n ≥ 1.</p>
+                            <p>Alors u<sub>n+1</sub> - u<sub>n</sub> = (u<sub>n</sub> + 3)/2 - (u<sub>n-1</sub> + 3)/2 = (u<sub>n</sub> - u<sub>n-1</sub>)/2 > 0</p>
+                            <p>Donc la suite est strictement croissante.</p>
+                            
+                            <p>Montrons que la suite est majorée par 3 :</p>
+                            <p>u<sub>0</sub> = 2 < 3</p>
+                            <p>Supposons que u<sub>n</sub> < 3 pour un certain n ≥ 0.</p>
+                            <p>Alors u<sub>n+1</sub> = (u<sub>n</sub> + 3)/2 < (3 + 3)/2 = 3</p>
+                            <p>Donc la suite est majorée par 3.</p>
+                            
+                            <p>La suite (u<sub>n</sub>) est strictement croissante et majorée, donc elle converge vers une limite l ≤ 3.</p>
+                            <p>Cette limite vérifie l = (l + 3)/2, d'où l = 3.</p>
+                            <p>La suite (u<sub>n</sub>) converge donc vers 3.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Calculez la limite de la suite (u<sub>n</sub>) définie par u<sub>n</sub> = (n² + 2n)/(2n² - 1) pour n ≥ 1.</div>
+                            <div class="practice-solution">
+                                <p>Divisons le numérateur et le dénominateur par n² :</p>
+                                <p>u<sub>n</sub> = (1 + 2/n)/(2 - 1/n²)</p>
+                                
+                                <p>Quand n tend vers +∞ :</p>
+                                <p>- 2/n tend vers 0</p>
+                                <p>- 1/n² tend vers 0</p>
+                                
+                                <p>Donc lim u<sub>n</sub> = 1/2 = 0,5</p>
+                                <p>La suite (u<sub>n</sub>) converge vers 1/2.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Soit la suite (v<sub>n</sub>) définie par v<sub>0</sub> = 0 et v<sub>n+1</sub> = (v<sub>n</sub>² + 2)/3 pour tout n ≥ 0.
+                                <br>a) Montrez que pour tout n ≥ 1, 0 ≤ v<sub>n</sub> ≤ 1.
+                                <br>b) Montrez que la suite (v<sub>n</sub>) est croissante.
+                                <br>c) En déduire que la suite (v<sub>n</sub>) converge et déterminez sa limite.
+                            </div>
+                            <div class="practice-solution">
+                                <p>a) Montrons par récurrence que 0 ≤ v<sub>n</sub> ≤ 1 pour tout n ≥ 1.</p>
+                                <p>- Pour n = 1 : v<sub>1</sub> = (v<sub>0</sub>² + 2)/3 = (0² + 2)/3 = 2/3 ≈ 0,67, donc 0 ≤ v<sub>1</sub> ≤ 1.</p>
+                                <p>- Supposons que 0 ≤ v<sub>n</sub> ≤ 1 pour un certain n ≥ 1.</p>
+                                <p>- Alors 0 ≤ v<sub>n</sub>² ≤ 1, donc 2 ≤ v<sub>n</sub>² + 2 ≤ 3, et 2/3 ≤ (v<sub>n</sub>² + 2)/3 ≤ 1.</p>
+                                <p>- Donc 0 ≤ v<sub>n+1</sub> ≤ 1.</p>
+                                <p>Par récurrence, 0 ≤ v<sub>n</sub> ≤ 1 pour tout n ≥ 1.</p>
+                                
+                                <p>b) Montrons que la suite est croissante.</p>
+                                <p>v<sub>1</sub> = 2/3 > 0 = v<sub>0</sub></p>
+                                <p>Supposons que v<sub>n</sub> ≥ v<sub>n-1</sub> pour un certain n ≥ 1.</p>
+                                <p>Alors v<sub>n</sub>² ≥ v<sub>n-1</sub>², donc v<sub>n</sub>² + 2 ≥ v<sub>n-1</sub>² + 2, et v<sub>n+1</sub> ≥ v<sub>n</sub>.</p>
+                                <p>Par récurrence, la suite (v<sub>n</sub>) est croissante.</p>
+                                
+                                <p>c) La suite (v<sub>n</sub>) est croissante et majorée par 1, donc elle converge vers une limite l ≤ 1.</p>
+                                <p>Cette limite vérifie l = (l² + 2)/3, d'où 3l = l² + 2, soit l² - 3l + 2 = 0.</p>
+                                <p>Les solutions de cette équation sont l = 1 et l = 2.</p>
+                                <p>Comme l ≤ 1, on a l = 1.</p>
+                                <p>La suite (v<sub>n</sub>) converge donc vers 1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications des suites -->
+    <div class="method-section">
+        <h2>5. Applications des Suites Numériques</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Applications en économie et finance</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Intérêts composés</h4>
+                    <div class="concept-card">
+                        <p>Un capital C<sub>0</sub> placé à un taux d'intérêt annuel t (exprimé en décimal) pendant n années produit un capital C<sub>n</sub> donné par :</p>
+                        <div class="formula-box">
+                            <p>C<sub>n</sub> = C<sub>0</sub> × (1 + t)<sup>n</sup></p>
+                        </div>
+                        <p>C'est une suite géométrique de premier terme C<sub>0</sub> et de raison (1 + t).</p>
+                        
+                        <p>Si les intérêts sont composés m fois par an, le capital après n années est :</p>
+                        <div class="formula-box">
+                            <p>C<sub>n</sub> = C<sub>0</sub> × (1 + t/m)<sup>m×n</sup></p>
+                        </div>
+                        
+                        <p>Lorsque m tend vers l'infini (capitalisation continue), on obtient :</p>
+                        <div class="formula-box">
+                            <p>C<sub>n</sub> = C<sub>0</sub> × e<sup>t×n</sup></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'application des intérêts composés</h5>
+                        <div class="example">
+                            <p>Un capital de 1000 € est placé à un taux d'intérêt annuel de 4% pendant 10 ans. Calculons le capital final.</p>
+                            
+                            <p>C<sub>10</sub> = 1000 × (1 + 0,04)<sup>10</sup> = 1000 × 1,04<sup>10</sup> = 1000 × 1,48 = 1480 €</p>
+                            
+                            <p>Le capital final est de 1480 €.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="subsection">
+                    <h4>Amortissement d'un emprunt</h4>
+                    <div class="concept-card">
+                        <p>Pour un emprunt de montant E remboursé par annuités constantes A sur n années à un taux d'intérêt annuel t, l'annuité A est donnée par :</p>
+                        <div class="formula-box">
+                            <p>A = E × t × (1 + t)<sup>n</sup>/((1 + t)<sup>n</sup> - 1)</p>
+                        </div>
+                        
+                        <p>Le capital restant dû C<sub>k</sub> après k années est :</p>
+                        <div class="formula-box">
+                            <p>C<sub>k</sub> = A × ((1 + t)<sup>n-k</sup> - 1)/(t × (1 + t)<sup>n-k</sup>)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'amortissement d'un emprunt</h5>
+                        <div class="example">
+                            <p>Un emprunt de 100 000 € est contracté sur 20 ans à un taux d'intérêt annuel de 3%. Calculons l'annuité constante et le capital restant dû après 10 ans.</p>
+                            
+                            <p>A = 100 000 × 0,03 × (1 + 0,03)<sup>20</sup>/((1 + 0,03)<sup>20</sup> - 1)</p>
+                            <p>A = 100 000 × 0,03 × 1,81/0,81 = 6700 €</p>
+                            
+                            <p>C<sub>10</sub> = 6700 × ((1 + 0,03)<sup>10</sup> - 1)/(0,03 × (1 + 0,03)<sup>10</sup>)</p>
+                            <p>C<sub>10</sub> = 6700 × (1,34 - 1)/(0,03 × 1,34) = 6700 × 0,34/0,04 = 56 950 €</p>
+                            
+                            <p>L'annuité constante est de 6700 € et le capital restant dû après 10 ans est de 56 950 €.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Applications en sciences</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Croissance d'une population</h4>
+                    <div class="concept-card">
+                        <p>Une population de taille initiale P<sub>0</sub> qui croît à un taux annuel constant r (exprimé en décimal) a une taille P<sub>n</sub> apr��s n années donnée par :</p>
+                        <div class="formula-box">
+                            <p>P<sub>n</sub> = P<sub>0</sub> × (1 + r)<sup>n</sup></p>
+                        </div>
+                        <p>C'est une suite géométrique de premier terme P<sub>0</sub> et de raison (1 + r).</p>
+                        
+                        <p>Si la croissance est limitée par une capacité maximale K (modèle logistique), la taille de la population peut être modélisée par :</p>
+                        <div class="formula-box">
+                            <p>P<sub>n+1</sub> = P<sub>n</sub> + r × P<sub>n</sub> × (1 - P<sub>n</sub>/K)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de croissance d'une population</h5>
+                        <div class="example">
+                            <p>Une population de bactéries de taille initiale 1000 croît à un taux de 20% par heure. Calculons la taille de la population après 5 heures.</p>
+                            
+                            <p>P<sub>5</sub> = 1000 × (1 + 0,2)<sup>5</sup> = 1000 × 1,2<sup>5</sup> = 1000 × 2,49 = 2490</p>
+                            
+                            <p>La population après 5 heures est d'environ 2490 bactéries.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Radioactivité et décroissance exponentielle</h4>
+                    <div class="concept-card">
+                        <p>La quantité Q<sub>n</sub> d'une substance radioactive de demi-vie T après n périodes est donnée par :</p>
+                        <div class="formula-box">
+                            <p>Q<sub>n</sub> = Q<sub>0</sub> × (1/2)<sup>n/T</sup></p>
+                        </div>
+                        <p>où Q<sub>0</sub> est la quantité initiale.</p>
+                        
+                        <p>Si λ est la constante de désintégration, la quantité après un temps t est :</p>
+                        <div class="formula-box">
+                            <p>Q(t) = Q<sub>0</sub> × e<sup>-λt</sup></p>
+                        </div>
+                        <p>avec λ = ln(2)/T.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de décroissance radioactive</h5>
+                        <div class="example">
+                            <p>Un échantillon contient initialement 100 mg d'un isotope radioactif de demi-vie 5 ans. Calculons la quantité restante après 15 ans.</p>
+                            
+                            <p>Q<sub>15</sub> = 100 × (1/2)<sup>15/5</sup> = 100 × (1/2)<sup>3</sup> = 100 × 1/8 = 12,5</p>
+                            
+                            <p>La quantité restante après 15 ans est de 12,5 mg.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Méthodes numériques</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Méthode de dichotomie</h4>
+                    <div class="concept-card">
+                        <p>La méthode de dichotomie permet de trouver une approximation d'une solution d'une équation f(x) = 0 sur un intervalle [a, b] où f est continue et change de signe.</p>
+                        
+                        <p>Principe de la méthode :</p>
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Initialisation</h5>
+                                    <p>On part d'un intervalle [a<sub>0</sub>, b<sub>0</sub>] tel que f(a<sub>0</sub>) × f(b<sub>0</sub>) < 0.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Itération</h5>
+                                    <p>On calcule le milieu c<sub>n</sub> = (a<sub>n</sub> + b<sub>n</sub>)/2 de l'intervalle [a<sub>n</sub>, b<sub>n</sub>].</p>
+                                    <p>Si f(c<sub>n</sub>) = 0, c<sub>n</sub> est la solution exacte.</p>
+                                    <p>Si f(a<sub>n</sub>) × f(c<sub>n</sub>) < 0, on pose a<sub>n+1</sub> = a<sub>n</sub> et b<sub>n+1</sub> = c<sub>n</sub>.</p>
+                                    <p>Si f(c<sub>n</sub>) × f(b<sub>n</sub>) < 0, on pose a<sub>n+1</sub> = c<sub>n</sub> et b<sub>n+1</sub> = b<sub>n</sub>.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Arrêt</h5>
+                                    <p>On arrête lorsque la longueur de l'intervalle [a<sub>n</sub>, b<sub>n</sub>] est inférieure à une précision ε fixée.</p>
+                                    <p>L'approximation de la solution est alors c<sub>n</sub> = (a<sub>n</sub> + b<sub>n</sub>)/2.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>La suite des intervalles [a<sub>n</sub>, b<sub>n</sub>] vérifie :</p>
+                        <ul>
+                            <li>f(a<sub>n</sub>) × f(b<sub>n</sub>) < 0 (la fonction change de signe sur l'intervalle)</li>
+                            <li>b<sub>n</sub> - a<sub>n</sub> = (b<sub>0</sub> - a<sub>0</sub>)/2<sup>n</sup> (la longueur de l'intervalle est divisée par 2 à chaque étape)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'application de la méthode de dichotomie</h5>
+                        <div class="example">
+                            <p>Utilisons la méthode de dichotomie pour trouver une approximation de la solution de l'équation x³ - 2x - 5 = 0 sur l'intervalle [2, 3] avec une précision ε = 0,1.</p>
+                            
+                            <p>Posons f(x) = x³ - 2x - 5.</p>
+                            <p>f(2) = 2³ - 2×2 - 5 = 8 - 4 - 5 = -1 < 0</p>
+                            <p>f(3) = 3³ - 2×3 - 5 = 27 - 6 - 5 = 16 > 0</p>
+                            <p>Donc f change de signe sur [2, 3].</p>
+                            
+                            <p>Itération 1 :</p>
+                            <p>c<sub>1</sub> = (2 + 3)/2 = 2,5</p>
+                            <p>f(2,5) = 2,5³ - 2×2,5 - 5 = 15,625 - 5 - 5 = 5,625 > 0</p>
+                            <p>f(2) × f(2,5) < 0, donc [a<sub>1</sub>, b<sub>1</sub>] = [2, 2,5]</p>
+                            
+                            <p>Itération 2 :</p>
+                            <p>c<sub>2</sub> = (2 + 2,5)/2 = 2,25</p>
+                            <p>f(2,25) = 2,25³ - 2×2,25 - 5 = 11,39 - 4,5 - 5 = 1,89 > 0</p>
+                            <p>f(2) × f(2,25) < 0, donc [a<sub>2</sub>, b<sub>2</sub>] = [2, 2,25]</p>
+                            
+                            <p>Itération 3 :</p>
+                            <p>c<sub>3</sub> = (2 + 2,25)/2 = 2,125</p>
+                            <p>f(2,125) = 2,125³ - 2×2,125 - 5 = 9,63 - 4,25 - 5 = 0,38 > 0</p>
+                            <p>f(2) × f(2,125) < 0, donc [a<sub>3</sub>, b<sub>3</sub>] = [2, 2,125]</p>
+                            
+                            <p>b<sub>3</sub> - a<sub>3</sub> = 2,125 - 2 = 0,125 > 0,1</p>
+                            
+                            <p>Itération 4 :</p>
+                            <p>c<sub>4</sub> = (2 + 2,125)/2 = 2,0625</p>
+                            <p>f(2,0625) = 2,0625³ - 2×2,0625 - 5 = 8,77 - 4,125 - 5 = -0,355 < 0</p>
+                            <p>f(2,0625) × f(2,125) < 0, donc [a<sub>4</sub>, b<sub>4</sub>] = [2,0625, 2,125]</p>
+                            
+                            <p>b<sub>4</sub> - a<sub>4</sub> = 2,125 - 2,0625 = 0,0625 < 0,1</p>
+                            
+                            <p>On s'arrête et l'approximation de la solution est c<sub>4</sub> = (2,0625 + 2,125)/2 = 2,09375 ≈ 2,09.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Méthode de Newton</h4>
+                    <div class="concept-card">
+                        <p>La méthode de Newton permet de trouver une approximation d'une solution d'une équation f(x) = 0 où f est une fonction dérivable.</p>
+                        
+                        <p>Principe de la méthode :</p>
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Initialisation</h5>
+                                    <p>On choisit une valeur initiale x<sub>0</sub> proche de la solution recherchée.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Itération</h5>
+                                    <p>On calcule les termes successifs par la formule :</p>
+                                    <p>x<sub>n+1</sub> = x<sub>n</sub> - f(x<sub>n</sub>)/f'(x<sub>n</sub>)</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Arrêt</h5>
+                                    <p>On arrête lorsque |x<sub>n+1</sub> - x<sub>n</sub>| est inférieur à une précision ε fixée ou lorsque |f(x<sub>n</sub>)| est suffisamment petit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>Géométriquement, x<sub>n+1</sub> est l'abscisse du point d'intersection de l'axe des abscisses avec la tangente à la courbe de f au point (x<sub>n</sub>, f(x<sub>n</sub>)).</p>
+                        
+                        <div class="important-note">
+                            <p>La méthode de Newton converge généralement plus rapidement que la méthode de dichotomie, mais elle nécessite que la fonction soit dérivable et que la dérivée ne s'annule pas près de la solution.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple d'application de la méthode de Newton</h5>
+                        <div class="example">
+                            <p>Utilisons la méthode de Newton pour trouver une approximation de la solution de l'équation x³ - 2x - 5 = 0 avec x<sub>0</sub> = 2 et une précision ε = 0,001.</p>
+                            
+                            <p>Posons f(x) = x³ - 2x - 5.</p>
+                            <p>f'(x) = 3x² - 2</p>
+                            
+                            <p>Itération 1 :</p>
+                            <p>f(2) = 2³ - 2×2 - 5 = 8 - 4 - 5 = -1</p>
+                            <p>f'(2) = 3×2² - 2 = 3×4 - 2 = 12 - 2 = 10</p>
+                            <p>x<sub>1</sub> = 2 - (-1)/10 = 2 + 0,1 = 2,1</p>
+                            
+                            <p>Itération 2 :</p>
+                            <p>f(2,1) = 2,1³ - 2×2,1 - 5 = 9,261 - 4,2 - 5 = 0,061</p>
+                            <p>f'(2,1) = 3×2,1² - 2 = 3×4,41 - 2 = 13,23 - 2 = 11,23</p>
+                            <p>x<sub>2</sub> = 2,1 - 0,061/11,23 = 2,1 - 0,0054 = 2,0946</p>
+                            
+                            <p>|x<sub>2</sub> - x<sub>1</sub>| = |2,0946 - 2,1| = 0,0054 > 0,001</p>
+                            
+                            <p>Itération 3 :</p>
+                            <p>f(2,0946) = 2,0946³ - 2×2,0946 - 5 = 9,17 - 4,19 - 5 = -0,02</p>
+                            <p>f'(2,0946) = 3×2,0946² - 2 = 3×4,39 - 2 = 13,17 - 2 = 11,17</p>
+                            <p>x<sub>3</sub> = 2,0946 - (-0,02)/11,17 = 2,0946 + 0,0018 = 2,0964</p>
+                            
+                            <p>|x<sub>3</sub> - x<sub>2</sub>| = |2,0964 - 2,0946| = 0,0018 > 0,001</p>
+                            
+                            <p>Itération 4 :</p>
+                            <p>f(2,0964) = 2,0964³ - 2×2,0964 - 5 = 9,19 - 4,19 - 5 = 0,0004</p>
+                            <p>f'(2,0964) = 3×2,0964² - 2 = 3×4,39 - 2 = 13,17 - 2 = 11,17</p>
+                            <p>x<sub>4</sub> = 2,0964 - 0,0004/11,17 = 2,0964 - 0,00004 = 2,09636</p>
+                            
+                            <p>|x<sub>4</sub> - x<sub>3</sub>| = |2,09636 - 2,0964| = 0,00004 < 0,001</p>
+                            
+                            <p>On s'arrête et l'approximation de la solution est x<sub>4</sub> = 2,09636 ≈ 2,096.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Un capital de 5000 € est placé à un taux d'intérêt annuel de 3%. Au bout de combien d'années ce capital aura-t-il doublé ?</div>
+                            <div class="practice-solution">
+                                <p>On cherche le plus petit entier n tel que 5000 × (1 + 0,03)<sup>n</sup> ≥ 10000.</p>
+                                <p>Soit 5000 × 1,03<sup>n</sup> ≥ 10000</p>
+                                <p>Donc 1,03<sup>n</sup> ≥ 2</p>
+                                <p>En prenant le logarithme : n × ln(1,03) ≥ ln(2)</p>
+                                <p>D'où n ≥ ln(2)/ln(1,03) ≈ 0,693/0,0296 ≈ 23,4</p>
+                                <p>Le capital aura doublé au bout de 24 ans.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Utilisez la méthode de dichotomie pour trouver une approximation à 0,1 près de la solution de l'équation x² - x - 1 = 0 sur l'intervalle [1, 2].</div>
+                            <div class="practice-solution">
+                                <p>Posons f(x) = x² - x - 1.</p>
+                                <p>f(1) = 1² - 1 - 1 = -1 < 0</p>
+                                <p>f(2) = 2² - 2 - 1 = 4 - 2 - 1 = 1 > 0</p>
+                                <p>Donc f change de signe sur [1, 2].</p>
+                                
+                                <p>Itération 1 :</p>
+                                <p>c<sub>1</sub> = (1 + 2)/2 = 1,5</p>
+                                <p>f(1,5) = 1,5² - 1,5 - 1 = 2,25 - 1,5 - 1 = -0,25 < 0</p>
+                                <p>f(1,5) × f(2) < 0, donc [a<sub>1</sub>, b<sub>1</sub>] = [1,5, 2]</p>
+                                
+                                <p>Itération 2 :</p>
+                                <p>c<sub>2</sub> = (1,5 + 2)/2 = 1,75</p>
+                                <p>f(1,75) = 1,75² - 1,75 - 1 = 3,0625 - 1,75 - 1 = 0,3125 > 0</p>
+                                <p>f(1,5) × f(1,75) < 0, donc [a<sub>2</sub>, b<sub>2</sub>] = [1,5, 1,75]</p>
+                                
+                                <p>Itération 3 :</p>
+                                <p>c<sub>3</sub> = (1,5 + 1,75)/2 = 1,625</p>
+                                <p>f(1,625) = 1,625² - 1,625 - 1 = 2,64 - 1,625 - 1 = 0,015 > 0</p>
+                                <p>f(1,5) × f(1,625) < 0, donc [a<sub>3</sub>, b<sub>3</sub>] = [1,5, 1,625]</p>
+                                
+                                <p>b<sub>3</sub> - a<sub>3</sub> = 1,625 - 1,5 = 0,125 > 0,1</p>
+                                
+                                <p>Itération 4 :</p>
+                                <p>c<sub>4</sub> = (1,5 + 1,625)/2 = 1,5625</p>
+                                <p>f(1,5625) = 1,5625² - 1,5625 - 1 = 2,44 - 1,5625 - 1 = -0,1225 < 0</p>
+                                <p>f(1,5625) × f(1,625) < 0, donc [a<sub>4</sub>, b<sub>4</sub>] = [1,5625, 1,625]</p>
+                                
+                                <p>b<sub>4</sub> - a<sub>4</sub> = 1,625 - 1,5625 = 0,0625 < 0,1</p>
+                                
+                                <p>On s'arrête et l'approximation de la solution est c<sub>4</sub> = (1,5625 + 1,625)/2 = 1,59375 ≈ 1,6.</p>
+                                
+                                <p>Remarque : La solution exacte de cette équation est (1 + √5)/2 ≈ 1,618 (le nombre d'or).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="method-section">
+        <h2>Conclusion</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Synthèse et perspectives</h3>
+            </div>
+            <div class="method-content">
+                <div class="conclusion-box">
+                    <h4>Points clés à retenir</h4>
+                    <div class="key-points-grid">
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Définition et modes de génération</h5>
+                                <p>Une suite numérique est une fonction définie sur ℕ à valeurs dans ℝ. Elle peut être définie de manière explicite, par récurrence ou par récurrence d'ordre supérieur.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Suites particulières</h5>
+                                <p>Les suites arithmétiques (u<sub>n+1</sub> = u<sub>n</sub> + r) et géométriques (u<sub>n+1</sub> = q × u<sub>n</sub>) sont des cas particuliers importants avec des formules explicites et des formules de somme.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Monotonie et convergence</h5>
+                                <p>Une suite monotone (croissante ou décroissante) et bornée converge. La limite d'une suite peut être finie ou infinie.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Applications</h5>
+                                <p>Les suites numériques modélisent de nombreux phénomènes : intérêts composés, croissance de populations, méthodes numériques d'approximation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Importance et applications</h4>
+                    <div class="concept-card">
+                        <p>Les suites numériques constituent un outil mathématique fondamental avec de nombreuses applications :</p>
+                        <ul>
+                            <li>En économie et finance : calcul d'intérêts, amortissements, évolution de capitaux</li>
+                            <li>En sciences : modélisation de phénomènes discrets, croissance de populations</li>
+                            <li>En informatique : algorithmes itératifs, méthodes d'approximation</li>
+                            <li>En statistiques : séries chronologiques, moyennes mobiles</li>
+                        </ul>
+                        <p>La maîtrise des suites numériques est essentielle pour comprendre et modéliser de nombreux phénomènes du monde réel qui évoluent de manière discrète.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Extensions et perspectives</h4>
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">🔄</div>
+                            <h5>Suites récurrentes</h5>
+                            <p>Étude approfondie des suites définies par récurrence et de leur comportement asymptotique.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🌀</div>
+                            <h5>Suites de fonctions</h5>
+                            <p>Extension aux suites dont les termes sont des fonctions, avec les notions de convergence simple et uniforme.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧮</div>
+                            <h5>Séries numériques</h5>
+                            <p>Étude des sommes infinies de termes d'une suite, avec les critères de convergence associés.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🔊</div>
+                            <h5>Systèmes dynamiques</h5>
+                            <p>Application à l'étude des systèmes dynamiques discrets et de leurs comportements (points fixes, cycles, chaos).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <p>"Les suites numériques sont aux mathématiques ce que les escaliers sont à l'architecture : un moyen d'atteindre progressivement des hauteurs plus élevées." - Henri Poincaré</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ressources -->
+    <div class="resources-section">
+        <h2>Pour approfondir</h2>
+        
+        <div class="resources-grid">
+            <div class="resource">
+                <div class="resource-icon">📚</div>
+                <div class="resource-content">
+                    <h4>Exercices complémentaires</h4>
+                    <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                    <div class="download-box">
+                        <a href="#" class="download-button">
+                            <span class="download-icon">📥</span>
+                            <span class="download-text">Exercices sur les suites numériques</span>
+                        </a>
+                        <p class="download-info">PDF - 12 pages d'exercices avec corrigés</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🔍</div>
+                <div class="resource-content">
+                    <h4>Points à réviser</h4>
+                    <ul>
+                        <li>Les différents modes de définition d'une suite</li>
+                        <li>Les formules explicites des suites arithmétiques et géométriques</li>
+                        <li>Les méthodes pour étudier la monotonie d'une suite</li>
+                        <li>Les théorèmes de convergence et le calcul de limites</li>
+                        <li>Les applications des suites à des problèmes concrets</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🎯</div>
+                <div class="resource-content">
+                    <h4>Préparation à l'examen</h4>
+                    <p>Les suites numériques sont un thème important du programme de Terminale S, souvent présent aux examens.</p>
+                    <p>Points d'attention pour l'examen :</p>
+                    <ul>
+                        <li>Maîtriser les différentes techniques de calcul de termes d'une suite</li>
+                        <li>Savoir démontrer la monotonie d'une suite par récurrence</li>
+                        <li>Être capable de déterminer la limite d'une suite et de justifier sa convergence</li>
+                        <li>Connaître les applications classiques (intérêts composés, etc.)</li>
+                        <li>Savoir modéliser un problème concret à l'aide d'une suite</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🌐</div>
+                <div class="resource-content">
+                    <h4>Ressources en ligne</h4>
+                    <ul>
+                        <li><a href="#">Khan Academy : Cours sur les suites numériques</a></li>
+                        <li><a href="#">Exo7 : Exercices corrigés sur les suites</a></li>
+                        <li><a href="#">Université en ligne : Simulations interactives de suites récurrentes</a></li>
+                        <li><a href="#">YouTube : Vidéos explicatives sur les applications des suites</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Variables pour les couleurs et les espacements */
+    
+    /* Styles spécifiques pour le discours rapporté */
+    .time-expression {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .time-expression:last-child {
+        border-bottom: none;
+    }
+    
+    .direct {
+        font-weight: 500;
+        color: var(--primary-color);
+    }
+    
+    .indirect {
+        font-style: italic;
+        color: var(--semi-modal-color);
+    }
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2980b9;
+        --accent-color: #e74c3c;
+        --success-color: #2ecc71;
+        --warning-color: #f39c12;
+        --background-light: #f8f9fa;
+        --background-medium: #edf2f7;
+        --text-color: #333;
+        --text-light: #f8f9fa;
+        --border-radius: 8px;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --spacing-sm: 10px;
+        --spacing-md: 20px;
+        --spacing-lg: 30px;
+        
+        /* Couleurs spécifiques */
+        --modal-color: #3498db;
+        --semi-modal-color: #9b59b6;
+        --negative-color: #e74c3c;
+        --neutral-color: #f39c12;
+        --positive-color: #2ecc71;
+    }
+    
+    /* Styles de base */
+    body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-light);
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* En-tête du cours */
+    .course-header {
+        background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+        color: white;
+        padding: var(--spacing-lg) 0;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-md);
+    }
+    
+    .subject-tag {
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: var(--text-light);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-md);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+    
+    .course-title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        line-height: 1.2;
+        color: var(--text-light);
+    }
+    
+    .course-subtitle {
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin-bottom: var(--spacing-lg);
+        opacity: 0.9;
+    }
+    
+    .course-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+    }
+    
+    .action-button {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .action-button.primary {
+        background-color: var(--accent-color);
+        color: white;
+    }
+    
+    .action-button.secondary {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .action-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Alerte et introduction */
+    .alert-box {
+        background: #e3f2fd;
+        border-left: 4px solid var(--secondary-color);
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .alert-box h3 {
+        color: var(--primary-color);
+        margin-bottom: var(--spacing-sm);
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Points clés */
+    .key-points {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .point-item {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: var(--spacing-md);
+        box-shadow: var(--card-shadow);
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .point-icon {
+        font-size: 1.8rem;
+        margin-right: var(--spacing-md);
+        color: var(--primary-color);
+    }
+    
+    .point-content {
+        flex: 1;
+    }
+    
+    .point-content h4 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    /* Liste de modaux */
+    .modal-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: var(--spacing-sm);
+    }
+    
+    .modal-pill {
+        background-color: var(--modal-color);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .modal-pill.semi {
+        background-color: var(--semi-modal-color);
+    }
+    
+    /* Sections */
+    .method-section {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .method-section h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: var(--spacing-md);
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: var(--spacing-sm);
+        position: relative;
+    }
+    
+    .method-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 80px;
+        height: 2px;
+        background-color: var(--accent-color);
+    }
+    
+    /* Cards */
+    .method-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+        margin-bottom: var(--spacing-md);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+    }
+    
+    .method-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .method-header {
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+    
+    .method-header h3 {
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    
+    .method-content {
+        padding: var(--spacing-md);
+    }
+    
+    /* Colonnes */
+    .two-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .two-columns-list {
+        columns: 2;
+        column-gap: var(--spacing-md);
+    }
+    
+    /* Règles de grammaire */
+    .grammar-rules {
+        margin: var(--spacing-md) 0;
+    }
+    
+    .grammar-rule {
+        display: flex;
+        margin-bottom: var(--spacing-md);
+        align-items: flex-start;
+    }
+    
+    .rule-number {
+        width: 30px;
+        height: 30px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: var(--spacing-md);
+        flex-shrink: 0;
+    }
+    
+    .rule-content {
+        flex: 1;
+    }
+    
+    .rule-content h5 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    /* Exemples */
+    .examples-box {
+        background: var(--background-medium);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin: var(--spacing-sm) 0;
+    }
+    
+    .example {
+        margin-bottom: 10px;
+        position: relative;
+    }
+    
+    .example:last-child {
+        margin-bottom: 0;
+    }
+    
+    .example-icon {
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+        margin-right: 5px;
+    }
+    
+    .example.correct .example-icon {
+        color: var(--success-color);
+    }
+    
+    .example.incorrect .example-icon {
+        color: var(--accent-color);
+    }
+    
+    .example-label {
+        font-weight: 500;
+        color: var(--primary-color);
+        margin-right: 8px;
+    }
+    
+    .example-note {
+        display: block;
+        font-size: 0.85rem;
+        color: #666;
+        font-style: italic;
+        margin-top: 2px;
+    }
+    
+    .highlight {
+        background-color: rgba(52, 152, 219, 0.2);
+        padding: 0 3px;
+        border-radius: 3px;
+        font-weight: 500;
+    }
+    
+    /* Tableau des temps */
+    .tense-table {
+        margin: var(--spacing-md) 0;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .tense-row {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 2fr;
+    }
+    
+    .tense-row.header {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .tense-row:not(.header) {
+        background-color: white;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .tense-row:nth-child(even):not(.header) {
+        background-color: var(--background-light);
+    }
+    
+    .tense-row:last-child {
+        border-bottom: none;
+    }
+    
+    .tense-cell {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    /* Concept box */
+    .concept-card {
+        background: var(--background-medium);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .concept-card h5 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Info box */
+    .info-box {
+        background: #e8f4f8;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin: var(--spacing-md) 0;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    .info-box h5 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Comparison table */
+    .comparison-table {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .comparison-item {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .comparison-header {
+        padding: var(--spacing-sm) var(--spacing-md);
+        color: white;
+        text-align: center;
+    }
+    
+    .comparison-header.modal {
+        background-color: var(--modal-color);
+    }
+    
+    .comparison-header.semi-modal {
+        background-color: var(--semi-modal-color);
+    }
+    
+    .comparison-content {
+        padding: var(--spacing-md);
+        background: white;
+    }
+    
+    .comparison-content ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    
+    /* Modal cards */
+    .modal-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .modal-card {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .modal-card.small {
+        font-size: 0.95rem;
+    }
+    
+    .modal-name {
+        background-color: var(--primary-color);
+        color: white;
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-weight: 600;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+    
+    .modal-content {
+        padding: var(--spacing-md);
+        background: white;
+    }
+    
+    .modal-examples {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Practice box */
+    .practice-box {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: var(--border-radius);
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .practice-box h5 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .practice-items {
+        margin-top: var(--spacing-md);
+    }
+    
+    .practice-item {
+        margin-bottom: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .practice-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+    .practice-question {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    
+    .practice-answer {
+        margin-bottom: 8px;
+        padding-left: 15px;
+        border-left: 3px solid #dee2e6;
+    }
+    
+    .practice-solution {
+        padding-left: 15px;
+        border-left: 3px solid var(--success-color);
+        color: #2c3e50;
+    }
+    
+    .answer-blank {
+        display: inline-block;
+        width: 80px;
+        height: 1px;
+        border-bottom: 1px solid #666;
+        margin: 0 5px;
+    }
+    
+    /* Uses grid */
+    .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .use-card {
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .use-icon {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .use-card h5 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .use-card p {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Conclusion */
+    .conclusion-box {
+        background: #e8f4f8;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin-top: var(--spacing-md);
+    }
+    
+    .conclusion-box h4 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .key-points-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+    }
+    
+    .key-point {
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .key-point-icon {
+        font-size: 1.2rem;
+        margin-right: 10px;
+        color: var(--primary-color);
+    }
+    
+    .key-point-content {
+        flex: 1;
+    }
+    
+    .key-point-content h5 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+    }
+    
+    .key-point-content p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* Summary table */
+    .summary-table {
+        margin: var(--spacing-md) 0;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .summary-row {
+        display: grid;
+        grid-template-columns: 1fr 2fr 2fr;
+    }
+    
+    .summary-row.header {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .summary-row:not(.header) {
+        background-color: white;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .summary-row:nth-child(even):not(.header) {
+        background-color: var(--background-light);
+    }
+    
+    .summary-row:last-child {
+        border-bottom: none;
+    }
+    
+    .summary-cell {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    /* Tips */
+    .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .tip-card {
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .tip-icon {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .tip-card h5 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .tip-card p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* Quote box */
+    .quote-box {
+        background: var(--background-medium);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        border-left: 4px solid var(--secondary-color);
+        margin: var(--spacing-md) 0;
+        font-style: italic;
+    }
+    
+    .quote-box p {
+        margin: 0;
+    }
+    
+    /* Resources */
+    .resources-section {
+        margin-top: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .resources-section h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: var(--spacing-md);
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: var(--spacing-sm);
+        position: relative;
+    }
+    
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    .resource {
+        display: flex;
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .resource-icon {
+        font-size: 1.8rem;
+        margin-right: var(--spacing-md);
+        color: var(--primary-color);
+    }
+    
+    .resource-content {
+        flex: 1;
+    }
+    
+    .resource-content h4 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Download box */
+    .download-box {
+        background: var(--background-medium);
+        border-radius: var(--border-radius);
+        padding: var(--spacing-sm);
+        margin-top: var(--spacing-sm);
+    }
+    
+    .download-button {
+        display: flex;
+        align-items: center;
+        background: var(--primary-color);
+        color: white;
+        padding: 10px 15px;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .download-button:hover {
+        background: var(--secondary-color);
+        text-decoration: none;
+        color: white;
+    }
+    
+    .download-icon {
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+    
+    .download-info {
+        font-size: 0.85rem;
+        color: #666;
+        margin: 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        :root {
+            --spacing-md: 15px;
+            --spacing-lg: 25px;
+        }
+        
+        .course-title {
+            font-size: 2rem;
+        }
+        
+        .course-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .course-actions {
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .action-button {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .two-columns,
+        .comparison-table,
+        .modal-grid,
+        .tense-row,
+        .summary-row {
+            grid-template-columns: 1fr;
+        }
+        
+        .tense-row.header,
+        .summary-row.header {
+            display: none;
+        }
+        
+        .resource {
+            flex-direction: column;
+        }
+        
+        .resource-icon {
+            margin-bottom: var(--spacing-sm);
+            margin-right: 0;
+        }
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .method-card {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    .method-card:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+    
+    .method-card:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+    
+    /* Accessibilité */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+    
+    /* Impression */
+    @media print {
+        .method-card {
+            break-inside: avoid;
+            box-shadow: none;
+            border: 1px solid #ddd;
+        }
+        
+        .course-header {
+            background: none;
+            color: black;
+            padding: 0;
+        }
+        
+        .subject-tag, .action-button {
+            display: none;
+        }
+        
+        .course-title {
+            color: black;
+            font-size: 24pt;
+        }
+        
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        
+        .method-header {
+            background: none;
+            color: black;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .modal-name, .comparison-header {
+            background: none !important;
+            color: black;
+            border: 1px solid #ddd;
+        }
+        
+        .highlight {
+            background: none;
+            text-decoration: underline;
+        }
+    }
+    </style> 
+{% endblock %}
+
+                            
+
+                
+                
+                            

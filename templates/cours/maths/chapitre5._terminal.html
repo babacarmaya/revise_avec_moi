@@ -1,0 +1,1546 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Mathématiques - Algèbre et Géométrie</div>
+        <h1 class="course-title">Nombres Complexes et Similitudes</h1>
+        <div class="course-subtitle">Explorer l'univers des nombres complexes et leurs applications géométriques</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Point essentiel</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>Les nombres complexes constituent une extension des nombres réels qui permet de résoudre des équations comme x² + 1 = 0, n'ayant pas de solution dans ℝ. Ils forment un outil mathématique puissant utilisé dans de nombreux domaines scientifiques. Les similitudes, quant à elles, sont des transformations géométriques qui conservent les rapports de distances et les angles. L'étude conjointe des nombres complexes et des similitudes révèle des liens profonds entre l'algèbre et la géométrie, offrant une approche élégante pour résoudre des problèmes géométriques.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Maîtriser les opérations sur les nombres complexes</li>
+                        <li>Comprendre les différentes formes d'écriture d'un nombre complexe</li>
+                        <li>Interpréter géométriquement les nombres complexes</li>
+                        <li>Étudier les similitudes planes et leurs propriétés</li>
+                        <li>Utiliser les nombres complexes pour caractériser et composer des similitudes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Calcul algébrique et équations du second degré</li>
+                        <li>Trigonométrie (cercle trigonométrique, formules d'addition)</li>
+                        <li>Géométrie plane (isométries, homothéties)</li>
+                        <li>Représentation dans le plan complexe</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>Les nombres complexes et similitudes sont utilisés pour :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">Résoudre des problèmes d'électricité en régime alternatif</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Analyser des signaux en traitement d'images</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Modéliser des transformations en infographie et animation 3D</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nombres complexes : définition et opérations -->
+    <div class="method-section">
+        <h2>1. Nombres Complexes : Définition et Opérations</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Forme algébrique et opérations de base</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition et notation</h4>
+                    <div class="concept-card">
+                        <p>Un nombre complexe z est un nombre de la forme z = a + ib, où :</p>
+                        <ul>
+                            <li>a et b sont des nombres réels</li>
+                            <li>i est le nombre imaginaire pur tel que i² = -1</li>
+                        </ul>
+                        <p>Pour un nombre complexe z = a + ib :</p>
+                        <ul>
+                            <li>a est appelé la <strong>partie réelle</strong> de z, notée Re(z)</li>
+                            <li>b est appelé la <strong>partie imaginaire</strong> de z, notée Im(z)</li>
+                        </ul>
+                        <div class="important-note">
+                            <p>L'ensemble des nombres complexes est noté ℂ. Tout nombre réel est un nombre complexe particulier dont la partie imaginaire est nulle.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de nombres complexes</h5>
+                        <div class="example">
+                            <p>z₁ = 3 + 2i (partie réelle : 3, partie imaginaire : 2)</p>
+                            <p>z₂ = -1 - 4i (partie réelle : -1, partie imaginaire : -4)</p>
+                            <p>z₃ = 5 (nombre réel, partie réelle : 5, partie imaginaire : 0)</p>
+                            <p>z₄ = -3i (partie réelle : 0, partie imaginaire : -3)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Opérations sur les nombres complexes</h4>
+                    <div class="concept-card">
+                        <p>Soient z₁ = a + ib et z₂ = c + id deux nombres complexes.</p>
+                        
+                        <p><strong>Égalité :</strong> z₁ = z₂ si et seulement si a = c et b = d</p>
+                        
+                        <p><strong>Addition :</strong></p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z₁ + z₂ = (a + c) + i(b + d)</span></p>
+                        </div>
+                        
+                        <p><strong>Soustraction :</strong></p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z₁ - z₂ = (a - c) + i(b - d)</span></p>
+                        </div>
+                        
+                        <p><strong>Multiplication :</strong></p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z₁ × z₂ = (a + ib) × (c + id) = (ac - bd) + i(ad + bc)</span></p>
+                        </div>
+                        
+                        <p><strong>Conjugué :</strong> Le conjugué de z = a + ib, noté z̄ ou z*, est défini par :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z̄ = a - ib</span></p>
+                        </div>
+                        
+                        <p><strong>Module :</strong> Le module de z = a + ib, noté |z|, est défini par :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">|z| = √(a² + b²)</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Opérations sur les nombres complexes</h5>
+                        <div class="example">
+                            <p>Soient z₁ = 2 + 3i et z₂ = 1 - 4i</p>
+                            <p>Addition : z₁ + z₂ = (2 + 1) + i(3 + (-4)) = 3 - i</p>
+                            <p>Soustraction : z₁ - z₂ = (2 - 1) + i(3 - (-4)) = 1 + 7i</p>
+                            <p>Multiplication : z₁ × z₂ = (2 × 1 - 3 × (-4)) + i(2 × (-4) + 3 × 1) = 2 + 12 + i(-8 + 3) = 14 - 5i</p>
+                            <p>Conjugué : z̄₁ = 2 - 3i</p>
+                            <p>Module : |z₁| = √(2² + 3²) = √(4 + 9) = √13 ≈ 3,61</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Division des nombres complexes</h4>
+                    <div class="concept-card">
+                        <p>Pour diviser deux nombres complexes z₁ et z₂ (avec z₂ ≠ 0), on multiplie le numérateur et le dénominateur par le conjugué du dénominateur :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z₁/z₂ = (z₁ × z̄₂)/(z₂ × z̄₂) = (z₁ × z̄₂)/|z₂|²</span></p>
+                        </div>
+                        <p>Cette méthode permet d'obtenir un dénominateur réel.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Division de nombres complexes</h5>
+                        <div class="example">
+                            <p>Calculons (2 + 3i)/(1 - 4i) :</p>
+                            <p>(2 + 3i)/(1 - 4i) = ((2 + 3i) × (1 + 4i))/((1 - 4i) × (1 + 4i))</p>
+                            <p>= ((2 × 1 - 3 × 4) + i(2 × 4 + 3 × 1))/((1)² + (4)²)</p>
+                            <p>= (2 - 12 + i(8 + 3))/(1 + 16)</p>
+                            <p>= (-10 + 11i)/17</p>
+                            <p>= -10/17 + (11/17)i</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Propriétés du conjugué et du module</h4>
+                    <div class="concept-card">
+                        <p>Pour tous nombres complexes z, z₁ et z₂ :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z × z̄ = |z|²</span></p>
+                            <p><span class="math-formula">|z₁ × z₂| = |z₁| × |z₂|</span></p>
+                            <p><span class="math-formula">|z₁/z₂| = |z₁|/|z₂|</span> (si z₂ ≠ 0)</p>
+                            <p><span class="math-formula">|z₁ + z₂| ≤ |z₁| + |z₂|</span> (inégalité triangulaire)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Calculez (3 - 2i) × (4 + 5i) et exprimez le résultat sous forme algébrique.</div>
+                            <div class="practice-solution">
+                                <p>(3 - 2i) × (4 + 5i) = (3 × 4 - (-2) × 5) + i(3 × 5 + (-2) × 4)</p>
+                                <p>= (12 + 10) + i(15 - 8)</p>
+                                <p>= 22 + 7i</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Déterminez le module et le conjugué de z = 2 - 3i.</div>
+                            <div class="practice-solution">
+                                <p>Conjugué : z̄ = 2 + 3i</p>
+                                <p>Module : |z| = √(2² + (-3)²) = √(4 + 9) = √13 ≈ 3,61</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forme trigonométrique et exponentielle -->
+    <div class="method-section">
+        <h2>2. Forme Trigonométrique et Exponentielle</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Représentation polaire des nombres complexes</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Représentation géométrique</h4>
+                    <div class="concept-card">
+                        <p>Tout nombre complexe z = a + ib peut être représenté par un point M(a,b) dans le plan complexe :</p>
+                        <ul>
+                            <li>L'axe horizontal est l'axe des réels</li>
+                            <li>L'axe vertical est l'axe des imaginaires</li>
+                        </ul>
+                        <p>Le module |z| représente la distance du point M à l'origine O.</p>
+                        <div class="illustration-box">
+                            <h5>Représentation dans le plan complexe</h5>
+                            <div class="image-placeholder">
+                                <p>[Illustration d'un nombre complexe dans le plan]</p>
+                                <p>Le nombre complexe z = a + ib est représenté par le point M(a,b). Le module |z| est la longueur du segment OM.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Argument d'un nombre complexe</h4>
+                    <div class="concept-card">
+                        <p>L'argument d'un nombre complexe non nul z = a + ib, noté arg(z), est l'angle θ que fait le vecteur OM avec l'axe des réels positifs, mesuré dans le sens trigonométrique.</p>
+                        <div class="formula-box">
+                            <p>Si z = a + ib ≠ 0, alors :</p>
+                            <p><span class="math-formula">cos(θ) = a/|z|</span></p>
+                            <p><span class="math-formula">sin(θ) = b/|z|</span></p>
+                            <p><span class="math-formula">tan(θ) = b/a</span> (si a ≠ 0)</p>
+                        </div>
+                        <p>L'argument est défini à 2π près : si θ est un argument de z, alors θ + 2kπ (k entier) est aussi un argument de z.</p>
+                        <p>On note souvent arg(z) l'argument principal, qui est dans l'intervalle ]-π, π].</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Calcul de l'argument</h5>
+                        <div class="example">
+                            <p>Déterminons l'argument de z = -1 + i :</p>
+                            <p>|z| = √((-1)² + 1²) = √2</p>
+                            <p>cos(θ) = -1/√2 = -1/√2 × √2/√2 = -√2/2</p>
+                            <p>sin(θ) = 1/√2 = 1/√2 × √2/√2 = √2/2</p>
+                            <p>Ces valeurs correspondent à θ = 3π/4</p>
+                            <p>Donc arg(z) = 3π/4</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Forme trigonométrique</h4>
+                    <div class="concept-card">
+                        <p>Tout nombre complexe non nul z peut s'écrire sous la forme :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z = |z|(cos(θ) + i·sin(θ))</span></p>
+                        </div>
+                        <p>où |z| est le module de z et θ est un argument de z.</p>
+                        <p>Cette écriture est appelée la <strong>forme trigonométrique</strong> (ou polaire) du nombre complexe.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Passage à la forme trigonométrique</h5>
+                        <div class="example">
+                            <p>Exprimons z = -2 - 2i sous forme trigonométrique :</p>
+                            <p>|z| = √((-2)² + (-2)²) = √(4 + 4) = √8 = 2√2</p>
+                            <p>cos(θ) = -2/2√2 = -1/√2 = -√2/2</p>
+                            <p>sin(θ) = -2/2√2 = -1/√2 = -√2/2</p>
+                            <p>Ces valeurs correspondent à θ = -3π/4 ou θ = 5π/4</p>
+                            <p>En choisissant l'argument principal θ = -3π/4, on a :</p>
+                            <p>z = 2√2(cos(-3π/4) + i·sin(-3π/4))</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Forme exponentielle</h4>
+                    <div class="concept-card">
+                        <p>La formule d'Euler établit que pour tout réel �� :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">e<sup>iθ</sup> = cos(θ) + i·sin(θ)</span></p>
+                        </div>
+                        <p>Grâce à cette formule, tout nombre complexe non nul z peut s'écrire sous la forme :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z = |z|e<sup>iθ</sup></span></p>
+                        </div>
+                        <p>où |z| est le module de z et θ est un argument de z.</p>
+                        <p>Cette écriture est appelée la <strong>forme exponentielle</strong> du nombre complexe.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Passage à la forme exponentielle</h5>
+                        <div class="example">
+                            <p>Exprimons z = 1 + i sous forme exponentielle :</p>
+                            <p>|z| = √(1² + 1²) = √2</p>
+                            <p>cos(θ) = 1/√2 = √2/2</p>
+                            <p>sin(θ) = 1/√2 = √2/2</p>
+                            <p>Ces valeurs correspondent à θ = π/4</p>
+                            <p>Donc z = √2·e<sup>iπ/4</sup></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Opérations en forme trigonométrique et exponentielle</h4>
+                    <div class="concept-card">
+                        <p>Soient z₁ = |z₁|e<sup>iθ₁</sup> et z₂ = |z₂|e<sup>iθ₂</sup> deux nombres complexes non nuls.</p>
+                        
+                        <p><strong>Multiplication :</strong></p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z₁ × z₂ = |z₁|·|z₂|·e<sup>i(θ₁+θ₂)</sup></span></p>
+                        </div>
+                        <p>Le module du produit est le produit des modules, et l'argument du produit est la somme des arguments.</p>
+                        
+                        <p><strong>Division :</strong></p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z₁/z₂ = (|z₁|/|z₂|)·e<sup>i(θ₁-θ₂)</sup></span></p>
+                        </div>
+                        <p>Le module du quotient est le quotient des modules, et l'argument du quotient est la différence des arguments.</p>
+                        
+                        <p><strong>Puissance (Formule de Moivre) :</strong> Pour tout entier n :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z<sup>n</sup> = |z|<sup>n</sup>·e<sup>inθ</sup> = |z|<sup>n</sup>(cos(nθ) + i·sin(nθ))</span></p>
+                        </div>
+                        
+                        <p><strong>Racines n-ièmes :</strong> Les n racines n-ièmes d'un nombre complexe z = |z|e<sup>iθ</sup> sont :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">z<sub>k</sub> = |z|<sup>1/n</sup>·e<sup>i(θ+2kπ)/n</sup></span></p>
+                        </div>
+                        <p>où k varie de 0 à n-1.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Calcul de puissance</h5>
+                        <div class="example">
+                            <p>Calculons (1 + i)<sup>4</sup> en utilisant la forme exponentielle :</p>
+                            <p>1 + i = √2·e<sup>iπ/4</sup></p>
+                            <p>(1 + i)<sup>4</sup> = (√2·e<sup>iπ/4</sup>)<sup>4</sup> = (√2)<sup>4</sup>·e<sup>4iπ/4</sup> = 4·e<sup>iπ</sup> = 4·(-1) = -4</p>
+                        </div>
+                        
+                        <h5>Exemple : Racines cubiques</h5>
+                        <div class="example">
+                            <p>Déterminons les racines cubiques de z = 8i :</p>
+                            <p>8i = 8·e<sup>iπ/2</sup></p>
+                            <p>Les racines cubiques sont :</p>
+                            <p>z₀ = 8<sup>1/3</sup>·e<sup>i(π/2+0)/3</sup> = 2·e<sup>iπ/6</sup> = 2(cos(π/6) + i·sin(π/6)) = 2(√3/2 + i/2) = √3 + i</p>
+                            <p>z₁ = 8<sup>1/3</sup>·e<sup>i(π/2+2π)/3</sup> = 2·e<sup>i(π/2+2π)/3</sup> = 2·e<sup>i(π+2π/3)/3</sup> = 2·e<sup>i5π/6</sup> = 2(cos(5π/6) + i·sin(5π/6)) = 2(-√3/2 + i/2) = -√3 + i</p>
+                            <p>z₂ = 8<sup>1/3</sup>·e<sup>i(π/2+4π)/3</sup> = 2·e<sup>i(π/2+4π)/3</sup> = 2·e<sup>i(π+4π/3)/3</sup> = 2·e<sup>i3π/2</sup> = 2(cos(3π/2) + i·sin(3π/2)) = 2(0 - i) = -2i</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Écrivez le nombre complexe z = -3 + 3i sous forme trigonométrique et exponentielle.</div>
+                            <div class="practice-solution">
+                                <p>|z| = √((-3)² + 3²) = √(9 + 9) = √18 = 3√2</p>
+                                <p>cos(θ) = -3/3√2 = -1/√2 = -√2/2</p>
+                                <p>sin(θ) = 3/3√2 = 1/√2 = √2/2</p>
+                                <p>Ces valeurs correspondent à θ = 3π/4</p>
+                                <p>Forme trigonométrique : z = 3√2(cos(3π/4) + i·sin(3π/4))</p>
+                                <p>Forme exponentielle : z = 3√2·e<sup>i3π/4</sup></p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Calculez (√3 + i)<sup>3</sup> en utilisant la forme exponentielle.</div>
+                            <div class="practice-solution">
+                                <p>z = √3 + i</p>
+                                <p>|z| = √((√3)² + 1²) = √(3 + 1) = 2</p>
+                                <p>cos(θ) = √3/2</p>
+                                <p>sin(θ) = 1/2</p>
+                                <p>Ces valeurs correspondent à θ = π/6</p>
+                                <p>z = 2·e<sup>iπ/6</sup></p>
+                                <p>z<sup>3</sup> = (2·e<sup>iπ/6</sup>)<sup>3</sup> = 2<sup>3</sup>·e<sup>3iπ/6</sup> = 8·e<sup>iπ/2</sup> = 8·i</p>
+                                <p>Donc (√3 + i)<sup>3</sup> = 8i</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interprétation géométrique des nombres complexes -->
+    <div class="method-section">
+        <h2>3. Interprétation Géométrique des Nombres Complexes</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Transformations dans le plan complexe</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Affixe d'un point et d'un vecteur</h4>
+                    <div class="concept-card">
+                        <p>Dans le plan complexe muni d'un repère orthonormé direct (O, ⃗u, ⃗v) :</p>
+                        <ul>
+                            <li>L'<strong>affixe d'un point M(a,b)</strong> est le nombre complexe z = a + ib</li>
+                            <li>L'<strong>affixe d'un vecteur ⃗v(a,b)</strong> est le nombre complexe z = a + ib</li>
+                        </ul>
+                        <p>Cette correspondance permet d'utiliser les nombres complexes pour représenter et manipuler des objets géométriques.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Interprétation géométrique des opérations</h4>
+                    <div class="concept-card">
+                        <p>Soient z₁ et z₂ deux nombres complexes, et M₁, M₂ les points d'affixes respectives z₁ et z₂.</p>
+                        
+                        <p><strong>Addition :</strong> z₁ + z₂ est l'affixe du point M tel que ⃗OM = ⃗OM₁ + ⃗OM₂</p>
+                        <p>L'addition correspond à la somme vectorielle.</p>
+                        <p><strong>Soustraction :</strong> z₁ - z₂ est l'affixe du vecteur ⃗M₂M₁</p>
+                        
+                        <p><strong>Multiplication par un réel k :</strong> k·z₁ est l'affixe du point M tel que ⃗OM = k·⃗OM₁</p>
+                        <p>La multiplication par un réel correspond à une homothétie de rapport k.</p>
+                        
+                        <p><strong>Multiplication par i :</strong> i·z₁ est l'affixe du point M tel que ⃗OM est obtenu en faisant tourner ⃗OM₁ d'un angle de π/2 dans le sens direct</p>
+                        <p>La multiplication par i correspond à une rotation de 90° dans le sens direct.</p>
+                        
+                        <p><strong>Multiplication par un complexe :</strong> z₁·z₂ combine une homothétie de rapport |z₂| et une rotation d'angle arg(z₂)</p>
+                        
+                        <p><strong>Conjugaison :</strong> z̄₁ est l'affixe du point M symétrique de M₁ par rapport à l'axe des réels</p>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Interprétation géométrique des opérations</h5>
+                        <div class="image-placeholder">
+                            <p>[Illustration des opérations complexes dans le plan]</p>
+                            <p>L'addition correspond à la règle du parallélogramme, la multiplication par i à une rotation de 90°, et la conjugaison à une symétrie par rapport à l'axe réel.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Équation d'un cercle et d'une droite</h4>
+                    <div class="concept-card">
+                        <p><strong>Cercle :</strong> L'ensemble des points M d'affixe z tels que |z - a| = r est un cercle de centre le point d'affixe a et de rayon r.</p>
+                        
+                        <p><strong>Droite :</strong> L'ensemble des points M d'affixe z tels que Im(z̄·u) = c (où u est un nombre complexe non nul et c un réel) est une droite perpendiculaire au vecteur d'affixe u.</p>
+                        
+                        <p>En particulier :</p>
+                        <ul>
+                            <li>Im(z) = b représente une droite horizontale d'ordonnée b</li>
+                            <li>Re(z) = a représente une droite verticale d'abscisse a</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Équation d'un cercle</h5>
+                        <div class="example">
+                            <p>Déterminons l'équation du cercle de centre C(2,3) et de rayon 4 dans le plan complexe.</p>
+                            <p>L'affixe du centre est c = 2 + 3i.</p>
+                            <p>L'équation du cercle est |z - c| = 4, soit |z - (2 + 3i)| = 4.</p>
+                            <p>En développant : |z - 2 - 3i| = 4</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Transformations géométriques</h4>
+                    <div class="concept-card">
+                        <p>Les nombres complexes permettent de représenter simplement plusieurs transformations géométriques :</p>
+                        
+                        <p><strong>Translation de vecteur ⃗t d'affixe t :</strong> z ↦ z + t</p>
+                        
+                        <p><strong>Homothétie de centre O et de rapport k (réel) :</strong> z ↦ k·z</p>
+                        
+                        <p><strong>Rotation de centre O et d'angle θ :</strong> z ↦ e<sup>iθ</sup>·z</p>
+                        
+                        <p><strong>Symétrie par rapport à l'axe des réels :</strong> z ↦ z̄</p>
+                        
+                        <p><strong>Rotation de centre Ω d'affixe ω et d'angle θ :</strong> z ↦ ω + e<sup>iθ</sup>(z - ω)</p>
+                        
+                        <p><strong>Homothétie de centre Ω d'affixe ω et de rapport k :</strong> z ↦ ω + k(z - ω)</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Rotation</h5>
+                        <div class="example">
+                            <p>Appliquons une rotation de centre C(1,2) et d'angle π/3 au point M(3,4).</p>
+                            <p>L'affixe de C est c = 1 + 2i et l'affixe de M est m = 3 + 4i.</p>
+                            <p>L'image de M a pour affixe : z = c + e<sup>iπ/3</sup>(m - c)</p>
+                            <p>= (1 + 2i) + e<sup>iπ/3</sup>((3 + 4i) - (1 + 2i))</p>
+                            <p>= (1 + 2i) + e<sup>iπ/3</sup>(2 + 2i)</p>
+                            <p>= (1 + 2i) + (2 + 2i)(cos(π/3) + i·sin(π/3))</p>
+                            <p>= (1 + 2i) + (2 + 2i)(1/2 + i·√3/2)</p>
+                            <p>= (1 + 2i) + (1 + i·√3 + i + i²·√3)</p>
+                            <p>= (1 + 2i) + (1 + i·√3 + i - √3)</p>
+                            <p>= (1 + 1 - √3) + (2 + √3 + 1)i</p>
+                            <p>= (2 - √3) + (3 + √3)i</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Déterminez l'ensemble des points M d'affixe z tels que |z - 3 - 4i| = 5.</div>
+                            <div class="practice-solution">
+                                <p>L'équation |z - 3 - 4i| = 5 représente un cercle de centre C(3,4) et de rayon 5.</p>
+                                <p>Il s'agit de l'ensemble des points situés à une distance 5 du point C.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Soit z un nombre complexe. Quelle transformation géométrique représente l'application z ↦ 2iz ?</div>
+                            <div class="practice-solution">
+                                <p>L'application z ↦ 2iz peut se décomposer en :</p>
+                                <p>- Une multiplication par i, qui correspond à une rotation de centre O et d'angle π/2</p>
+                                <p>- Une multiplication par 2, qui correspond à une homothétie de centre O et de rapport 2</p>
+                                <p>La transformation est donc une similitude directe de centre O, de rapport 2 et d'angle π/2.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Similitudes planes -->
+    <div class="method-section">
+        <h2>4. Similitudes Planes</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Définition et caract��risation complexe</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition et propriétés</h4>
+                    <div class="concept-card">
+                        <p>Une <strong>similitude plane</strong> est une transformation du plan qui conserve les rapports de distances et les angles (en valeur et en signe).</p>
+                        
+                        <p>Propriétés :</p>
+                        <ul>
+                            <li>Une similitude transforme une droite en une droite</li>
+                            <li>Une similitude transforme un cercle en un cercle</li>
+                            <li>Une similitude conserve l'alignement des points</li>
+                            <li>Une similitude conserve le parallélisme des droites</li>
+                        </ul>
+                        
+                        <p>Une similitude est caractérisée par :</p>
+                        <ul>
+                            <li>Son <strong>centre</strong> (point invariant, s'il existe)</li>
+                            <li>Son <strong>rapport</strong> (facteur d'agrandissement ou de réduction)</li>
+                            <li>Son <strong>angle</strong> (angle de rotation)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Écriture complexe des similitudes</h4>
+                    <div class="concept-card">
+                        <p>Dans le plan complexe, toute similitude directe peut s'écrire sous la forme :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">f(z) = az + b</span></p>
+                        </div>
+                        <p>où a et b sont des nombres complexes, avec a ≠ 0.</p>
+                        
+                        <p>Dans cette expression :</p>
+                        <ul>
+                            <li>|a| est le rapport de la similitude</li>
+                            <li>arg(a) est l'angle de la similitude</li>
+                            <li>Si a ≠ 1, la similitude admet un point fixe d'affixe z₀ = b/(1-a)</li>
+                        </ul>
+                        
+                        <p>Une similitude indirecte peut s'écrire sous la forme :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">f(z) = az̄ + b</span></p>
+                        </div>
+                        <p>où a et b sont des nombres complexes, avec a ≠ 0.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Caractérisation d'une similitude</h5>
+                        <div class="example">
+                            <p>Étudions la transformation définie par f(z) = (2 + 2i)z + 3 - i.</p>
+                            <p>Ici, a = 2 + 2i et b = 3 - i.</p>
+                            <p>|a| = |2 + 2i| = √(2² + 2²) = 2√2</p>
+                            <p>arg(a) = arg(2 + 2i) = π/4</p>
+                            <p>La transformation est une similitude directe de rapport 2√2 et d'angle π/4.</p>
+                            <p>Le point fixe a pour affixe :</p>
+                            <p>z₀ = b/(1-a) = (3 - i)/(1 - (2 + 2i)) = (3 - i)/(-1 - 2i)</p>
+                            <p>= ((3 - i)(-1 + 2i))/((-1 - 2i)(-1 + 2i))</p>
+                            <p>= ((-3 + i) + (6i - 2i²))/(1 + 4)</p>
+                            <p>= ((-3 + i) + (6i - 2(-1)))/(5)</p>
+                            <p>= ((-3 + i) + (6i + 2))/(5)</p>
+                            <p>= (-1 + 7i)/5</p>
+                            <p>= -1/5 + 7i/5</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Cas particuliers de similitudes</h4>
+                    <div class="concept-card">
+                        <p><strong>Translation de vecteur ⃗t d'affixe t :</strong> f(z) = z + t</p>
+                        <p>C'est une similitude directe de rapport 1 et d'angle 0, sans point fixe (sauf si t = 0).</p>
+                        
+                        <p><strong>Rotation de centre Ω d'affixe ω et d'angle θ :</strong> f(z) = ω + e<sup>iθ</sup>(z - ω) = e<sup>iθ</sup>z + ω(1 - e<sup>iθ</sup>)</p>
+                        <p>C'est une similitude directe de rapport 1 et d'angle θ, avec un point fixe en Ω.</p>
+                        
+                        <p><strong>Homothétie de centre Ω d'affixe ω et de rapport k (réel non nul) :</strong> f(z) = ω + k(z - ω) = kz + ω(1 - k)</p>
+                        <p>C'est une similitude directe de rapport |k| et d'angle 0 (si k > 0) ou π (si k < 0), avec un point fixe en Ω.</p>
+                        
+                        <p><strong>Symétrie axiale d'axe la droite passant par O et faisant un angle α avec l'axe des réels :</strong> f(z) = e<sup>2iα</sup>z̄</p>
+                        <p>C'est une similitude indirecte de rapport 1.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Composition de similitudes</h4>
+                    <p>Si f(z) = az + b et g(z) = cz + d sont deux similitudes directes, alors leur composée h = g∘f est définie par :</p>
+                    <div class="formula-box">
+                        <p><span class="math-formula">h(z) = g(f(z)) = c(az + b) + d = (ca)z + (cb + d)</span></p>
+                    </div>
+                    <p>C'est encore une similitude directe de rapport |c|·|a| et d'angle arg(c) + arg(a).</p>
+                        
+                    <p>Propriétés de la composition :</p>
+                    <ul>
+                        <li>La composée de deux similitudes directes est une similitude directe</li>
+                        <li>La composée de deux similitudes indirectes est une similitude directe</li>
+                        <li>La composée d'une similitude directe et d'une similitude indirecte est une similitude indirecte</li>
+                    </ul>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Composition de similitudes</h5>
+                    <div class="example">
+                        <p>Soient f(z) = 2iz + 1 + i et g(z) = (1 + i)z - 2.</p>
+                        <p>Calculons h = g∘f :</p>
+                        <p>h(z) = g(f(z)) = g(2iz + 1 + i)</p>
+                        <p>= (1 + i)(2iz + 1 + i) - 2</p>
+                        <p>= 2i(1 + i)z + (1 + i)(1 + i) - 2</p>
+                        <p>= 2i(1 + i)z + (1 + 2i + i²) - 2</p>
+                        <p>= 2i(1 + i)z + (1 + 2i - 1) - 2</p>
+                        <p>= 2i(1 + i)z + 2i - 2</p>
+                        <p>= 2i(1 + i)z + 2(i - 1)</p>
+                        <p>= 2i(1 + i)z + 2(i - 1)</p>
+                        <p>= 2i(1 + i)z + 2i - 2</p>
+                        <p>= (2i + 2i²)z + 2i - 2</p>
+                        <p>= (2i - 2)z + 2i - 2</p>
+                        <p>= (2i - 2)z + 2i - 2</p>
+                        <p>C'est une similitude directe de rapport |2i - 2| = 2√2 et d'angle arg(2i - 2) = 3π/4.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Similitude et géométrie</h4>
+                <div class="concept-card">
+                    <p>Les similitudes sont des outils puissants pour résoudre des problèmes géométriques :</p>
+                    <ul>
+                        <li>Étude des figures semblables</li>
+                        <li>Construction de points particuliers</li>
+                        <li>Démonstration de propriétés géométriques</li>
+                        <li>Résolution de problèmes de lieux géométriques</li>
+                    </ul>
+                    
+                    <p>Une similitude transforme :</p>
+                    <ul>
+                        <li>Un triangle en un triangle semblable</li>
+                        <li>Un angle en un angle de même mesure</li>
+                        <li>Des droites parallèles en des droites parallèles</li>
+                        <li>Des droites perpendiculaires en des droites perpendiculaires</li>
+                    </ul>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Application géométrique</h5>
+                    <div class="example">
+                        <p>Soit ABC un triangle. On construit sur chaque côté, à l'extérieur du triangle, un carré. Soient P, Q et R les centres respectifs de ces carrés. Montrons que les segments AP, BQ et CR sont de même longueur et font entre eux des angles de 120°.</p>
+                        <p>Plaçons le triangle dans le plan complexe et notons a, b et c les affixes des sommets A, B et C.</p>
+                        <p>Le centre du carré construit sur BC a pour affixe p = (b + c)/2 + i(c - b)/2.</p>
+                        <p>De même, q = (a + c)/2 + i(c - a)/2 et r = (a + b)/2 + i(b - a)/2.</p>
+                        <p>Calculons :</p>
+                        <p>p - a = (b + c)/2 + i(c - b)/2 - a = (b + c - 2a)/2 + i(c - b)/2</p>
+                        <p>q - b = (a + c)/2 + i(c - a)/2 - b = (a + c - 2b)/2 + i(c - a)/2</p>
+                        <p>r - c = (a + b)/2 + i(b - a)/2 - c = (a + b - 2c)/2 + i(b - a)/2</p>
+                        <p>On peut montrer que |p - a| = |q - b| = |r - c| et que les arguments de ces nombres complexes diffèrent de 2π/3, ce qui prouve le résultat.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h5>Exercices d'application</h5>
+                <div class="practice-items">
+                    <div class="practice-item">
+                        <div class="practice-question">1. Déterminez la nature, le rapport et l'angle de la similitude définie par f(z) = (1 + i√3)z/2 + 1 - i.</div>
+                        <div class="practice-solution">
+                            <p>Ici, a = (1 + i√3)/2 et b = 1 - i.</p>
+                            <p>|a| = |(1 + i√3)/2| = √(1² + (√3)²)/2 = √4/2 = 1</p>
+                            <p>arg(a) = arg(1 + i√3) = π/3</p>
+                            <p>La transformation est une similitude directe de rapport 1 (donc une isométrie) et d'angle π/3 (donc une rotation).</p>
+                            <p>Le point fixe a pour affixe :</p>
+                            <p>z₀ = b/(1-a) = (1 - i)/(1 - (1 + i√3)/2) = (1 - i)/(1 - 1/2 - i√3/2) = (1 - i)/(-1/2 - i√3/2)</p>
+                            <p>= (1 - i)·(-2)/(1 + i√3) = (-2 + 2i)/(1 + i√3)</p>
+                            <p>= (-2 + 2i)(1 - i√3)/((1 + i√3)(1 - i√3)) = (-2 + 2i)(1 - i√3)/(1 + 3) = (-2 + 2i)(1 - i√3)/4</p>
+                            <p>= (-2 + 2i - 2i√3 + 2i²√3)/4 = (-2 + 2i - 2i√3 - 2√3)/4 = (-2 - 2√3 + 2i - 2i√3)/4</p>
+                            <p>= -1/2 - √3/2 + i/2 - i√3/2</p>
+                            <p>C'est donc une rotation de centre z₀ = -1/2 - √3/2 + i/2 - i√3/2 et d'angle π/3.</p>
+                        </div>
+                    </div>
+                    <div class="practice-item">
+                        <div class="practice-question">2. Soit f la similitude définie par f(z) = 2e<sup>iπ/4</sup>z + 3 + i. Déterminez l'image du cercle |z| = 1 par f.</div>
+                        <div class="practice-solution">
+                            <p>La similitude f a pour rapport |2e<sup>iπ/4</sup>| = 2 et pour angle arg(2e<sup>iπ/4</sup>) = π/4.</p>
+                            <p>Le cercle |z| = 1 a pour centre l'origine O et pour rayon 1.</p>
+                            <p>L'image de ce cercle par f est un cercle de rayon 2 × 1 = 2 (car le rapport de la similitude est 2).</p>
+                            <p>Le centre du cercle image est l'image de O par f, soit f(0) = 3 + i.</p>
+                            <p>L'image du cercle |z| = 1 par f est donc le cercle de centre (3,1) et de rayon 2, d'équation |z - (3 + i)| = 2.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Applications et problèmes -->
+<div class="method-section">
+    <h2>5. Applications et Problèmes</h2>
+    
+    <div class="method-card">
+        <div class="method-header">
+            <h3>Résolution de problèmes avec les nombres complexes</h3>
+        </div>
+        <div class="method-content">
+            <div class="subsection">
+                <h4>Résolution d'équations</h4>
+                <div class="concept-card">
+                    <p>Les nombres complexes permettent de résoudre des équations qui n'ont pas de solutions réelles :</p>
+                    
+                    <p><strong>Équations du second degré :</strong> ax² + bx + c = 0</p>
+                    <p>Les solutions sont x = (-b ± √(b² - 4ac))/(2a), où √(b² - 4ac) est un nombre complexe si b² - 4ac < 0.</p>
+                    
+                    <p><strong>Équations polynomiales :</strong> Tout polynôme de degré n à coefficients complexes admet exactement n racines complexes (comptées avec leur multiplicité).</p>
+                    
+                    <p><strong>Équations trigonométriques :</strong> Les nombres complexes facilitent la résolution d'équations comme cos(θ) = a ou sin(θ) = b.</p>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Résolution d'équation</h5>
+                    <div class="example">
+                        <p>Résolvons l'équation z² + 2z + 5 = 0 dans ℂ.</p>
+                        <p>Le discriminant est Δ = 2² - 4 × 1 × 5 = 4 - 20 = -16.</p>
+                        <p>Les solutions sont :</p>
+                        <p>z = (-2 ± √(-16))/(2 × 1) = (-2 ± 4i)/2 = -1 ± 2i</p>
+                        <p>Les solutions sont donc z₁ = -1 + 2i et z₂ = -1 - 2i.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Lieux géométriques</h4>
+                <div class="concept-card">
+                    <p>Les nombres complexes sont particulièrement efficaces pour déterminer des lieux géométriques :</p>
+                    
+                    <p><strong>|z - a| = r</strong> : cercle de centre le point d'affixe a et de rayon r</p>
+                    
+                    <p><strong>|z - a| = |z - b|</strong> : médiatrice du segment [AB] où A et B ont pour affixes respectives a et b</p>
+                    
+                    <p><strong>arg((z - a)/(z - b)) = θ</strong> : arc de cercle passant par les points d'affixes a et b, et sous-tendant un angle θ</p>
+                    
+                    <p><strong>|z - a|/|z - b| = k</strong> (k > 0, k ≠ 1) : cercle d'Apollonius</p>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Lieu géométrique</h5>
+                    <div class="example">
+                        <p>Déterminons le lieu des points M d'affixe z tels que |z - 1| = |z - i|.</p>
+                        <p>L'équation |z - 1| = |z - i| caractérise l'ensemble des points équidistants des points A(1,0) et B(0,1).</p>
+                        <p>C'est donc la médiatrice du segment [AB].</p>
+                        <p>En développant : |z - 1|² = |z - i|²</p>
+                        <p>(z - 1)(z̄ - 1) = (z - i)(z̄ - i̅)</p>
+                        <p>|z|² - z - z̄ + 1 = |z|² - iz̄ - z̅i + i²</p>
+                        <p>-z - z̄ + 1 = -iz̄ - z̅i - 1</p>
+                        <p>-z - z̄ + 1 = -iz̄ - z̅i - 1</p>
+                        <p>-z - z̄ + 2 = -iz̄ - z̅i</p>
+                        <p>Si z = x + iy, on obtient après simplification : x = y</p>
+                        <p>Le lieu est donc la droite d'équation x = y, c'est-à-dire la première bissectrice.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Problèmes de géométrie</h4>
+                <div class="concept-card">
+                    <p>Les nombres complexes permettent de résoudre élégamment de nombreux problèmes de géométrie :</p>
+                    
+                    <p><strong>Alignement de points :</strong> Trois points d'affixes z₁, z₂ et z₃ sont alignés si et seulement si (z₃ - z₁)/(z₂ - z₁) est réel.</p>
+                    
+                    <p><strong>Orthogonalité :</strong> Deux vecteurs d'affixes z₁ et z₂ sont orthogonaux si et seulement si z₁z̄₂ est imaginaire pur (ou Re(z₁z̄₂) = 0).</p>
+                    
+                    <p><strong>Cocyclicité :</strong> Quatre points d'affixes z₁, z₂, z₃ et z₄ sont cocycliques ou alignés si et seulement si arg((z₃ - z₁)/(z₃ - z₂)) = arg((z₄ - z₁)/(z₄ - z₂)) [2π].</p>
+                        
+                    <p><strong>Barycentre :</strong> Le barycentre de points pondérés (A₁, α₁), (A₂, α₂), ..., (Aₙ, αₙ) a pour affixe (α₁z₁ + α₂z₂ + ... + αₙzₙ)/(α₁ + α₂ + ... + αₙ), où z₁, z₂, ..., zₙ sont les affixes des points A₁, A₂, ..., Aₙ.</p>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Alignement de points</h5>
+                    <div class="example">
+                        <p>Vérifions si les points A(1,2), B(3,4) et C(7,8) sont alignés.</p>
+                        <p>Les affixes de ces points sont a = 1 + 2i, b = 3 + 4i et c = 7 + 8i.</p>
+                        <p>Calculons (c - a)/(b - a) :</p>
+                        <p>(c - a)/(b - a) = ((7 + 8i) - (1 + 2i))/((3 + 4i) - (1 + 2i)) = (6 + 6i)/(2 + 2i) = (6 + 6i)/(2(1 + i)) = 3</p>
+                        <p>Le rapport est réel, donc les trois points sont alignés.</p>
+                    </div>
+                    
+                    <h5>Exemple : Orthogonalité</h5>
+                    <div class="example">
+                        <p>Vérifions si les vecteurs ⃗u(2,1) et ⃗v(-1,2) sont orthogonaux.</p>
+                        <p>Les affixes de ces vecteurs sont u = 2 + i et v = -1 + 2i.</p>
+                        <p>Calculons uv̄ :</p>
+                        <p>uv̄ = (2 + i)(-1 - 2i) = -2 - 4i - i - 2i² = -2 - 5i - 2(-1) = -2 - 5i + 2 = -5i</p>
+                        <p>Le produit uv̄ est imaginaire pur, donc les vecteurs sont orthogonaux.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Applications physiques et techniques</h4>
+                <div class="concept-card">
+                    <p>Les nombres complexes sont utilisés dans de nombreux domaines scientifiques et techniques :</p>
+                    
+                    <p><strong>Électricit�� :</strong> En régime sinusoïdal, les grandeurs électriques (tension, intensité, impédance) sont représentées par des nombres complexes.</p>
+                    
+                    <p><strong>Mécanique :</strong> Les nombres complexes facilitent l'étude des mouvements vibratoires et des rotations.</p>
+                    
+                    <p><strong>Traitement du signal :</strong> La transformée de Fourier, essentielle en traitement du signal, utilise les nombres complexes.</p>
+                    
+                    <p><strong>Optique :</strong> Les nombres complexes interviennent dans l'étude de la diffraction et des interférences.</p>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Circuit électrique</h5>
+                    <div class="example">
+                        <p>Dans un circuit RLC série soumis à une tension sinusoïdale, l'impédance complexe est donnée par :</p>
+                        <p>Z = R + j(Lω - 1/(Cω))</p>
+                        <p>où R est la résistance, L l'inductance, C la capacité et ω la pulsation.</p>
+                        <p>Pour R = 100 Ω, L = 0,1 H, C = 10⁻⁶ F et ω = 1000 rad/s :</p>
+                        <p>Z = 100 + j(0,1 × 1000 - 1/(10⁻⁶ × 1000))</p>
+                        <p>= 100 + j(100 - 1000)</p>
+                        <p>= 100 - 900j</p>
+                        <p>Le module de l'impédance est |Z| = √(100² + 900²) = √(10000 + 810000) = √820000 ≈ 905,5 Ω.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h5>Exercices d'application</h5>
+                <div class="practice-items">
+                    <div class="practice-item">
+                        <div class="practice-question">1. Résolvez l'équation z² - 2iz - 3 = 0 dans ℂ.</div>
+                        <div class="practice-solution">
+                            <p>L'équation est z² - 2iz - 3 = 0.</p>
+                            <p>Le discriminant est Δ = (-2i)² - 4 × 1 × (-3) = -4i² + 12 = -4 × (-1) + 12 = 4 + 12 = 16.</p>
+                            <p>Les solutions sont :</p>
+                            <p>z = (2i ± √16)/(2 × 1) = (2i ± 4)/2 = i ± 2</p>
+                            <p>Les solutions sont donc z₁ = i + 2 = 2 + i et z₂ = i - 2 = -2 + i.</p>
+                        </div>
+                    </div>
+                    <div class="practice-item">
+                        <div class="practice-question">2. Soit ABC un triangle équilatéral. Montrez que le barycentre G du triangle a pour affixe g = (a + b + c)/3, où a, b et c sont les affixes des sommets A, B et C.</div>
+                        <div class="practice-solution">
+                            <p>Le barycentre G du triangle ABC est le point pondéré par les coefficients 1, 1 et 1 aux sommets A, B et C.</p>
+                            <p>D'après la formule du barycentre, l'affixe g de G est :</p>
+                            <p>g = (1×a + 1×b + 1×c)/(1 + 1 + 1) = (a + b + c)/3</p>
+                            <p>Ce qui confirme le résultat demandé.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Conclusion -->
+<div class="method-section">
+    <h2>Conclusion : Nombres Complexes et Similitudes</h2>
+    
+    <div class="method-card">
+        <div class="method-header">
+            <h3>Synthèse et perspectives</h3>
+        </div>
+        <div class="method-content">
+            <div class="conclusion-box">
+                <h4>Points clés à retenir</h4>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Formes d'un nombre complexe</h5>
+                            <p>Algébrique (z = a + ib), trigonométrique (z = r(cos θ + i sin θ)) et exponentielle (z = re<sup>iθ</sup>), chacune adaptée à certains types de problèmes.</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Opérations fondamentales</h5>
+                            <p>Addition, multiplication, division et conjugaison des nombres complexes, avec leurs interprétations géométriques.</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Similitudes planes</h5>
+                            <p>Transformations qui conservent les rapports de distances et les angles, caractérisées par f(z) = az + b (directe) ou f(z) = az̄ + b (indirecte).</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Applications géométriques</h5>
+                            <p>Résolution de problèmes d'alignement, d'orthogonalité, de cocyclicité et de lieux géométriques à l'aide des nombres complexes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Importance et applications</h4>
+                <div class="concept-card">
+                    <p>Les nombres complexes et les similitudes constituent des outils mathématiques fondamentaux avec de nombreuses applications :</p>
+                    <ul>
+                        <li>En mathématiques : algèbre, analyse complexe, géométrie</li>
+                        <li>En physique : électricité, mécanique quantique, optique</li>
+                        <li>En ingénierie : traitement du signal, automatique, électronique</li>
+                        <li>En informatique : infographie, compression d'images, fractales</li>
+                    </ul>
+                    <p>La maîtrise de ces concepts ouvre la porte à une compréhension plus profonde de nombreux phénomènes et à la résolution élégante de problèmes complexes.</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Extensions et perspectives</h4>
+                <div class="uses-grid">
+                    <div class="use-card">
+                        <div class="use-icon">🔄</div>
+                        <h5>Analyse complexe</h5>
+                        <p>Étude des fonctions à variable complexe, intégrales complexes et théorème des résidus.</p>
+                    </div>
+                    <div class="use-card">
+                        <div class="use-icon">🌀</div>
+                        <h5>Fractales</h5>
+                        <p>Ensembles de Julia et de Mandelbrot, générés par itération de fonctions complexes.</p>
+                    </div>
+                    <div class="use-card">
+                        <div class="use-icon">🧮</div>
+                        <h5>Quaternions</h5>
+                        <p>Extension des nombres complexes à quatre dimensions, utilisée en animation 3D.</p>
+                    </div>
+                    <div class="use-card">
+                        <div class="use-icon">🔊</div>
+                        <h5>Traitement du signal</h5>
+                        <p>Transformée de Fourier et analyse spectrale utilisant les nombres complexes.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quote-box">
+                <p>"Les nombres complexes représentent une extension remarquable du concept de nombre, offrant un pont élégant entre l'algèbre et la géométrie. Leur beauté réside dans leur capacité à simplifier des problèmes qui semblaient insolubles."</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ressources -->
+<div class="resources-section">
+    <h2>Pour approfondir</h2>
+    
+    <div class="resources-grid">
+        <div class="resource">
+            <div class="resource-icon">📚</div>
+            <div class="resource-content">
+                <h4>Exercices complémentaires</h4>
+                <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                <div class="download-box">
+                    <a href="#" class="download-button">
+                        <span class="download-icon">📥</span>
+                        <span class="download-text">Exercices sur les nombres complexes et similitudes</span>
+                    </a>
+                    <p class="download-info">PDF - 8 pages d'exercices avec corrigés</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resource">
+            <div class="resource-icon">🔍</div>
+            <div class="resource-content">
+                <h4>Points à réviser</h4>
+                <ul>
+                    <li>Les différentes formes d'écriture des nombres complexes et les passages de l'une à l'autre</li>
+                    <li>Les opérations sur les nombres complexes et leurs propriétés</li>
+                    <li>L'interprétation géométrique des nombres complexes</li>
+                    <li>La caractérisation des similitudes planes à l'aide des nombres complexes</li>
+                    <li>La résolution de problèmes géométriques avec les nombres complexes</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="resource">
+            <div class="resource-icon">🎯</div>
+            <div class="resource-content">
+                <h4>Préparation à l'examen</h4>
+                <p>Les nombres complexes et les similitudes sont des thèmes importants du programme de Terminale S, souvent présents aux examens.</p>
+                <p>Points d'attention pour l'examen :</p>
+                <ul>
+                    <li>Maîtriser les calculs avec les nombres complexes sous différentes formes</li>
+                    <li>Savoir passer d'une forme à l'autre selon le contexte du problème</li>
+                    <li>Être capable d'interpréter géométriquement les opérations sur les nombres complexes</li>
+                    <li>Savoir caractériser et composer des similitudes</li>
+                    <li>Utiliser les nombres complexes pour résoudre des problèmes géométriques</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="resource">
+            <div class="resource-icon">🌐</div>
+            <div class="resource-content">
+                <h4>Ressources en ligne</h4>
+                <ul>
+                    <li><a href="#">Khan Academy : Cours sur les nombres complexes</a></li>
+                    <li><a href="#">Exo7 : Exercices corrigés sur les similitudes</a></li>
+                    <li><a href="#">Mathématiques Web : Cours interactif sur les applications géométriques des nombres complexes</a></li>
+                    <li><a href="#">YouTube : Vidéos explicatives sur les transformations dans le plan complexe</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+/* Styles généraux */
+:root {
+--primary-color: #3498db;
+--secondary-color: #2c3e50;
+--accent-color: #e74c3c;
+--light-bg: #f5f7fa;
+--dark-bg: #34495e;
+--text-color: #333;
+--light-text: #7f8c8d;
+--border-radius: 8px;
+--box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+line-height: 1.6;
+color: var(--text-color);
+background-color: var(--light-bg);
+margin: 0;
+padding: 0;
+}
+
+.content-wrapper {
+max-width: 800px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+/* En-tête du cours */
+.course-header {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+color: white;
+padding: 40px 0;
+margin-bottom: 30px;
+}
+
+.subject-tag {
+display: inline-block;
+background: rgba(255,255,255,0.2);
+padding: 5px 10px;
+border-radius: 20px;
+font-size: 0.9em;
+margin-bottom: 10px;
+}
+
+.course-title {
+font-size: 2.5em;
+margin: 10px 0;
+font-weight: 700;
+}
+
+.course-subtitle {
+font-size: 1.2em;
+opacity: 0.9;
+margin-bottom: 20px;
+}
+
+.course-actions {
+margin-top: 20px;
+}
+
+.action-button {
+display: inline-block;
+padding: 10px 20px;
+border-radius: 30px;
+text-decoration: none;
+font-weight: 600;
+margin-right: 10px;
+transition: all 0.3s ease;
+}
+
+.action-button.primary {
+background: white;
+color: var(--primary-color);
+}
+
+.action-button.secondary {
+background: rgba(255,255,255,0.2);
+color: white;
+}
+
+/* Section d'introduction */
+.intro-section {
+margin-bottom: 40px;
+}
+
+.alert-box {
+background: white;
+border-radius: var(--border-radius);
+padding: 20px;
+box-shadow: var(--box-shadow);
+margin-bottom: 20px;
+}
+
+.alert-box h3 {
+margin-top: 0;
+color: var(--primary-color);
+}
+
+.key-points {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+margin-top: 30px;
+}
+
+.point-item {
+background: white;
+border-radius: var(--border-radius);
+padding: 20px;
+box-shadow: var(--box-shadow);
+display: flex;
+align-items: flex-start;
+}
+
+.point-icon {
+font-size: 1.5em;
+margin-right: 15px;
+color: var(--primary-color);
+}
+
+.point-content h4 {
+margin-top: 0;
+color: var(--secondary-color);
+}
+
+.check-list {
+list-style: none;
+padding: 0;
+}
+
+.check-list li {
+position: relative;
+padding-left: 25px;
+margin-bottom: 10px;
+}
+
+.check-list li:before {
+content: "✓";
+position: absolute;
+left: 0;
+color: var(--primary-color);
+}
+
+.examples-box {
+background: var(--light-bg);
+border-radius: var(--border-radius);
+padding: 15px;
+margin-top: 15px;
+}
+
+.example {
+margin-bottom: 10px;
+padding-left: 20px;
+position: relative;
+}
+
+.example:before {
+content: "•";
+position: absolute;
+left: 0;
+color: var(--primary-color);
+}
+
+.example:last-child {
+margin-bottom: 0;
+}
+
+/* Sections de méthode */
+.method-section {
+margin-bottom: 40px;
+}
+
+.method-section h2 {
+color: var(--secondary-color);
+border-bottom: 2px solid var(--primary-color);
+padding-bottom: 10px;
+margin-bottom: 20px;
+}
+
+.method-card {
+background: white;
+border-radius: var(--border-radius);
+box-shadow: var(--box-shadow);
+overflow: hidden;
+}
+
+.method-header {
+background: var(--secondary-color);
+color: white;
+padding: 15px 20px;
+}
+
+.method-header h3 {
+margin: 0;
+}
+
+.method-content {
+padding: 20px;
+}
+
+.subsection {
+margin-bottom: 30px;
+}
+
+.subsection:last-child {
+margin-bottom: 0;
+}
+
+.subsection h4 {
+color: var(--primary-color);
+margin-top: 0;
+}
+
+.concept-card {
+background: var(--light-bg);
+border-radius: var(--border-radius);
+padding: 20px;
+margin-bottom: 20px;
+}
+
+.formula-box {
+background: white;
+border-left: 4px solid var(--primary-color);
+padding: 10px 15px;
+margin: 15px 0;
+}
+
+.math-formula {
+font-family: 'Cambria Math', Georgia, serif;
+font-style: italic;
+}
+
+.important-note {
+background: #fef9e7;
+border-left: 4px solid #f39c12;
+padding: 10px 15px;
+margin: 15px 0;
+}
+
+.illustration-box {
+text-align: center;
+margin: 20px 0;
+}
+
+.image-placeholder {
+background: #eee;
+border-radius: var(--border-radius);
+padding: 30px;
+color: #777;
+}
+
+/* Tableaux */
+.summary-table {
+width: 100%;
+border-collapse: collapse;
+margin: 20px 0;
+}
+
+.summary-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+border-bottom: 1px solid #eee;
+}
+
+.summary-row.header {
+background: var(--secondary-color);
+color: white;
+font-weight: bold;
+}
+
+.summary-cell {
+padding: 10px 15px;
+}
+
+/* Étapes de méthode */
+.method-steps {
+margin: 20px 0;
+}
+
+.method-step {
+display: flex;
+margin-bottom: 15px;
+align-items: flex-start;
+}
+
+.step-number {
+background: var(--primary-color);
+color: white;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 15px;
+flex-shrink: 0;
+}
+
+.step-content {
+flex-grow: 1;
+}
+
+.step-content h5 {
+margin-top: 0;
+color: var(--secondary-color);
+}
+
+/* Exercices */
+.practice-box {
+background: #f0f4f8;
+border-radius: var(--border-radius);
+padding: 20px;
+margin-top: 30px;
+}
+
+.practice-items {
+margin-top: 15px;
+}
+
+.practice-item {
+background: white;
+border-radius: var(--border-radius);
+padding: 15px;
+margin-bottom: 15px;
+box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.practice-question {
+font-weight: 600;
+margin-bottom: 10px;
+color: var(--secondary-color);
+}
+
+.practice-solution {
+border-top: 1px solid #eee;
+margin-top: 10px;
+padding-top: 10px;
+}
+
+/* Applications */
+.uses-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+margin: 20px 0;
+}
+
+.use-card {
+background: white;
+border-radius: var(--border-radius);
+padding: 20px;
+box-shadow: var(--box-shadow);
+text-align: center;
+}
+
+.use-icon {
+font-size: 2em;
+margin-bottom: 10px;
+color: var(--primary-color);
+}
+
+.use-card h5 {
+margin-top: 0;
+color: var(--secondary-color);
+}
+
+/* Citations */
+.quote-box {
+background: #f0f4f8;
+border-left: 4px solid var(--primary-color);
+padding: 20px;
+margin: 20px 0;
+font-style: italic;
+color: var(--secondary-color);
+}
+
+/* Conclusion */
+.conclusion-box {
+background: white;
+border-radius: var(--border-radius);
+padding: 20px;
+margin-bottom: 30px;
+box-shadow: var(--box-shadow);
+}
+
+.key-points-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+margin-top: 20px;
+}
+
+.key-point {
+display: flex;
+align-items: flex-start;
+margin-bottom: 15px;
+}
+
+.key-point-icon {
+font-size: 1.2em;
+margin-right: 10px;
+color: var(--primary-color);
+}
+
+.key-point-content h5 {
+margin-top: 0;
+margin-bottom: 5px;
+color: var(--secondary-color);
+}
+
+.key-point-content p {
+margin: 0;
+}
+
+/* Ressources */
+.resources-section {
+margin-top: 40px;
+margin-bottom: 60px;
+}
+
+.resources-section h2 {
+color: var(--secondary-color);
+border-bottom: 2px solid var(--primary-color);
+padding-bottom: 10px;
+margin-bottom: 20px;
+}
+
+.resources-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+}
+
+.resource {
+background: white;
+border-radius: var(--border-radius);
+padding: 20px;
+box-shadow: var(--box-shadow);
+display: flex;
+align-items: flex-start;
+}
+
+.resource-icon {
+font-size: 1.5em;
+margin-right: 15px;
+color: var(--primary-color);
+}
+
+.resource-content h4 {
+margin-top: 0;
+color: var(--secondary-color);
+}
+
+.download-box {
+background: var(--light-bg);
+border-radius: var(--border-radius);
+padding: 15px;
+margin-top: 10px;
+}
+
+.download-button {
+display: flex;
+align-items: center;
+background: var(--primary-color);
+color: white;
+text-decoration: none;
+padding: 10px 15px;
+border-radius: var(--border-radius);
+transition: all 0.3s ease;
+}
+
+.download-icon {
+margin-right: 10px;
+}
+
+.download-info {
+font-size: 0.9em;
+color: var(--light-text);
+margin-top: 10px;
+margin-bottom: 0;
+}
+</style>
+{% endblock %}
+
+
+                    
+                          

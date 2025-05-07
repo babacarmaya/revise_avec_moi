@@ -252,6 +252,46 @@ def philo_chapitre8():
 def mathematiques_terminale():
     return render_template('cours/maths/maths_terminal.html')
 
+@app.route('/cours/maths/chapitre1')
+@login_required
+def mathematiques_chapitre1():
+    return render_template('cours/maths/chapitre1._terminal.html')
+
+@app.route('/cours/maths/chapitre2')
+@login_required
+def mathematiques_chapitre2():
+    return render_template('cours/maths/chapitre2._terminal.html')
+
+@app.route('/cours/maths/chapitre3')
+@login_required
+def mathematiques_chapitre3():
+    return render_template('cours/maths/chapitre3._terminal.html')
+
+@app.route('/cours/maths/chapitre4')
+@login_required
+def mathematiques_chapitre4():
+    return render_template('cours/maths/chapitre4._terminal.html')
+
+@app.route('/cours/maths/chapitre5')
+@login_required
+def mathematiques_chapitre5():
+    return render_template('cours/maths/chapitre5._terminal.html')
+
+@app.route('/cours/maths/chapitre6')
+@login_required
+def mathematiques_chapitre6():
+    return render_template('cours/maths/chapitre6._terminal.html')
+
+@app.route('/cours/maths/chapitre7')
+@login_required
+def mathematiques_chapitre7():
+    return render_template('cours/maths/chapitre7._terminal.html')
+
+@app.route('/cours/maths/chapitre8')
+@login_required
+def mathematiques_chapitre8():
+    return render_template('cours/maths/chapitre8._terminal.html')
+
 
 
 

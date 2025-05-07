@@ -1,0 +1,1300 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Mathématiques - Algèbre</div>
+        <h1 class="course-title">Dénombrement</h1>
+        <div class="course-subtitle">Techniques de comptage et analyse combinatoire</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Point essentiel</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>Le dénombrement est l'étude des techniques permettant de compter le nombre d'éléments d'un ensemble fini sans avoir à les énumérer un par un. Ces méthodes sont essentielles en mathématiques discrètes et en probabilités, où elles permettent de calculer le nombre de façons d'organiser ou de sélectionner des objets selon certaines contraintes. Les principes de dénombrement constituent la base de l'analyse combinatoire et trouvent des applications dans de nombreux domaines comme l'informatique, la génétique, la cryptographie et la théorie des jeux.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Comprendre les principes fondamentaux du dénombrement</li>
+                        <li>Maîtriser les techniques de calcul des arrangements, permutations et combinaisons</li>
+                        <li>Résoudre des problèmes de dénombrement dans divers contextes</li>
+                        <li>Appliquer ces concepts aux calculs de probabilités</li>
+                        <li>Comprendre le binôme de Newton et ses applications</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Opérations sur les ensembles</li>
+                        <li>Notions de base en algèbre</li>
+                        <li>Factorielle et puissances</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>Le dénombrement est utilisé pour :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">Calculer des probabilités dans les jeux de hasard</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Analyser des séquences génétiques en biologie</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Optimiser des algorithmes en informatique</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Principes fondamentaux du dénombrement -->
+    <div class="method-section">
+        <h2>1. Principes Fondamentaux du Dénombrement</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Règles de base pour compter</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Principe multiplicatif (règle du produit)</h4>
+                    <div class="concept-card">
+                        <p>Si une opération peut être décomposée en k étapes successives, où :</p>
+                        <ul>
+                            <li>La première étape peut être réalisée de n₁ façons différentes</li>
+                            <li>La deuxième étape peut être réalisée de n₂ façons différentes</li>
+                            <li>...</li>
+                            <li>La k-ième étape peut être réalisée de nₖ façons différentes</li>
+                        </ul>
+                        <p>Alors l'opération complète peut être réalisée de n₁ × n₂ × ... × nₖ façons différentes.</p>
+                        <div class="important-note">
+                            <p>Ce principe s'applique lorsque le nombre de possibilités à chaque étape ne dépend pas des choix effectués aux étapes précédentes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Code vestimentaire</h5>
+                        <div class="example">
+                            <p>Une personne possède 5 chemises, 3 pantalons et 2 paires de chaussures. Combien de tenues différentes peut-elle composer ?</p>
+                            <p>En appliquant le principe multiplicatif :</p>
+                            <p>Nombre de tenues = 5 × 3 × 2 = 30</p>
+                            <p>La personne peut composer 30 tenues différentes.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Principe additif (règle de la somme)</h4>
+                    <div class="concept-card">
+                        <p>Si une opération peut être réalisée soit par une méthode A, soit par une méthode B, et que :</p>
+                        <ul>
+                            <li>La méthode A peut être réalisée de n₁ façons différentes</li>
+                            <li>La méthode B peut être réalisée de n₂ façons différentes</li>
+                        </ul>
+                        <p>Alors l'opération complète peut être réalisée de n₁ + n₂ façons différentes, à condition que les méthodes A et B soient mutuellement exclusives (aucun chevauchement).</p>
+                        <div class="important-note">
+                            <p>Si les ensembles de possibilités se chevauchent, il faut soustraire le nombre d'éléments communs pour éviter de les compter deux fois.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Choix de transport</h5>
+                        <div class="example">
+                            <p>Pour se rendre à l'école, un étudiant peut soit prendre le bus (avec 3 lignes possibles), soit marcher (par 2 chemins différents). De combien de façons peut-il se rendre à l'école ?</p>
+                            <p>En appliquant le principe additif :</p>
+                            <p>Nombre de façons = 3 + 2 = 5</p>
+                            <p>L'étudiant dispose de 5 façons différentes de se rendre à l'école.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Principe d'inclusion-exclusion</h4>
+                    <div class="concept-card">
+                        <p>Pour deux ensembles A et B, le nombre d'éléments dans leur union est :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">|A ∪ B| = |A| + |B| - |A ∩ B|</span></p>
+                        </div>
+                        <p>Pour trois ensembles A, B et C, le nombre d'éléments dans leur union est :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">|A ∪ B ∪ C| = |A| + |B| + |C| - |A ∩ B| - |A ∩ C| - |B ∩ C| + |A ∩ B ∩ C|</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Élèves et activités</h5>
+                        <div class="example">
+                            <p>Dans une classe de 30 élèves, 15 font du football, 12 font du basketball et 8 pratiquent les deux sports. Combien d'élèves pratiquent au moins l'un des deux sports ?</p>
+                            <p>Soit F l'ensemble des élèves qui font du football et B l'ensemble des élèves qui font du basketball.</p>
+                            <p>|F| = 15, |B| = 12, |F ∩ B| = 8</p>
+                            <p>|F ∪ B| = |F| + |B| - |F ∩ B| = 15 + 12 - 8 = 19</p>
+                            <p>19 élèves pratiquent au moins l'un des deux sports.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Un restaurant propose 4 entrées, 6 plats principaux et 3 desserts. Combien de menus différents (entrée + plat + dessert) peut-on composer ?</div>
+                            <div class="practice-solution">
+                                <p>En appliquant le principe multiplicatif :</p>
+                                <p>Nombre de menus = 4 × 6 × 3 = 72</p>
+                                <p>On peut composer 72 menus différents.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Dans une classe de 35 élèves, 20 étudient l'anglais, 15 étudient l'espagnol et 8 étudient les deux langues. Combien d'élèves n'étudient ni l'anglais ni l'espagnol ?</div>
+                            <div class="practice-solution">
+                                <p>Soit A l'ensemble des élèves qui étudient l'anglais et E l'ensemble des élèves qui étudient l'espagnol.</p>
+                                <p>|A| = 20, |E| = 15, |A ∩ E| = 8</p>
+                                <p>|A ∪ E| = |A| + |E| - |A ∩ E| = 20 + 15 - 8 = 27</p>
+                                <p>Nombre d'élèves qui n'étudient ni l'anglais ni l'espagnol = 35 - 27 = 8</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrangements et permutations -->
+    <div class="method-section">
+        <h2>2. Arrangements et Permutations</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Ordonner des éléments</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Factorielle</h4>
+                    <div class="concept-card">
+                        <p>La factorielle d'un entier naturel n, notée n!, est le produit des entiers positifs inférieurs ou égaux à n :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">n! = n × (n-1) × (n-2) × ... × 2 × 1</span></p>
+                        </div>
+                        <p>Par convention : 0! = 1</p>
+                        <p>Exemples :</p>
+                        <ul>
+                            <li>1! = 1</li>
+                            <li>2! = 2 × 1 = 2</li>
+                            <li>3! = 3 × 2 × 1 = 6</li>
+                            <li>4! = 4 × 3 × 2 × 1 = 24</li>
+                            <li>5! = 5 × 4 × 3 × 2 × 1 = 120</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Arrangements</h4>
+                    <div class="concept-card">
+                        <p>Un arrangement de p éléments parmi n (p ≤ n) est une sélection ordonnée de p éléments parmi n.</p>
+                        <p>Le nombre d'arrangements de p éléments parmi n, noté A<sub>n</sub><sup>p</sup>, est donné par :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">A<sub>n</sub><sup>p</sup> = n × (n-1) × (n-2) × ... × (n-p+1) = n!/(n-p)!</span></p>
+                        </div>
+                        <div class="important-note">
+                            <p>Dans un arrangement, l'ordre des éléments est important et chaque élément ne peut être choisi qu'une seule fois.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Podium sportif</h5>
+                        <div class="example">
+                            <p>De combien de façons différentes peut-on attribuer les médailles d'or, d'argent et de bronze dans une compétition de 8 athlètes ?</p>
+                            <p>Il s'agit de sélectionner 3 athlètes parmi 8 et de les ordonner (1er, 2ème, 3ème).</p>
+                            <p>C'est un arrangement de 3 éléments parmi 8 :</p>
+                            <p>A<sub>8</sub><sup>3</sup> = 8!/(8-3)! = 8!/5! = 8 × 7 × 6 × 5!/5! = 8 × 7 × 6 = 336</p>
+                            <p>Il y a 336 podiums possibles.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Permutations</h4>
+                    <div class="concept-card">
+                        <p>Une permutation de n éléments est un arrangement de n éléments parmi n, c'est-à-dire une façon d'ordonner tous les éléments d'un ensemble.</p>
+                        <p>Le nombre de permutations de n éléments, noté P<sub>n</sub>, est donné par :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">P<sub>n</sub> = A<sub>n</sub><sup>n</sup> = n!</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Rangement de livres</h5>
+                        <div class="example">
+                            <p>De combien de façons différentes peut-on ranger 5 livres distincts sur une étagère ?</p>
+                            <p>Il s'agit d'ordonner 5 éléments, donc c'est une permutation de 5 éléments :</p>
+                            <p>P<sub>5</sub> = 5! = 5 × 4 × 3 × 2 × 1 = 120</p>
+                            <p>Il y a 120 façons différentes de ranger les livres.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Permutations avec répétition</h4>
+                    <div class="concept-card">
+                        <p>Si parmi n éléments, certains sont identiques, le nombre de permutations distinctes est réduit.</p>
+                        <p>Si on a n éléments dont n₁ sont de type 1, n₂ sont de type 2, ..., nₖ sont de type k (avec n₁ + n₂ + ... + nₖ = n), alors le nombre de permutations distinctes est :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">P<sub>n</sub>(n₁, n₂, ..., nₖ) = n!/(n₁! × n₂! × ... × nₖ!)</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Anagrammes</h5>
+                        <div class="example">
+                            <p>Combien d'anagrammes (réarrangements de lettres) peut-on former avec le mot "MISSISSIPPI" ?</p>
+                            <p>Le mot "MISSISSIPPI" contient 11 lettres :</p>
+                            <ul>
+                                <li>1 lettre M</li>
+                                <li>4 lettres I</li>
+                                <li>4 lettres S</li>
+                                <li>2 lettres P</li>
+                            </ul>
+                            <p>Nombre d'anagrammes = 11!/(1! × 4! × 4! × 2!) = 11!/(1 × 24 × 24 × 2) = 11!/1152</p>
+                            <p>= 39916800/1152 = 34650</p>
+                            <p>On peut former 34650 anagrammes différents.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Combien de codes à 3 chiffres différents peut-on former avec les chiffres 1, 2, 3, 4 et 5 ?</div>
+                            <div class="practice-solution">
+                                <p>Il s'agit d'un arrangement de 3 éléments parmi 5 :</p>
+                                <p>A<sub>5</sub><sup>3</sup> = 5!/(5-3)! = 5!/2! = 5 × 4 × 3 × 2!/2! = 5 × 4 × 3 = 60</p>
+                                <p>On peut former 60 codes différents.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Combien d'anagrammes peut-on former avec le mot "MATHS" ?</div>
+                            <div class="practice-solution">
+                                <p>Le mot "MATHS" contient 5 lettres différentes, donc il s'agit d'une permutation de 5 éléments :</p>
+                                <p>P<sub>5</sub> = 5! = 5 × 4 × 3 × 2 × 1 = 120</p>
+                                <p>On peut former 120 anagrammes différents.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Combinaisons -->
+    <div class="method-section">
+        <h2>3. Combinaisons</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Sélectionner sans tenir compte de l'ordre</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Définition et formule</h4>
+                    <div class="concept-card">
+                        <p>Une combinaison de p éléments parmi n (p ≤ n) est une sélection non ordonnée de p éléments parmi n.</p>
+                        <p>Le nombre de combinaisons de p éléments parmi n, noté C<sub>n</sub><sup>p</sup> ou (n p), est donné par :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">C<sub>n</sub><sup>p</sup> = A<sub>n</sub><sup>p</sup>/p! = n!/[p!(n-p)!]</span></p>
+                        </div>
+                        <div class="important-note">
+                            <p>Dans une combinaison, l'ordre des éléments n'est pas important, contrairement aux arrangements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Comité</h5>
+                        <div class="example">
+                            <p>De combien de façons peut-on former un comité de 3 personnes parmi 10 candidats ?</p>
+                            <p>Il s'agit de sélectionner 3 personnes parmi 10 sans tenir compte de l'ordre, donc c'est une combinaison :</p>
+                            <p>C<sub>10</sub><sup>3</sup> = 10!/[3!(10-3)!] = 10!/(3!×7!) = (10×9×8×7!)/(3×2×1×7!) = (10×9×8)/(3×2×1) = 120</p>
+                            <p>On peut former 120 comités différents.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Propriétés des combinaisons</h4>
+                    <div class="concept-card">
+                        <p>Les combinaisons possèdent plusieurs propriétés importantes :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">C<sub>n</sub><sup>p</sup> = C<sub>n</sub><sup>n-p</sup></span> (symétrie)</p>
+                            <p><span class="math-formula">C<sub>n</sub><sup>0</sup> = C<sub>n</sub><sup>n</sup> = 1</span></p>
+                            <p><span class="math-formula">C<sub>n</sub><sup>1</sup> = C<sub>n</sub><sup>n-1</sup> = n</span></p>
+                            <p><span class="math-formula">C<sub>n+1</sub><sup>p</sup> = C<sub>n</sub><sup>p</sup> + C<sub>n</sub><sup>p-1</sup></span> (relation de Pascal)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Vérification de propriété</h5>
+                        <div class="example">
+                            <p>Vérifions la propriété de symétrie avec n = 5 et p = 2 :</p>
+                            <p>C<sub>5</sub><sup>2</sup> = 5!/(2!×3!) = (5×4×3!)/(2×1×3!) = (5×4)/(2×1) = 10</p>
+                            <p>C<sub>5</sub><sup>3</sup> = 5!/(3!×2!) = (5×4×3×2!)/(3×2×1×2!) = (5×4×3)/(3×2×1) = 10</p>
+                            <p>On a bien C<sub>5</sub><sup>2</sup> = C<sub>5</sub><sup>3</sup> = 10</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Triangle de Pascal</h4>
+                    <div class="concept-card">
+                        <p>Le triangle de Pascal est une représentation des coefficients binomiaux C<sub>n</sub><sup>p</sup> :</p>
+                        <div class="formula-box">
+                            <pre>
+                                    1
+                                  1   1
+                                1   2   1
+                              1   3   3   1
+                            1   4   6   4   1
+                          1   5  10  10   5   1
+                            </pre>
+                        </div>
+                        <p>Chaque nombre du triangle est la somme des deux nombres situés au-dessus (relation de Pascal).</p>
+                        <p>La n-ième ligne du triangle contient les valeurs de C<sub>n</sub><sup>p</sup> pour p allant de 0 à n.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Applications des combinaisons</h4>
+                    <div class="concept-card">
+                        <p>Les combinaisons sont utilisées dans de nombreux contextes :</p>
+                        <ul>
+                            <li>Calcul de probabilités (tirage de cartes, loterie...)</li>
+                            <li>Théorie des ensembles (nombre de sous-ensembles)</li>
+                            <li>Développement du binôme de Newton</li>
+                            <li>Problèmes de sélection et de distribution</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Loterie</h5>
+                        <div class="example">
+                            <p>Dans une loterie, on tire 6 numéros parmi 49. Quelle est la probabilité de trouver tous les numéros gagnants ?</p>
+                            <p>Le nombre total de tirages possibles est C<sub>49</sub><sup>6</sup> = 49!/(6!×43!) = 13983816</p>
+                            <p>Il n'y a qu'une seule combinaison gagnante.</p>
+                            <p>Probabilité = 1/13983816 ≈ 7,15 × 10<sup>-8</sup></p>
+                            <p>La probabilité est d'environ 1 chance sur 14 millions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Dans une classe de 25 élèves, on veut choisir 3 délégués. Combien de possibilités y a-t-il ?</div>
+                            <div class="practice-solution">
+                                <p>Il s'agit de choisir 3 élèves parmi 25 sans tenir compte de l'ordre, donc c'est une combinaison :</p>
+                                <p>C<sub>25</sub><sup>3</sup> = 25!/(3!×22!) = (25×24×23×22!)/(3×2×1×22!) = (25×24×23)/(3×2×1) = 2300</p>
+                                <p>Il y a 2300 façons différentes de choisir les délégués.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Au poker, on distribue 5 cartes parmi un jeu de 52 cartes. Combien de mains différentes peut-on obtenir ?</div>
+                            <div class="practice-solution">
+                                <p>Il s'agit de choisir 5 cartes parmi 52 sans tenir compte de l'ordre, donc c'est une combinaison :</p>
+                                <p>C<sub>52</sub><sup>5</sup> = 52!/(5!×47!) = 2598960</p>
+                                <p>Il y a 2598960 mains différentes possibles au poker.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Binôme de Newton -->
+    <div class="method-section">
+        <h2>4. Binôme de Newton</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Développement et applications</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Formule du binôme</h4>
+                    <div class="concept-card">
+                        <p>Le binôme de Newton permet de développer la puissance n d'une somme de deux termes :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">(a + b)<sup>n</sup> = ∑<sub>k=0</sub><sup>n</sup> C<sub>n</sub><sup>k</sup> a<sup>n-k</sup> b<sup>k</sup></span></p>
+                            <p><span class="math-formula">= C<sub>n</sub><sup>0</sup> a<sup>n</sup> + C<sub>n</sub><sup>1</sup> a<sup>n-1</sup>b + C<sub>n</sub><sup>2</sup> a<sup>n-2</sup>b<sup>2</sup> + ... + C<sub>n</sub><sup>n</sup> b<sup>n</sup></span></p>
+                        </div>
+                        <p>Les coefficients C<sub>n</sub><sup>k</sup> sont appelés coefficients binomiaux et correspondent au nombre de combinaisons de k éléments parmi n.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Développement</h5>
+                        <div class="example">
+                            <p>Développons (x + 2)<sup>4</sup> :</p>
+                            <p>(x + 2)<sup>4</sup> = C<sub>4</sub><sup>0</sup> x<sup>4</sup> + C<sub>4</sub><sup>1</sup> x<sup>3</sup>×2 + C<sub>4</sub><sup>2</sup> x<sup>2</sup>×2<sup>2</sup> + C<sub>4</sub><sup>3</sup> x×2<sup>3</sup> + C<sub>4</sub><sup>4</sup> 2<sup>4</sup></p>
+                            <p>= 1×x<sup>4</sup> + 4×x<sup>3</sup>×2 + 6×x<sup>2</sup>×4 + 4×x×8 + 1×16</p>
+                            <p>= x<sup>4</sup> + 8x<sup>3</sup> + 24x<sup>2</sup> + 32x + 16</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Propriétés remarquables</h4>
+                    <div class="concept-card">
+                        <p>Le binôme de Newton permet de démontrer plusieurs identités :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">∑<sub>k=0</sub><sup>n</sup> C<sub>n</sub><sup>k</sup> = 2<sup>n</sup></span> (en posant a = b = 1)</p>
+                            <p><span class="math-formula">∑<sub>k=0</sub><sup>n</sup> (-1)<sup>k</sup> C<sub>n</sub><sup>k</sup> = 0</span> (en posant a = 1, b = -1)</p>
+                            <p><span class="math-formula">∑<sub>k=0</sub><sup>n</sup> C<sub>n</sub><sup>k</sup><sup>2</sup> = C<sub>2n</sub><sup>n</sup></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Vérification de propriété</h5>
+                        <div class="example">
+                            <p>Vérifions que ∑<sub>k=0</sub><sup>3</sup> C<sub>3</sub><sup>k</sup> = 2<sup>3</sup> :</p>
+                            <p>C<sub>3</sub><sup>0</sup> + C<sub>3</sub><sup>1</sup> + C<sub>3</sub><sup>2</sup> + C<sub>3</sub><sup>3</sup> = 1 + 3 + 3 + 1 = 8 = 2<sup>3</sup></p>
+                            <p>La propriété est vérifiée.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Applications du binôme</h4>
+                    <div class="concept-card">
+                        <p>Le binôme de Newton a de nombreuses applications :</p>
+                        <ul>
+                            <li>Développement des expressions algébriques</li>
+                            <li>Calcul de sommes combinatoires</li>
+                            <li>Approximation de fonctions</li>
+                            <li>Calcul de probabilités dans la loi binomiale</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Coefficient d'un terme</h5>
+                        <div class="example">
+                            <p>Dans le développement de (2x - 3)<sup>5</sup>, quel est le coefficient du terme en x<sup>3</sup> ?</p>
+                            <p>On a (2x - 3)<sup>5</sup> = ∑<sub>k=0</sub><sup>5</sup> C<sub>5</sub><sup>k</sup> (2x)<sup>5-k</sup> (-3)<sup>k</sup></p>
+                            <p>Le terme en x<sup>3</sup> correspond à k = 2 (car 5-k = 3) :</p>
+                            <p>C<sub>5</sub><sup>2</sup> (2x)<sup>3</sup> (-3)<sup>2</sup> = C<sub>5</sub><sup>2</sup> × 2<sup>3</sup> × x<sup>3</sup> × (-3)<sup>2</sup></p>
+                            <p>= 10 × 8 × x<sup>3</sup> × 9 = 720x<sup>3</sup></p>
+                            <p>Le coefficient du terme en x<sup>3</sup> est 720.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Développez (x - 1)<sup>3</sup>.</div>
+                            <div class="practice-solution">
+                                <p>(x - 1)<sup>3</sup> = C<sub>3</sub><sup>0</sup> x<sup>3</sup> + C<sub>3</sub><sup>1</sup> x<sup>2</sup>(-1) + C<sub>3</sub><sup>2</sup> x(-1)<sup>2</sup> + C<sub>3</sub><sup>3</sup> (-1)<sup>3</sup></p>
+                                <p>= 1×x<sup>3</sup> + 3×x<sup>2</sup>×(-1) + 3×x×1 + 1×(-1)</p>
+                                <p>= x<sup>3</sup> - 3x<sup>2</sup> + 3x - 1</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Dans le développement de (3x + 2)<sup>4</sup>, quel est le coefficient du terme en x<sup>2</sup> ?</div>
+                            <div class="practice-solution">
+                                <p>On a (3x + 2)<sup>4</sup> = ∑<sub>k=0</sub><sup>4</sup> C<sub>4</sub><sup>k</sup> (3x)<sup>4-k</sup> (2)<sup>k</sup></p>
+                                <p>Le terme en x<sup>2</sup> correspond à k = 2 (car 4-k = 2) :</p>
+                                <p>C<sub>4</sub><sup>2</sup> (3x)<sup>2</sup> (2)<sup>2</sup> = C<sub>4</sub><sup>2</sup> × 3<sup>2</sup> × x<sup>2</sup> × 2<sup>2</sup></p>
+                                <p>= 6 × 9 × x<sup>2</sup> × 4 = 216x<sup>2</sup></p>
+                                <p>Le coefficient du terme en x<sup>2</sup> est 216.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications aux probabilités -->
+    <div class="method-section">
+        <h2>5. Applications aux Probabilités</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Dénombrement et calcul de probabilités</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Probabilité d'un événement</h4>
+                    <div class="concept-card">
+                        <p>Dans un univers équiprobable (tous les résultats élémentaires ont la même probabilité), la probabilité d'un événement A est :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">P(A) = nombre de cas favorables / nombre de cas possibles</span></p>
+                        </div>
+                        <p>Le dénombrement permet de calculer ces nombres sans avoir à énumérer tous les cas.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Tirage sans remise</h4>
+                    <div class="concept-card">
+                        <p>Dans un tirage sans remise de k objets parmi n, le nombre total de tirages possibles est C<sub>n</sub><sup>k</sup>.</p>
+                        <p>Si on s'intéresse à un événement particulier (par exemple, tirer certains objets spécifiques), on peut calculer sa probabilité en dénombrant les cas favorables.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Tirage de cartes</h5>
+                        <div class="example">
+                            <p>On tire 5 cartes au hasard dans un jeu de 52 cartes. Quelle est la probabilité d'obtenir exactement 2 as ?</p>
+                            <p>Nombre total de tirages possibles : C<sub>52</sub><sup>5</sup></p>
+                            <p>Cas favorables : il faut choisir 2 as parmi les 4 as du jeu, et 3 cartes qui ne sont pas des as parmi les 48 cartes restantes.</p>
+                            <p>Nombre de cas favorables : C<sub>4</sub><sup>2</sup> × C<sub>48</sub><sup>3</sup> = 6 × 17296 = 103776</p>
+                            <p>Probabilité = 103776/C<sub>52</sub><sup>5</sup> = 103776/2598960 ≈ 0,0399</p>
+                            <p>La probabilité est d'environ 4%.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Loi binomiale</h4>
+                    <div class="concept-card">
+                        <p>La loi binomiale modélise le nombre de succès dans une série de n épreuves indépendantes, chacune ayant une probabilité p de succès.</p>
+                        <p>La probabilité d'obtenir exactement k succès est :</p>
+                        <div class="formula-box">
+                            <p><span class="math-formula">P(X = k) = C<sub>n</sub><sup>k</sup> p<sup>k</sup> (1-p)<sup>n-k</sup></span></p>
+                        </div>
+                        <p>Cette formule utilise le coefficient binomial C<sub>n</sub><sup>k</sup> pour compter le nombre de façons d'obtenir k succès parmi n épreuves.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Loi binomiale</h5>
+                        <div class="example">
+                            <p>On lance une pièce équilibrée 8 fois. Quelle est la probabilité d'obtenir exactement 3 faces "pile" ?</p>
+                            <p>Il s'agit d'une loi binomiale avec n = 8 (nombre de lancers) et p = 0,5 (probabilité d'obtenir "pile" à chaque lancer).</p>
+                            <p>P(X = 3) = C<sub>8</sub><sup>3</sup> × (0,5)<sup>3</sup> × (0,5)<sup>5</sup></p>
+                            <p>= 56 × 0,125 × 0,03125 = 0,2188</p>
+                            <p>La probabilité est d'environ 21,9%.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Problèmes de dénombrement en probabilités</h4>
+                    <div class="concept-card">
+                        <p>De nombreux problèmes de probabilités peuvent être résolus en utilisant les techniques de dénombrement :</p>
+                        <ul>
+                            <li>Arrangements : quand l'ordre est important et sans répétition</li>
+                            <li>Permutations : quand on ordonne tous les éléments</li>
+                            <li>Combinaisons : quand l'ordre n'est pas important</li>
+                        </ul>
+                        <p>Le choix de la technique dépend de la nature du problème.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Comité avec contraintes</h5>
+                        <div class="example">
+                            <p>Dans un groupe de 10 personnes (6 hommes et 4 femmes), on forme un comité de 4 personnes. Quelle est la probabilité que le comité contienne exactement 2 femmes ?</p>
+                            <p>Nombre total de comités possibles : C<sub>10</sub><sup>4</sup> = 210</p>
+                            <p>Cas favorables : il faut choisir 2 femmes parmi 4, et 2 hommes parmi 6.</p>
+                            <p>Nombre de cas favorables : C<sub>4</sub><sup>2</sup> × C<sub>6</sub><sup>2</sup> = 6 × 15 = 90</p>
+                            <p>Probabilité = 90/210 = 3/7 ≈ 0,429</p>
+                            <p>La probabilité est d'environ 42,9%.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. On tire au hasard 3 cartes d'un jeu de 32 cartes. Quelle est la probabilité d'obtenir exactement 1 figure (valet, dame ou roi) ?</div>
+                            <div class="practice-solution">
+                                <p>Un jeu de 32 cartes contient 12 figures (3 figures × 4 couleurs) et 20 cartes qui ne sont pas des figures.</p>
+                                <p>Nombre total de tirages possibles : C<sub>32</sub><sup>3</sup> = 4960</p>
+                                <p>Cas favorables : il faut choisir 1 figure parmi 12, et 2 cartes qui ne sont pas des figures parmi 20.</p>
+                                <p>Nombre de cas favorables : C<sub>12</sub><sup>1</sup> × C<sub>20</sub><sup>2</sup> = 12 × 190 = 2280</p>
+                                <p>Probabilité = 2280/4960 = 0,46</p>
+                                <p>La probabilité est de 46%.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. On lance 10 fois un dé équilibré. Quelle est la probabilité d'obtenir exactement 4 fois le chiffre 6 ?</div>
+                            <div class="practice-solution">
+                                <p>Il s'agit d'une loi binomiale avec n = 10 (nombre de lancers) et p = 1/6 (probabilité d'obtenir 6 à chaque lancer).</p>
+                                <p>P(X = 4) = C<sub>10</sub><sup>4</sup> × (1/6)<sup>4</sup> × (5/6)<sup>6</sup></p>
+                                <p>= 210 × (1/6)<sup>4</sup> × (5/6)<sup>6</sup></p>
+                                <p>= 210 × (1/1296) × (15625/46656) ≈ 0,055</p>
+                                <p>La probabilité est d'environ 5,5%.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="method-section">
+        <h2>Conclusion : Dénombrement</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Synthèse et applications</h3>
+            </div>
+            <div class="method-content">
+                <div class="conclusion-box">
+                    <h4>Points clés à retenir</h4>
+                    <div class="key-points-grid">
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Principes fondamentaux</h5>
+                                <p>Le principe multiplicatif et le principe additif sont à la base de toutes les techniques de dénombrement.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Arrangements et permutations</h5>
+                                <p>Les arrangements A<sub>n</sub><sup>p</sup> = n!/(n-p)! comptent les sélections ordonnées, tandis que les permutations P<sub>n</sub> = n! comptent les réarrangements.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Combinaisons</h5>
+                                <p>Les combinaisons C<sub>n</sub><sup>p</sup> = n!/[p!(n-p)!] comptent les sélections non ordonnées et sont essentielles en probabilités.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Binôme de Newton</h5>
+                                <p>La formule du binôme (a+b)<sup>n</sup> = ∑<sub>k=0</sub><sup>n</sup> C<sub>n</sub><sup>k</sup> a<sup>n-k</sup> b<sup>k</sup> utilise les coefficients binomiaux et a de nombreuses applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Choix de la méthode de dénombrement</h4>
+                    <div class="concept-card">
+                        <p>Pour choisir la bonne technique de dénombrement, posez-vous ces questions :</p>
+                        <ul>
+                            <li><strong>L'ordre est-il important ?</strong> Si oui, utilisez les arrangements ou les permutations. Sinon, utilisez les combinaisons.</li>
+                            <li><strong>Tous les éléments sont-ils utilisés ?</strong> Si oui, utilisez les permutations. Sinon, utilisez les arrangements ou les combinaisons.</li>
+                            <li><strong>Y a-t-il des éléments identiques ?</strong> Si oui, pensez aux permutations avec répétition.</li>
+                            <li><strong>L'opération peut-elle être décomposée en étapes ?</strong> Si oui, appliquez le principe multiplicatif.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Applications pratiques</h4>
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">🎲</div>
+                            <h5>Probabilités</h5>
+                            <p>Calcul de probabilités dans les jeux de hasard, les tirages aléatoires et les expériences statistiques.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">💻</div>
+                            <h5>Informatique</h5>
+                            <p>Analyse d'algorithmes, cryptographie, théorie des graphes et intelligence artificielle.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧬</div>
+                            <h5>Biologie</h5>
+                            <p>Étude des séquences génétiques, modélisation de populations et analyse de la biodiversité.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">📊</div>
+                            <h5>Statistiques</h5>
+                            <p>Échantillonnage, tests d'hypothèses et analyse combinatoire des données.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <p>"Le dénombrement est l'art de compter sans compter, c'est-à-dire de déterminer le nombre d'éléments d'un ensemble sans avoir à les énumérer un par un."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ressources -->
+    <div class="resources-section">
+        <h2>Pour approfondir</h2>
+        
+        <div class="resources-grid">
+            <div class="resource">
+                <div class="resource-icon">📚</div>
+                <div class="resource-content">
+                    <h4>Exercices complémentaires</h4>
+                    <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                    <div class="download-box">
+                        <a href="#" class="download-button">
+                            <span class="download-icon">📥</span>
+                            <span class="download-text">Exercices sur le dénombrement et les probabilités</span>
+                        </a>
+                        <p class="download-info">PDF - 5 pages d'exercices avec corrigés</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🔍</div>
+                <div class="resource-content">
+                    <h4>Points à réviser</h4>
+                    <ul>
+                        <li>Les formules d'arrangements, permutations et combinaisons</li>
+                        <li>Les propriétés des coefficients binomiaux</li>
+                        <li>Le développement du binôme de Newton</li>
+                        <li>L'application des techniques de dénombrement aux probabilités</li>
+                        <li>La résolution de problèmes combinatoires complexes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🎯</div>
+                <div class="resource-content">
+                    <h4>Préparation à l'examen</h4>
+                    <p>Le dénombrement est un thème important du programme de Terminale S, souvent lié aux probabilités.</p>
+                    <p>Points d'attention pour l'examen :</p>
+                    <ul>
+                        <li>Maîtriser les formules de base du dénombrement</li>
+                        <li>Savoir identifier la technique appropriée pour chaque problème</li>
+                        <li>Être capable d'appliquer ces concepts aux calculs de probabilités</li>
+                        <li>Comprendre et utiliser le binôme de Newton</li>
+                        <li>S'entraîner à résoudre des problèmes variés</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🌐</div>
+                <div class="resource-content">
+                    <h4>Ressources en ligne</h4>
+                    <ul>
+                        <li><a href="#">Khan Academy : Dénombrement et probabilités</a></li>
+                        <li><a href="#">Exo7 : Exercices corrigés sur l'analyse combinatoire</a></li>
+                        <li><a href="#">Mathématiques Web : Cours interactif sur le dénombrement</a></li>
+                        <li><a href="#">YouTube : Vidéos explicatives sur le binôme de Newton et ses applications</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Styles généraux */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --light-bg: #f5f7fa;
+    --dark-bg: #34495e;
+    --text-color: #333;
+    --light-text: #7f8c8d;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* En-tête du cours */
+.course-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 30px;
+}
+
+.subject-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.course-title {
+    font-size: 2.5em;
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+.course-subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.course-actions {
+    margin-top: 20px;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.action-button.primary {
+    background: white;
+    color: var(--primary-color);
+}
+
+.action-button.secondary {
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+/* Section d'introduction */
+.intro-section {
+    margin-bottom: 40px;
+}
+
+.alert-box {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.alert-box h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.point-item {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: flex-start;
+}
+
+.point-icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+.point-content h4 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+.check-list {
+    list-style: none;
+    padding: 0;
+}
+
+.check-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+}
+
+.check-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.examples-box {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.example {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.example:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.example:last-child {
+    margin-bottom: 0;
+}
+
+/* Sections de méthode */
+.method-section {
+    margin-bottom: 40px;
+}
+
+.method-section h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.method-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.method-header {
+    background: var(--secondary-color);
+    color: white;
+    padding: 15px 20px;
+}
+
+.method-header h3 {
+    margin: 0;
+}
+
+.method-content {
+    padding: 20px;
+}
+
+.subsection {
+    margin-bottom: 30px;
+}
+
+.subsection:last-child {
+    margin-bottom: 0;
+}
+
+.subsection h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.concept-card {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.formula-box {
+    background: white;
+    border-left: 4px solid var(--primary-color);
+    padding: 10px 15px;
+    margin: 15px 0;
+}
+
+.math-formula {
+    font-family: 'Cambria Math', Georgia, serif;
+    font-style: italic;
+}
+
+.important-note {
+    background: #fef9e7;
+    border-left: 4px solid #f39c12;
+    padding: 10px 15px;
+    margin: 15px 0;
+}
+
+.illustration-box {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.image-placeholder {
+    background: #eee;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    color: #777;
+}
+
+/* Tableaux */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.summary-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-row.header {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.summary-cell {
+    padding: 10px 15px;
+}
+
+/* Étapes de méthode */
+.method-steps {
+    margin: 20px 0;
+}
+
+.method-step {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.step-content h5 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+/* Exercices */
+.practice-box {
+    background: #f0f4f8;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.practice-items {
+    margin-top: 15px;
+}
+
+.practice-item {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.practice-question {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.practice-solution {
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+/* Applications */
+.uses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.use-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.use-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.use-card h5 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+/* Citations */
+.quote-box {
+    background: #f0f4f8;
+    border-left: 4px solid var(--primary-color);
+    padding: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: var(--secondary-color);
+}
+
+/* Conclusion */
+.conclusion-box {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--box-shadow);
+}
+
+.key-points-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.key-point {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.key-point-icon {
+    font-size: 1.2em;
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.key-point-content h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+}
+
+.key-point-content p {
+    margin: 0;
+}
+
+/* Ressources */
+.resources-section {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.resources-section h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.resource {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: flex-start;
+}
+
+.resource-icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+.resource-content h4 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+.download-box {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.download-button {
+    display: flex;
+    align-items: center;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.download-icon {
+    margin-right: 10px;
+}
+
+.download-info {
+    font-size: 0.9em;
+    color: var(--light-text);
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+</style>
+{% endblock %}
+
+                                
+                            

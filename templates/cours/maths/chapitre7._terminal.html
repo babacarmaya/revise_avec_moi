@@ -1,0 +1,2252 @@
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Mathématiques - Analyse</div>
+        <h1 class="course-title">Équations Différentielles</h1>
+        <div class="course-subtitle">Résolution et applications des équations différentielles du premier et second ordre</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Point essentiel</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>Les équations différentielles sont des équations qui font intervenir une fonction inconnue et ses dérivées. Elles constituent un outil mathématique fondamental pour modéliser de nombreux phénomènes physiques, biologiques ou économiques où intervient la notion de variation. En Terminale S, nous nous concentrerons sur les équations différentielles linéaires du premier et du second ordre à coefficients constants, qui sont les plus couramment utilisées dans les applications scientifiques.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Comprendre ce qu'est une équation différentielle et sa signification</li>
+                        <li>Maîtriser la résolution des équations différentielles linéaires du premier ordre</li>
+                        <li>Résoudre des équations différentielles linéaires du second ordre à coefficients constants</li>
+                        <li>Appliquer ces méthodes à des problèmes concrets en physique et autres domaines</li>
+                        <li>Interpréter géométriquement et physiquement les solutions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Calcul de dérivées et primitives</li>
+                        <li>Fonctions exponentielles et trigonométriques</li>
+                        <li>Résolution d'équations du second degré</li>
+                        <li>Notions de base sur les suites et les limites</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>Les équations différentielles permettent de modéliser :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">La chute d'un corps avec frottement</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Les circuits électriques (charge/décharge d'un condensateur)</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Les oscillations mécaniques (ressort, pendule)</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">La croissance de populations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Généralités sur les équations différentielles -->
+    <div class="method-section">
+        <h2>1. Généralités sur les Équations Différentielles</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Définitions et concepts de base</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Qu'est-ce qu'une équation différentielle ?</h4>
+                    <div class="concept-card">
+                        <p>Une <strong>équation différentielle</strong> est une équation qui relie une fonction inconnue à ses dérivées.</p>
+                        
+                        <p>Formellement, une équation différentielle d'ordre n s'écrit sous la forme :</p>
+                        <div class="formula-box">
+                            <p>F(x, y, y', y'', ..., y<sup>(n)</sup>) = 0</p>
+                        </div>
+                        <p>où y est la fonction inconnue, y' sa dérivée première, y'' sa dérivée seconde, etc.</p>
+                        
+                        <p>L'<strong>ordre</strong> d'une équation différentielle est l'ordre de la dérivée la plus élevée qui y figure.</p>
+                        
+                        <div class="important-note">
+                            <p>Une <strong>solution</strong> d'une équation différentielle est une fonction qui, lorsqu'elle est substituée à la fonction inconnue, satisfait l'équation pour toutes les valeurs de la variable dans un certain domaine.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples d'équations différentielles</h5>
+                        <div class="example">
+                            <p>y' = 2x (équation différentielle du premier ordre)</p>
+                        </div>
+                        <div class="example">
+                            <p>y'' + 4y = 0 (équation différentielle du second ordre)</p>
+                        </div>
+                        <div class="example">
+                            <p>y' = y (équation différentielle du premier ordre dont la solution est y = Ce<sup>x</sup>)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Classification des équations différentielles</h4>
+                    <div class="concept-card">
+                        <p>On distingue plusieurs types d'équations différentielles :</p>
+                        
+                        <p><strong>Équations différentielles ordinaires (EDO)</strong> : elles ne font intervenir qu'une seule variable indépendante.</p>
+                        
+                        <p><strong>Équations différentielles linéaires</strong> : elles sont de la forme :</p>
+                        <div class="formula-box">
+                            <p>a<sub>n</sub>(x)y<sup>(n)</sup> + a<sub>n-1</sub>(x)y<sup>(n-1)</sup> + ... + a<sub>1</sub>(x)y' + a<sub>0</sub>(x)y = b(x)</p>
+                        </div>
+                        <p>où les a<sub>i</sub>(x) et b(x) sont des fonctions de x.</p>
+                        
+                        <p><strong>Équations différentielles à coefficients constants</strong> : équations linéaires où les a<sub>i</sub>(x) sont des constantes.</p>
+                        
+                        <p><strong>Équations différentielles homogènes</strong> : équations linéaires où b(x) = 0.</p>
+                        
+                        <p><strong>Équations différentielles non homogènes</strong> : équations linéaires où b(x) ≠ 0.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de classification</h5>
+                        <div class="example">
+                            <p>y'' + 3y' + 2y = 0 : équation linéaire homogène du second ordre à coefficients constants</p>
+                        </div>
+                        <div class="example">
+                            <p>y'' + y = sin(x) : équation linéaire non homogène du second ordre à coefficients constants</p>
+                        </div>
+                        <div class="example">
+                            <p>xy' + y = x<sup>2</sup> : équation linéaire non homogène du premier ordre à coefficients variables</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Problème de Cauchy</h4>
+                    <div class="concept-card">
+                        <p>Le <strong>problème de Cauchy</strong> consiste à trouver une solution d'une équation différentielle satisfaisant des conditions initiales données.</p>
+                        
+                        <p>Pour une équation d'ordre n, les conditions initiales sont généralement de la forme :</p>
+                        <div class="formula-box">
+                            <p>y(x<sub>0</sub>) = y<sub>0</sub>, y'(x<sub>0</sub>) = y<sub>1</sub>, ..., y<sup>(n-1)</sup>(x<sub>0</sub>) = y<sub>n-1</sub></p>
+                        </div>
+                        
+                        <p>Le théorème de Cauchy-Lipschitz garantit, sous certaines conditions, l'existence et l'unicité d'une solution au problème de Cauchy.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple de problème de Cauchy</h5>
+                        <div class="example">
+                            <p>Résoudre l'équation y' = 2x avec la condition initiale y(0) = 1.</p>
+                            <p>Solution : y = x<sup>2</sup> + 1</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Interprétation géométrique</h4>
+                    <div class="concept-card">
+                        <p>Une équation différentielle du premier ordre y' = f(x,y) peut être interprétée géométriquement comme définissant un <strong>champ de directions</strong> dans le plan.</p>
+                        
+                        <p>À chaque point (x,y) du plan, on associe la direction de pente f(x,y).</p>
+                        
+                        <p>Les solutions de l'équation différentielle sont alors les courbes qui, en chaque point, sont tangentes à la direction donnée par le champ.</p>
+                        
+                        <p>Ces courbes sont appelées <strong>courbes intégrales</strong> de l'équation différentielle.</p>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <h5>Champ de directions et courbes intégrales</h5>
+                        <div class="image-placeholder">
+                            <p>[Illustration d'un champ de directions et de quelques courbes intégrales]</p>
+                            <p>Champ de directions pour l'équation y' = y - x avec quelques courbes intégrales</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Déterminez l'ordre des équations différentielles suivantes :
+                                <br>a) y'' - 3y' + 2y = e<sup>x</sup>
+                                <br>b) (y')<sup>2</sup> + y = x
+                                <br>c) y''' + y' = sin(x)
+                            </div>
+                            <div class="practice-solution">
+                                <p>a) L'ordre est 2 car la dérivée la plus élevée est y''.</p>
+                                <p>b) L'ordre est 1 car la dérivée la plus élevée est y' (même si elle est au carré).</p>
+                                <p>c) L'ordre est 3 car la dérivée la plus élevée est y'''.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Vérifiez si la fonction y = e<sup>2x</sup> est solution de l'équation différentielle y' - 2y = 0.</div>
+                            <div class="practice-solution">
+                                <p>Calculons y' = 2e<sup>2x</sup></p>
+                                <p>Substituons dans l'équation : y' - 2y = 2e<sup>2x</sup> - 2(e<sup>2x</sup>) = 2e<sup>2x</sup> - 2e<sup>2x</sup> = 0</p>
+                                <p>L'équation est vérifiée, donc y = e<sup>2x</sup> est bien une solution de l'équation différentielle.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Équations différentielles du premier ordre -->
+    <div class="method-section">
+        <h2>2. Équations Différentielles du Premier Ordre</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Équations linéaires du premier ordre</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Forme générale</h4>
+                    <div class="concept-card">
+                        <p>Une équation différentielle linéaire du premier ordre s'écrit sous la forme :</p>
+                        <div class="formula-box">
+                            <p>y' + a(x)y = b(x)</p>
+                        </div>
+                        <p>où a(x) et b(x) sont des fonctions continues sur un intervalle I.</p>
+                        
+                        <p>Si b(x) = 0, l'équation est dite <strong>homogène</strong> : y' + a(x)y = 0</p>
+                        <p>Si b(x) ≠ 0, l'équation est dite <strong>non homogène</strong> ou <strong>avec second membre</strong>.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Résolution de l'équation homogène</h4>
+                    <div class="concept-card">
+                        <p>Pour résoudre l'équation homogène y' + a(x)y = 0 :</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Réarranger l'équation</h5>
+                                    <p>y' = -a(x)y</p>
+                                    <p>dy/dx = -a(x)y</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Séparer les variables</h5>
+                                    <p>dy/y = -a(x)dx</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Intégrer les deux membres</h5>
+                                    <p>∫(dy/y) = -∫a(x)dx</p>
+                                    <p>ln|y| = -∫a(x)dx + C</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Exprimer y</h5>
+                                    <p>y = K·e<sup>-∫a(x)dx</sup></p>
+                                    <p>où K est une constante réelle arbitraire.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="important-note">
+                            <p>La solution générale de l'équation homogène y' + a(x)y = 0 est :</p>
+                            <p>y<sub>h</sub>(x) = K·e<sup>-∫a(x)dx</sup></p>
+                            <p>où K est une constante réelle.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Équation homogène</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y' + 2y = 0</p>
+                            <p>Ici, a(x) = 2 (constante)</p>
+                            <p>La solution générale est y<sub>h</sub>(x) = K·e<sup>-∫2dx</sup> = K·e<sup>-2x</sup></p>
+                            <p>où K est une constante réelle.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Résolution de l'équation non homogène</h4>
+                    <div class="concept-card">
+                        <p>Pour résoudre l'équation non homogène y' + a(x)y = b(x), on utilise la méthode de <strong>variation de la constante</strong> :</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Résoudre l'équation homogène associée</h5>
+                                    <p>Trouver y<sub>h</sub>(x) = K·e<sup>-∫a(x)dx</sup></p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Chercher une solution particulière</h5>
+                                    <p>On cherche une solution de la forme y<sub>p</sub>(x) = v(x)·e<sup>-∫a(x)dx</sup></p>
+                                    <p>où v(x) est une fonction à déterminer.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Déterminer v(x)</h5>
+                                    <p>En substituant y<sub>p</sub>(x) dans l'équation originale, on trouve :</p>
+                                    <p>v'(x) = b(x)·e<sup>∫a(x)dx</sup></p>
+                                    <p>Donc v(x) = ∫b(x)·e<sup>∫a(x)dx</sup>dx + C</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Exprimer la solution générale</h5>
+                                    <p>y(x) = y<sub>h</sub>(x) + y<sub>p</sub>(x) = K·e<sup>-∫a(x)dx</sup> + e<sup>-∫a(x)dx</sup>·∫b(x)·e<sup>∫a(x)dx</sup>dx</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="important-note">
+                            <p>La solution générale de l'équation non homogène y' + a(x)y = b(x) est :</p>
+                            <p>y(x) = K·e<sup>-∫a(x)dx</sup> + e<sup>-∫a(x)dx</sup>·∫b(x)·e<sup>∫a(x)dx</sup>dx</p>
+                            <p>où K est une constante réelle.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Équation non homogène</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y' + 2y = 4x</p>
+                            <p>Ici, a(x) = 2 et b(x) = 4x</p>
+                            
+                            <p>1. Solution de l'équation homogène : y<sub>h</sub>(x) = K·e<sup>-2x</sup></p>
+                            
+                            <p>2. Cherchons une solution particulière :</p>
+                            <p>v'(x) = 4x·e<sup>2x</sup></p>
+                            <p>v(x) = ∫4x·e<sup>2x</sup>dx</p>
+                            <p>En utilisant l'intégration par parties :</p>
+                            <p>v(x) = 2x·e<sup>2x</sup> - ∫2·e<sup>2x</sup>dx = 2x·e<sup>2x</sup> - e<sup>2x</sup> + C</p>
+                            
+                            <p>3. Solution particulière :</p>
+                            <p>y<sub>p</sub>(x) = e<sup>-2x</sup>·(2x·e<sup>2x</sup> - e<sup>2x</sup>) = 2x - 1</p>
+                            
+                            <p>4. Solution générale :</p>
+                            <p>y(x) = K·e<sup>-2x</sup> + 2x - 1</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Cas particulier : équation à variables séparables</h4>
+                    <div class="concept-card">
+                        <p>Une équation différentielle à variables séparables est de la forme :</p>
+                        <div class="formula-box">
+                            <p>y' = f(x)g(y)</p>
+                        </div>
+                        <p>où f est une fonction de x et g est une fonction de y.</p>
+                        
+                        <p>Pour résoudre ce type d'équation :</p>
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Réarranger l'équation</h5>
+                                    <p>dy/dx = f(x)g(y)</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Séparer les variables</h5>
+                                    <p>dy/g(y) = f(x)dx</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Intégrer les deux membres</h5>
+                                    <p>∫(dy/g(y)) = ∫f(x)dx</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Résoudre pour y</h5>
+                                    <p>Exprimer y en fonction de x si possible</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Équation à variables séparables</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y' = xy</p>
+                            <p>Cette équation peut s'écrire dy/dx = xy</p>
+                            
+                            <p>1. Séparons les variables :</p>
+                            <p>dy/y = x·dx</p>
+                            
+                            <p>2. Intégrons les deux membres :</p>
+                            <p>∫(dy/y) = ∫x·dx</p>
+                            <p>ln|y| = x²/2 + C</p>
+                            
+                            <p>3. Exprimons y :</p>
+                            <p>y = K·e<sup>x²/2</sup></p>
+                            <p>où K est une constante réelle.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Résolvez l'équation différentielle y' + 3y = 0.</div>
+                            <div class="practice-solution">
+                                <p>C'est une équation homogène avec a(x) = 3.</p>
+                                <p>La solution générale est y(x) = K·e<sup>-∫3dx</sup> = K·e<sup>-3x</sup></p>
+                                <p>où K est une constante réelle.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Résolvez l'équation différentielle y' + y = e<sup>x</sup>.</div>
+                            <div class="practice-solution">
+                                <p>C'est une équation non homogène avec a(x) = 1 et b(x) = e<sup>x</sup>.</p>
+                                
+                                <p>1. Solution de l'équation homogène : y<sub>h</sub>(x) = K·e<sup>-x</sup></p>
+                                
+                                <p>2. Cherchons une solution particulière :</p>
+                                <p>v'(x) = e<sup>x</sup>·e<sup>x</sup> = e<sup>2x</sup></p>
+                                <p>v(x) = ∫e<sup>2x</sup>dx = e<sup>2x</sup>/2 + C</p>
+                                
+                                <p>3. Solution particulière :</p>
+                                <p>y<sub>p</sub>(x) = e<sup>-x</sup>·(e<sup>2x</sup>/2) = e<sup>x</sup>/2</p>
+                                
+                                <p>4. Solution générale :</p>
+                                <p>y(x) = K·e<sup>-x</sup> + e<sup>x</sup>/2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Équations différentielles du second ordre -->
+    <div class="method-section">
+        <h2>3. Équations Différentielles du Second Ordre</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Équations linéaires à coefficients constants</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Forme générale</h4>
+                    <div class="concept-card">
+                        <p>Une équation différentielle linéaire du second ordre à coefficients constants s'écrit sous la forme :</p>
+                        <div class="formula-box">
+                            <p>ay'' + by' + cy = f(x)</p>
+                        </div>
+                        <p>où a, b et c sont des constantes réelles (avec a ≠ 0) et f est une fonction continue.</p>
+                        
+                        <p>Si f(x) = 0, l'équation est dite <strong>homogène</strong> : ay'' + by' + cy = 0</p>
+                        <p>Si f(x) ≠ 0, l'équation est dite <strong>non homogène</strong> ou <strong>avec second membre</strong>.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Résolution de l'équation homogène</h4>
+                    <div class="concept-card">
+                        <p>Pour résoudre l'équation homogène ay'' + by' + cy = 0, on utilise l'<strong>équation caractéristique</strong> :</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Former l'équation caractéristique</h5>
+                                    <p>ar² + br + c = 0</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Calculer le discriminant</h5>
+                                    <p>Δ = b² - 4ac</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Déterminer les racines</h5>
+                                    <p>r₁ et r₂ sont les racines de l'équation caractéristique.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Écrire la solution générale</h5>
+                                    <p>La forme de la solution dépend de la nature des racines.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>La solution générale dépend de la nature des racines de l'équation caractéristique :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Cas</div>
+                                <div class="summary-cell">Solution générale</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Δ > 0 (racines réelles distinctes r₁ et r₂)</div>
+                                <div class="summary-cell">y(x) = C₁e<sup>r₁x</sup> + C₂e<sup>r₂x</sup></div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Δ = 0 (racine réelle double r = -b/2a)</div>
+                                <div class="summary-cell">y(x) = (C₁ + C₂x)e<sup>rx</sup></div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Δ < 0 (racines complexes conjuguées r = α ± iβ)</div>
+                                <div class="summary-cell">y(x) = e<sup>αx</sup>(C₁cos(βx) + C₂sin(βx))</div>
+                            </div>
+                        </div>
+                        
+                        <p>où C₁ et C₂ sont des constantes réelles arbitraires.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple 1 : Racines réelles distinctes</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y'' - 3y' + 2y = 0</p>
+                            
+                            <p>1. Équation caractéristique : r² - 3r + 2 = 0</p>
+                            
+                            <p>2. Discriminant : Δ = (-3)² - 4×1×2 = 9 - 8 = 1 > 0</p>
+                            
+                            <p>3. Racines : r₁ = (3 + 1)/2 = 2 et r₂ = (3 - 1)/2 = 1</p>
+                            
+                            <p>4. Solution générale : y(x) = C₁e<sup>2x</sup> + C₂e<sup>x</sup></p>
+                        </div>
+                        
+                        <h5>Exemple 2 : Racine réelle double</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y'' + 4y' + 4y = 0</p>
+                            
+                            <p>1. Équation caractéristique : r² + 4r + 4 = 0</p>
+                            
+                            <p>2. Discriminant : Δ = 4² - 4×1×4 = 16 - 16 = 0</p>
+                            
+                            <p>3. Racine double : r = -4/2 = -2</p>
+                            
+                            <p>4. Solution générale : y(x) = (C₁ + C₂x)e<sup>-2x</sup></p>
+                        </div>
+                        
+                        <h5>Exemple 3 : Racines complexes conjuguées</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y'' + y = 0</p>
+                            
+                            <p>1. Équation caractéristique : r² + 1 = 0</p>
+                            
+                            <p>2. Discriminant : Δ = 0² - 4×1×1 = -4 < 0</p>
+                            
+                            <p>3. Racines complexes : r = ±i (α = 0, β = 1)</p>
+                            
+                            <p>4. Solution générale : y(x) = e<sup>0x</sup>(C₁cos(x) + C₂sin(x)) = C₁cos(x) + C₂sin(x)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Résolution de l'équation non homogène</h4>
+                    <div class="concept-card">
+                        <p>Pour résoudre l'équation non homogène ay'' + by' + cy = f(x), on utilise le principe de superposition :</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Résoudre l'équation homogène associée</h5>
+                                    <p>Trouver la solution générale y<sub>h</sub>(x) de ay'' + by' + cy = 0</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Trouver une solution particulière</h5>
+                                    <p>Déterminer une solution particulière y<sub>p</sub>(x) de l'équation complète</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Former la solution générale</h5>
+                                    <p>y(x) = y<sub>h</sub>(x) + y<sub>p</sub>(x)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>Pour trouver une solution particulière, on peut utiliser :</p>
+                        <ul>
+                            <li>La <strong>méthode de variation des constantes</strong></li>
+                            <li>La <strong>méthode des coefficients indéterminés</strong> (pour certaines formes de f(x))</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>Méthode des coefficients indéterminés</h5>
+                        <p>Cette méthode s'applique lorsque f(x) est une combinaison linéaire de fonctions du type :</p>
+                        <ul>
+                            <li>Polynômes : x<sup>n</sup></li>
+                            <li>Exponentielles : e<sup>αx</sup></li>
+                            <li>Sinus et cosinus : sin(βx), cos(βx)</li>
+                            <li>Produits des types précédents</li>
+                        </ul>
+                        
+                        <p>On cherche une solution particulière de la même forme que f(x), avec des coefficients à déterminer.</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Forme de f(x)</div>
+                                <div class="summary-cell">Forme de y<sub>p</sub>(x)</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Polynôme de degré n : P<sub>n</sub>(x)</div>
+                                <div class="summary-cell">Polynôme de degré n : Q<sub>n</sub>(x)</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">e<sup>αx</sup></div>
+                                <div class="summary-cell">A·e<sup>αx</sup></div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">sin(βx) ou cos(βx)</div>
+                                <div class="summary-cell">A·sin(βx) + B·cos(βx)</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">x<sup>n</sup>e<sup>αx</sup></div>
+                                <div class="summary-cell">Polynôme de degré n en x multiplié par e<sup>αx</sup></div>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Attention :</strong> Si la forme proposée pour y<sub>p</sub>(x) est déjà solution de l'équation homogène, il faut la multiplier par x (ou par x² si nécessaire).</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple 1 : Second membre polynomial</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y'' - y = x</p>
+                            
+                            <p>1. Équation homogène : y'' - y = 0</p>
+                            <p>Équation caractéristique : r² - 1 = 0</p>
+                            <p>Racines : r₁ = 1, r₂ = -1</p>
+                            <p>Solution homogène : y<sub>h</sub>(x) = C₁e<sup>x</sup> + C₂e<sup>-x</sup></p>
+                            
+                            <p>2. Solution particulière : Comme f(x) = x est un polynôme de degré 1, on cherche y<sub>p</sub>(x) = Ax + B</p>
+                            <p>y<sub>p</sub>'(x) = A</p>
+                            <p>y<sub>p</sub>''(x) = 0</p>
+                            <p>En substituant dans l'équation : 0 - (Ax + B) = x</p>
+                            <p>-Ax - B = x</p>
+                            <p>En identifiant les coefficients : -A = 1 et -B = 0</p>
+                            <p>Donc A = -1 et B = 0</p>
+                            <p>Solution particulière : y<sub>p</sub>(x) = -x</p>
+                            
+                            <p>3. Solution générale : y(x) = C₁e<sup>x</sup> + C₂e<sup>-x</sup> - x</p>
+                        </div>
+                        
+                        <h5>Exemple 2 : Second membre exponentiel</h5>
+                        <div class="example">
+                            <p>Résolvons l'équation y'' - 4y = e<sup>2x</sup></p>
+                            
+                            <p>1. Équation homogène : y'' - 4y = 0</p>
+                            <p>Équation caractéristique : r² - 4 = 0</p>
+                            <p>Racines : r₁ = 2, r₂ = -2</p>
+                            <p>Solution homogène : y<sub>h</sub>(x) = C₁e<sup>2x</sup> + C₂e<sup>-2x</sup></p>
+                            
+                            <p>2. Solution particulière : Comme f(x) = e<sup>2x</sup> et e<sup>2x</sup> est déjà solution de l'équation homogène, on cherche y<sub>p</sub>(x) = Axe<sup>2x</sup></p>
+                            <p>y<sub>p</sub>'(x) = A(e<sup>2x</sup> + 2xe<sup>2x</sup>) = Ae<sup>2x</sup>(1 + 2x)</p>
+                            <p>y<sub>p</sub>''(x) = A(2e<sup>2x</sup> + 2e<sup>2x</sup> + 4xe<sup>2x</sup>) = Ae<sup>2x</sup>(4 + 4x)</p>
+                            <p>En substituant dans l'équation : Ae<sup>2x</sup>(4 + 4x) - 4Axe<sup>2x</sup> = e<sup>2x</sup></p>
+                            <p>Ae<sup>2x</sup>(4 + 4x - 4x) = e<sup>2x</sup></p>
+                            <p>4Ae<sup>2x</sup> = e<sup>2x</sup></p>
+                            <p>Donc A = 1/4</p>
+                            <p>Solution particulière : y<sub>p</sub>(x) = (1/4)xe<sup>2x</sup></p>
+                            
+                            <p>3. Solution générale : y(x) = C₁e<sup>2x</sup> + C₂e<sup>-2x</sup> + (1/4)xe<sup>2x</sup></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Résolvez l'équation différentielle y'' + 4y = 0.</div>
+                            <div class="practice-solution">
+                                <p>Équation caractéristique : r² + 4 = 0</p>
+                                <p>Discriminant : Δ = 0² - 4×1×4 = -16 < 0</p>
+                                <p>Racines complexes : r = ±2i (α = 0, β = 2)</p>
+                                <p>Solution générale : y(x) = C₁cos(2x) + C₂sin(2x)</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Résolvez l'équation différentielle y'' - 2y' + y = e<sup>x</sup>.</div>
+                            <div class="practice-solution">
+                                <p>1. Équation homogène : y'' - 2y' + y = 0</p>
+                                <p>Équation caractéristique : r² - 2r + 1 = 0</p>
+                                <p>Discriminant : Δ = (-2)² - 4×1×1 = 4 - 4 = 0</p>
+                                <p>Racine double : r = 1</p>
+                                <p>Solution homogène : y<sub>h</sub>(x) = (C₁ + C₂x)e<sup>x</sup></p>
+                                
+                                <p>2. Solution particulière : Comme f(x) = e<sup>x</sup> et e<sup>x</sup> est déjà solution de l'équation homogène (et xe<sup>x</sup> aussi), on cherche y<sub>p</sub>(x) = Ax²e<sup>x</sup></p>
+                                <p>En substituant dans l'équation et en résolvant, on trouve A = 1/2</p>
+                                <p>Solution particulière : y<sub>p</sub>(x) = (1/2)x²e<sup>x</sup></p>
+                                
+                                <p>3. Solution générale : y(x) = (C₁ + C₂x)e<sup>x</sup> + (1/2)x²e<sup>x</sup></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications des équations différentielles -->
+    <div class="method-section">
+        <h2>4. Applications des Équations Différentielles</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Modélisation de phénomènes physiques</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Circuits électriques</h4>
+                    <div class="concept-card">
+                        <p>Les équations différentielles sont fondamentales pour l'étude des circuits électriques :</p>
+                        
+                        <p><strong>Circuit RC (résistance-condensateur) :</strong></p>
+                        <p>L'équation différentielle régissant la charge q(t) du condensateur est :</p>
+                        <div class="formula-box">
+                            <p>RC(dq/dt) + q = E</p>
+                        </div>
+                        <p>où R est la résistance, C la capacité et E la force électromotrice.</p>
+                        
+                        <p><strong>Circuit RL (résistance-inductance) :</strong></p>
+                        <p>L'équation différentielle régissant l'intensité i(t) du courant est :</p>
+                        <div class="formula-box">
+                            <p>L(di/dt) + Ri = E</p>
+                        </div>
+                        <p>où L est l'inductance, R la résistance et E la force électromotrice.</p>
+                        
+                        <p><strong>Circuit RLC (résistance-inductance-condensateur) :</strong></p>
+                        <p>L'équation différentielle régissant la charge q(t) du condensateur est :</p>
+                        <div class="formula-box">
+                            <p>LC(d²q/dt²) + RC(dq/dt) + q = E</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Décharge d'un condensateur</h5>
+                        <div class="example">
+                            <p>Un condensateur de capacité C = 10<sup>-6</sup> F est chargé à une tension U₀ = 12 V, puis se décharge à travers une résistance R = 10⁶ Ω. Déterminons l'expression de la tension u(t) aux bornes du condensateur en fonction du temps.</p>
+                            
+                            <p>L'équation différentielle est : RC(du/dt) + u = 0</p>
+                            <p>Soit : 10⁶ × 10<sup>-6</sup> × (du/dt) + u = 0</p>
+                            <p>(du/dt) + u = 0</p>
+                            
+                            <p>C'est une équation différentielle du premier ordre homogène.</p>
+                            <p>La solution générale est : u(t) = Ke<sup>-t</sup></p>
+                            
+                            <p>Avec la condition initiale u(0) = 12 V :</p>
+                            <p>12 = Ke<sup>0</sup> = K</p>
+                            
+                            <p>Donc : u(t) = 12e<sup>-t</sup> volts</p>
+                            
+                            <p>La tension décroît exponentiellement avec une constante de temps τ = RC = 1 seconde.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Mécanique</h4>
+                    <div class="concept-card">
+                        <p>Les équations différentielles sont essentielles en mécanique pour décrire le mouvement des corps :</p>
+                        
+                        <p><strong>Chute libre avec frottement proportionnel à la vitesse :</strong></p>
+                        <p>L'équation différentielle régissant la vitesse v(t) est :</p>
+                        <div class="formula-box">
+                            <p>m(dv/dt) = mg - kv</p>
+                        </div>
+                        <p>où m est la masse, g l'accélération de la pesanteur et k le coefficient de frottement.</p>
+                        
+                        <p><strong>Oscillateur harmonique :</strong></p>
+                        <p>L'équation différentielle régissant la position x(t) est :</p>
+                        <div class="formula-box">
+                            <p>m(d²x/dt²) + kx = 0</p>
+                        </div>
+                        <p>où m est la masse et k la constante de raideur du ressort.</p>
+                        
+                        <p><strong>Oscillateur harmonique amorti :</strong></p>
+                        <p>L'équation différentielle régissant la position x(t) est :</p>
+                        <div class="formula-box">
+                            <p>m(d²x/dt²) + c(dx/dt) + kx = 0</p>
+                        </div>
+                        <p>où c est le coefficient d'amortissement.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Oscillateur harmonique</h5>
+                        <div class="example">
+                            <p>Une masse m = 0,1 kg est attachée à un ressort de constante de raideur k = 4 N/m. La masse est écartée de 5 cm de sa position d'équilibre et lâchée sans vitesse initiale. Déterminons le mouvement de la masse.</p>
+                            
+                            <p>L'équation différentielle est : m(d²x/dt²) + kx = 0</p>
+                            <p>Soit : 0,1 × (d²x/dt²) + 4x = 0</p>
+                            <p>(d²x/dt²) + 40x = 0</p>
+                            
+                            <p>C'est une équation différentielle du second ordre homogène.</p>
+                            <p>Équation caractéristique : r² + 40 = 0</p>
+                            <p>Racines : r = ±i√40 = ±i2√10</p>
+                            
+                            <p>La solution générale est : x(t) = C₁cos(2√10 t) + C₂sin(2√10 t)</p>
+                            
+                            <p>Avec les conditions initiales x(0) = 0,05 m et x'(0) = 0 :</p>
+                            <p>x(0) = C₁ = 0,05</p>
+                            <p>x'(0) = 2√10 × C₂ = 0, donc C₂ = 0</p>
+                            
+                            <p>Donc : x(t) = 0,05 × cos(2√10 t) mètres</p>
+                            
+                            <p>La masse oscille avec une amplitude de 5 cm et une période T = 2π/(2√10) = π/√10 ≈ 0,99 seconde.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Autres applications</h4>
+                    <div class="concept-card">
+                        <p>Les équations différentielles sont utilisées dans de nombreux autres domaines :</p>
+                        
+                        <p><strong>Croissance de populations :</strong></p>
+                        <p>L'équation différentielle de Malthus pour une population P(t) est :</p>
+                        <div class="formula-box">
+                            <p>dP/dt = kP</p>
+                        </div>
+                        <p>où k est le taux de croissance.</p>
+                        
+                        <p>L'équation logistique, plus réaliste, est :</p>
+                        <div class="formula-box">
+                            <p>dP/dt = kP(1 - P/M)</p>
+                        </div>
+                        <p>où M est la capacité maximale du milieu.</p>
+                        
+                        <p><strong>Réactions chimiques :</strong></p>
+                        <p>Pour une réaction du premier ordre, la concentration C(t) suit :</p>
+                        <div class="formula-box">
+                            <p>dC/dt = -kC</p>
+                        </div>
+                        <p>où k est la constante de vitesse de la réaction.</p>
+                        
+                        <p><strong>Transfert de chaleur :</strong></p>
+                        <p>La loi de refroidissement de Newton pour la température T(t) d'un corps est :</p>
+                        <div class="formula-box">
+                            <p>dT/dt = -k(T - T<sub>a</sub>)</p>
+                        </div>
+                        <p>où T<sub>a</sub> est la température ambiante et k une constante.</p>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Croissance d'une population</h5>
+                        <div class="example">
+                            <p>Une population de bactéries croît selon la loi de Malthus avec un taux de croissance k = 0,1 h<sup>-1</sup>. Si la population initiale est de 1000 bactéries, combien y aura-t-il de bactéries après 10 heures ?</p>
+                            
+                            <p>L'équation différentielle est : dP/dt = 0,1P</p>
+                            
+                            <p>C'est une équation différentielle du premier ordre à variables séparables.</p>
+                            <p>La solution générale est : P(t) = Ce<sup>0,1t</sup></p>
+                            
+                            <p>Avec la condition initiale P(0) = 1000 :</p>
+                            <p>1000 = Ce<sup>0</sup> = C</p>
+                            
+                            <p>Donc : P(t) = 1000e<sup>0,1t</sup></p>
+                            
+                            <p>Après 10 heures : P(10) = 1000e<sup>0,1×10</sup> = 1000e<sup>1</sup> = 1000 × 2,72 ≈ 2720 bactéries</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Un condensateur de capacité C = 2×10<sup>-6</sup> F se charge à travers une résistance R = 5×10⁵ Ω sous une tension constante E = 9 V. Si la charge initiale est nulle, déterminez l'expression de la charge q(t) en fonction du temps.</div>
+                            <div class="practice-solution">
+                                <p>L'équation différentielle est : RC(dq/dt) + q = CE</p>
+                                <p>Soit : 5×10⁵ × 2×10<sup>-6</sup> × (dq/dt) + q = 2×10<sup>-6</sup> × 9</p>
+                                <p>1 × (dq/dt) + q = 18×10<sup>-6</sup></p>
+                                
+                                <p>C'est une équation différentielle du premier ordre non homogène.</p>
+                                <p>La solution générale est : q(t) = Ke<sup>-t</sup> + 18×10<sup>-6</sup></p>
+                                
+                                <p>Avec la condition initiale q(0) = 0 :</p>
+                                <p>0 = Ke<sup>0</sup> + 18×10<sup>-6</sup></p>
+                                <p>K = -18×10<sup>-6</sup></p>
+                                
+                                <p>Donc : q(t) = 18×10<sup>-6</sup>(1 - e<sup>-t</sup>) coulombs</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Un pendule simple de longueur L = 1 m oscille avec de petites amplitudes. Sachant que g = 9,8 m/s², déterminez l'équation du mouvement et la période des oscillations.</div>
+                            <div class="practice-solution">
+                                <p>Pour de petites oscillations, l'équation différentielle du pendule est : d²θ/dt² + (g/L)θ = 0</p>
+                                <p>Soit : d²θ/dt² + 9,8θ = 0</p>
+                                
+                                <p>C'est une équation différentielle du second ordre homogène.</p>
+                                <p>Équation caractéristique : r² + 9,8 = 0</p>
+                                <p>Racines : r = ±i√9,8 = ±i3,13</p>
+                                
+                                <p>La solution générale est : θ(t) = C₁cos(3,13t) + C₂sin(3,13t)</p>
+                                
+                                <p>La période des oscillations est : T = 2π/3,13 ≈ 2 secondes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Méthodes numériques -->
+    <div class="method-section">
+        <h2>5. Méthodes Numériques</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Approximation des solutions</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Pourquoi utiliser des méthodes numériques ?</h4>
+                    <div class="concept-card">
+                        <p>De nombreuses équations différentielles ne peuvent pas être résolues analytiquement, c'est-à-dire qu'on ne peut pas trouver une expression explicite de la solution. Dans ces cas, on recourt à des méthodes numériques pour approximer la solution.</p>
+                        
+                        <p>Les méthodes numériques sont également utiles lorsque :</p>
+                        <ul>
+                            <li>L'équation différentielle est trop complexe</li>
+                            <li>On s'intéresse seulement à la solution sur un intervalle spécifique</li>
+                            <li>On veut visualiser graphiquement le comportement de la solution</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Méthode d'Euler</h4>
+                    <div class="concept-card">
+                        <p>La <strong>méthode d'Euler</strong> est l'une des plus simples pour résoudre numériquement une équation différentielle du premier ordre :</p>
+                        <div class="formula-box">
+                            <p>y' = f(x, y)</p>
+                            <p>avec la condition initiale y(x₀) = y₀</p>
+                        </div>
+                        
+                        <p>Principe de la méthode :</p>
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Diviser l'intervalle</h5>
+                                    <p>On divise l'intervalle [x₀, x<sub>final</sub>] en n sous-intervalles de longueur h = (x<sub>final</sub> - x₀)/n</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Initialiser</h5>
+                                    <p>On part du point (x₀, y₀)</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Itérer</h5>
+                                    <p>Pour i = 0, 1, 2, ..., n-1 :</p>
+                                    <p>x<sub>i+1</sub> = x<sub>i</sub> + h</p>
+                                    <p>y<sub>i+1</sub> = y<sub>i</sub> + h × f(x<sub>i</sub>, y<sub>i</sub>)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>La méthode d'Euler approxime la solution en utilisant la tangente à la courbe solution au point (x<sub>i</sub>, y<sub>i</sub>) pour estimer la valeur de y<sub>i+1</sub>.</p>
+                        
+                        <div class="important-note">
+                            <p>La méthode d'Euler est simple mais peu précise. L'erreur est proportionnelle au pas h. Pour améliorer la précision, on peut :</p>
+                            <ul>
+                                <li>Réduire le pas h (mais cela augmente le nombre de calculs)</li>
+                                <li>Utiliser des méthodes plus sophistiquées (Runge-Kutta, etc.)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Application de la méthode d'Euler</h5>
+                        <div class="example">
+                            <p>Approximons la solution de l'équation différentielle y' = y avec la condition initiale y(0) = 1 sur l'intervalle [0, 1] en utilisant la méthode d'Euler avec n = 4 pas.</p>
+                            
+                            <p>Ici, f(x, y) = y, x₀ = 0, y₀ = 1, et h = (1 - 0)/4 = 0,25</p>
+                            
+                            <p>Itération 1 :</p>
+                            <p>x₁ = x₀ + h = 0 + 0,25 = 0,25</p>
+                            <p>y₁ = y₀ + h × f(x₀, y₀) = 1 + 0,25 × 1 = 1,25</p>
+                            
+                            <p>Itération 2 :</p>
+                            <p>x₂ = x₁ + h = 0,25 + 0,25 = 0,5</p>
+                            <p>y₂ = y₁ + h × f(x₁, y₁) = 1,25 + 0,25 × 1,25 = 1,5625</p>
+                            
+                            <p>Itération 3 :</p>
+                            <p>x₃ = x₂ + h = 0,5 + 0,25 = 0,75</p>
+                            <p>y₃ = y₂ + h × f(x₂, y₂) = 1,5625 + 0,25 × 1,5625 = 1,953125</p>
+                            
+                            <p>Itération 4 :</p>
+                            <p>x₄ = x₃ + h = 0,75 + 0,25 = 1</p>
+                            <p>y₄ = y₃ + h × f(x₃, y₃) = 1,953125 + 0,25 × 1,953125 = 2,44140625</p>
+                            
+                            <p>La solution approximative en x = 1 est donc y(1) ≈ 2,44</p>
+                            <p>La solution exacte est y(x) = e<sup>x</sup>, donc y(1) = e ≈ 2,718</p>
+                            <p>L'erreur est d'environ 0,28, soit environ 10%.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Méthode de Runge-Kutta</h4>
+                    <div class="concept-card">
+                        <p>La <strong>méthode de Runge-Kutta d'ordre 4</strong> (RK4) est beaucoup plus précise que la méthode d'Euler. Elle approxime la solution en utilisant une moyenne pondérée de quatre évaluations de la fonction f(x, y) à différents points.</p>
+                        
+                        <p>Pour l'équation y' = f(x, y) avec la condition initiale y(x₀) = y₀ :</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Diviser l'intervalle</h5>
+                                    <p>On divise l'intervalle [x₀, x<sub>final</sub>] en n sous-intervalles de longueur h = (x<sub>final</sub> - x₀)/n</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Initialiser</h5>
+                                    <p>On part du point (x₀, y₀)</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Itérer</h5>
+                                    <p>Pour i = 0, 1, 2, ..., n-1 :</p>
+                                    <p>k₁ = f(x<sub>i</sub>, y<sub>i</sub>)</p>
+                                    <p>k₂ = f(x<sub>i</sub> + h/2, y<sub>i</sub> + h×k₁/2)</p>
+                                    <p>k₃ = f(x<sub>i</sub> + h/2, y<sub>i</sub> + h×k₂/2)</p>
+                                    <p>k₄ = f(x<sub>i</sub> + h, y<sub>i</sub> + h×k₃)</p>
+                                    <p>y<sub>i+1</sub> = y<sub>i</sub> + h×(k₁ + 2k₂ + 2k₃ + k₄)/6</p>
+                                    <p>x<sub>i+1</sub> = x<sub>i</sub> + h</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="important-note">
+                            <p>La méthode RK4 est beaucoup plus précise que la méthode d'Euler. L'erreur est proportionnelle à h⁴, ce qui signifie qu'en divisant le pas par 2, on divise l'erreur par environ 16.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Comparaison des méthodes</h5>
+                        <div class="example">
+                            <p>Comparons les approximations de la solution de l'équation y' = y avec y(0) = 1 en x = 1, en utilisant différentes méthodes et différents pas.</p>
+                            
+                            <div class="summary-table">
+                                <div class="summary-row header">
+                                    <div class="summary-cell">Méthode</div>
+                                    <div class="summary-cell">Nombre de pas</div>
+                                    <div class="summary-cell">Approximation de y(1)</div>
+                                    <div class="summary-cell">Erreur</div>
+                                </div>
+                                <div class="summary-row">
+                                    <div class="summary-cell">Euler</div>
+                                    <div class="summary-cell">4</div>
+                                    <div class="summary-cell">2,44</div>
+                                    <div class="summary-cell">0,28 (10%)</div>
+                                </div>
+                                <div class="summary-row">
+                                    <div class="summary-cell">Euler</div>
+                                    <div class="summary-cell">10</div>
+                                    <div class="summary-cell">2,59</div>
+                                    <div class="summary-cell">0,13 (5%)</div>
+                                </div>
+                                <div class="summary-row">
+                                    <div class="summary-cell">RK4</div>
+                                    <div class="summary-cell">4</div>
+                                    <div class="summary-cell">2,718</div>
+                                    <div class="summary-cell">0,0002 (0,01%)</div>
+                                </div>
+                            </div>
+                            
+                            <p>La méthode RK4 avec seulement 4 pas donne une approximation beaucoup plus précise que la méthode d'Euler avec 10 pas.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Utilisez la méthode d'Euler avec n = 2 pas pour approximer la solution de l'équation différentielle y' = -2y avec la condition initiale y(0) = 3 sur l'intervalle [0, 1].</div>
+                            <div class="practice-solution">
+                                <p>Ici, f(x, y) = -2y, x₀ = 0, y₀ = 3, et h = (1 - 0)/2 = 0,5</p>
+                                
+                                <p>Itération 1 :</p>
+                                <p>x₁ = x₀ + h = 0 + 0,5 = 0,5</p>
+                                <p>y₁ = y₀ + h × f(x₀, y₀) = 3 + 0,5 × (-2 × 3) = 3 - 3 = 0</p>
+                                
+                                <p>Itération 2 :</p>
+                                <p>x₂ = x₁ + h = 0,5 + 0,5 = 1</p>
+                                <p>y₂ = y₁ + h × f(x₁, y₁) = 0 + 0,5 × (-2 × 0) = 0</p>
+                                
+                                <p>La solution approximative en x = 1 est donc y(1) ≈ 0</p>
+                                <p>La solution exacte est y(x) = 3e<sup>-2x</sup>, donc y(1) = 3e<sup>-2</sup> ≈ 0,406</p>
+                                <p>L'erreur est d'environ 0,406, ce qui est significatif.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Utilisez la méthode d'Euler avec n = 4 pas pour approximer la solution de l'équation différentielle y' = x + y avec la condition initiale y(0) = 1 sur l'intervalle [0, 1].</div>
+                            <div class="practice-solution">
+                                <p>Ici, f(x, y) = x + y, x₀ = 0, y₀ = 1, et h = (1 - 0)/4 = 0,25</p>
+                                
+                                <p>Itération 1 :</p>
+                                <p>x₁ = x₀ + h = 0 + 0,25 = 0,25</p>
+                                <p>y₁ = y₀ + h × f(x₀, y₀) = 1 + 0,25 × (0 + 1) = 1 + 0,25 = 1,25</p>
+                                
+                                <p>Itération 2 :</p>
+                                <p>x₂ = x₁ + h = 0,25 + 0,25 = 0,5</p>
+                                <p>y₂ = y₁ + h × f(x₁, y₁) = 1,25 + 0,25 × (0,25 + 1,25) = 1,25 + 0,25 × 1,5 = 1,25 + 0,375 = 1,625</p>
+                                
+                                <p>Itération 3 :</p>
+                                <p>x₃ = x₂ + h = 0,5 + 0,25 = 0,75</p>
+                                <p>y₃ = y₂ + h × f(x₂, y₂) = 1,625 + 0,25 × (0,5 + 1,625) = 1,625 + 0,25 × 2,125 = 1,625 + 0,53125 = 2,15625</p>
+                                
+                                <p>Itération 4 :</p>
+                                <p>x₄ = x₃ + h = 0,75 + 0,25 = 1</p>
+                                <p>y₄ = y₃ + h × f(x₃, y₃) = 2,15625 + 0,25 × (0,75 + 2,15625) = 2,15625 + 0,25 × 2,90625 = 2,15625 + 0,7265625 = 2,8828125</p>
+                                
+                                <p>La solution approximative en x = 1 est donc y(1) ≈ 2,88</p>
+                                <p>La solution exacte est y(x) = 2e<sup>x</sup> - x - 1, donc y(1) = 2e - 1 - 1 = 2e - 2 ≈ 3,44</p>
+                                <p>L'erreur est d'environ 0,56, soit environ 16%.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="method-section">
+        <h2>Conclusion</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Synthèse et perspectives</h3>
+            </div>
+            <div class="method-content">
+                <div class="conclusion-box">
+                    <h4>Points clés à retenir</h4>
+                    <div class="key-points-grid">
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Équations du premier ordre</h5>
+                                <p>Les équations différentielles linéaires du premier ordre y' + a(x)y = b(x) se résolvent par la méthode de variation de la constante.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Équations du second ordre</h5>
+                                <p>Les équations différentielles linéaires du second ordre à coefficients constants ay'' + by' + cy = f(x) se résolvent en utilisant l'équation caractéristique et le principe de superposition.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Applications</h5>
+                                <p>Les équations différentielles modélisent de nombreux phénomènes physiques, biologiques et économiques, comme les circuits électriques, les oscillations mécaniques et la croissance de populations.</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📌</div>
+                            <div class="key-point-content">
+                                <h5>Méthodes numériques</h5>
+                                <p>Lorsqu'une solution analytique n'est pas accessible, on peut utiliser des méthodes numériques comme Euler ou Runge-Kutta pour approximer la solution.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Importance et applications</h4>
+                    <div class="concept-card">
+                        <p>Les équations différentielles constituent un outil mathématique fondamental avec de nombreuses applications :</p>
+                        <ul>
+                            <li>En physique : mécanique, électricité, thermodynamique</li>
+                            <li>En biologie : dynamique des populations, épidémiologie</li>
+                            <li>En économie : modèles de croissance, finance</li>
+                            <li>En ingénierie : contrôle, traitement du signal</li>
+                        </ul>
+                        <p>La maîtrise des équations différentielles ouvre la porte à une compréhension plus profonde de nombreux phénomènes et à la modélisation de systèmes complexes.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Extensions et perspectives</h4>
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">🔄</div>
+                            <h5>Systèmes d'équations</h5>
+                            <p>Étude des systèmes d'équations différentielles couplées pour modéliser des phénomènes plus complexes.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🌀</div>
+                            <h5>Équations aux dérivées partielles</h5>
+                            <p>Extension aux fonctions de plusieurs variables, comme l'équation de la chaleur ou l'équation d'onde.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧮</div>
+                            <h5>Analyse qualitative</h5>
+                            <p>Étude du comportement qualitatif des solutions sans les calculer explicitement.</p>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🔊</div>
+                            <h5>Modélisation avancée</h5>
+                            <p>Application à des modèles plus sophistiqués en sciences et en ingénierie.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <p>"Les équations différentielles sont le langage dans lequel sont écrites les lois de la nature." - Ian Stewart</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ressources -->
+    <div class="resources-section">
+        <h2>Pour approfondir</h2>
+        
+        <div class="resources-grid">
+            <div class="resource">
+                <div class="resource-icon">📚</div>
+                <div class="resource-content">
+                    <h4>Exercices complémentaires</h4>
+                    <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                    <div class="download-box">
+                        <a href="#" class="download-button">
+                            <span class="download-icon">📥</span>
+                            <span class="download-text">Exercices sur les équations différentielles</span>
+                        </a>
+                        <p class="download-info">PDF - 10 pages d'exercices avec corrigés</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🔍</div>
+                <div class="resource-content">
+                    <h4>Points à réviser</h4>
+                    <ul>
+                        <li>Les méthodes de résolution des équations différentielles du premier ordre</li>
+                        <li>L'utilisation de l'équation caractéristique pour les équations du second ordre</li>
+                        <li>La recherche de solutions particulières pour les équations non homogènes</li>
+                        <li>L'application des équations différentielles à des problèmes concrets</li>
+                        <li>Les principes des méthodes numériques d'approximation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🎯</div>
+                <div class="resource-content">
+                    <h4>Préparation à l'examen</h4>
+                    <p>Les équations différentielles sont un thème important du programme de Terminale S, souvent présent aux examens.</p>
+                    <p>Points d'attention pour l'examen :</p>
+                    <ul>
+                        <li>Maîtriser les différentes méthodes de résolution</li>
+                        <li>Savoir appliquer les conditions initiales pour déterminer les constantes d'intégration</li>
+                        <li>Être capable d'interpréter physiquement les solutions</li>
+                        <li>Connaître les applications classiques (circuits, oscillateurs, etc.)</li>
+                        <li>Savoir vérifier qu'une fonction est solution d'une équation différentielle</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resource">
+                <div class="resource-icon">🌐</div>
+                <div class="resource-content">
+                    <h4>Ressources en ligne</h4>
+                    <ul>
+                        <li><a href="#">Khan Academy : Cours sur les équations différentielles</a></li>
+                        <li><a href="#">Exo7 : Exercices corrigés sur les équations différentielles</a></li>
+                        <li><a href="#">Université en ligne : Simulations interactives d'équations différentielles</a></li>
+                        <li><a href="#">YouTube : Vidéos explicatives sur les applications physiques</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Variables pour les couleurs et les espacements */
+    
+    /* Styles spécifiques pour le discours rapporté */
+    .time-expression {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .time-expression:last-child {
+        border-bottom: none;
+    }
+    
+    .direct {
+        font-weight: 500;
+        color: var(--primary-color);
+    }
+    
+    .indirect {
+        font-style: italic;
+        color: var(--semi-modal-color);
+    }
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2980b9;
+        --accent-color: #e74c3c;
+        --success-color: #2ecc71;
+        --warning-color: #f39c12;
+        --background-light: #f8f9fa;
+        --background-medium: #edf2f7;
+        --text-color: #333;
+        --text-light: #f8f9fa;
+        --border-radius: 8px;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --spacing-sm: 10px;
+        --spacing-md: 20px;
+        --spacing-lg: 30px;
+        
+        /* Couleurs spécifiques */
+        --modal-color: #3498db;
+        --semi-modal-color: #9b59b6;
+        --negative-color: #e74c3c;
+        --neutral-color: #f39c12;
+        --positive-color: #2ecc71;
+    }
+    
+    /* Styles de base */
+    body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-light);
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* En-tête du cours */
+    .course-header {
+        background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+        color: white;
+        padding: var(--spacing-lg) 0;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-md);
+    }
+    
+    .subject-tag {
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: var(--text-light);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-md);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+    
+    .course-title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        line-height: 1.2;
+        color: var(--text-light);
+    }
+    
+    .course-subtitle {
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin-bottom: var(--spacing-lg);
+        opacity: 0.9;
+    }
+    
+    .course-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+    }
+    
+    .action-button {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .action-button.primary {
+        background-color: var(--accent-color);
+        color: white;
+    }
+    
+    .action-button.secondary {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .action-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Alerte et introduction */
+    .alert-box {
+        background: #e3f2fd;
+        border-left: 4px solid var(--secondary-color);
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .alert-box h3 {
+        color: var(--primary-color);
+        margin-bottom: var(--spacing-sm);
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Points clés */
+    .key-points {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .point-item {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: var(--spacing-md);
+        box-shadow: var(--card-shadow);
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .point-icon {
+        font-size: 1.8rem;
+        margin-right: var(--spacing-md);
+        color: var(--primary-color);
+    }
+    
+    .point-content {
+        flex: 1;
+    }
+    
+    .point-content h4 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    /* Liste de modaux */
+    .modal-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: var(--spacing-sm);
+    }
+    
+    .modal-pill {
+        background-color: var(--modal-color);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .modal-pill.semi {
+        background-color: var(--semi-modal-color);
+    }
+    
+    /* Sections */
+    .method-section {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .method-section h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: var(--spacing-md);
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: var(--spacing-sm);
+        position: relative;
+    }
+    
+    .method-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 80px;
+        height: 2px;
+        background-color: var(--accent-color);
+    }
+    
+    /* Cards */
+    .method-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+        margin-bottom: var(--spacing-md);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+    }
+    
+    .method-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .method-header {
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+    
+    .method-header h3 {
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    
+    .method-content {
+        padding: var(--spacing-md);
+    }
+    
+    /* Colonnes */
+    .two-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .two-columns-list {
+        columns: 2;
+        column-gap: var(--spacing-md);
+    }
+    
+    /* Règles de grammaire */
+    .grammar-rules {
+        margin: var(--spacing-md) 0;
+    }
+    
+    .grammar-rule {
+        display: flex;
+        margin-bottom: var(--spacing-md);
+        align-items: flex-start;
+    }
+    
+    .rule-number {
+        width: 30px;
+        height: 30px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: var(--spacing-md);
+        flex-shrink: 0;
+    }
+    
+    .rule-content {
+        flex: 1;
+    }
+    
+    .rule-content h5 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    /* Exemples */
+    .examples-box {
+        background: var(--background-medium);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin: var(--spacing-sm) 0;
+    }
+    
+    .example {
+        margin-bottom: 10px;
+        position: relative;
+    }
+    
+    .example:last-child {
+        margin-bottom: 0;
+    }
+    
+    .example-icon {
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+        margin-right: 5px;
+    }
+    
+    .example.correct .example-icon {
+        color: var(--success-color);
+    }
+    
+    .example.incorrect .example-icon {
+        color: var(--accent-color);
+    }
+    
+    .example-label {
+        font-weight: 500;
+        color: var(--primary-color);
+        margin-right: 8px;
+    }
+    
+    .example-note {
+        display: block;
+        font-size: 0.85rem;
+        color: #666;
+        font-style: italic;
+        margin-top: 2px;
+    }
+    
+    .highlight {
+        background-color: rgba(52, 152, 219, 0.2);
+        padding: 0 3px;
+        border-radius: 3px;
+        font-weight: 500;
+    }
+    
+    /* Tableau des temps */
+    .tense-table {
+        margin: var(--spacing-md) 0;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .tense-row {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 2fr;
+    }
+    
+    .tense-row.header {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .tense-row:not(.header) {
+        background-color: white;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .tense-row:nth-child(even):not(.header) {
+        background-color: var(--background-light);
+    }
+    
+    .tense-row:last-child {
+        border-bottom: none;
+    }
+    
+    .tense-cell {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    /* Concept box */
+    .concept-card {
+        background: var(--background-medium);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .concept-card h5 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Info box */
+    .info-box {
+        background: #e8f4f8;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin: var(--spacing-md) 0;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    .info-box h5 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Comparison table */
+    .comparison-table {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .comparison-item {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .comparison-header {
+        padding: var(--spacing-sm) var(--spacing-md);
+        color: white;
+        text-align: center;
+    }
+    
+    .comparison-header.modal {
+        background-color: var(--modal-color);
+    }
+    
+    .comparison-header.semi-modal {
+        background-color: var(--semi-modal-color);
+    }
+    
+    .comparison-content {
+        padding: var(--spacing-md);
+        background: white;
+    }
+    
+    .comparison-content ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    
+    /* Modal cards */
+    .modal-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .modal-card {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .modal-card.small {
+        font-size: 0.95rem;
+    }
+    
+    .modal-name {
+        background-color: var(--primary-color);
+        color: white;
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-weight: 600;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+    
+    .modal-content {
+        padding: var(--spacing-md);
+        background: white;
+    }
+    
+    .modal-examples {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Practice box */
+    .practice-box {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: var(--border-radius);
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .practice-box h5 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .practice-items {
+        margin-top: var(--spacing-md);
+    }
+    
+    .practice-item {
+        margin-bottom: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .practice-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+    .practice-question {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    
+    .practice-answer {
+        margin-bottom: 8px;
+        padding-left: 15px;
+        border-left: 3px solid #dee2e6;
+    }
+    
+    .practice-solution {
+        padding-left: 15px;
+        border-left: 3px solid var(--success-color);
+        color: #2c3e50;
+    }
+    
+    .answer-blank {
+        display: inline-block;
+        width: 80px;
+        height: 1px;
+        border-bottom: 1px solid #666;
+        margin: 0 5px;
+    }
+    
+    /* Uses grid */
+    .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .use-card {
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .use-icon {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .use-card h5 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .use-card p {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Conclusion */
+    .conclusion-box {
+        background: #e8f4f8;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        margin-top: var(--spacing-md);
+    }
+    
+    .conclusion-box h4 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .key-points-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+    }
+    
+    .key-point {
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .key-point-icon {
+        font-size: 1.2rem;
+        margin-right: 10px;
+        color: var(--primary-color);
+    }
+    
+    .key-point-content {
+        flex: 1;
+    }
+    
+    .key-point-content h5 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+    }
+    
+    .key-point-content p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* Summary table */
+    .summary-table {
+        margin: var(--spacing-md) 0;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+    }
+    
+    .summary-row {
+        display: grid;
+        grid-template-columns: 1fr 2fr 2fr;
+    }
+    
+    .summary-row.header {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .summary-row:not(.header) {
+        background-color: white;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .summary-row:nth-child(even):not(.header) {
+        background-color: var(--background-light);
+    }
+    
+    .summary-row:last-child {
+        border-bottom: none;
+    }
+    
+    .summary-cell {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    /* Tips */
+    .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .tip-card {
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .tip-icon {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .tip-card h5 {
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary-color);
+    }
+    
+    .tip-card p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* Quote box */
+    .quote-box {
+        background: var(--background-medium);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        border-left: 4px solid var(--secondary-color);
+        margin: var(--spacing-md) 0;
+        font-style: italic;
+    }
+    
+    .quote-box p {
+        margin: 0;
+    }
+    
+    /* Resources */
+    .resources-section {
+        margin-top: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .resources-section h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: var(--spacing-md);
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: var(--spacing-sm);
+        position: relative;
+    }
+    
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    .resource {
+        display: flex;
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .resource-icon {
+        font-size: 1.8rem;
+        margin-right: var(--spacing-md);
+        color: var(--primary-color);
+    }
+    
+    .resource-content {
+        flex: 1;
+    }
+    
+    .resource-content h4 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Download box */
+    .download-box {
+        background: var(--background-medium);
+        border-radius: var(--border-radius);
+        padding: var(--spacing-sm);
+        margin-top: var(--spacing-sm);
+    }
+    
+    .download-button {
+        display: flex;
+        align-items: center;
+        background: var(--primary-color);
+        color: white;
+        padding: 10px 15px;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .download-button:hover {
+        background: var(--secondary-color);
+        text-decoration: none;
+        color: white;
+    }
+    
+    .download-icon {
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+    
+    .download-info {
+        font-size: 0.85rem;
+        color: #666;
+        margin: 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        :root {
+            --spacing-md: 15px;
+            --spacing-lg: 25px;
+        }
+        
+        .course-title {
+            font-size: 2rem;
+        }
+        
+        .course-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .course-actions {
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .action-button {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .two-columns,
+        .comparison-table,
+        .modal-grid,
+        .tense-row,
+        .summary-row {
+            grid-template-columns: 1fr;
+        }
+        
+        .tense-row.header,
+        .summary-row.header {
+            display: none;
+        }
+        
+        .resource {
+            flex-direction: column;
+        }
+        
+        .resource-icon {
+            margin-bottom: var(--spacing-sm);
+            margin-right: 0;
+        }
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .method-card {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    .method-card:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+    
+    .method-card:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+    
+    /* Accessibilité */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+    
+    /* Impression */
+    @media print {
+        .method-card {
+            break-inside: avoid;
+            box-shadow: none;
+            border: 1px solid #ddd;
+        }
+        
+        .course-header {
+            background: none;
+            color: black;
+            padding: 0;
+        }
+        
+        .subject-tag, .action-button {
+            display: none;
+        }
+        
+        .course-title {
+            color: black;
+            font-size: 24pt;
+        }
+        
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        
+        .method-header {
+            background: none;
+            color: black;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .modal-name, .comparison-header {
+            background: none !important;
+            color: black;
+            border: 1px solid #ddd;
+        }
+        
+        .highlight {
+            background: none;
+            text-decoration: underline;
+        }
+    }
+    </style> 
+{% endblock %}
