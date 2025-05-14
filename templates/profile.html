@@ -73,23 +73,21 @@
         </div>
     </div>
 
-    <!-- Dans votre profile.html -->
-<div class="settings-box">
-    <h3>Paramètres d'affichage</h3>
-    <div class="dark-mode-toggle">
-        <span>Mode sombre</span>
-        <label class="switch">
-            <input type="checkbox" id="darkmode-toggle">
-            <span class="switch-slider"></span>
-        </label>
+    <!-- Paramètres d'affichage -->
+    <div class="settings-box">
+        <h3>Paramètres d'affichage</h3>
+        <div class="dark-mode-toggle">
+            <span>Mode sombre</span>
+            <label class="switch">
+                <input type="checkbox" id="darkmode-toggle">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
     </div>
-</div>
-
-
 
     <!-- Boutons d'action -->
     <div class="profile-actions">
-        <a href="#" class="btn-edit">
+        <a href="#" class="btn-edit" id="edit-profile-btn">
             <i class="fas fa-edit"></i> Modifier le profil
         </a>
         <a href="{{ url_for('logout') }}" class="btn-logout">
@@ -97,4 +95,394 @@
         </a>
     </div>
 </div>
+
+<!-- Modal de modification de profil -->
+<div id="edit-profile-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Modifier mon profil</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form action="{{ url_for('update_profile') }}" method="POST" id="edit-profile-form">
+                <div class="form-tabs">
+                    <button type="button" class="tab-btn active" data-tab="personal-info">Informations personnelles</button>
+                    <button type="button" class="tab-btn" data-tab="password">Mot de passe</button>
+                </div>
+                
+                <div class="tab-content active" id="personal-info">
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" value="{{ user.prenom }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" value="{{ user.nom }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone" value="{{ user.telephone }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Âge</label>
+                        <input type="number" id="age" name="age" value="{{ user.age }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="niveau">Niveau scolaire</label>
+                        <select id="niveau" name="niveau">
+                            <option value="seconde" {% if user.niveau == 'seconde' %}selected{% endif %}>Seconde</option>
+                            <option value="premiere" {% if user.niveau == 'premiere' %}selected{% endif %}>Première</option>
+                            <option value="terminale" {% if user.niveau == 'terminale' %}selected{% endif %}>Terminale</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="password">
+                    <div class="form-group">
+                        <label for="current_password">Mot de passe actuel</label>
+                        <input type="password" id="current_password" name="current_password">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">Nouveau mot de passe</label>
+                        <input type="password" id="new_password" name="new_password">
+                        <div class="password-strength">
+                            <div class="strength-meter"></div>
+                            <p class="strength-text">Force du mot de passe</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirmer le mot de passe</label>
+                        <input type="password" id="confirm_password" name="confirm_password">
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancel-edit">Annuler</button>
+                    <button type="submit" class="btn-save">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styles pour la modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: auto;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        animation: modalFadeIn 0.3s;
+    }
+
+    @keyframes modalFadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        color: #333;
+    }
+
+    .close-modal {
+        font-size: 28px;
+        font-weight: bold;
+        color: #aaa;
+        cursor: pointer;
+    }
+
+    .close-modal:hover {
+        color: #333;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    /* Styles pour les onglets */
+    .form-tabs {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+
+    .tab-btn {
+        background: none;
+        border: none;
+        padding: 10px 15px;
+        margin-right: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #666;
+        border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn.active {
+        color: #3498db;
+        border-bottom: 3px solid #3498db;
+        font-weight: bold;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    /* Styles pour le formulaire */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group input[type="tel"],
+    .form-group input[type="number"],
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    /* Styles pour l'indicateur de force du mot de passe */
+    .password-strength {
+        margin-top: 10px;
+    }
+
+    .strength-meter {
+        height: 5px;
+        width: 0%;
+        background-color: #eee;
+        border-radius: 3px;
+        margin-bottom: 5px;
+    }
+
+    .strength-text {
+        font-size: 12px;
+        color: #777;
+        margin: 0;
+    }
+
+    /* Styles pour les boutons d'action */
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 30px;
+        gap: 15px;
+    }
+
+    .btn-cancel {
+        background-color: #f1f1f1;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-save {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-cancel:hover {
+        background-color: #e0e0e0;
+    }
+
+    .btn-save:hover {
+        background-color: #2980b9;
+    }
+
+    /* Styles pour les appareils mobiles */
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 95%;
+            margin: 10% auto;
+        }
+        
+        .form-tabs {
+            flex-direction: column;
+            border-bottom: none;
+        }
+        
+        .tab-btn {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            padding: 15px 10px;
+        }
+        
+        .tab-btn.active {
+            border-left: 3px solid #3498db;
+            border-bottom: 1px solid #ddd;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Éléments DOM
+        const modal = document.getElementById('edit-profile-modal');
+        const editBtn = document.getElementById('edit-profile-btn');
+        const closeBtn = document.querySelector('.close-modal');
+        const cancelBtn = document.getElementById('cancel-edit');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const passwordInput = document.getElementById('new_password');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+        const strengthMeter = document.querySelector('.strength-meter');
+        const strengthText = document.querySelector('.strength-text');
+        
+        // Ouvrir la modal
+        editBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Empêcher le défilement
+        });
+        
+        // Fermer la modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Réactiver le défilement
+        }
+        
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        
+        // Fermer la modal si on clique en dehors
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Gestion des onglets
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Retirer la classe active de tous les onglets
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Ajouter la classe active à l'onglet cliqué
+                this.classList.add('active');
+                
+                // Afficher le contenu correspondant
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Vérification de la force du mot de passe
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            // Critères de force
+            if (password.length >= 8) strength += 25;
+            if (password.match(/[a-z]+/)) strength += 25;
+            if (password.match(/[A-Z]+/)) strength += 25;
+            if (password.match(/[0-9]+/) || password.match(/[^a-zA-Z0-9]+/)) strength += 25;
+            
+            // Mise à jour de l'indicateur visuel
+            strengthMeter.style.width = strength + '%';
+            
+            // Couleur selon la force
+            if (strength < 50) {
+                strengthMeter.style.backgroundColor = '#ff4d4d'; // Rouge
+                strengthText.textContent = 'Mot de passe faible';
+            } else if (strength < 75) {
+                strengthMeter.style.backgroundColor = '#ffa64d'; // Orange
+                strengthText.textContent = 'Mot de passe moyen';
+            } else {
+                strengthMeter.style.backgroundColor = '#4CAF50'; // Vert
+                strengthText.textContent = 'Mot de passe fort';
+            }
+        });
+        
+        // Vérification de la correspondance des mots de passe
+        confirmPasswordInput.addEventListener('input', function() {
+            if (this.value !== passwordInput.value) {
+                this.setCustomValidity('Les mots de passe ne correspondent pas');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+        
+        // Validation du formulaire avant soumission
+        document.getElementById('edit-profile-form').addEventListener('submit', function(e) {
+            // Vérifier si on est dans l'onglet mot de passe
+            const passwordTab = document.getElementById('password');
+            if (passwordTab.classList.contains('active')) {
+                const currentPassword = document.getElementById('current_password').value;
+                const newPassword = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                // Vérifier que le mot de passe actuel est rempli
+                if (newPassword && !currentPassword) {
+                    e.preventDefault();
+                    alert('Veuillez entrer votre mot de passe actuel');
+                    return;
+                }
+                
+                // Vérifier que les mots de passe correspondent
+                if (newPassword !== confirmPassword) {
+                    e.preventDefault();
+                    alert('Les mots de passe ne correspondent pas');
+                    return;
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}

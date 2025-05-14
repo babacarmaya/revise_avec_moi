@@ -1,0 +1,1340 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="calendar-container">
+    <div class="calendar-header">
+        <h1>Mon Planning</h1>
+        <div class="calendar-actions">
+            <button id="add-event-btn" class="btn-primary">
+                <i class="fas fa-plus"></i> Ajouter un événement
+            </button>
+            <div class="view-selector">
+                <button id="month-view" class="view-btn active">Mois</button>
+                <button id="week-view" class="view-btn">Semaine</button>
+                <button id="day-view" class="view-btn">Jour</button>
+                <button id="list-view" class="view-btn">Liste</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="calendar-sidebar">
+        <div class="upcoming-events">
+            <h3>Prochains événements</h3>
+            <div id="upcoming-events-list">
+                <!-- Les événements à venir seront chargés ici -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="event-types">
+            <h3>Types d'événements</h3>
+            <div class="event-type-filters">
+                <label class="event-type">
+                    <input type="checkbox" value="cours" checked>
+                    <span class="type-color" style="background-color: #3498db;"></span>
+                    <span class="type-name">Cours</span>
+                </label>
+                <label class="event-type">
+                    <input type="checkbox" value="exercice" checked>
+                    <span class="type-color" style="background-color: #2ecc71;"></span>
+                    <span class="type-name">Exercices</span>
+                </label>
+                <label class="event-type">
+                    <input type="checkbox" value="examen" checked>
+                    <span class="type-color" style="background-color: #e74c3c;"></span>
+                    <span class="type-name">Examens</span>
+                </label>
+                <label class="event-type">
+                    <input type="checkbox" value="rappel" checked>
+                    <span class="type-color" style="background-color: #f39c12;"></span>
+                    <span class="type-name">Rappels</span>
+                </label>
+                <label class="event-type">
+                    <input type="checkbox" value="other" checked>
+                    <span class="type-color" style="background-color: #9b59b6;"></span>
+                    <span class="type-name">Autres</span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="progress-section">
+            <h3>Progression</h3>
+            <div class="progress-stats">
+                <div class="progress-item">
+                    <span class="progress-label">Tâches complétées</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="tasks-progress" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-value" id="tasks-progress-value">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="calendar-main">
+        <div id="calendar"></div>
+    </div>
+</div>
+
+<!-- Modal pour ajouter/modifier un événement -->
+<div id="event-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title">Ajouter un événement</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="event-form">
+                <input type="hidden" id="event-id">
+                
+                <div class="form-group">
+                    <label for="event-title">Titre</label>
+                    <input type="text" id="event-title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-description">Description</label>
+                    <textarea id="event-description"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-start-date">Date de début</label>
+                        <input type="date" id="event-start-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-start-time">Heure</label>
+                        <input type="time" id="event-start-time" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event-end-date">Date de fin</label>
+                        <input type="date" id="event-end-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-end-time">Heure</label>
+                        <input type="time" id="event-end-time" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-type">Type d'événement</label>
+                    <select id="event-type">
+                        <option value="cours">Cours</option>
+                        <option value="exercice">Exercice</option>
+                        <option value="examen">Examen</option>
+                        <option value="rappel">Rappel</option>
+                        <option value="other">Autre</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-color">Couleur</label>
+                    <input type="color" id="event-color" value="#3498db">
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="event-reminder">
+                        <span>Activer un rappel</span>
+                    </label>
+                </div>
+                
+                <div id="reminder-options" class="form-group" style="display: none;">
+                    <label for="reminder-time">Rappel avant l'événement</label>
+                    <select id="reminder-time">
+                        <option value="5">5 minutes</option>
+                        <option value="15">15 minutes</option>
+                        <option value="30" selected>30 minutes</option>
+                        <option value="60">1 heure</option>
+                        <option value="120">2 heures</option>
+                        <option value="1440">1 jour</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancel-event">Annuler</button>
+                    <button type="submit" class="btn-save">Enregistrer</button>
+                    <button type="button" class="btn-delete" id="delete-event" style="display: none;">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Notification pour les rappels -->
+<div id="reminder-notification" class="notification" style="display: none;">
+    <div class="notification-header">
+        <h3>Rappel</h3>
+        <span class="close-notification">&times;</span>
+    </div>
+    <div class="notification-body">
+        <p id="reminder-message"></p>
+        <p id="reminder-time-info"></p>
+    </div>
+    <div class="notification-actions">
+        <button id="dismiss-reminder" class="btn-secondary">Ignorer</button>
+        <button id="snooze-reminder" class="btn-primary">Reporter (5 min)</button>
+    </div>
+</div>
+
+<style>
+    /* Styles pour le calendrier */
+    .calendar-container {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "header header"
+            "sidebar main";
+        gap: 20px;
+        height: calc(100vh - 100px);
+        padding: 20px;
+    }
+
+    .calendar-header {
+        grid-area: header;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .calendar-header h1 {
+        margin: 0;
+        color: #333;
+    }
+
+    .calendar-actions {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+    }
+
+    .view-selector {
+        display: flex;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .view-btn {
+        background: none;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .view-btn.active {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .calendar-sidebar {
+        grid-area: sidebar;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .calendar-main {
+        grid-area: main;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        overflow-y: auto;
+    }
+
+    /* Styles pour les sections de la sidebar */
+    .upcoming-events, .event-types, .progress-section {
+        margin-bottom: 30px;
+    }
+
+    .upcoming-events h3, .event-types h3, .progress-section h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 18px;
+        color: #333;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    /* Styles pour la liste des événements à venir */
+    #upcoming-events-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .upcoming-event {
+        background-color: #fff;
+        border-left: 4px solid #3498db;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .upcoming-event h4 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+    }
+
+    .upcoming-event p {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .upcoming-event .event-time {
+        font-size: 12px;
+        color: #999;
+        margin-top: 5px;
+    }
+
+    .loading-spinner {
+        text-align: center;
+        padding: 20px;
+        color: #999;
+    }
+
+    /* Styles pour les filtres de type d'événement */
+    .event-type-filters {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .event-type {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .event-type input {
+        margin-right: 10px;
+    }
+
+    .type-color {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    /* Styles pour la section de progression */
+    .progress-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .progress-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .progress-label {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .progress-bar {
+        height: 8px;
+        background-color: #eee;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background-color: #2ecc71;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
+
+    .progress-value {
+        font-size: 14px;
+        color: #666;
+        align-self: flex-end;
+    }
+
+    /* Styles pour le calendrier principal */
+    #calendar {
+        height: 100%;
+    }
+
+    /* Styles pour la modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: auto;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        animation: modalFadeIn 0.3s;
+    }
+
+    @keyframes modalFadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        color: #333;
+    }
+
+    .close-modal {
+        font-size: 28px;
+        font-weight: bold;
+        color: #aaa;
+        cursor: pointer;
+    }
+
+    .close-modal:hover {
+        color: #333;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    /* Styles pour le formulaire */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 15px;
+    }
+
+    .form-row .form-group {
+        flex: 1;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group input[type="time"],
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .form-group textarea {
+        height: 100px;
+        resize: vertical;
+    }
+
+    .form-group input[type="color"] {
+        width: 50px;
+        height: 40px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .checkbox-group {
+        margin-top: 5px;
+    }
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+    }
+
+    .checkbox-label input {
+        margin-right: 10px;
+    }
+
+    /* Styles pour les boutons d'action */
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 30px;
+        gap: 15px;
+    }
+
+    .btn-cancel {
+        background-color: #f1f1f1;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-save {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-delete {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: auto;
+    }
+
+    .btn-cancel:hover {
+        background-color: #e0e0e0;
+    }
+
+    .btn-save:hover {
+        background-color: #2980b9;
+    }
+
+    .btn-delete:hover {
+        background-color: #c0392b;
+    }
+
+    /* Styles pour les notifications */
+    .notification {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 350px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1001;
+        animation: notificationFadeIn 0.3s;
+    }
+
+    @keyframes notificationFadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .notification-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        background-color: #3498db;
+        color: white;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .notification-header h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .close-notification {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+    }
+
+    .notification-body {
+        padding: 15px;
+    }
+
+    .notification-body p {
+        margin: 0 0 10px 0;
+    }
+
+    .notification-actions {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 15px 15px;
+        gap: 10px;
+    }
+
+    .btn-secondary {
+        background-color: #f1f1f1;
+        color: #333;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e0e0e0;
+    }
+
+    /* Styles pour les événements du calendrier */
+    .fc-event {
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .fc-event.completed {
+        opacity: 0.7;
+        text-decoration: line-through;
+    }
+
+    /* Styles pour les appareils mobiles */
+    @media (max-width: 768px) {
+        .calendar-container {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "header"
+                "main"
+                "sidebar";
+        }
+
+        .calendar-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .calendar-actions {
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .view-selector {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .form-row {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .modal-content {
+            width: 95%;
+            margin: 10% auto;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Éléments DOM
+        const calendarEl = document.getElementById('calendar');
+        const addEventBtn = document.getElementById('add-event-btn');
+        const eventModal = document.getElementById('event-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const cancelEventBtn = document.getElementById('cancel-event');
+        const deleteEventBtn = document.getElementById('delete-event');
+        const eventForm = document.getElementById('event-form');
+        const modalTitle = document.getElementById('modal-title');
+        const eventId = document.getElementById('event-id');
+        const eventTitle = document.getElementById('event-title');
+        const eventDescription = document.getElementById('event-description');
+        const eventStartDate = document.getElementById('event-start-date');
+        const eventStartTime = document.getElementById('event-start-time');
+        const eventEndDate = document.getElementById('event-end-date');
+        const eventEndTime = document.getElementById('event-end-time');
+        const eventType = document.getElementById('event-type');
+        const eventColor = document.getElementById('event-color');
+        const eventReminder = document.getElementById('event-reminder');
+        const reminderOptions = document.getElementById('reminder-options');
+        const reminderTime = document.getElementById('reminder-time');
+        const viewBtns = document.querySelectorAll('.view-btn');
+        const typeFilters = document.querySelectorAll('.event-type input');
+        const upcomingEventsList = document.getElementById('upcoming-events-list');
+        const tasksProgress = document.getElementById('tasks-progress');
+        const tasksProgressValue = document.getElementById('tasks-progress-value');
+        const reminderNotification = document.getElementById('reminder-notification');
+        const closeNotification = document.querySelector('.close-notification');
+        const dismissReminder = document.getElementById('dismiss-reminder');
+        const snoozeReminder = document.getElementById('snooze-reminder');
+        const reminderMessage = document.getElementById('reminder-message');
+        const reminderTimeInfo = document.getElementById('reminder-time-info');
+        
+        // Initialiser le calendrier
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: ''
+            },
+            locale: 'fr',
+            firstDay: 1, // Lundi comme premier jour de la semaine
+            height: '100%',
+            selectable: true,
+            selectMirror: true,
+            editable: true,
+            dayMaxEvents: true,
+            events: '/api/events',
+            select: function(info) {
+                // Ouvrir la modal pour ajouter un événement
+                openAddEventModal(info.startStr, info.endStr);
+            },
+            eventClick: function(info) {
+                // Ouvrir la modal pour éditer un événement
+                openEditEventModal(info.event);
+            },
+            eventDrop: function(info) {
+                // Mettre à jour l'événement après un drag & drop
+                updateEvent(info.event);
+            },
+            eventResize: function(info) {
+                // Mettre à jour l'événement après un redimensionnement
+                updateEvent(info.event);
+            },
+            eventDidMount: function(info) {
+                // Ajouter la classe 'completed' aux événements complétés
+                if (info.event.extendedProps.completed) {
+                    info.el.classList.add('completed');
+                }
+                
+                // Ajouter un tooltip avec la description
+                if (info.event.extendedProps.description) {
+                    info.el.title = info.event.extendedProps.description;
+                }
+            },
+            datesSet: function() {
+                // Mettre à jour la liste des événements à venir et les statistiques
+                loadUpcomingEvents();
+                updateStatistics();
+            }
+        });
+        
+        // Rendre le calendrier
+        calendar.render();
+        
+        // Charger les événements à venir
+        loadUpcomingEvents();
+        
+        // Mettre à jour les statistiques
+        updateStatistics();
+        
+        // Vérifier les rappels toutes les minutes
+        setInterval(checkReminders, 60000);
+        checkReminders(); // Vérifier immédiatement au chargement
+        
+        // Fonction pour ouvrir la modal d'ajout d'événement
+        function openAddEventModal(start, end) {
+            modalTitle.textContent = 'Ajouter un événement';
+            eventId.value = '';
+            eventForm.reset();
+            
+            // Définir les dates par défaut
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            endDate.setDate(endDate.getDate() - 1); // Ajuster la date de fin
+            
+            eventStartDate.value = formatDate(startDate);
+            eventStartTime.value = '09:00';
+            eventEndDate.value = formatDate(endDate);
+            eventEndTime.value = '10:00';
+            
+            // Définir la couleur en fonction du type
+            updateEventColor();
+            
+            // Cacher le bouton de suppression
+            deleteEventBtn.style.display = 'none';
+            
+            // Afficher la modal
+            eventModal.style.display = 'block';
+        }
+        
+        // Fonction pour ouvrir la modal d'édition d'événement
+        function openEditEventModal(event) {
+            modalTitle.textContent = 'Modifier l\'événement';
+            eventId.value = event.id;
+            eventTitle.value = event.title;
+            eventDescription.value = event.extendedProps.description || '';
+            
+            const startDate = new Date(event.start);
+            const endDate = event.end ? new Date(event.end) : new Date(startDate);
+            
+            eventStartDate.value = formatDate(startDate);
+            eventStartTime.value = formatTime(startDate);
+            eventEndDate.value = formatDate(endDate);
+            eventEndTime.value = formatTime(endDate);
+            
+            eventType.value = event.extendedProps.type || 'other';
+            eventColor.value = event.backgroundColor || '#3498db';
+            
+            eventReminder.checked = event.extendedProps.reminder || false;
+            reminderOptions.style.display = eventReminder.checked ? 'block' : 'none';
+            
+            if (event.extendedProps.reminder && event.extendedProps.reminder_time) {
+                const reminderDate = new Date(event.extendedProps.reminder_time);
+                const diffMinutes = Math.round((startDate - reminderDate) / 60000);
+                
+                // Trouver l'option la plus proche
+                const options = [5, 15, 30, 60, 120, 1440];
+                let closest = options.reduce((prev, curr) => {
+                    return (Math.abs(curr - diffMinutes) < Math.abs(prev - diffMinutes) ? curr : prev);
+                });
+                
+                reminderTime.value = closest.toString();
+            } else {
+                reminderTime.value = '30';
+            }
+            
+            // Afficher le bouton de suppression
+            deleteEventBtn.style.display = 'block';
+            
+            // Afficher la modal
+            eventModal.style.display = 'block';
+        }
+        
+        // Fonction pour fermer la modal
+        function closeEventModal() {
+            eventModal.style.display = 'none';
+        }
+        
+        // Fonction pour mettre à jour la couleur en fonction du type
+        function updateEventColor() {
+            const typeColors = {
+                'cours': '#3498db',
+                'exercice': '#2ecc71',
+                'examen': '#e74c3c',
+                'rappel': '#f39c12',
+                'other': '#9b59b6'
+            };
+            
+            eventColor.value = typeColors[eventType.value] || '#3498db';
+        }
+        
+        // Fonction pour charger les événements à venir
+        function loadUpcomingEvents() {
+            upcomingEventsList.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>';
+            
+            // Obtenir la date actuelle
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(23, 59, 59, 999);
+            
+            // Récupérer les événements à venir
+            fetch(`/api/events?start=${now.toISOString()}&end=${tomorrow.toISOString()}`)
+                .then(response => response.json())
+                .then(events => {
+                    if (events.length === 0) {
+                        upcomingEventsList.innerHTML = '<p class="no-events">Aucun événement à venir aujourd\'hui</p>';
+                        return;
+                    }
+                    
+                    // Trier les événements par heure de début
+                    events.sort((a, b) => new Date(a.start) - new Date(b.start));
+                    
+                    // Limiter à 5 événements
+                    const limitedEvents = events.slice(0, 5);
+                    
+                    // Générer le HTML
+                    let html = '';
+                    limitedEvents.forEach(event => {
+                        const startTime = new Date(event.start);
+                        const typeClass = event.extendedProps.type || 'other';
+                        const completedClass = event.extendedProps.completed ? 'completed' : '';
+                        
+                        html += `
+                            <div class="upcoming-event ${completedClass}" style="border-left-color: ${event.color}">
+                                <h4>${event.title}</h4>
+                                <p class="event-time">${formatTimeDisplay(startTime)}</p>
+                            </div>
+                        `;
+                    });
+                    
+                    upcomingEventsList.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des événements à venir:', error);
+                    upcomingEventsList.innerHTML = '<p class="error">Erreur lors du chargement des événements</p>';
+                });
+        }
+        
+        // Fonction pour mettre à jour les statistiques
+        function updateStatistics() {
+            // Récupérer tous les événements
+            fetch('/api/events')
+                .then(response => response.json())
+                .then(events => {
+                    // Calculer le pourcentage de tâches complétées
+                    const completableEvents = events.filter(event => 
+                        ['exercice', 'examen', 'rappel'].includes(event.extendedProps.type)
+                    );
+                    
+                    if (completableEvents.length === 0) {
+                        tasksProgress.style.width = '0%';
+                        tasksProgressValue.textContent = '0%';
+                        return;
+                    }
+                    
+                    const completedEvents = completableEvents.filter(event => event.extendedProps.completed);
+                    const completionRate = Math.round((completedEvents.length / completableEvents.length) * 100);
+                    
+                    tasksProgress.style.width = `${completionRate}%`;
+                    tasksProgressValue.textContent = `${completionRate}%`;
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des statistiques:', error);
+                });
+        }
+        
+        // Fonction pour vérifier les rappels
+        function checkReminders() {
+            const now = new Date();
+            const fiveMinutesFromNow = new Date(now.getTime() + 5 * 60000);
+            
+            // Récupérer tous les événements
+            fetch('/api/events')
+                .then(response => response.json())
+                .then(events => {
+                    // Filtrer les événements avec rappel
+                    const eventsWithReminders = events.filter(event => 
+                        event.extendedProps.reminder && 
+                        event.extendedProps.reminder_time &&
+                        !event.extendedProps.completed
+                    );
+                    
+                    // Vérifier chaque rappel
+                    eventsWithReminders.forEach(event => {
+                        const reminderTime = new Date(event.extendedProps.reminder_time);
+                        
+                        // Si le rappel est dû dans les 5 prochaines minutes ou est déjà passé mais pas plus de 30 minutes
+                        if (reminderTime <= fiveMinutesFromNow && reminderTime >= new Date(now.getTime() - 30 * 60000)) {
+                            showReminderNotification(event);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la vérification des rappels:', error);
+                });
+        }
+        
+        // Fonction pour afficher une notification de rappel
+        function showReminderNotification(event) {
+            const eventStart = new Date(event.start);
+            const now = new Date();
+            const diffMinutes = Math.round((eventStart - now) / 60000);
+            
+            reminderMessage.textContent = `${event.title}`;
+            
+            if (diffMinutes > 0) {
+                reminderTimeInfo.textContent = `Commence dans ${diffMinutes} minute${diffMinutes > 1 ? 's' : ''}`;
+            } else if (diffMinutes === 0) {
+                reminderTimeInfo.textContent = `Commence maintenant`;
+            } else {
+                reminderTimeInfo.textContent = `A commencé il y a ${Math.abs(diffMinutes)} minute${Math.abs(diffMinutes) > 1 ? 's' : ''}`;
+            }
+            
+            reminderNotification.style.display = 'block';
+            
+            // Stocker l'ID de l'événement pour le snooze
+            snoozeReminder.dataset.eventId = event.id;
+        }
+        
+        // Fonction pour formater une date (YYYY-MM-DD)
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+        
+        // Fonction pour formater une heure (HH:MM)
+        function formatTime(date) {
+            return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+        }
+        
+        // Fonction pour formater l'affichage de l'heure
+        function formatTimeDisplay(date) {
+            return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+        }
+        
+        // Fonction pour créer un événement
+        function createEvent(eventData) {
+            fetch('/api/events', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(eventData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Rafraîchir le calendrier
+                    calendar.refetchEvents();
+                    
+                    // Mettre à jour les événements à venir et les statistiques
+                    loadUpcomingEvents();
+                    updateStatistics();
+                    
+                    // Fermer la modal
+                    closeEventModal();
+                } else {
+                    alert(`Erreur: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la création de l\'événement:', error);
+                alert('Une erreur est survenue lors de la création de l\'événement');
+            });
+        }
+        
+        // Fonction pour mettre à jour un événement
+        function updateEvent(event) {
+            const eventData = {
+                title: event.title,
+                description: event.extendedProps.description,
+                start: event.start.toISOString(),
+                end: event.end ? event.end.toISOString() : new Date(event.start.getTime() + 3600000).toISOString(),
+                color: event.backgroundColor,
+                type: event.extendedProps.type,
+                reminder: event.extendedProps.reminder,
+                reminder_minutes: event.extendedProps.reminder_minutes
+            };
+            
+            fetch(`/api/events/${event.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(eventData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Rafraîchir le calendrier
+                    calendar.refetchEvents();
+                    
+                    // Mettre à jour les événements à venir et les statistiques
+                    loadUpcomingEvents();
+                    updateStatistics();
+                } else {
+                    alert(`Erreur: ${data.message}`);
+                    // Annuler les modifications
+                    calendar.refetchEvents();
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la mise à jour de l\'événement:', error);
+                alert('Une erreur est survenue lors de la mise à jour de l\'événement');
+                // Annuler les modifications
+                calendar.refetchEvents();
+            });
+        }
+        
+        // Fonction pour supprimer un événement
+        function deleteEvent(eventId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {
+                return;
+            }
+            
+            fetch(`/api/events/${eventId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Rafraîchir le calendrier
+                    calendar.refetchEvents();
+                    
+                    // Mettre à jour les événements à venir et les statistiques
+                    loadUpcomingEvents();
+                    updateStatistics();
+                    
+                    // Fermer la modal
+                    closeEventModal();
+                } else {
+                    alert(`Erreur: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la suppression de l\'événement:', error);
+                alert('Une erreur est survenue lors de la suppression de l\'événement');
+            });
+        }
+        
+        // Fonction pour marquer un événement comme complété/non complété
+        function toggleEventCompletion(eventId) {
+            fetch(`/api/events/complete/${eventId}`, {
+                method: 'PUT'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Rafraîchir le calendrier
+                    calendar.refetchEvents();
+                    
+                    // Mettre à jour les événements à venir et les statistiques
+                    loadUpcomingEvents();
+                    updateStatistics();
+                } else {
+                    alert(`Erreur: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la mise à jour de l\'événement:', error);
+                alert('Une erreur est survenue lors de la mise à jour de l\'événement');
+            });
+        }
+        
+        // Gestionnaires d'événements
+        
+        // Ouvrir la modal pour ajouter un événement
+        addEventBtn.addEventListener('click', function() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            openAddEventModal(today.toISOString(), tomorrow.toISOString());
+        });
+        
+        // Fermer la modal
+        closeModal.addEventListener('click', closeEventModal);
+        cancelEventBtn.addEventListener('click', closeEventModal);
+        
+        // Fermer la modal si on clique en dehors
+        window.addEventListener('click', function(e) {
+            if (e.target === eventModal) {
+                closeEventModal();
+            }
+        });
+        
+        // Mettre à jour la couleur en fonction du type
+        eventType.addEventListener('change', updateEventColor);
+        
+        // Afficher/masquer les options de rappel
+        eventReminder.addEventListener('change', function() {
+            reminderOptions.style.display = this.checked ? 'block' : 'none';
+        });
+        
+        // Soumettre le formulaire
+        eventForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer les données du formulaire
+            const id = eventId.value;
+            const title = eventTitle.value;
+            const description = eventDescription.value;
+            
+            // Construire les dates de début et de fin
+            const startDateTime = new Date(`${eventStartDate.value}T${eventStartTime.value}`);
+            const endDateTime = new Date(`${eventEndDate.value}T${eventEndTime.value}`);
+            
+            // Vérifier que la date de fin est après la date de début
+            if (endDateTime <= startDateTime) {
+                alert('La date de fin doit être après la date de début');
+                return;
+            }
+            
+            const eventData = {
+                title: title,
+                description: description,
+                start: startDateTime.toISOString(),
+                end: endDateTime.toISOString(),
+                color: eventColor.value,
+                type: eventType.value,
+                reminder: eventReminder.checked
+            };
+            
+            // Ajouter les informations de rappel si activé
+            if (eventReminder.checked) {
+                eventData.reminder_minutes = parseInt(reminderTime.value);
+            }
+            
+            if (id) {
+                // Mettre à jour un événement existant
+                fetch(`/api/events/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(eventData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Rafraîchir le calendrier
+                        calendar.refetchEvents();
+                        
+                        // Mettre à jour les événements à venir et les statistiques
+                        loadUpcomingEvents();
+                        updateStatistics();
+                        
+                        // Fermer la modal
+                        closeEventModal();
+                    } else {
+                        alert(`Erreur: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la mise à jour de l\'événement:', error);
+                    alert('Une erreur est survenue lors de la mise à jour de l\'événement');
+                });
+            } else {
+                // Créer un nouvel événement
+                createEvent(eventData);
+            }
+        });
+        
+        // Supprimer un événement
+        deleteEventBtn.addEventListener('click', function() {
+            const id = eventId.value;
+            if (id) {
+                deleteEvent(id);
+            }
+        });
+        
+        // Changer la vue du calendrier
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Retirer la classe active de tous les boutons
+                viewBtns.forEach(b => b.classList.remove('active'));
+                
+                // Ajouter la classe active au bouton cliqué
+                this.classList.add('active');
+                
+                // Changer la vue du calendrier
+                const view = this.id.replace('-view', '');
+                const viewMap = {
+                    'month': 'dayGridMonth',
+                    'week': 'timeGridWeek',
+                    'day': 'timeGridDay',
+                    'list': 'listWeek'
+                };
+                
+                calendar.changeView(viewMap[view]);
+            });
+        });
+        
+        // Filtrer les types d'événements
+        typeFilters.forEach(filter => {
+            filter.addEventListener('change', function() {
+                const checkedTypes = Array.from(typeFilters)
+                    .filter(f => f.checked)
+                    .map(f => f.value);
+                
+                // Filtrer les événements
+                calendar.getEvents().forEach(event => {
+                    const type = event.extendedProps.type || 'other';
+                    const shouldShow = checkedTypes.includes(type);
+                    
+                    event.setProp('display', shouldShow ? 'auto' : 'none');
+                });
+            });
+        });
+        
+        // Fermer la notification de rappel
+        closeNotification.addEventListener('click', function() {
+            reminderNotification.style.display = 'none';
+        });
+        
+        // Ignorer le rappel
+        dismissReminder.addEventListener('click', function() {
+            reminderNotification.style.display = 'none';
+        });
+        
+        // Reporter le rappel
+        snoozeReminder.addEventListener('click', function() {
+            const eventId = this.dataset.eventId;
+            
+            // Reporter le rappel de 5 minutes
+            fetch(`/api/events/${eventId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    reminder: true,
+                    reminder_minutes: 5
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    reminderNotification.style.display = 'none';
+                    // Rafraîchir le calendrier
+                    calendar.refetchEvents();
+                } else {
+                    alert(`Erreur: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors du report du rappel:', error);
+                alert('Une erreur est survenue lors du report du rappel');
+            });
+        });
+        
+        // Double-cliquer sur un événement pour le marquer comme complété/non complété
+        document.addEventListener('dblclick', function(e) {
+            // Vérifier si on a cliqué sur un événement
+            const eventEl = e.target.closest('.fc-event');
+            if (eventEl) {
+                const eventId = eventEl.getAttribute('data-event-id') || eventEl.fcSeg?.eventRange?.def?.publicId;
+                if (eventId) {
+                    toggleEventCompletion(eventId);
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
+

@@ -1,201 +1,215 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="hero-section">
+<div class="main-container">
+    <div class="header">
+        <div class="logo">
+        
+        </div>
+    </div>
+    
+
     <div class="hero-content">
-        <h1>Bienvenue<br>sur<br>Révise Avec Moi</h1>
+        <h1>Prêt·e à briller aux prochains examens<span class="sparkle">✨</span></h1>
+        <p class="subtitle">Cours interactifs, quiz, défis entre amis et + encore!</p>
+        
+        <a  class="start-button">
+            <span class="target-icon">🎯</span>
+            Commencer à réviser
+        </a>
+    </div>
+
+    <div class="levels-section">
+        <div class="level-card">
+            <h2>Seconde</h2>
+            <a href="{{ url_for('seconde') }}" class="access-button">Accéder</a>
+        </div>
+        
+        <div class="level-card">
+            <h2>Première</h2>
+            <a href="{{ url_for('premiere') }}" class="access-button">Accéder</a>
+        </div>
+        
+        <div class="level-card">
+            <h2>Terminale</h2>
+            <a href="{{ url_for('terminale') }}" class="access-button">Accéder</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Révise Avec Moi — Tous droits réservés</p>
     </div>
 </div>
-
-<div class="levels-section">
-    <div class="level-card">
-        <h2>Seconde</h2>
-        <a href="{{ url_for('seconde') }}" class="access-button">accéder au cours</a>
-    </div>
-    
-    <div class="level-card">
-        <h2>Première</h2>
-        <a href="{{ url_for('premiere') }}" class="access-button">accéder au cours</a>
-    </div>
-    
-    <div class="level-card">
-        <h2>Terminale</h2>
-        <a href="{{ url_for('terminale') }}" class="access-button">accéder au cours</a>
-    </div>
-</div>
-
-
 
 <style>
     :root {
-        --primary-gradient: linear-gradient(135deg, #3b4d8c 0%, #4a7ab7 100%);
-        --card-bg: #fff9f3;
-        --button-bg: #3b4d8c;
-        --text-color: #1a2342;
+        --background-dark:rgb(168, 168, 168);
+        --background-card:rgb(0, 0, 0);
+        --text-cream: #f5f5dc;
+        --button-yellow: #ffc94d;
+        --accent-blue: #4d9eff;
     }
 
     body {
         margin: 0;
         padding: 0;
         font-family: 'Arial', sans-serif;
-        overflow-x: hidden;
+        background: linear-gradient(135deg, #111827 0%, #1e1e3f 100%);
+        min-height: 100vh;
+        color: var(--text-cream§);
     }
 
-    .hero-section {
-        background: var(--primary-gradient);
-        min-height: 70vh;
-        padding: 2rem;
-        position: relative;
-        border-radius: 0 0 30px 30px;
-        overflow: hidden;
+    .main-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        margin-bottom: 40px;
     }
 
     .logo {
-        position: absolute;
-        top: 2rem;
-        left: 2rem;
-        color: white;
-        font-size: 1.8rem;
-        font-weight: bold;
-    }
-
-    .user-button {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-    }
-
-    .user-link {
         display: flex;
         align-items: center;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 0.5rem 1.5rem;
-        border-radius: 50px;
-        text-decoration: none;
-        color: var(--text-color);
-        font-weight: 500;
+        gap: 15px;
     }
 
-    .user-icon {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        background: #3b4d8c;
+    .logo-icon {
+        background-color: #4caf50;
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .book {
+        width: 30px;
+        height: 25px;
+        background-color: #f5f5dc;
+        border-radius: 2px;
+    }
+
+    .line {
+        position: absolute;
+        bottom: 8px;
+        width: 25px;
+        height: 3px;
+        background-color: #f5f5dc;
+    }
+
+   
+    .user-dot {
+        width: 15px;
+        height: 15px;
+        background-color: #111827;
         border-radius: 50%;
-        margin-right: 10px;
     }
 
     .hero-content {
-        display: flex;
-        flex-direction: column;
-        padding-top: 5rem;
+        text-align: left;
+        margin: 60px 0;
     }
 
     h1 {
-        color: white;
-        font-size: 4rem;
+        font-size: 3.5rem;
         font-weight: bold;
-        margin-left: 2rem;
+        margin-bottom: 20px;
         line-height: 1.1;
-        max-width: 600px;
+        color: var(--text-cream);
     }
 
-    .floating-icons {
-        position: absolute;
-        right: 5%;
-        top: 20%;
-        width: 40%;
-        height: 60%;
+    .sparkle {
+        color: #ffd700;
+        font-size: 3rem;
+        position: relative;
+        top: -10px;
     }
 
-    .icon {
-        position: absolute;
+    .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+        color: #4d9eff;
     }
 
-    .pencil {
-        width: 80px;
-        top: 10%;
-        left: 30%;
-        transform: rotate(15deg);
+    .start-button {
+        display: inline-flex;
+        align-items: center;
+        background-color: var(--button-yellow);
+        color: #5a3e00;
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        margin-bottom: 40px;
     }
 
-    .globe {
-        width: 200px;
-        bottom: 0;
-        right: 0;
-    }
-
-    .small-square {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        background: #60a5fa;
-        top: 30%;
-        right: 40%;
-        transform: rotate(15deg);
+    .target-icon {
+        margin-right: 15px;
+        font-size: 1.5rem;
     }
 
     .levels-section {
         display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        margin: -50px 2rem 2rem;
-        position: relative;
-        z-index: 10;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 40px;
     }
 
     .level-card {
-        background: var(--card-bg);
-        padding: 2rem;
-        border-radius: 20px;
-        text-align: center;
-        width: 25%;
-        min-width: 250px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        margin-bottom: 1rem;
+        background: var(--background-card);
+        padding: 20px 30px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     h2 {
-        color: var(--text-color);
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+        color: var(--text-cream);
+        font-size: 1.8rem;
+        margin: 0;
     }
 
     .access-button {
         display: inline-block;
-        background: var(--button-bg);
+        background: #111827;
         color: white;
-        padding: 0.8rem 1.5rem;
+        padding: 10px 30px;
         border-radius: 50px;
         text-decoration: none;
-        font-weight: 500;
+        font-weight: bold;
         transition: all 0.3s ease;
-    }
-
-    .access-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(59, 77, 140, 0.3);
     }
 
     .footer {
         text-align: center;
-        padding: 1rem;
-        color: var(--text-color);
+        padding: 20px 0;
+        color: rgba(245, 245, 220, 0.7);
         font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
 
-        .level-card {
-            width: 80%;
+        .subtitle {
+            font-size: 1.2rem;
         }
 
-        .floating-icons {
-            width: 100%;
-            right: 0;
+        .start-button {
+            padding: 12px 25px;
+            font-size: 1rem;
         }
     }
 </style>

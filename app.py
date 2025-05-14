@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
-from datetime import datetime
+from datetime import datetime, timedelta
+from flask_migrate import Migrate
+
 
 # Création de l'application Flask
 app = Flask(__name__)
@@ -24,10 +26,28 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
     age = db.Column(db.Integer)
     date_inscription = db.Column(db.DateTime, default=datetime.utcnow)
+    
     # Relations
     quiz_results = db.relationship('QuizResult', backref='user', lazy=True)
     badges = db.relationship('Badge', secondary='user_badges', backref='users', lazy=True)
     events = db.relationship('Event', backref='user', lazy=True)
+    # Relation avec CalendarEvent définie dans le modèle CalendarEvent
+
+class CalendarEvent(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
+    color = db.Column(db.String(20), default='#3498db')  # Couleur de l'événement
+    type = db.Column(db.String(20), default='other')  # cours, exercice, examen, rappel, etc.
+    completed = db.Column(db.Boolean, default=False)
+    reminder = db.Column(db.Boolean, default=False)
+    reminder_time = db.Column(db.DateTime)
+    
+    # Relation avec l'utilisateur
+    user = db.relationship('User', backref=db.backref('calendar_events', lazy=True, cascade="all, delete-orphan"))
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,6 +101,14 @@ class Event(db.Model):
     date_debut = db.Column(db.DateTime, nullable=False)
     date_fin = db.Column(db.DateTime, nullable=False)
     type = db.Column(db.String(50))
+
+class CourseContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(50))  # philo, maths, etc.
+    chapter_number = db.Column(db.String(10))  # "1.1", "1.2", etc.
+    title = db.Column(db.String(200))
+    content = db.Column(db.Text)
+    is_locked = db.Column(db.Boolean, default=True)
 
 # Protection des routes
 def login_required(f):
@@ -140,6 +168,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('auth/register.html')
 
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -194,11 +223,287 @@ def profile():
                          average_score=average_score,
                          recent_results=recent_results)
 
+@app.route('/update_profile', methods=['POST'])
+@login_required
+def update_profile():
+    if request.method == 'POST':
+        user = User.query.get(session['user_id'])
+        
+        # Récupérer les données du formulaire
+        prenom = request.form.get('prenom')
+        nom = request.form.get('nom')
+        email = request.form.get('email')
+        niveau = request.form.get('niveau')
+        telephone = request.form.get('telephone', user.telephone)
+        age = request.form.get('age')
+        if age:
+            try:
+                age = int(age)
+            except ValueError:
+                age = user.age
+        else:
+            age = user.age
+        
+        # Vérifier si l'email est déjà utilisé par un autre utilisateur
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user and existing_user.id != user.id:
+            flash('Cet email est déjà utilisé par un autre compte', 'error')
+            return redirect(url_for('profile'))
+        
+        # Mettre à jour les informations personnelles
+        user.prenom = prenom
+        user.nom = nom
+        user.email = email
+        user.niveau = niveau
+        user.telephone = telephone
+        user.age = age
+        
+        # Mettre à jour la session si le niveau a changé
+        if session['niveau'] != niveau:
+            session['niveau'] = niveau
+        
+        # Vérifier si le mot de passe doit être mis à jour
+        current_password = request.form.get('current_password')
+        new_password = request.form.get('new_password')
+        
+        if current_password and new_password:
+            # Vérifier que le mot de passe actuel est correct
+            if check_password_hash(user.password, current_password):
+                # Mettre à jour le mot de passe
+                user.password = generate_password_hash(new_password)
+                flash('Votre mot de passe a été mis à jour', 'success')
+            else:
+                flash('Le mot de passe actuel est incorrect', 'error')
+                return redirect(url_for('profile'))
+        
+        # Sauvegarder les modifications
+        try:
+            db.session.commit()
+            flash('Votre profil a été mis à jour avec succès', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Une erreur est survenue: {str(e)}', 'error')
+        
+    return redirect(url_for('profile'))
 
- ########################################## Matiere terminale ############################################################
+@app.route('/calendar')
+@login_required
+def calendar():
+    user = User.query.get(session['user_id'])
+    return render_template('calendar.html', user=user)
 
- #PHILO
+@app.route('/cours/<subject>/chapitre/<chapter_number>')
+@login_required
+def view_chapter(subject, chapter_number):
+    chapter = CourseContent.query.filter_by(
+        subject=subject,
+        chapter_number=chapter_number
+    ).first_or_404()
+    
+    return render_template('cours/chapter_content.html', 
+                         chapter=chapter,
+                         subject=subject)
 
+# Routes API pour le calendrier
+@app.route('/api/events', methods=['GET'])
+@login_required
+def get_events():
+    user_id = session['user_id']
+    start = request.args.get('start', '')
+    end = request.args.get('end', '')
+    
+    # Convertir les dates de chaîne ISO à objets datetime
+    if start and end:
+        start_date = datetime.fromisoformat(start.replace('Z', '+00:00'))
+        end_date = datetime.fromisoformat(end.replace('Z', '+00:00'))
+        
+        events = CalendarEvent.query.filter(
+            CalendarEvent.user_id == user_id,
+            CalendarEvent.start_date >= start_date,
+            CalendarEvent.end_date <= end_date
+        ).all()
+    else:
+        events = CalendarEvent.query.filter_by(user_id=user_id).all()
+    
+    # Formater les événements pour FullCalendar
+    events_data = []
+    for event in events:
+        events_data.append({
+            'id': event.id,
+            'title': event.title,
+            'description': event.description,
+            'start': event.start_date.isoformat(),
+            'end': event.end_date.isoformat(),
+            'color': event.color,
+            'extendedProps': {
+                'type': event.type,
+                'completed': event.completed,
+                'reminder': event.reminder,
+                'reminder_time': event.reminder_time.isoformat() if event.reminder_time else None
+            }
+        })
+    
+    return jsonify(events_data)
+
+@app.route('/api/events', methods=['POST'])
+@login_required
+def create_event():
+    user_id = session['user_id']
+    data = request.json
+    
+    # Convertir les dates de chaîne ISO à objets datetime
+    start_date = datetime.fromisoformat(data['start'].replace('Z', '+00:00'))
+    end_date = datetime.fromisoformat(data['end'].replace('Z', '+00:00'))
+    
+    # Créer un nouvel événement
+    new_event = CalendarEvent(
+        user_id=user_id,
+        title=data['title'],
+                description=data.get('description', ''),
+        start_date=start_date,
+        end_date=end_date,
+        color=data.get('color', '#3498db'),
+        type=data.get('type', 'other'),
+        reminder=data.get('reminder', False)
+    )
+    
+    # Ajouter un rappel si demandé
+    if data.get('reminder'):
+        reminder_minutes = int(data.get('reminder_minutes', 30))
+        reminder_time = start_date - timedelta(minutes=reminder_minutes)
+        new_event.reminder_time = reminder_time
+    
+    db.session.add(new_event)
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            'status': 'success',
+            'id': new_event.id,
+            'message': 'Événement créé avec succès'
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/events/<int:event_id>', methods=['PUT'])
+@login_required
+def update_event(event_id):
+    user_id = session['user_id']
+    data = request.json
+    
+    # Trouver l'événement
+    event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
+    
+    if not event:
+        return jsonify({
+            'status': 'error',
+            'message': 'Événement non trouvé'
+        }), 404
+    
+    # Mettre à jour les champs
+    if 'title' in data:
+        event.title = data['title']
+    if 'description' in data:
+        event.description = data['description']
+    if 'start' in data:
+        event.start_date = datetime.fromisoformat(data['start'].replace('Z', '+00:00'))
+    if 'end' in data:
+        event.end_date = datetime.fromisoformat(data['end'].replace('Z', '+00:00'))
+    if 'color' in data:
+        event.color = data['color']
+    if 'type' in data:
+        event.type = data['type']
+    if 'completed' in data:
+        event.completed = data['completed']
+    if 'reminder' in data:
+        event.reminder = data['reminder']
+        
+        if data['reminder']:
+            reminder_minutes = int(data.get('reminder_minutes', 30))
+            reminder_time = event.start_date - timedelta(minutes=reminder_minutes)
+            event.reminder_time = reminder_time
+        else:
+            event.reminder_time = None
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            'status': 'success',
+            'message': 'Événement mis à jour avec succès'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/events/<int:event_id>', methods=['DELETE'])
+@login_required
+def delete_event(event_id):
+    user_id = session['user_id']
+    
+    # Trouver l'événement
+    event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
+    
+    if not event:
+        return jsonify({
+            'status': 'error',
+            'message': 'Événement non trouvé'
+        }), 404
+    
+    db.session.delete(event)
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            'status': 'success',
+            'message': 'Événement supprimé avec succès'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/events/complete/<int:event_id>', methods=['PUT'])
+@login_required
+def complete_event(event_id):
+    user_id = session['user_id']
+    
+    # Trouver l'événement
+    event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
+    
+    if not event:
+        return jsonify({
+            'status': 'error',
+            'message': 'Événement non trouvé'
+        }), 404
+    
+    # Inverser l'état de complétion
+    event.completed = not event.completed
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            'status': 'success',
+            'completed': event.completed,
+            'message': f'Événement marqué comme {"complété" if event.completed else "non complété"}'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+# Routes pour les matières de terminale
+# PHILO
 @app.route('/cours/philo/terminale')
 @login_required
 def philo_terminale():
@@ -244,9 +549,7 @@ def philo_chapitre7():
 def philo_chapitre8():
     return render_template('cours/philo/chapitre8._terminal.html')
 
-#PHILO
-
-#Mathématiques
+# Mathématiques
 @app.route('/cours/mathematiques/terminale')
 @login_required
 def mathematiques_terminale():
@@ -292,17 +595,11 @@ def mathematiques_chapitre7():
 def mathematiques_chapitre8():
     return render_template('cours/maths/chapitre8._terminal.html')
 
-
-
-
-
-
-#Histoire
+# Histoire
 @app.route('/cours/histoire/terminale')
 @login_required
 def histoire_terminale():
     return render_template('cours/histoire/histoire_terminal.html')
-
 
 @app.route('/cours/histoire/chapitre1')
 @login_required
@@ -314,8 +611,6 @@ def histoire_chapitre1():
 def histoire_chapitre2():
     return render_template('cours/histoire/chapitre2._terminal.html')
 
-
-#Les conséquences et les règlements de la Seconde Guerre mondiale
 @app.route('/cours/histoire/chapitre3')
 @login_required
 def histoire_chapitre3():
@@ -346,17 +641,11 @@ def histoire_chapitre7():
 def histoire_chapitre8():
     return render_template('cours/histoire/chapitre8._terminal.html')
 
-
-#Histoire
-
-
-#Anglais 
-
+# Anglais 
 @app.route('/cours/anglais/terminale')
 @login_required
 def anglais_terminale():
     return render_template('cours/anglais/anglais_terminal.html')
-
 
 @app.route('/cours/Anglais/chapitre1')
 @login_required
@@ -398,23 +687,13 @@ def anglais_chapitre7():
 def anglais_chapitre8():
     return render_template('cours/anglais/chapitre8._terminal.html')
 
-
-#Anglais 
-
-
-
-
-
-
+# Physique-Chimie
 @app.route('/cours/physique-chimie/terminale')
 @login_required
 def physique_chimie_terminale():
     return render_template('cours/physique-chimie/physique_chimie_terminal.html')
 
-
-
-### SVT
-
+# SVT
 @app.route('/cours/svt/terminale')
 @login_required
 def svt_terminale():
@@ -435,39 +714,9 @@ def svt_chapitre2():
 def svt_chapitre3():
     return render_template('cours/svt/chapitre3._terminal.html')
 
-
-
-
-class CourseContent(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    subject = db.Column(db.String(50))  # philo, maths, etc.
-    chapter_number = db.Column(db.String(10))  # "1.1", "1.2", etc.
-    title = db.Column(db.String(200))
-    content = db.Column(db.Text)
-    is_locked = db.Column(db.Boolean, default=True)
-
-@app.route('/cours/<subject>/chapitre/<chapter_number>')
-@login_required
-def view_chapter(subject, chapter_number):
-    chapter = CourseContent.query.filter_by(
-        subject=subject,
-        chapter_number=chapter_number
-    ).first_or_404()
-    
-    return render_template('cours/chapter_content.html', 
-                         chapter=chapter,
-                         subject=subject)
-
-
-
-
-
-
-
-
-   ######### # Route pour voir tous les utilisateurs inscrits
+# Routes de test
 @app.route('/test/users')
-@login_required  # Ajoute la protection de la route
+@login_required
 def test_users():
     try:
         # Récupère tous les utilisateurs de la base de données
@@ -477,7 +726,6 @@ def test_users():
         flash(f"Erreur: {str(e)}", "error")
         return redirect(url_for('home'))
 
-# Route pour tester la connexion à la base de données
 @app.route('/test/db')
 def test_db():
     try:
@@ -487,12 +735,13 @@ def test_db():
     
     except Exception as e:
         return f"Erreur de connexion à la base de données : {str(e)}"
-    
 
 # Initialisation de la base de données
 with app.app_context():
     db.create_all()
+    migrate = Migrate(app, db)
 
-# Lancement de l'application
+# Lancement de l'applications
 if __name__ == '__main__':
     app.run(debug=True)
+

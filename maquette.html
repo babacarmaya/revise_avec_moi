@@ -1,0 +1,48 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Sparkles, BookOpen, User } from "lucide-react";
+
+export default function Accueil() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-500 text-white p-4 flex flex-col items-center justify-between">
+      {/* Header */}
+      <header className="w-full flex justify-between items-center mt-4">
+        <div className="text-2xl font-bold">📘 Révise Avec Moi</div>
+        <Button variant="outline" className="text-blue-900 bg-white rounded-full">
+          <User className="mr-2" size={16} /> Mon profil
+        </Button>
+      </header>
+
+      {/* Hero */}
+      <section className="mt-16 text-center">
+        <h1 className="text-4xl font-bold leading-tight">
+          Prêt·e à briller <br />
+          aux prochains examens ? <Sparkles className="inline ml-2 text-yellow-300" />
+        </h1>
+        <p className="mt-4 text-lg text-blue-100">
+          Cours interactifs, quiz, défis entre amis et + encore !
+        </p>
+        <Button className="mt-6 text-lg bg-yellow-400 text-blue-900 hover:bg-yellow-300">
+          🎯 Commencer à réviser
+        </Button>
+      </section>
+
+      {/* Niveaux */}
+      <section className="mt-10 w-full flex flex-col gap-4">
+        {["Seconde", "Première", "Terminale"].map((niveau) => (
+          <Card key={niveau} className="bg-white text-blue-900 rounded-xl shadow-md">
+            <CardContent className="p-4 flex items-center justify-between">
+              <div className="font-semibold text-xl">{niveau}</div>
+              <Button className="bg-blue-600 text-white hover:bg-blue-700">Accéder</Button>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
+
+      {/* Footer */}
+      <footer className="mt-8 text-sm text-blue-100">
+        © 2025 Révise Avec Moi — Tous droits réservés
+      </footer>
+    </div>
+  );
+}

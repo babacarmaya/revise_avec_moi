@@ -49,7 +49,7 @@
         <div class="header-container">
             <div class="logo-container">
                 <a href="{{ url_for('home') }}">
-                    <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Logo" class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
                 </a>
             </div>
             
@@ -58,6 +58,10 @@
                     {% if request.endpoint != 'home' %}
                         <a href="{{ url_for('home') }}">Accueil</a>
                     {% endif %}
+                    <a href="{{ url_for('calendar') }}">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Calendrier</span>
+                    </a>
 
                     {% if session['niveau'] == 'seconde' and request.endpoint != 'seconde' %}
                         <a href="{{ url_for('seconde') }}">Mes cours</a>
