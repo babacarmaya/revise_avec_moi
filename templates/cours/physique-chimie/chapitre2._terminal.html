@@ -1,0 +1,2088 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Physique-Chimie - Chimie Organique</div>
+        <h1 class="course-title">Les Amines</h1>
+        <div class="course-subtitle">Structure, propriétés et applications</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Points essentiels</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>Les amines constituent une importante famille de composés organiques azotés dérivés de l'ammoniac (NH₃). Présentes dans de nombreux médicaments, colorants, polymères et molécules biologiques comme les acides aminés et les neurotransmetteurs, les amines jouent un rôle essentiel dans la chimie du vivant et dans l'industrie. Leur étude permet de comprendre les relations entre structure moléculaire, propriétés chimiques et applications pratiques.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Identifier et nommer les amines selon les règles IUPAC</li>
+                        <li>Comprendre la classification des amines (primaires, secondaires, tertiaires)</li>
+                        <li>Étudier les propriétés physiques et chimiques des amines</li>
+                        <li>Maîtriser les principales réactions des amines</li>
+                        <li>Découvrir les applications des amines dans divers domaines</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Nomenclature des composés organiques</li>
+                        <li>Notion de groupe fonctionnel</li>
+                        <li>Liaisons covalentes et polarité</li>
+                        <li>Acides et bases de Brønsted-Lowry</li>
+                        <li>Réactions de substitution nucléophile</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>Les amines sont utilisées dans :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">Les médicaments (anesthésiques, antihistaminiques)</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Les colorants et pigments</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">Les polymères (nylon, polyuréthanes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Structure et classification des amines -->
+    <div class="method-section">
+        <h2>1. Structure et Classification des Amines</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Caractéristiques structurales</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Structure générale des amines</h4>
+                    <div class="concept-card">
+                        <p>Les amines sont des composés organiques dérivés de l'ammoniac (NH₃) dans lesquels un ou plusieurs atomes d'hydrogène sont remplacés par des groupes alkyle ou aryle.</p>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Amine-general.svg/220px-Amine-general.svg.png" alt="Structure générale d'une amine" width="200">
+                            <p class="caption">Structure générale d'une amine où R₁, R₂ et R₃ peuvent être H, alkyle ou aryle</p>
+                        </div>
+                        
+                        <p>L'atome d'azote dans les amines possède une paire d'électrons libres, ce qui confère à ces composés des propriétés basiques et nucléophiles caractéristiques.</p>
+                        
+                        <div class="important-note">
+                            <p>L'azote des amines est hybridé sp³, ce qui donne une géométrie pyramidale (tétraédrique avec une paire d'électrons libres) autour de l'atome d'azote.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Classification des amines</h4>
+                    <div class="concept-card">
+                        <p>Les amines sont classées selon le nombre de substituants (autres que H) liés à l'atome d'azote :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Type d'amine</div>
+                                <div class="summary-cell">Structure</div>
+                                <div class="summary-cell">Exemple</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Amine primaire (1°)</strong></div>
+                                <div class="summary-cell">R-NH₂<br>(un seul groupe alkyle ou aryle)</div>
+                                <div class="summary-cell">Méthylamine (CH₃-NH₂)</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Amine secondaire (2°)</strong></div>
+                                <div class="summary-cell">R₁-NH-R₂<br>(deux groupes alkyle ou aryle)</div>
+                                <div class="summary-cell">Diméthylamine ((CH₃)₂NH)</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Amine tertiaire (3°)</strong></div>
+                                <div class="summary-cell">R₁-N(R₂)-R₃<br>(trois groupes alkyle ou aryle)</div>
+                                <div class="summary-cell">Triméthylamine ((CH₃)₃N)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Amine_types.svg/800px-Amine_types.svg.png" alt="Types d'amines" width="600">
+                            <p class="caption">Représentation des trois types d'amines</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Amines aromatiques</h4>
+                    <div class="concept-card">
+                        <p>Les amines aromatiques (ou arylamines) sont des composés dans lesquels l'atome d'azote est directement lié à un cycle aromatique.</p>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Aniline-2D-skeletal.svg/220px-Aniline-2D-skeletal.svg.png" alt="Structure de l'aniline" width="150">
+                            <p class="caption">Structure de l'aniline (phénylamine), l'amine aromatique la plus simple</p>
+                        </div>
+                        
+                        <p>Les amines aromatiques ont des propriétés différentes des amines aliphatiques :</p>
+                        <ul>
+                            <li>Basicité plus faible (la paire d'électrons libres de l'azote est partiellement délocalisée dans le cycle aromatique)</li>
+                            <li>Réactivité particulière en synthèse organique (formation de sels de diazonium)</li>
+                            <li>Applications spécifiques dans la synthèse de colorants</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Amines hétérocycliques</h4>
+                    <div class="concept-card">
+                        <p>Les amines hétérocycliques sont des composés cycliques dans lesquels l'atome d'azote fait partie du cycle.</p>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Pyridine-2D-skeletal.svg/220px-Pyridine-2D-skeletal.svg.png" alt="Structure de la pyridine" width="150">
+                            <p class="caption">Structure de la pyridine, une amine hétérocyclique aromatique</p>
+                        </div>
+                        
+                        <p>Exemples d'amines hétérocycliques importantes :</p>
+                        <ul>
+                            <li>Pyridine, pyrrole, imidazole (cycles à 5 ou 6 chaînons)</li>
+                            <li>Purine, pyrimidine (bases azotées de l'ADN)</li>
+                            <li>Pipéridine, pyrrolidine (cycles saturés)</li>
+                        </ul>
+                        
+                        <p>Ces composés sont abondants dans la nature et jouent un rôle crucial dans de nombreux processus biologiques.</p>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Classez les amines suivantes comme primaire, secondaire ou tertiaire :</div>
+                            <div class="practice-question">a) (CH₃)₂NH</div>
+                            <div class="practice-question">b) CH₃CH₂NH₂</div>
+                            <div class="practice-question">c) (CH₃CH₂)₃N</div>
+                            <div class="practice-solution">
+                                <p>a) (CH₃)₂NH : amine <strong>secondaire</strong> (deux groupes méthyle liés à l'azote)</p>
+                                <p>b) CH₃CH₂NH₂ : amine <strong>primaire</strong> (un seul groupe éthyle lié à l'azote)</p>
+                                <p>c) (CH₃CH₂)₃N : amine <strong>tertiaire</strong> (trois groupes éthyle liés à l'azote)</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Identifiez les amines aromatiques et hétérocycliques parmi les composés suivants :</div>
+                            <div class="practice-question">a) Aniline</div>
+                            <div class="practice-question">b) Pyridine</div>
+                            <div class="practice-question">c) N-méthylaniline</div>
+                            <div class="practice-solution">
+                                <p>a) Aniline : <strong>amine aromatique</strong> (groupe NH₂ lié directement au cycle benzénique)</p>
+                                <p>b) Pyridine : <strong>amine hétérocyclique</strong> (l'azote fait partie du cycle aromatique)</p>
+                                <p>c) N-méthylaniline : <strong>amine aromatique secondaire</strong> (groupe NH-CH₃ lié au cycle benzénique)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nomenclature des amines -->
+    <div class="method-section">
+        <h2>2. Nomenclature des Amines</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Règles de dénomination</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Nomenclature IUPAC des amines</h4>
+                    <div class="concept-card">
+                        <p>Pour nommer les amines selon les règles IUPAC, on peut utiliser deux méthodes :</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Méthode du suffixe -amine</h5>
+                                    <p>Pour les amines primaires simples, on nomme la chaîne carbonée la plus longue portant le groupe -NH₂ et on ajoute le suffixe "-amine".</p>
+                                    <p>Exemple : CH₃-CH₂-NH₂ → éthanamine</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Méthode du préfixe N-</h5>
+                                    <p>Pour les amines secondaires et tertiaires, on utilise le préfixe "N-" pour indiquer les substituants liés à l'azote.</p>
+                                    <p>Exemple : CH₃-NH-CH₃ → N-méthylméthanamine</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Position du groupe amine</h5>
+                                    <p>Si nécessaire, on indique la position du groupe -NH₂ sur la chaîne principale par un chiffre.</p>
+                                    <p>Exemple : CH₃-CH(NH₂)-CH₃ → propan-2-amine</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de nomenclature</h5>
+                        <div class="example">
+                            <p><strong>CH₃-NH₂</strong> : méthanamine (ou méthylamine)</p>
+                            <p>Explication : chaîne d'un carbone (méth-) avec un groupe -NH₂, d'où méthanamine.</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>CH₃-CH₂-NH₂</strong> : éthanamine (ou éthylamine)</p>
+                            <p>Explication : chaîne de 2 carbones (éth-) avec un groupe -NH₂, d'où éthanamine.</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>(CH₃)₂NH</strong> : N-méthylméthanamine (ou diméthylamine)</p>
+                            <p>Explication : amine secondaire avec deux groupes méthyle liés à l'azote.</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>(CH₃)₃N</strong> : N,N-diméthylméthanamine (ou triméthylamine)</p>
+                            <p>Explication : amine tertiaire avec trois groupes méthyle liés à l'azote.</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>CH₃-CH₂-CH(NH₂)-CH₃</strong> : butan-2-amine</p>
+                            <p>Explication : chaîne de 4 carbones (but-) avec un groupe -NH₂ sur le carbone 2.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Nomenclature des amines aromatiques</h4>
+                    <div class="concept-card">
+                        <p>Pour les amines aromatiques, on peut utiliser deux approches :</p>
+                        
+                        <ul>
+                            <li><strong>Nomenclature substituante</strong> : le groupe -NH₂ est considéré comme un substituant "amino-" sur le cycle aromatique.</li>
+                            <li><strong>Nomenclature fonctionnelle</strong> : on utilise le nom du groupe aryle suivi du suffixe "-amine".</li>
+                        </ul>
+                        
+                        <div class="examples-box">
+                            <div class="example">
+                                <p><strong>C₆H₅-NH₂</strong> : aminobenzène (nomenclature substituante) ou phénylamine (nomenclature fonctionnelle)</p>
+                                <p>Nom usuel : aniline</p>
+                            </div>
+                            <div class="example">
+                                <p><strong>C₆H₅-NH-CH₃</strong> : N-méthylphénylamine ou N-méthylaniline</p>
+                            </div>
+                            <div class="example">
+                                <p><strong>p-CH₃-C₆H₄-NH₂</strong> : 4-méthylaniline ou p-toluidine (nom usuel)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Noms usuels</h4>
+                    <div class="concept-card">
+                        <p>De nombreuses amines sont connues sous des noms usuels ou traditionnels qui sont encore largement utilisés :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Nom usuel</div>
+                                <div class="summary-cell">Nom IUPAC</div>
+                                <div class="summary-cell">Formule</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Méthylamine</div>
+                                <div class="summary-cell">Méthanamine</div>
+                                <div class="summary-cell">CH₃-NH₂</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Diméthylamine</div>
+                                <div class="summary-cell">N-méthylméthanamine</div>
+                                <div class="summary-cell">(CH₃)₂NH</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Triméthylamine</div>
+                                <div class="summary-cell">N,N-diméthylméthanamine</div>
+                                <div class="summary-cell">(CH₃)₃N</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Aniline</div>
+                                <div class="summary-cell">Phénylamine</div>
+                                <div class="summary-cell">C₆H₅-NH₂</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Benzylamine</div>
+                                <div class="summary-cell">Phénylméthanamine</div>
+                                <div class="summary-cell">C₆H₅-CH₂-NH₂</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Nommez les composés suivants selon la nomenclature IUPAC :</div>
+                            <div class="practice-question">a) CH₃-CH₂-CH₂-NH₂</div>
+                            <div class="practice-question">b) (CH₃)₂CH-NH₂</div>
+                            <div class="practice-question">c) CH₃-NH-CH₂-CH₃</div>
+                            <div class="practice-solution">
+                                <p>a) CH₃-CH₂-CH₂-NH₂ : <strong>propan-1-amine</strong> (ou propylamine)</p>
+                                <p>b) (CH₃)₂CH-NH₂ : <strong>propan-2-amine</strong> (ou isopropylamine)</p>
+                                <p>c) CH₃-NH-CH₂-CH₃ : <strong>N-méthyléthanamine</strong> (ou éthylméthylamine)</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Donnez la formule semi-développée des composés suivants :</div>
+                            <div class="practice-question">a) N,N-diméthylpropan-1-amine</div>
+                            <div class="practice-question">b) 3-méthylbutan-2-amine</div>
+                            <div class="practice-question">c) N-éthylaniline</div>
+                            <div class="practice-solution">
+                                <p>a) N,N-diméthylpropan-1-amine : <strong>CH₃-CH₂-CH₂-N(CH₃)₂</strong></p>
+                                <p>b) 3-méthylbutan-2-amine : <strong>CH₃-CH(NH₂)-CH(CH₃)-CH₃</strong></p>
+                                <p>c) N-éthylaniline : <strong>C₆H₅-NH-CH₂-CH₃</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Propriétés physiques des amines -->
+    <div class="method-section">
+        <h2>3. Propriétés Physiques des Amines</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Caractéristiques physico-chimiques</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Polarité et liaisons hydrogène</h4>
+                    <div class="concept-card">
+                        <p>Les amines sont des molécules polaires en raison de la différence d'électronégativité entre l'azote et l'hydrogène. Cette polarité confère aux amines des propriétés particulières :</p>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Hydrogen-bonding-in-ammonia-2D.svg/440px-Hydrogen-bonding-in-ammonia-2D.svg.png" alt="Liaisons hydrogène dans l'ammoniac" width="300">
+                            <p class="caption">Représentation des liaisons hydrogène (similaires à celles formées entre molécules d'amines)</p>
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Formation de liaisons hydrogène</strong> : les amines primaires et secondaires peuvent former des liaisons hydrogène entre elles (N-H···N) et avec d'autres molécules polaires comme l'eau.</li>
+                            <li><strong>Capacité donneuse de liaisons hydrogène</strong> : les groupes N-H peuvent agir comme donneurs de liaisons hydrogène.</li>
+                            <li><strong>Capacité acceptrice de liaisons hydrogène</strong> : la paire d'électrons libres sur l'azote peut agir comme accepteur de liaisons hydrogène.</li>
+                        </ul>
+                        
+                        <div class="important-note">
+                            <p>Les amines tertiaires ne peuvent pas former de liaisons hydrogène entre elles (absence de liaison N-H), mais peuvent toujours agir comme accepteurs de liaisons hydrogène grâce à leur paire d'électrons libres.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Points d'ébullition</h4>
+                    <div class="concept-card">
+                        <p>Les points d'ébullition des amines sont influencés par leur capacité à former des liaisons hydrogène :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Composé</div>
+                                <div class="summary-cell">Masse molaire (g/mol)</div>
+                                <div class="summary-cell">Point d'ébullition (°C)</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Méthylamine (CH₃NH₂)</div>
+                                <div class="summary-cell">31</div>
+                                <div class="summary-cell">-6</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Diméthylamine ((CH₃)₂NH)</div>
+                                <div class="summary-cell">45</div>
+                                <div class="summary-cell">7</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Triméthylamine ((CH₃)₃N)</div>
+                                <div class="summary-cell">59</div>
+                                <div class="summary-cell">3</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Propane (CH₃CH₂CH���)</div>
+                                <div class="summary-cell">44</div>
+                                <div class="summary-cell">-42</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Éthanol (CH₃CH₂OH)</div>
+                                <div class="summary-cell">46</div>
+                                <div class="summary-cell">78</div>
+                            </div>
+                        </div>
+                        
+                        <p>On observe que :</p>
+                        <ul>
+                            <li>Les amines ont des points d'ébullition plus élevés que les alcanes de masse molaire comparable, en raison des liaisons hydrogène.</li>
+                            <li>Les amines ont des points d'ébullition généralement plus bas que les alcools correspondants, car les liaisons hydrogène N-H···N sont plus faibles que les liaisons O-H···O.</li>
+                            <li>Pour les amines de même nombre de carbones, l'ordre des points d'ébullition est généralement : amines primaires > amines secondaires > amines tertiaires (en raison de la diminution du nombre de liaisons N-H disponibles pour former des liaisons hydrogène).</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Solubilité dans l'eau</h4>
+                    <div class="concept-card">
+                        <p>La solubilité des amines dans l'eau dépend de deux facteurs antagonistes :</p>
+                        <ul>
+                            <li>Le groupe amine (-NH₂, -NH- ou -N-), hydrophile, favorise la solubilité dans l'eau grâce aux liaisons hydrogène et à la basicité.</li>
+                            <li>La chaîne carbonée, hydrophobe, diminue la solubilité dans l'eau.</li>
+                        </ul>
+                        
+                        <p>Conséquences :</p>
+                        <ul>
+                            <li>Les amines à chaîne courte (jusqu'à 6 carbones environ) sont solubles ou partiellement solubles dans l'eau.</li>
+                            <li>La solubilité diminue avec l'augmentation de la longueur de la chaîne carbonée.</li>
+                            <li>Les amines forment des liaisons hydrogène avec l'eau, mais peuvent également s'ioniser partiellement en milieu aqueux pour former des ions ammonium (R-NH₃⁺), ce qui augmente leur solubilité.</li>
+                        </ul>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">R-NH₂ + H₂O ⇌ R-NH₃⁺ + OH⁻</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Odeur et autres propriétés</h4>
+                    <div class="concept-card">
+                        <p><strong>Odeur</strong> : Les amines ont généralement une odeur caractéristique, souvent désagréable :</p>
+                        <ul>
+                            <li>Les amines à faible masse molaire ont une odeur ammoniacale piquante.</li>
+                            <li>Certaines amines ont une odeur de poisson pourri (cadavérine, putrescine).</li>
+                            <li>L'odeur est due à la volatilité des amines et à leur interaction avec les récepteurs olfactifs.</li>
+                        </ul>
+                        
+                        <p><strong>CH₃-NH₂</strong> : méthanamine (ou méthylamine)</p>
+                        <p>Explication : chaîne d'un carbone (méth-) avec un groupe -NH₂, d'où méthanamine.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>CH₃-CH₂-NH₂</strong> : éthanamine (ou éthylamine)</p>
+                        <p>Explication : chaîne de 2 carbones (éth-) avec un groupe -NH₂, d'où éthanamine.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>(CH₃)₂NH</strong> : N-méthylméthanamine (ou diméthylamine)</p>
+                        <p>Explication : amine secondaire avec deux groupes méthyle liés à l'azote.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>(CH₃)₃N</strong> : N,N-diméthylméthanamine (ou triméthylamine)</p>
+                        <p>Explication : amine tertiaire avec trois groupes méthyle liés à l'azote.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>CH₃-CH₂-CH(NH₂)-CH₃</strong> : butan-2-amine</p>
+                        <p>Explication : chaîne de 4 carbones (but-) avec un groupe -NH₂ sur le carbone 2.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Nomenclature des amines aromatiques</h4>
+                <div class="concept-card">
+                    <p>Pour les amines aromatiques, on peut utiliser deux approches :</p>
+                    
+                    <ul>
+                        <li><strong>Nomenclature substituante</strong> : le groupe -NH₂ est considéré comme un substituant "amino-" sur le cycle aromatique.</li>
+                        <li><strong>Nomenclature fonctionnelle</strong> : on utilise le nom du groupe aryle suivi du suffixe "-amine".</li>
+                    </ul>
+                    
+                    <div class="examples-box">
+                        <div class="example">
+                            <p><strong>C₆H₅-NH₂</strong> : aminobenzène (nomenclature substituante) ou phénylamine (nomenclature fonctionnelle)</p>
+                            <p>Nom usuel : aniline</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>C₆H₅-NH-CH₃</strong> : N-méthylphénylamine ou N-méthylaniline</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>p-CH₃-C₆H₄-NH₂</strong> : 4-méthylaniline ou p-toluidine (nom usuel)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Noms usuels</h4>
+                <div class="concept-card">
+                    <p>De nombreuses amines sont connues sous des noms usuels ou traditionnels qui sont encore largement utilisés :</p>
+                    
+                    <div class="summary-table">
+                        <div class="summary-row header">
+                            <div class="summary-cell">Nom usuel</div>
+                            <div class="summary-cell">Nom IUPAC</div>
+                            <div class="summary-cell">Formule</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Méthylamine</div>
+                            <div class="summary-cell">Méthanamine</div>
+                            <div class="summary-cell">CH₃-NH₂</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Diméthylamine</div>
+                            <div class="summary-cell">N-méthylméthanamine</div>
+                            <div class="summary-cell">(CH₃)₂NH</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Triméthylamine</div>
+                            <div class="summary-cell">N,N-diméthylméthanamine</div>
+                            <div class="summary-cell">(CH₃)₃N</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Aniline</div>
+                            <div class="summary-cell">Phénylamine</div>
+                            <div class="summary-cell">C₆H₅-NH₂</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Benzylamine</div>
+                            <div class="summary-cell">Phénylméthanamine</div>
+                            <div class="summary-cell">C₆H₅-CH₂-NH₂</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h5>Exercices d'application</h5>
+                <div class="practice-items">
+                    <div class="practice-item">
+                        <div class="practice-question">1. Nommez les composés suivants selon la nomenclature IUPAC :</div>
+                        <div class="practice-question">a) CH₃-CH₂-CH₂-NH₂</div>
+                        <div class="practice-question">b) (CH₃)₂CH-NH₂</div>
+                        <div class="practice-question">c) CH₃-NH-CH₂-CH₃</div>
+                        <div class="practice-solution">
+                            <p>a) CH₃-CH₂-CH₂-NH₂ : <strong>propan-1-amine</strong> (ou propylamine)</p>
+                            <p>b) (CH₃)₂CH-NH₂ : <strong>propan-2-amine</strong> (ou isopropylamine)</p>
+                            <p>c) CH₃-NH-CH₂-CH₃ : <strong>N-méthyléthanamine</strong> (ou éthylméthylamine)</p>
+                        </div>
+                    </div>
+                    <div class="practice-item">
+                        <div class="practice-question">2. Donnez la formule semi-développée des composés suivants :</div>
+                        <div class="practice-question">a) N,N-diméthylpropan-1-amine</div>
+                        <div class="practice-question">b) 3-méthylbutan-2-amine</div>
+                        <div class="practice-question">c) N-éthylaniline</div>
+                        <div class="practice-solution">
+                            <p>a) N,N-diméthylpropan-1-amine : <strong>CH₃-CH₂-CH₂-N(CH₃)₂</strong></p>
+                            <p>b) 3-méthylbutan-2-amine : <strong>CH₃-CH(NH₂)-CH(CH₃)-CH₃</strong></p>
+                            <p>c) N-éthylaniline : <strong>C₆H₅-NH-CH₂-CH₃</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Propriétés physiques des amines -->
+<div class="method-section">
+    <h2>3. Propriétés Physiques des Amines</h2>
+    
+    <div class="method-card">
+        <div class="method-header">
+            <h3>Caractéristiques physico-chimiques</h3>
+        </div>
+        <div class="method-content">
+            <div class="subsection">
+                <h4>Polarité et liaisons hydrogène</h4>
+                <div class="concept-card">
+                    <p>Les amines sont des molécules polaires en raison de la différence d'électronégativité entre l'azote et l'hydrogène. Cette polarité confère aux amines des propriétés particulières :</p>
+                    
+                    <div class="illustration-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Hydrogen-bonding-in-ammonia-2D.svg/440px-Hydrogen-bonding-in-ammonia-2D.svg.png" alt="Liaisons hydrogène dans l'ammoniac" width="300">
+                        <p class="caption">Représentation des liaisons hydrogène (similaires à celles formées entre molécules d'amines)</p>
+                    </div>
+                    
+                    <ul>
+                        <li><strong>Formation de liaisons hydrogène</strong> : les amines primaires et secondaires peuvent former des liaisons hydrogène entre elles (N-H···N) et avec d'autres molécules polaires comme l'eau.</li>
+                        <li><strong>Capacité donneuse de liaisons hydrogène</strong> : les groupes N-H peuvent agir comme donneurs de liaisons hydrogène.</li>
+                        <li><strong>Capacité acceptrice de liaisons hydrogène</strong> : la paire d'électrons libres sur l'azote peut agir comme accepteur de liaisons hydrogène.</li>
+                    </ul>
+                    
+                    <div class="important-note">
+                        <p>Les amines tertiaires ne peuvent pas former de liaisons hydrogène entre elles (absence de liaison N-H), mais peuvent toujours agir comme accepteurs de liaisons hydrogène grâce à leur paire d'électrons libres.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Points d'ébullition</h4>
+                <div class="concept-card">
+                    <p>Les points d'ébullition des amines sont influencés par leur capacité à former des liaisons hydrogène :</p>
+                    
+                    <div class="summary-table">
+                        <div class="summary-row header">
+                            <div class="summary-cell">Composé</div>
+                            <div class="summary-cell">Masse molaire (g/mol)</div>
+                            <div class="summary-cell">Point d'ébullition (°C)</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Méthylamine (CH₃NH₂)</div>
+                            <div class="summary-cell">31</div>
+                            <div class="summary-cell">-6</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Diméthylamine ((CH₃)₂NH)</div>
+                            <div class="summary-cell">45</div>
+                            <div class="summary-cell">7</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Triméthylamine ((CH₃)₃N)</div>
+                            <div class="summary-cell">59</div>
+                            <div class="summary-cell">3</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Propane (CH₃CH₂CH���)</div>
+                            <div class="summary-cell">44</div>
+                            <div class="summary-cell">-42</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Éthanol (CH₃CH₂OH)</div>
+                            <div class="summary-cell">46</div>
+                            <div class="summary-cell">78</div>
+                        </div>
+                    </div>
+                    
+                    <p>On observe que :</p>
+                    <ul>
+                        <li>Les amines ont des points d'ébullition plus élevés que les alcanes de masse molaire comparable, en raison des liaisons hydrogène.</li>
+                        <li>Les amines ont des points d'ébullition généralement plus bas que les alcools correspondants, car les liaisons hydrogène N-H···N sont plus faibles que les liaisons O-H···O.</li>
+                        <li>Pour les amines de même nombre de carbones, l'ordre des points d'ébullition est généralement : amines primaires > amines secondaires > amines tertiaires (en raison de la diminution du nombre de liaisons N-H disponibles pour former des liaisons hydrogène).</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Solubilité dans l'eau</h4>
+                <div class="concept-card">
+                    <p>La solubilité des amines dans l'eau dépend de deux facteurs antagonistes :</p>
+                    <ul>
+                        <li>Le groupe amine (-NH₂, -NH- ou -N-), hydrophile, favorise la solubilité dans l'eau grâce aux liaisons hydrogène et à la basicité.</li>
+                        <li>La chaîne carbonée, hydrophobe, diminue la solubilité dans l'eau.</li>
+                    </ul>
+                    
+                    <p>Conséquences :</p>
+                    <ul>
+                        <li>Les amines à chaîne courte (jusqu'à 6 carbones environ) sont solubles ou partiellement solubles dans l'eau.</li>
+                        <li>La solubilité diminue avec l'augmentation de la longueur de la chaîne carbonée.</li>
+                        <li>Les amines forment des liaisons hydrogène avec l'eau, mais peuvent également s'ioniser partiellement en milieu aqueux pour former des ions ammonium (R-NH₃⁺), ce qui augmente leur solubilité.</li>
+                    </ul>
+                    
+                    <div class="formula-box">
+                        <p><span class="math-formula">R-NH₂ + H₂O ⇌ R-NH₃⁺ + OH⁻</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Odeur et autres propriétés</h4>
+                <div class="concept-card">
+                    <p><strong>Odeur</strong> : Les amines ont généralement une odeur caractéristique, souvent désagréable :</p>
+                    <ul>
+                        <li>Les amines à faible masse molaire ont une odeur ammoniacale piquante.</li>
+                        <li>Certaines amines ont une odeur de poisson pourri (cadavérine, putrescine).</li>
+                        <li>L'odeur est due à la volatilité des amines et à leur interaction avec les récepteurs olfactifs.</li>
+                    </ul>
+                    
+                    <p><strong>État physique</strong> : À température ambiante :</p>
+                    <ul>
+                        <li>Les amines de C₁ à C₄ sont gazeuses</li>
+                        <li>Les amines de C₅ à C₁₁ sont liquides</li>
+                        <li>Les amines au-delà de C₁₂ sont solides</li>
+                    </ul>
+                    
+                    <p><strong>Couleur</strong> : La plupart des amines aliphatiques sont incolores, tandis que certaines amines aromatiques peuvent être colorées ou se colorer à l'air par oxydation.</p>
+                    
+                    <p><strong>Toxicité</strong> : De nombreuses amines sont toxiques ou irritantes pour les voies respiratoires, la peau et les yeux. Certaines amines aromatiques (comme la benzidine) sont cancérigènes.</p>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h5>Exercices d'application</h5>
+                <div class="practice-items">
+                    <div class="practice-item">
+                        <div class="practice-question">1. Classez les composés suivants par ordre croissant de point d'ébullition : propan-1-amine, triméthylamine, propan-1-ol.</div>
+                        <div class="practice-solution">
+                            <p>Ordre croissant de point d'ébullition : triméthylamine (3°C) < propan-1-amine (48°C) < propan-1-ol (97°C)</p>
+                            <p>Explication : La triméthylamine est une amine tertiaire qui ne peut pas former de liaisons hydrogène entre ses molécules. La propan-1-amine peut former des liaisons hydrogène N-H···N, mais ces liaisons sont plus faibles que les liaisons O-H···O du propan-1-ol.</p>
+                        </div>
+                    </div>
+                    <div class="practice-item">
+                        <div class="practice-question">2. Expliquez pourquoi les amines à chaîne courte sont solubles dans l'eau, alors que les amines à longue chaîne ne le sont pas.</div>
+                        <div class="practice-solution">
+                            <p>Les amines à chaîne courte sont solubles dans l'eau car :</p>
+                            <ul>
+                                <li>Elles peuvent former des liaisons hydrogène avec l'eau via leur groupe amine (N-H···O et O-H···N)</li>
+                                <li>Elles peuvent s'ioniser partiellement en milieu aqueux pour former des ions ammonium (R-NH₃⁺), augmentant leur solubilité</li>
+                                <li>La partie hydrophobe (chaîne carbonée) est relativement petite</li>
+                            </ul>
+                            <p>Pour les amines à longue chaîne, l'effet hydrophobe de la chaîne carbonée devient prédominant et l'emporte sur l'effet hydrophile du groupe amine, rendant ces composés insolubles dans l'eau.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Propriétés chimiques des amines -->
+<div class="method-section">
+    <h2>4. Propriétés Chimiques des Amines</h2>
+    
+    <div class="method-card">
+        <div class="method-header">
+            <h3>Réactivité et comportement chimique</h3>
+        </div>
+        <div class="method-content">
+            <div class="subsection">
+                <h4>Basicité des amines</h4>
+                <div class="concept-card">
+                    <p>Les amines sont des bases de Brønsted-Lowry (accepteurs de protons) en raison de la paire d'électrons libres sur l'atome d'azote. En solution aqueuse, elles réagissent avec l'eau selon l'équilibre :</p>
+                    
+                    <div class="formula-box">
+                        <p><span class="math-formula">R-NH₂ + H₂O ⇌ R-NH₃⁺ + OH⁻</span></p>
+                    </div>
+                    
+                    <p>La force basique d'une amine est caractérisée par sa constante de basicité K<sub>b</sub> ou par le pK<sub>a</sub> de son acide conjugué (ion ammonium) :</p>
+                    
+                    <div class="formula-box">
+                        <p><span class="math-formula">K<sub>b</sub> = [R-NH₃⁺][OH⁻]/[R-NH₂]</span></p>
+                        <p><span class="math-formula">pK<sub>a</sub> + pK<sub>b</sub> = 14</span> (à 25°C)</p>
+                    </div>
+                    
+                    <p>Facteurs influençant la basicité des amines :</p>
+                    <ul>
+                        <li><strong>Effets inductifs</strong> : Les groupes alkyle (donneurs d'électrons) augmentent la basicité en stabilisant la charge positive de l'ion ammonium.</li>
+                        <li><strong>Effets de résonance</strong> : Dans les amines aromatiques, la délocalisation de la paire d'électrons libres dans le cycle diminue la basicité.</li>
+                        <li><strong>Effets stériques</strong> : L'encombrement stérique autour de l'azote peut réduire la basicité en gênant la solvatation de l'ion ammonium.</li>
+                    </ul>
+                    
+                    <div class="summary-table">
+                        <div class="summary-row header">
+                            <div class="summary-cell">Composé</div>
+                            <div class="summary-cell">pK<sub>a</sub> de l'acide conjugué</div>
+                            <div class="summary-cell">Force basique relative</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Ammoniac (NH₃)</div>
+                            <div class="summary-cell">9,25</div>
+                            <div class="summary-cell">Référence</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Méthylamine (CH₃NH₂)</div>
+                            <div class="summary-cell">10,66</div>
+                            <div class="summary-cell">Plus basique</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Diméthylamine ((CH₃)₂NH)</div>
+                            <div class="summary-cell">10,73</div>
+                            <div class="summary-cell">Plus basique</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Triméthylamine ((CH₃)₃N)</div>
+                            <div class="summary-cell">9,80</div>
+                            <div class="summary-cell">Plus basique</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Aniline (C₆H₅NH₂)</div>
+                            <div class="summary-cell">4,63</div>
+                            <div class="summary-cell">Moins basique</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Pyridine (C₅H₅N)</div>
+                            <div class="summary-cell">5,25</div>
+                            <div class="summary-cell">Moins basique</div>
+                        </div>
+                    </div>
+                    
+                    <div class="important-note">
+                        <p>Pour les amines aliphatiques, l'ordre général de basicité est : amines secondaires > amines primaires > amines tertiaires > ammoniac. Cependant, les amines aromatiques sont nettement moins basiques que les amines aliphatiques en raison de la délocalisation de la paire d'électrons libres.</p>
+                    </div>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Réaction avec les acides</h5>
+                    <div class="example">
+                        <p>Les amines réagissent avec les acides pour former des sels d'ammonium :</p>
+                        <p>CH₃NH₂ + HCl → CH₃NH₃⁺Cl⁻ (chlorure de méthylammonium)</p>
+                        <p>Ces sels sont généralement solubles dans l'eau et ont des points de fusion élevés. Cette réaction est utilisée pour convertir les amines en sels hydrosolubles, ce qui est utile en pharmacologie pour améliorer la solubilité des médicaments contenant des groupes amine.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Nucléophilie des amines</h4>
+                <div class="concept-card">
+                    <p>Grâce à leur paire d'électrons libres, les amines sont de bons nucléophiles et peuvent participer à diverses réactions de substitution nucléophile :</p>
+                    
+                    <p><strong>1. Alkylation des amines</strong> : Réaction avec les halogénoalcanes (R-X) pour former des amines de degré supérieur.</p>
+                    <div class="formula-box">
+                        <p><span class="math-formula">R-NH₂ + R'-X → R-NH-R' + HX</span> (formation d'une amine secondaire)</p>
+                        <p><span class="math-formula">R-NH-R' + R''-X → R-N(R')-R'' + HX</span> (formation d'une amine tertiaire)</p>
+                        <p><span class="math-formula">R-N(R')-R'' + R'''-X → R-N⁺(R')(R'')(R''') X⁻</span> (formation d'un sel d'ammonium quaternaire)</p>
+                    </div>
+                    
+                    <p><strong>2. Acylation des amines</strong> : Réaction avec les chlorures d'acyle ou les anhydrides d'acide pour former des amides.</p>
+                    <div class="formula-box">
+                        <p><span class="math-formula">R-NH₂ + R'-COCl → R-NH-CO-R' + HCl</span></p>
+                    </div>
+                    
+                    <div class="important-note">
+                        <p>L'alkylation des amines est difficile à contrôler et conduit souvent à des mélanges de produits (sur-alkylation). L'acylation est plus sélective car l'amide formé est moins nucléophile que l'amine de départ.</p>
+                    </div>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Formation d'amide</h5>
+                    <div class="example">
+                        <p>La réaction entre l'aniline et le chlorure d'acétyle produit l'acétanilide :</p>
+                        <p>C₆H₅NH₂ + CH₃COCl → C₆H₅NHCOCH₃ + HCl</p>
+                        <p>Cette réaction est utilisée dans la synthèse de médicaments comme le paracétamol (acétaminophène).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Réactions des amines aromatiques</h4>
+                <div class="concept-card">
+                    <p>Les amines aromatiques présentent des réactions spécifiques en raison de la présence du cycle aromatique :</p>
+                    
+                    <p><strong>1. Formation de sels de diazonium</strong> : Réaction de diazotation avec l'acide nitreux (HNO₂) à basse température (0-5°C).</p>
+                    <div class="formula-box">
+                        <p><span class="math-formula">Ar-NH₂ + HNO₂ + HCl → Ar-N₂⁺Cl⁻ + 2H₂O</span></p>
+                    </div>
+                    
+                    <p><strong>2. Couplage diazoïque</strong> : Les sels de diazonium peuvent réagir avec des composés aromatiques activés (phénols, amines) pour former des composés azoïques colorés.</p>
+                    <div class="formula-box">
+                        <p><span class="math-formula">Ar-N₂⁺ + Ar'-OH → Ar-N=N-Ar'-OH + H⁺</span></p>
+                    </div>
+                    
+                    <p><strong>3. Substitution électrophile aromatique</strong> : Le groupe -NH₂ est fortement activant et orienteur en ortho/para dans les réactions de substitution électrophile aromatique.</p>
+                    
+                    <div class="illustration-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Diazotization.svg/800px-Diazotization.svg.png" alt="Réaction de diazotation" width="500">
+                        <p class="caption">Réaction de diazotation d'une amine aromatique</p>
+                    </div>
+                </div>
+                
+                <div class="examples-box">
+                    <h5>Exemple : Synthèse d'un colorant azoïque</h5>
+                    <div class="example">
+                        <p>La diazotation de l'aniline suivie d'un couplage avec le β-naphtol produit un colorant azoïque rouge :</p>
+                        <p>1. C₆H₅NH₂ + NaNO₂ + HCl → C₆H₅N₂⁺Cl⁻ + NaCl + 2H₂O</p>
+                        <p>2. C₆H₅N₂⁺Cl⁻ + C₁₀H₇OH → C₆H₅N=N-C₁₀H₆OH + HCl</p>
+                        <p>Ce type de réaction est à la base de nombreux colorants industriels.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Réaction avec les carbonyles</h4>
+                <div class="concept-card">
+                    <p>Les amines réagissent avec les composés carbonylés (aldéhydes et cétones) pour former différents produits :</p>
+                    
+                    <p><strong>1. Avec les amines primaires</strong> : Formation d'imines (bases de Schiff) après élimination d'eau.</p>
+                    <div class="formula-box">
+                        <p><span class="math-formula">R-NH₂ + R'-CHO → R-N=CH-R' + H₂O</span></p>
+                    </div>
+                    
+                    <p><strong>2. Avec les amines secondaires</strong> : Formation d'énamines.</p>
+                    <div class="formula-box">
+                        <p><span class="math-formula">R₂NH + R'-CH₂-CO-R'' → R₂N-CR'=CH-R'' + H₂O</span></p>
+                    </div>
+                    
+                    <p>Ces réactions sont importantes en synthèse organique et en biochimie (formation de la liaison peptidique, vision).</p>
+                    
+                    <div class="illustration-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Imine_formation_mechanism.svg/800px-Imine_formation_mechanism.svg.png" alt="Formation d'une imine" width="500">
+                        <p class="caption">Mécanisme de formation d'une imine à partir d'une amine primaire et d'un aldéhyde</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h5>Exercices d'application</h5>
+                <div class="practice-items">
+                    <div class="practice-item">
+                        <div class="practice-question">1. Classez les composés suivants par ordre croissant de basicité : aniline, méthylamine, ammoniac.</div>
+                        <div class="practice-solution">
+                            <p>Ordre croissant de basicité : aniline < ammoniac < méthylamine</p>
+                            <p>Explication :</p>
+                            <ul>
+                                <li>L'aniline est la moins basique car la paire d'électrons libres de l'azote est partiellement délocalisée dans le cycle aromatique, la rendant moins disponible pour accepter un proton.</li>
+                                <li>L'ammoniac est plus basique que l'aniline mais moins que la méthylamine.</li>
+                                <li>La méthylamine est la plus basique car le groupe méthyle, donneur d'électrons par effet inductif, augmente la densité électronique sur l'azote et stabilise l'ion ammonium formé.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="practice-item">
+                        <div class="practice-question">2. Donnez les produits des réactions suivantes :</div>
+                        <div class="practice-question">a) Aniline + acide chlorhydrique</div>
+                        <div class="practice-question">b) Méthylamine + chlorure d'acétyle</div>
+                        <div class="practice-question">c) Aniline + nitrite de sodium + acide chlorhydrique (à 0-5°C)</div>
+                        <div class="practice-solution">
+                            <p>a) Aniline + acide chlorhydrique :</p>
+                            <p>C₆H₅NH₂ + HCl → C₆H₅NH₃⁺Cl⁻ (chlorhydrate d'aniline)</p>
+                            <p>b) Méthylamine + chlorure d'acétyle :</p>
+                            <p>CH₃NH₂ + CH₃COCl → CH₃NHCOCH₃ + HCl (N-méthylacétamide)</p>
+                            <p>c) Aniline + nitrite de sodium + acide chlorhydrique (à 0-5°C) :</p>
+                            <p>C₆H₅NH₂ + NaNO₂ + HCl → C₆H₅N₂⁺Cl⁻ + NaCl + 2H₂O (chlorure de benzènediazonium)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Méthodes de préparation des amines -->
+<div class="method-section">
+    <h2>5. Méthodes de Préparation des Amines</h2>
+    
+    <div class="method-card">
+        <div class="method-header">
+            <h3>Synthèse en laboratoire et dans l'industrie</h3>
+        </div>
+        <div class="method-content">
+            <div class="subsection">
+                <h4>Amination réductrice</h4>
+                <div class="concept-card">
+                    <p>L'amination réductrice est une méthode importante pour la synthèse d'amines à partir de composés carbonylés (aldéhydes ou cétones) et d'ammoniac ou d'amines.</p>
+                    
+                    <div class="method-steps">
+                        <div class="method-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Formation d'un intermédiaire imine</h5>
+                                <p>Le composé carbonylé réagit avec l'amine pour former une imine (base de Schiff).</p>
+                                <p>R₁-CO-R₂ + R₃-NH₂ → R₁-C(=N-R₃)-R₂ + H₂O</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Réduction de l'imine</h5>
+                                <p>L'imine est ensuite réduite par un agent réducteur (NaBH₄, H₂/Ni, etc.) pour donner l'amine.</p>
+                                <p>R₁-C(=N-R₃)-R₂ + 2[H] → R₁-CH(NH-R₃)-R₂</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>Cette méthode permet de synthétiser des amines primaires, secondaires ou tertiaires selon le réactif azoté utilisé (NH₃, amine primaire ou secondaire).</p>
+                    
+                    <div class="examples-box">
+                        <div class="example">
+                            <p>Synthèse de la N-méthylbenzylamine :</p>
+                            <p>C₆H₅CHO + CH₃NH₂ → C₆H₅CH=N-CH₃ + H₂O</p>
+                            <p>C₆H₅CH=N-CH₃ + NaBH₄ → C₆H₅CH₂-NH-CH₃</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Réduction des composés azotés</h4>
+                <div class="concept-card">
+                    <p>Plusieurs composés azotés peuvent être réduits pour donner des amines :</p>
+                    
+                    <div class="summary-table">
+                        <div class="summary-row header">
+                            <div class="summary-cell">Composé de départ</div>
+                            <div class="summary-cell">Conditions de réduction</div>
+                            <div class="summary-cell">Produit</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Nitriles (R-C≡N)</div>
+                            <div class="summary-cell">H₂/Ni, LiAlH₄</div>
+                            <div class="summary-cell">Amines primaires (R-CH₂-NH₂)</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Amides (R-CO-NH₂)</div>
+                            <div class="summary-cell">LiAlH₄</div>
+                            <div class="summary-cell">Amines primaires (R-CH₂-NH₂)</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Nitro (Ar-NO₂)</div>
+                            <div class="summary-cell">Fe/HCl, Sn/HCl, H₂/Ni</div>
+                            <div class="summary-cell">Amines aromatiques (Ar-NH₂)</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-cell">Imines (R₁-C=N-R₂)</div>
+                            <div class="summary-cell">NaBH₄, H₂/Ni</div>
+                            <div class="summary-cell">Amines secondaires (R₁-CH₂-NH-R₂)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <div class="example">
+                            <p>Réduction du nitrobenzène en aniline :</p>
+                            <p>C₆H₅NO₂ + 3Fe + 7HCl → C₆H₅NH₂ + 3FeCl₃ + 2H₂O</p>
+                            <p>Cette réaction est importante industriellement pour la production d'aniline, utilisée dans la synthèse de colorants et de polymères.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Alkylation de l'ammoniac et des amines</h4>
+                <div class="concept-card">
+                    <p>L'alkylation directe de l'ammoniac ou des amines avec des halogénoalcanes permet de synthétiser des amines :</p>
+                    
+                    <div class="formula-box">
+                        <p><span class="math-formula">NH₃ + R-X → R-NH₂ + HX</span> (amine primaire)</p>
+                        <p><span class="math-formula">R-NH₂ + R'-X → R-NH-R' + HX</span> (amine secondaire)</p>
+                        <p><span class="math-formula">R-NH-R' + R''-X → R-N(R')-R'' + HX</span> (amine tertiaire)</p>
+                    </div>
+                    
+                    <div class="important-note">
+                        <p>Cette méthode présente un inconvénient majeur : la sur-alkylation. L'amine formée étant plus nucléophile que l'ammoniac, elle réagit préférentiellement avec l'halogénoalcane, conduisant à un mélange d'amines primaires, secondaires, tertiaires et de sels d'ammonium quaternaires.</p>
+                    </div>
+                    
+                    <p>Pour contourner ce problème, on peut utiliser :</p>
+                    <ul>
+                        <li>Un large excès d'ammoniac</li>
+                        <li>La synthèse de Gabriel (voir ci-dessous)</li>
+                        <li>L'amination réductrice</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Synthèse de Gabriel</h4>
+                <div class="concept-card">
+                    <p>La synthèse de Gabriel est une méthode spécifique pour préparer des amines primaires sans risque de sur-alkylation :</p>
+                    
+                    <div class="method-steps">
+                        <div class="method-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Formation du sel de potassium du phtalimide</h5>
+                                <p>Le phtalimide réagit avec KOH pour former son sel de potassium.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Alkylation du phtalimide</h5>
+                                <p>Le sel de potassium du phtalimide réagit avec un halogénoalcane pour former un N-alkylphtalimide.</p>
+                            </div>
+                        </div>
+                        <div class="method-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>Hydrolyse</h5>
+                                <p>L'hydrolyse du N-alkylphtalimide (avec NaOH ou hydrazine) libère l'amine primaire.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Gabriel_synthesis.svg/800px-Gabriel_synthesis.svg.png" alt="Synthèse de Gabriel" width="600">
+                        <p class="caption">Étapes de la synthèse de Gabriel</p>
+                    </div>
+                    
+                    <p>Cette méthode est particulièrement utile pour la synthèse d'amines primaires pures, sans contamination par des amines secondaires ou tertiaires.</p>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h5>Exercices d'application</h5>
+                <div class="practice-items">
+                    <div class="practice-item">
+                        <div class="practice-question">1. Proposez une méthode de synthèse pour préparer la benzylamine (C₆H₅CH₂NH₂) à partir du benzaldéhyde (C₆H₅CHO).</div>
+                        <div class="practice-solution">
+                            <p>On peut utiliser l'amination réductrice :</p>
+                            <p>1. Réaction du benzaldéhyde avec l'ammoniac pour former une imine :</p>
+                            <p>C₆H₅CHO + NH₃ → C₆H₅CH=NH + H₂O</p>
+                            <p>2. Réduction de l'imine avec NaBH₄ ou H₂/Ni :</p>
+                            <p>C₆H₅CH=NH + 2[H] → C₆H₅CH₂NH₂</p>
+                            <p>Cette méthode permet d'obtenir sélectivement l'amine primaire.</p>
+                        </div>
+                    </div>
+                    <div class="practice-item">
+                        <div class="practice-question">2. Comment pourriez-vous synthétiser la N-méthylaniline (C₆H₅NHCH₃) à partir de l'aniline (C₆H₅NH₂) ?</div>
+                        <div class="practice-solution">
+                            <p>Deux méthodes sont possibles :</p>
+                            <p><strong>Méthode 1 : Alkylation directe</strong></p>
+                            <p>C₆H₅NH₂ + CH₃I → C₆H₅NHCH₃ + HI</p>
+                            <p>Cette méthode nécessite un contrôle précis des conditions pour éviter la formation de N,N-diméthylaniline.</p>
+                            
+                            <p><strong>Méthode 2 : Amination réductrice</strong></p>
+                            <p>1. Réaction de l'aniline avec le formaldéhyde pour former une imine :</p>
+                            <p>C₆H₅NH₂ + HCHO → C₆H₅N=CH₂ + H₂O</p>
+                            <p>2. Réduction de l'imine :</p>
+                            <p>C₆H₅N=CH₂ + 2[H] → C₆H₅NHCH₃</p>
+                            <p>Cette méthode est généralement préférée car elle offre une meilleure sélectivité.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Applications des amines -->
+<div class="method-section">
+    <h2>6. Applications des Amines</h2>
+    
+    <div class="method-card">
+        <div class="method-header">
+            <h3>Utilisations dans la vie quotidienne et l'industrie</h3>
+        </div>
+        <div class="method-content">
+            <div class="subsection">
+                <h4>Applications pharmaceutiques</h4>
+                <div class="concept-card">
+                    <p>Les amines sont présentes dans de nombreux médicaments et composés biologiquement actifs :</p>
+                    
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">💊</div>
+                            <h5>Analgésiques</h5>
+                            <ul>
+                                <li><strong>Paracétamol</strong> (acétaminophène) : analgésique et antipyrétique</li>
+                                <li><strong>Morphine</strong> et dérivés : analgésiques puissants</li>
+                                <li><strong>Lidocaïne</strong> : anesthésique local</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧠</div>
+                            <h5>Médicaments du système nerveux</h5>
+                            <ul>
+                                <li><strong>Antidépresseurs</strong> : fluoxétine (Prozac), amitriptyline</li>
+                                <li><strong>Antihistaminiques</strong> : diphenhydramine (Benadryl), cétirizine</li>
+                                <li><strong>Neuroleptiques</strong> : chlorpromazine, halopéridol</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">❤️</div>
+                            <h5>Médicaments cardiovasculaires</h5>
+                            <ul>
+                                <li><strong>Bêta-bloquants</strong> : propranolol, aténolol</li>
+                                <li><strong>Antihypertenseurs</strong> : captopril, énalapril</li>
+                                <li><strong>Anticoagulants</strong> : warfarine</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🦠</div>
+                            <h5>Anti-infectieux</h5>
+                            <ul>
+                                <li><strong>Antibiotiques</strong> : ampicilline, ciprofloxacine</li>
+                                <li><strong>Antipaludéens</strong> : chloroquine, méfloquine</li>
+                                <li><strong>Antiviraux</strong> : acyclovir, oseltamivir</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="important-note">
+                        <p>De nombreux médicaments contiennent des groupes amine qui sont essentiels à leur activité biologique. Ces groupes peuvent interagir avec les récepteurs, les enzymes ou d'autres cibles biologiques par le biais de liaisons hydrogène, d'interactions ioniques ou d'autres interactions moléculaires.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Colorants et pigments</h4>
+                <div class="concept-card">
+                    <p>Les amines aromatiques sont à la base de nombreux colorants synthétiques :</p>
+                    
+                    <ul>
+                        <li><strong>Colorants azoïques</strong> : Formés par couplage diazoïque entre un sel de diazonium et un phénol ou une amine aromatique. Ils représentent environ 60-70% des colorants synthétiques utilisés dans l'industrie.</li>
+                        <li><strong>Colorants triphénylméthanes</strong> : Comme le violet de méthyle, utilisés pour la coloration des textiles, encres et indicateurs de pH.</li>
+                        <li><strong>Indigo et dérivés</strong> : Utilisés pour teindre les jeans et autres textiles en bleu.</li>
+                    </ul>
+                    
+                    <div class="illustration-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Azo_coupling_mechanism.svg/800px-Azo_coupling_mechanism.svg.png" alt="Formation d'un colorant azoïque" width="500">
+                        <p class="caption">Mécanisme de formation d'un colorant azoïque par couplage diazoïque</p>
+                    </div>
+                    
+                    <p>Les colorants à base d'amines sont utilisés dans de nombreux domaines :</p>
+                    <ul>
+                        <li>Industrie textile</li>
+                        <li>Encres d'imprimerie</li>
+                        <li>Colorants alimentaires</li>
+                        <li>Teintures capillaires</li>
+                        <li>Indicateurs chimiques</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Polymères et matériaux</h4>
+                <div class="concept-card">
+                    <p>Les amines jouent un rôle important dans la synthèse de nombreux polymères et matériaux :</p>
+                    
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">🧵</div>
+                            <h5>Polyamides</h5>
+                            <ul>
+                                <li><strong>Nylon</strong> : Polymère formé par condensation d'une diamine et d'un diacide</li>
+                                <li><strong>Kevlar</strong> : Polyamide aromatique utilisé dans les gilets pare-balles et autres applications nécessitant une haute résistance</li>
+                                <li><strong>Fibres textiles</strong> : Vêtements, tapis, cordes</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🛋️</div>
+                            <h5>Polyuréthanes</h5>
+                            <ul>
+                                <li><strong>Mousses</strong> : Matelas, sièges, isolation</li>
+                                <li><strong>Élastomères</strong> : Pneus, semelles de chaussures</li>
+                                <li><strong>Revêtements</strong> : Peintures, vernis</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧪</div>
+                            <h5>Résines époxy</h5>
+                            <ul>
+                                <li><strong>Adhésifs</strong> : Colles industrielles</li>
+                                <li><strong>Revêtements</strong> : Peintures résistantes</li>
+                                <li><strong>Matériaux composites</strong> : Avec fibres de verre ou de carbone</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧼</div>
+                            <h5>Tensioactifs</h5>
+                            <ul>
+                                <li><strong>Détergents cationiques</strong> : Sels d'ammonium quaternaires</li>
+                                <li><strong>Adoucissants textiles</strong> : Composés d'ammonium quaternaire</li>
+                                <li><strong>Désinfectants</strong> : Chlorure de benzalkonium</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Synthèse du nylon 6,6</h5>
+                        <div class="example">
+                            <p>Le nylon 6,6 est formé par la réaction entre l'hexaméthylènediamine (1,6-diaminohexane) et l'acide adipique (acide hexanedioïque) :</p>
+                            <p>n H₂N-(CH₂)₆-NH₂ + n HOOC-(CH₂)₄-COOH → [-NH-(CH₂)₆-NH-CO-(CH₂)₄-CO-]ₙ + 2n H₂O</p>
+                            <p>Cette réaction de polycondensation produit un polymère avec des liaisons amide régulièrement espacées, conférant au nylon ses propriétés mécaniques remarquables.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Autres applications industrielles</h4>
+                <div class="concept-card">
+                    <p>Les amines trouvent de nombreuses autres applications dans l'industrie :</p>
+                    
+                    <ul>
+                        <li><strong>Agents de flottation</strong> : Utilisés dans l'extraction minière pour séparer les minerais</li>
+                        <li><strong>Inhibiteurs de corrosion</strong> : Protection des métaux dans diverses industries</li>
+                        <li><strong>Additifs pour carburants</strong> : Amélioration des performances et réduction des émissions</li>
+                        <li><strong>Agents de vulcanisation</strong> : Dans l'industrie du caoutchouc</li>
+                        <li><strong>Solvants</strong> : Notamment les amines tertiaires comme la triéthylamine</li>
+                        <li><strong>Catalyseurs</strong> : Dans diverses réactions chimiques, notamment en chimie fine</li>
+                        <li><strong>Agents d'extraction</strong> : Pour la purification de composés organiques</li>
+                    </ul>
+                    
+                    <div class="examples-box">
+                        <h5>Exemple : Captage du CO₂</h5>
+                        <div class="example">
+                            <p>Les amines, notamment la monoéthanolamine (MEA) et la diéthanolamine (DEA), sont utilisées pour capter le dioxyde de carbone dans les gaz de combustion des centrales électriques et d'autres installations industrielles :</p>
+                            <p>2 R-NH₂ + CO₂ → R-NH-COO⁻ + R-NH₃⁺</p>
+                            <p>Cette technologie est importante dans le contexte de la réduction des émissions de gaz à effet de serre.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Amines biologiquement importantes</h4>
+                <div class="concept-card">
+                    <p>De nombreuses amines jouent des rôles cruciaux dans les systèmes biologiques :</p>
+                    
+                    <div class="uses-grid">
+                        <div class="use-card">
+                            <div class="use-icon">🧠</div>
+                            <h5>Neurotransmetteurs</h5>
+                            <ul>
+                                <li><strong>Dopamine</strong> : Contrôle du mouvement, motivation, plaisir</li>
+                                <li><strong>Sérotonine</strong> : Régulation de l'humeur, sommeil, appétit</li>
+                                <li><strong>Adrénaline</strong> : Réponse au stress, "combat ou fuite"</li>
+                                <li><strong>Histamine</strong> : Réponse inflammatoire, sécrétion gastrique</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧬</div>
+                            <h5>Acides aminés</h5>
+                            <ul>
+                                <li><strong>Constituants des protéines</strong> : Tous contiennent un groupe amine</li>
+                                <li><strong>Précurseurs</strong> : De nombreuses molécules biologiquement actives</li>
+                                <li><strong>Métabolisme</strong> : Cycle de l'urée, transamination</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🌱</div>
+                            <h5>Alcaloïdes</h5>
+                            <ul>
+                                <li><strong>Caféine</strong> : Stimulant présent dans le café</li>
+                                <li><strong>Nicotine</strong> : Composé du tabac</li>
+                                <li><strong>Morphine</strong> : Analgésique puissant</li>
+                                <li><strong>Quinine</strong> : Antipaludéen naturel</li>
+                            </ul>
+                        </div>
+                        <div class="use-card">
+                            <div class="use-icon">🧫</div>
+                            <h5>Autres biomolécules</h5>
+                            <ul>
+                                <li><strong>Polyamines</strong> : Régulation de la croissance cellulaire</li>
+                                <li><strong>Sphingosine</strong> : Composant des sphingolipides membranaires</li>
+                                <li><strong>Bases azotées</strong> : Constituants de l'ADN et de l'ARN</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="illustration-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Dopamine_chemical_structure.svg/440px-Dopamine_chemical_structure.svg.png" alt="Structure de la dopamine" width="200">
+                        <p class="caption">Structure de la dopamine, un neurotransmetteur contenant un groupe amine</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h5>Exercices d'application</h5>
+                <div class="practice-items">
+                    <div class="practice-item">
+                        <div class="practice-question">1. Expliquez pourquoi les amines aromatiques sont particulièrement importantes dans l'industrie des colorants.</div>
+                        <div class="practice-solution">
+                            <p>Les amines aromatiques sont essentielles dans l'industrie des colorants pour plusieurs raisons :</p>
+                            <ul>
+                                <li>Elles peuvent être facilement diazotées (transformation en sels de diazonium) qui sont des intermédiaires clés dans la synthèse des colorants azoïques, la classe de colorants synthétiques la plus importante.</li>
+                                <li>Le groupe amine (-NH₂) est fortement activant et orienteur en ortho/para dans les réactions de substitution électrophile aromatique, permettant d'introduire d'autres groupes fonctionnels à des positions spécifiques.</li>
+                                <li>Les amines aromatiques peuvent former des systèmes conjugués étendus qui absorbent la lumière visible, produisant ainsi des couleurs.</li>
+                                <li>La présence du groupe amine permet de moduler les propriétés du colorant (solubilité, affinité pour différentes fibres, stabilité à la lumière).</li>
+                                <li>Les colorants dérivés d'amines aromatiques offrent une large gamme de teintes et une bonne résistance au lavage et à la lumière.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="practice-item">
+                        <div class="practice-question">2. Citez trois médicaments contenant un groupe amine et expliquez brièvement leur action thérapeutique.</div>
+                        <div class="practice-solution">
+                            <p><strong>1. Fluoxétine (Prozac)</strong> :</p>
+                            <ul>
+                                <li>Contient une amine tertiaire</li>
+                                <li>Antidépresseur de la classe des inhibiteurs sélectifs de la recapture de la sérotonine (ISRS)</li>
+                                <li>Agit en bloquant la réabsorption de la sérotonine dans les neurones, augmentant ainsi sa concentration dans la fente synaptique</li>
+                                <li>Utilisé pour traiter la dépression, les troubles obsessionnels compulsifs et les troubles anxieux</li>
+                            </ul>
+                            
+                            <p><strong>2. Chlorphéniramine</strong> :</p>
+                            <ul>
+                                <li>Contient une amine tertiaire</li>
+                                <li>Antihistaminique de première génération</li>
+                                <li>Agit en bloquant les récepteurs H₁ de l'histamine, réduisant ainsi les symptômes allergiques</li>
+                                <li>Utilisé pour traiter les rhinites allergiques, l'urticaire et d'autres réactions allergiques</li>
+                            </ul>
+                            
+                            <p><strong>3. Lidocaïne</strong> :</p>
+                            <ul>
+                                <li>Contient une amine secondaire</li>
+                                <li>Anesthésique local de type amide</li>
+                                <li>Agit en bloquant les canaux sodiques voltage-dépendants dans les membranes des cellules nerveuses, empêchant la propagation des potentiels d'action</li>
+                                <li>Utilisé pour l'anesthésie locale et régionale, ainsi que pour traiter certaines arythmies cardiaques</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Conclusion -->
+<div class="method-section">
+    <h2>Conclusion : Les Amines</h2>
+    
+    <div class="method-card">
+        <div class="method-header">
+            <h3>Synthèse et perspectives</h3>
+        </div>
+        <div class="method-content">
+            <div class="conclusion-box">
+                <h4>Points clés à retenir</h4>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Structure et classification</h5>
+                            <p>Les amines sont des dérivés de l'ammoniac avec un ou plusieurs hydrogènes remplacés par des groupes alkyle ou aryle, classées en primaires, secondaires et tertiaires.</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Propriétés physiques</h5>
+                            <p>Les amines forment des liaisons hydrogène, ont des points d'ébullition intermédiaires entre alcanes et alcools, et une solubilité dans l'eau qui diminue avec la longueur de la chaîne carbonée.</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Propriétés chimiques</h5>
+                            <p>Les amines sont basiques et nucléophiles, réagissent avec les acides pour former des sels, participent à des réactions d'alkylation, d'acylation et, pour les amines aromatiques, à la diazotation.</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">📌</div>
+                        <div class="key-point-content">
+                            <h5>Applications</h5>
+                            <p>Les amines sont présentes dans de nombreux médicaments, colorants, polymères et molécules biologiques, avec des applications variées dans l'industrie et la médecine.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Importance dans la vie quotidienne</h4>
+                <div class="concept-card">
+                    <p>Les amines sont omniprésentes dans notre quotidien, souvent sans que nous en soyons conscients :</p>
+                    <ul>
+                        <li>Dans les médicaments que nous prenons pour traiter diverses maladies</li>
+                        <li>Dans les colorants qui donnent leur couleur à nos vêtements, aliments et cosmétiques</li>
+                        <li>Dans les polymères qui constituent de nombreux objets du quotidien (nylon, polyuréthanes)</li>
+                        <li>Dans notre propre corps, sous forme de neurotransmetteurs, acides aminés et autres biomolécules</li>
+                    </ul>
+                    <p>Leur diversité structurale et leurs propriétés variées en font des composés polyvalents, essentiels à de nombreux secteurs industriels et à la vie elle-même.</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h4>Perspectives et développements</h4>
+                <div class="concept-card">
+                    <p>La recherche sur les amines continue d'évoluer dans plusieurs directions :</p>
+                    <ul>
+                        <li><strong>Chimie médicinale</strong> : Développement de nouveaux médicaments contenant des groupes amine avec une meilleure efficacité et moins d'effets secondaires.</li>
+                        <li><strong>Chimie verte</strong> : Méthodes de synthèse plus respectueuses de l'environnement pour les amines, utilisant des catalyseurs recyclables et des conditions de réaction plus douces.</li>
+                        <li><strong>Matériaux avancés</strong> : Nouveaux polymères à base d'amines avec des propriétés améliorées (résistance, biodégradabilité, conductivité).</li>
+                        <li><strong>Captage du CO₂</strong> : Amines modifiées pour une meilleure efficacité et une moindre consommation d'énergie dans le captage des gaz à effet de serre.</li>
+                        <li><strong>Neurosciences</strong> : Meilleure compréhension du rôle des amines comme neurotransmetteurs et développement de traitements pour les troubles neurologiques.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quote-box">
+                <p>"Les amines, avec leur paire d'électrons libres et leur capacité à former des liaisons hydrogène, représentent une famille de composés dont la chimie est aussi riche que leurs applications sont diverses, de la médecine à l'industrie, en passant par les processus biologiques fondamentaux."</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ressources -->
+<div class="resources-section">
+    <h2>Pour approfondir</h2>
+    
+    <div class="resources-grid">
+        <div class="resource">
+            <div class="resource-icon">📚</div>
+            <div class="resource-content">
+                <h4>Exercices complémentaires</h4>
+                <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                <div class="download-box">
+                    <a href="#" class="download-button">
+                        <span class="download-icon">📥</span>
+                        <span class="download-text">Exercices sur les amines</span>
+                    </a>
+                    <p class="download-info">PDF - 4 pages d'exercices avec corrigés</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resource">
+            <div class="resource-icon">🔍</div>
+            <div class="resource-content">
+                <h4>Points à réviser</h4>
+                <ul>
+                    <li>La nomenclature IUPAC des amines</li>
+                    <li>Les facteurs influençant la basicité des amines</li>
+                    <li>Les mécanismes des réactions de diazotation et de couplage diazoïque</li>
+                    <li>Les méthodes de synthèse des amines et leurs limitations</li>
+                    <li>Les applications des amines dans différents domaines</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="resource">
+            <div class="resource-icon">🎯</div>
+            <div class="resource-content">
+                <h4>Préparation à l'examen</h4>
+                <p>Les amines sont un sujet important du programme de Terminale S, souvent abordé dans les épreuves de chimie organique.</p>
+                <p>Points d'attention pour l'examen :</p>
+                <ul>
+                    <li>Savoir identifier et nommer les différents types d'amines</li>
+                    <li>Comprendre les facteurs qui influencent la basicité des amines</li>
+                    <li>Maîtriser les réactions caractéristiques des amines</li>
+                    <li>Connaître les principales méthodes de synthèse des amines</li>
+                    <li>Pouvoir citer des exemples d'applications des amines dans différents domaines</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="resource">
+            <div class="resource-icon">🌐</div>
+            <div class="resource-content">
+                <h4>Ressources en ligne</h4>
+                <ul>
+                    <li><a href="#">ChimieOrga : Cours complet sur les amines</a></li>
+                    <li><a href="#">Animations 3D des mécanismes réactionnels</a></li>
+                    <li><a href="#">Vidéos d'expériences sur les propriétés des amines</a></li>
+                    <li><a href="#">Quiz interactifs pour tester vos connaissances</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+/* Styles généraux */
+:root {
+--primary-color: #3498db;
+--secondary-color: #2c3e50;
+--accent-color: #e74c3c;
+--light-bg: #f5f7fa;
+--dark-bg: #34495e;
+--text-color: #333;
+--light-text: #7f8c8d;
+--border-radius: 8px;
+--box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+line-height: 1.6;
+color: var(--text-color);
+background-color: var(--light-bg);
+margin: 0;
+padding: 0;
+}
+
+.content-wrapper {
+max-width: 800px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+/* En-tête du cours */
+.course-header {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+color: white;
+padding: 40px 0;
+margin-bottom: 30px;
+}
+
+.subject-tag {
+display: inline-block;
+background: rgba(255,255,255,0.2);
+padding: 5px 10px;
+border-radius: 20px;
+font-size: 0.9em;
+margin-bottom: 10px;
+}
+
+.course-title {
+font-size: 2.5em;
+margin: 10px 0;
+font-weight: 700;
+}
+
+.course-subtitle {
+font-size: 1.2em;
+opacity: 0.9;
+margin-bottom: 20px;
+}
+
+.course-actions {
+margin-top: 20px;
+}
+
+.action-button {
+display: inline-block;
+padding: 10px 20px;
+border-radius: 30px;
+text-decoration: none;
+font-weight: 600;
+margin-right: 10px;
+transition: all 0.3s ease;
+}
+
+.action-button.primary {
+background: white;
+color: var(--primary-color);
+}
+
+.action-button.secondary {
+background: rgba(255,255,255,0.2);
+color: white;
+}
+
+/* Section d'introduction
+/* Section d'introduction */
+.intro-section {
+    margin-bottom: 40px;
+}
+
+.alert-box {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.alert-box h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.point-item {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: flex-start;
+}
+
+.point-icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+.point-content h4 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+.check-list {
+    list-style: none;
+    padding: 0;
+}
+
+.check-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+}
+
+.check-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.examples-box {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.example {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.example:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.example:last-child {
+    margin-bottom: 0;
+}
+
+/* Sections de méthode */
+.method-section {
+    margin-bottom: 40px;
+}
+
+.method-section h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.method-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.method-header {
+    background: var(--secondary-color);
+    color: white;
+    padding: 15px 20px;
+}
+
+.method-header h3 {
+    margin: 0;
+}
+
+.method-content {
+    padding: 20px;
+}
+
+.subsection {
+    margin-bottom: 30px;
+}
+
+.subsection:last-child {
+    margin-bottom: 0;
+}
+
+.subsection h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.concept-card {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.formula-box {
+    background: white;
+    border-left: 4px solid var(--primary-color);
+    padding: 10px 15px;
+    margin: 15px 0;
+}
+
+.math-formula {
+    font-family: 'Cambria Math', Georgia, serif;
+    font-style: italic;
+}
+
+.important-note {
+    background: #fef9e7;
+    border-left: 4px solid #f39c12;
+    padding: 10px 15px;
+    margin: 15px 0;
+}
+
+.illustration-box {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.illustration-box img {
+    max-width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.caption {
+    font-size: 0.9em;
+    color: var(--light-text);
+    margin-top: 10px;
+}
+
+/* Tableaux */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.summary-row {
+    display: grid;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-row.header {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-cell {
+    padding: 10px 15px;
+}
+
+.summary-row {
+    grid-template-columns: 1fr 1fr;
+}
+
+.summary-row.header {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* Pour les tableaux à 3 colonnes */
+.summary-table .summary-row:has(.summary-cell:nth-child(3)) {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Pour les tableaux à 4 colonnes */
+.summary-table .summary-row:has(.summary-cell:nth-child(4)) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/* Étapes de méthode */
+.method-steps {
+    margin: 20px 0;
+}
+
+.method-step {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.step-content h5 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+/* Exercices */
+.practice-box {
+    background: #f0f4f8;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.practice-items {
+    margin-top: 15px;
+}
+
+.practice-item {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.practice-question {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.practice-solution {
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+/* Applications */
+.uses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.use-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+.use-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-align: center;
+    display: block;
+}
+
+.use-card h5 {
+    margin-top: 0;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.use-card ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.use-card li {
+    margin-bottom: 8px;
+}
+
+/* Citations */
+.quote-box {
+    background: #f0f4f8;
+    border-left: 4px solid var(--primary-color);
+    padding: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: var(--secondary-color);
+}
+
+/* Conclusion */
+.conclusion-box {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--box-shadow);
+}
+
+.key-points-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.key-point {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.key-point-icon {
+    font-size: 1.2em;
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.key-point-content h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+}
+
+.key-point-content p {
+    margin: 0;
+}
+
+/* Ressources */
+.resources-section {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.resources-section h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.resource {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: flex-start;
+}
+
+.resource-icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+.resource-content h4 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+.download-box {
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.download-button {
+    display: flex;
+    align-items: center;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.download-icon {
+    margin-right: 10px;
+}
+
+.download-info {
+    font-size: 0.9em;
+    color: var(--light-text);
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+</style>
+{% endblock %}

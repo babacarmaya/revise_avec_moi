@@ -549,6 +549,11 @@ def philo_chapitre7():
 def philo_chapitre8():
     return render_template('cours/philo/chapitre8._terminal.html')
 
+@app.route('/cours/philo/premiere')
+@login_required
+def philo_premiere():
+    return render_template('cours/philo/philo_premiere.html')
+
 # Mathématiques
 @app.route('/cours/mathematiques/terminale')
 @login_required
@@ -594,6 +599,11 @@ def mathematiques_chapitre7():
 @login_required
 def mathematiques_chapitre8():
     return render_template('cours/maths/chapitre8._terminal.html')
+
+@app.route('/cours/mathematiques/premiere')
+@login_required
+def mathematiques_premiere():
+    return render_template('cours/maths/maths_premiere.html')
 
 # Histoire
 @app.route('/cours/histoire/terminale')
@@ -641,6 +651,11 @@ def histoire_chapitre7():
 def histoire_chapitre8():
     return render_template('cours/histoire/chapitre8._terminal.html')
 
+@app.route('/cours/histoire/premiere')
+@login_required
+def histoire_premiere():
+    return render_template('cours/histoire/histoire_premiere.html')
+
 # Anglais 
 @app.route('/cours/anglais/terminale')
 @login_required
@@ -687,11 +702,12 @@ def anglais_chapitre7():
 def anglais_chapitre8():
     return render_template('cours/anglais/chapitre8._terminal.html')
 
-# Physique-Chimie
-@app.route('/cours/physique-chimie/terminale')
+@app.route('/cours/anglais/premiere')
 @login_required
-def physique_chimie_terminale():
-    return render_template('cours/physique-chimie/physique_chimie_terminal.html')
+def anglais_premiere():
+    return render_template('cours/anglais/anglais_premiere.html')
+
+
 
 # SVT
 @app.route('/cours/svt/terminale')
@@ -713,6 +729,62 @@ def svt_chapitre2():
 @login_required
 def svt_chapitre3():
     return render_template('cours/svt/chapitre3._terminal.html')
+
+@app.route('/cours/svt/premiere')
+@login_required
+def svt_premiere():
+    return render_template('cours/svt/svt_premiere.html')
+
+# Physique-Chimie
+@app.route('/cours/physique-chimie/terminale')
+@login_required
+def physique_chimie_terminale():
+    return render_template('cours/physique-chimie/physique_chimie_terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre1')
+@login_required
+def PC_chapitre1():
+    return render_template('cours/physique-chimie/chapitre1._terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre2')
+@login_required
+def PC_chapitre2():
+    return render_template('cours/physique-chimie/chapitre2._terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre3')
+@login_required
+def PC_chapitre3():
+    return render_template('cours/physique-chimie/chapitre3._terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre4')
+@login_required
+def PC_chapitre4():
+    return render_template('cours/physique-chimie/chapitre4._terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre5')
+@login_required
+def PC_chapitre5():
+    return render_template('cours/physique-chimie/chapitre5._terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre6')
+@login_required
+def PC_chapitre6():
+    return render_template('cours/physique-chimie/chapitre6._terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre7')
+@login_required
+def PC_chapitre7():
+    return render_template('cours/physique-chimie/chapitre7._terminal.html')
+
+@app.route('/cours/physique-chimie/chapitre8')
+@login_required
+def PC_chapitre8():
+    return render_template('cours/physique-chimie/chapitre8._terminal.html')
+
+@app.route('/cours/physique-chimie/premiere')
+@login_required
+def physique_chimie_premiere():
+    return render_template('cours/physique-chimie/physique_chimie_premiere.html')
 
 # Routes de test
 @app.route('/test/users')

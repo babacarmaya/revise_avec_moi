@@ -1,0 +1,1916 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-header">
+    <div class="content-wrapper">
+        <div class="subject-tag">Physique-Chimie - Chimie des solutions</div>
+        <h1 class="course-title">Généralités sur les Acides et les Bases</h1>
+        <div class="course-subtitle">Théories, équilibres et applications en solutions aqueuses</div>
+        
+        <div class="course-actions">
+            <a href="#" class="action-button primary">Points essentiels</a>
+            <a href="#" class="action-button secondary">Niveau Terminale S</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Introduction -->
+    <div class="intro-section">
+        <div class="alert-box">
+            <h3>📌 Introduction</h3>
+            <p>Les acides et les bases sont des espèces chimiques fondamentales qui interviennent dans d'innombrables réactions, tant dans les laboratoires que dans notre environnement quotidien. De l'acidité des fruits à la basicité des produits ménagers, en passant par les équilibres biologiques essentiels à la vie, la compréhension des propriétés acido-basiques est cruciale pour expliquer de nombreux phénomènes chimiques et biochimiques.</p>
+        </div>
+        
+        <div class="key-points">
+            <div class="point-item">
+                <div class="point-icon">🔑</div>
+                <div class="point-content">
+                    <h4>Objectifs du chapitre</h4>
+                    <ul class="check-list">
+                        <li>Comprendre les différentes théories des acides et des bases</li>
+                        <li>Maîtriser la notion d'équilibre acido-basique en solution aqueuse</li>
+                        <li>Savoir calculer et interpréter le pH d'une solution</li>
+                        <li>Étudier les réactions de transfert de protons</li>
+                        <li>Découvrir les applications pratiques des acides et des bases</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">📋</div>
+                <div class="point-content">
+                    <h4>Prérequis</h4>
+                    <ul class="check-list">
+                        <li>Notion d'équilibre chimique et constante d'équilibre</li>
+                        <li>Calculs de concentration molaire</li>
+                        <li>Électronégativité et polarité des liaisons</li>
+                        <li>Réactions d'oxydoréduction</li>
+                        <li>Notions de base sur les solutions aqueuses</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="point-item">
+                <div class="point-icon">💡</div>
+                <div class="point-content">
+                    <h4>Applications concrètes</h4>
+                    <p>Les acides et les bases sont présents dans :</p>
+                    <div class="examples-box">
+                        <div class="example">
+                            <span class="example-text">L'industrie alimentaire (conservateurs, régulateurs de pH)</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">La médecine (médicaments, tampons physiologiques)</span>
+                        </div>
+                        <div class="example">
+                            <span class="example-text">L'agriculture (correction de l'acidité des sols)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Définitions et théories -->
+    <div class="method-section">
+        <h2>1. Définitions et Théories des Acides et des Bases</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Évolution des concepts acido-basiques</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Théorie d'Arrhenius (1884)</h4>
+                    <div class="concept-card">
+                        <p>La première théorie moderne des acides et des bases a été proposée par le chimiste suédois Svante Arrhenius à la fin du XIXe siècle.</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Type</div>
+                                <div class="summary-cell">Définition d'Arrhenius</div>
+                                <div class="summary-cell">Exemple</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Acide</strong></div>
+                                <div class="summary-cell">Substance qui, en solution aqueuse, libère des ions hydrogène (H⁺)</div>
+                                <div class="summary-cell">HCl → H⁺ + Cl⁻</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Base</strong></div>
+                                <div class="summary-cell">Substance qui, en solution aqueuse, libère des ions hydroxyde (OH⁻)</div>
+                                <div class="summary-cell">NaOH → Na⁺ + OH⁻</div>
+                            </div>
+                        </div>
+                        
+                        <div class="important-note">
+                            <p>Limites de la théorie d'Arrhenius : elle ne s'applique qu'aux solutions aqueuses et ne permet pas d'expliquer le comportement basique de composés comme NH₃ qui ne contiennent pas d'ions OH⁻.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Théorie de Brønsted-Lowry (1923)</h4>
+                    <div class="concept-card">
+                        <p>En 1923, Johannes Brønsted et Thomas Lowry ont proposé indépendamment une théorie plus générale, basée sur le transfert de protons.</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Type</div>
+                                <div class="summary-cell">Définition de Brønsted-Lowry</div>
+                                <div class="summary-cell">Exemple</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Acide</strong></div>
+                                <div class="summary-cell">Espèce chimique capable de céder un proton (H⁺)</div>
+                                <div class="summary-cell">HCl + H₂O → H₃O⁺ + Cl⁻</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Base</strong></div>
+                                <div class="summary-cell">Espèce chimique capable d'accepter un proton (H⁺)</div>
+                                <div class="summary-cell">NH₃ + H₂O ⇌ NH₄⁺ + OH⁻</div>
+                            </div>
+                        </div>
+                        
+                        <p>Cette théorie introduit les concepts importants de :</p>
+                        <ul>
+                            <li><strong>Couples acide/base conjugués</strong> : Un acide qui cède un proton devient sa base conjuguée, et une base qui accepte un proton devient son acide conjugué.</li>
+                            <li><strong>Ampholytes</strong> : Espèces pouvant agir à la fois comme acide et comme base (ex : H₂O, HCO₃⁻).</li>
+                        </ul>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Conjugate_acid-base_pair.svg/600px-Conjugate_acid-base_pair.svg.png" alt="Couples acide-base conjugués" width="500">
+                            <p class="caption">Représentation d'un couple acide-base conjugué selon Brønsted-Lowry</p>
+                        </div>
+                    </div>
+                    
+                    <div class="examples-box">
+                        <h5>Exemples de couples acide/base conjugués</h5>
+                        <div class="example">
+                            <p>HCl / Cl⁻ : HCl est l'acide, Cl⁻ est sa base conjuguée</p>
+                        </div>
+                        <div class="example">
+                            <p>NH₄⁺ / NH₃ : NH₄⁺ est l'acide, NH₃ est sa base conjuguée</p>
+                        </div>
+                        <div class="example">
+                            <p>H₂O / OH⁻ : H₂O est l'acide, OH⁻ est sa base conjuguée</p>
+                        </div>
+                        <div class="example">
+                            <p>H₃O⁺ / H₂O : H₃O⁺ est l'acide, H₂O est sa base conjuguée</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Théorie de Lewis (1923)</h4>
+                    <div class="concept-card">
+                        <p>La même année, Gilbert Lewis a proposé une théorie encore plus générale, basée sur les paires d'électrons.</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Type</div>
+                                <div class="summary-cell">Définition de Lewis</div>
+                                <div class="summary-cell">Exemple</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Acide</strong></div>
+                                <div class="summary-cell">Accepteur de doublet d'électrons</div>
+                                <div class="summary-cell">BF₃ + NH₃ → F₃B-NH₃</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Base</strong></div>
+                                <div class="summary-cell">Donneur de doublet d'électrons</div>
+                                <div class="summary-cell">NH₃ donne sa paire d'électrons à BF₃</div>
+                            </div>
+                        </div>
+                        
+                        <p>Cette théorie permet d'expliquer des réactions acido-basiques qui ne font pas intervenir de protons, comme les réactions entre les métaux et les ligands en chimie de coordination.</p>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Lewis_acid-base_reaction.svg/600px-Lewis_acid-base_reaction.svg.png" alt="Réaction acide-base de Lewis" width="400">
+                            <p class="caption">Exemple de réaction acide-base selon Lewis : formation d'un adduit entre BF₃ et NH₃</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Comparaison des théories</h4>
+                    <div class="concept-card">
+                        <p>Les trois théories présentées offrent des perspectives complémentaires sur les acides et les bases :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Théorie</div>
+                                <div class="summary-cell">Portée</div>
+                                <div class="summary-cell">Limitations</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Arrhenius</strong></div>
+                                <div class="summary-cell">Solutions aqueuses uniquement</div>
+                                <div class="summary-cell">Ne s'applique pas aux solvants non aqueux ni aux bases sans OH⁻</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Brønsted-Lowry</strong></div>
+                                <div class="summary-cell">Tous les solvants protiques</div>
+                                <div class="summary-cell">Limitée aux réactions impliquant un transfert de proton</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Lewis</strong></div>
+                                <div class="summary-cell">La plus générale, inclut les réactions sans proton</div>
+                                <div class="summary-cell">Parfois difficile à appliquer pour prédire la force des acides/bases</div>
+                            </div>
+                        </div>
+                        
+                        <p>Dans ce cours, nous nous concentrerons principalement sur la théorie de Brønsted-Lowry, qui est la plus adaptée pour comprendre les équilibres acido-basiques en solution aqueuse.</p>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Identifiez l'acide et la base dans les réactions suivantes selon la théorie de Brønsted-Lowry :</div>
+                            <div class="practice-question">a) HNO₃ + H₂O → H₃O⁺ + NO₃⁻</div>
+                            <div class="practice-question">b) NH₃ + H₂O ⇌ NH₄⁺ + OH⁻</div>
+                            <div class="practice-solution">
+                                <p>a) HNO₃ + H₂O → H₃O⁺ + NO₃⁻</p>
+                                <ul>
+                                    <li>Acide : HNO₃ (cède un proton H⁺)</li>
+                                    <li>Base : H₂O (accepte un proton H⁺)</li>
+                                    <li>Acide conjugué de H₂O : H₃O⁺</li>
+                                    <li>Base conjuguée de HNO₃ : NO₃⁻</li>
+                                </ul>
+                                <p>b) NH₃ + H₂O ⇌ NH₄⁺ + OH⁻</p>
+                                <ul>
+                                    <li>Acide : H₂O (cède un proton H⁺)</li>
+                                    <li>Base : NH₃ (accepte un proton H⁺)</li>
+                                    <li>Acide conjugué de NH₃ : NH₄⁺</li>
+                                    <li>Base conjuguée de H₂O : OH⁻</li>
+                                </ul>
+                                <p>Remarque : Dans cette réaction, l'eau agit comme un acide, contrairement à la réaction précédente où elle agissait comme une base. C'est un exemple d'ampholyte.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Pour chacune des espèces suivantes, identifiez sa base conjuguée ou son acide conjugué :</div>
+                            <div class="practice-question">a) HCO₃⁻</div>
+                            <div class="practice-question">b) HSO₄⁻</div>
+                            <div class="practice-question">c) H₂PO₄⁻</div>
+                            <div class="practice-solution">
+                                <p>a) HCO₃⁻ est un ampholyte :</p>
+                                <ul>
+                                    <li>En tant qu'acide : HCO₃⁻ → H⁺ + CO₃²⁻, sa base conjuguée est CO₃²⁻</li>
+                                    <li>En tant que base : HCO₃⁻ + H⁺ → H₂CO₃, son acide conjugué est H₂CO₃</li>
+                                </ul>
+                                <p>b) HSO₄⁻ est un ampholyte :</p>
+                                <ul>
+                                    <li>En tant qu'acide : HSO₄⁻ → H⁺ + SO₄²⁻, sa base conjuguée est SO₄²⁻</li>
+                                    <li>En tant que base : HSO₄⁻ + H⁺ → H₂SO₄, son acide conjugué est H₂SO₄</li>
+                                </ul>
+                                <p>c) H₂PO₄⁻ est un ampholyte :</p>
+                                <ul>
+                                    <li>En tant qu'acide : H₂PO₄⁻ → H⁺ + HPO₄²⁻, sa base conjuguée est HPO₄²⁻</li>
+                                    <li>En tant que base : H₂PO₄⁻ + H⁺ → H₃PO₄, son acide conjugué est H₃PO₄</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Autoprotolyse de l'eau et pH -->
+    <div class="method-section">
+        <h2>2. Autoprotolyse de l'Eau et Échelle de pH</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>L'eau comme solvant et acteur chimique</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Autoprotolyse de l'eau</h4>
+                    <div class="concept-card">
+                        <p>L'eau est un ampholyte qui peut agir à la fois comme acide et comme base. Elle peut donc réagir avec elle-même selon la réaction d'autoprotolyse :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">H₂O + H₂O ⇌ H₃O⁺ + OH⁻</span></p>
+                        </div>
+                        
+                        <p>Cette réaction est un équilibre caractérisé par le produit ionique de l'eau, noté K<sub>e</sub> :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">K<sub>e</sub> = [H₃O⁺] × [OH⁻]</span></p>
+                        </div>
+                        
+                        <p>À 25°C, K<sub>e</sub> = 10<sup>-14</sup> mol²·L<sup>-2</sup></p>
+                        
+                        <div class="important-note">
+                            <p>Dans l'eau pure à 25°C, les concentrations en ions H₃O⁺ et OH⁻ sont égales et valent 10<sup>-7</sup> mol·L<sup>-1</sup>. Cette valeur varie avec la température : K<sub>e</sub> augmente lorsque la température augmente.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Définition du pH</h4>
+                    <div class="concept-card">
+                        <p>Le pH (potentiel hydrogène) est une grandeur sans unité qui mesure l'acidité ou la basicité d'une solution. Il est défini par :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">pH = -log[H₃O⁺]</span></p>
+                        </div>
+                        
+                        <p>où [H₃O⁺] est la concentration en ions hydronium exprimée en mol·L<sup>-1</sup>.</p>
+                        
+                        <p>De même, on peut définir le pOH :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">pOH = -log[OH⁻]</span></p>
+                        </div>
+                        
+                        <p>À partir du produit ionique de l'eau, on peut établir la relation :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">pH + pOH = 14</span> (à 25°C)</p>
+                        </div>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Echelle_de_pH.svg/800px-Echelle_de_pH.svg.png" alt="Échelle de pH" width="700">
+                            <p class="caption">Échelle de pH avec exemples de solutions courantes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Interprétation du pH</h4>
+                    <div class="concept-card">
+                        <p>Le pH permet de caractériser rapidement l'acidité d'une solution :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Valeur du pH</div>
+                                <div class="summary-cell">Type de solution</div>
+                                <div class="summary-cell">Concentrations relatives</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>pH < 7</strong></div>
+                                <div class="summary-cell">Solution acide</div>
+                                <div class="summary-cell">[H₃O⁺] > [OH⁻]</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>pH = 7</strong></div>
+                                <div class="summary-cell">Solution neutre</div>
+                                <div class="summary-cell">[H₃O⁺] = [OH⁻] = 10⁻⁷ mol·L⁻¹</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>pH > 7</strong></div>
+                                <div class="summary-cell">Solution basique</div>
+                                <div class="summary-cell">[H₃O⁺] < [OH⁻]</div>
+                            </div>
+                        </div>
+                        
+                        <p>Il est important de noter que l'échelle de pH est logarithmique :</p>
+                        <ul>
+                            <li>Une variation d'une unité de pH correspond à une variation d'un facteur 10 de la concentration en H₃O⁺.</li>
+                            <li>Une solution de pH = 3 est 10 fois plus acide qu'une solution de pH = 4.</li>
+                            <li>Une solution de pH = 3 est 100 fois plus acide qu'une solution de pH = 5.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Mesure du pH</h4>
+                    <div class="concept-card">
+                        <p>Le pH peut être mesuré par différentes méthodes :</p>
+                        
+                        <div class="uses-grid">
+                            <div class="use-card">
+                                <div class="use-icon">🧪</div>
+                                <h5>Indicateurs colorés</h5>
+                                <ul>
+                                    <li>Substances qui changent de couleur selon le pH</li>
+                                    <li>Ex : papier pH, phénolphtaléine, bleu de bromothymol</li>
+                                    <li>Précision limitée (±0,5 unité pH)</li>
+                                </ul>
+                            </div>
+                            <div class="use-card">
+                                <div class="use-icon">📏</div>
+                                <h5>pH-mètre</h5>
+                                <ul>
+                                    <li>Appareil électronique avec électrode de verre</li>
+                                    <li>Mesure la différence de potentiel liée à [H₃O⁺]</li>
+                                    <li>Précision élevée (±0,01 unité pH)</li>
+                                    <li>Nécessite un étalonnage régulier</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/PH_indicator_chart.png/800px-PH_indicator_chart.png" alt="Indicateurs colorés de pH" width="600">
+                            <p class="caption">Changements de couleur de différents indicateurs en fonction du pH</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Calculez la concentration en ions H₃O⁺ et OH⁻ dans les solutions suivantes :</div>
+                            <div class="practice-question">a) Une solution de pH = 3,5</div>
+                            <div class="practice-question">b) Une solution de pH = 10,2</div>
+                            <div class="practice-solution">
+                                <p>a) Solution de pH = 3,5</p>
+                                <p>[H₃O⁺] = 10<sup>-pH</sup> = 10<sup>-3,5</sup> = 3,16 × 10<sup>-4</sup> mol·L<sup>-1</sup></p>
+                                <p>[OH⁻] = K<sub>e</sub>/[H₃O⁺] = 10<sup>-14</sup>/(3,16 × 10<sup>-4</sup>) = 3,16 × 10<sup>-11</sup> mol·L<sup>-1</sup></p>
+                                
+                                <p>b) Solution de pH = 10,2</p>
+                                <p>[H₃O⁺] = 10<sup>-pH</sup> = 10<sup>-10,2</sup> = 6,31 × 10<sup>-11</sup> mol·L<sup>-1</sup></p>
+                                <p>[OH⁻] = K<sub>e</sub>/[H₃O⁺] = 10<sup>-14</sup>/(6,31 × 10<sup>-11</sup>) = 1,58 × 10<sup>-4</sup> mol·L<sup>-1</sup></p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Déterminez le pH des solutions suivantes :</div>
+                            <div class="practice-question">a) [H₃O⁺] = 2,5 × 10<sup>-3</sup> mol·L<sup>-1</sup></div>
+                            <div class="practice-question">b) [OH⁻] = 4,8 × 10<sup>-3</sup> mol·L<sup>-1</sup></div>
+                            <div class="practice-solution">
+                                <p>a) [H₃O⁺] = 2,5 × 10<sup>-3</sup> mol·L<sup>-1</sup></p>
+                                <p>pH = -log[H₃O⁺] = -log(2,5 × 10<sup>-3</sup>) = 2,60</p>
+                                
+                                <p>b) [OH⁻] = 4,8 × 10<sup>-3</sup> mol·L<sup>-1</sup></p>
+                                <p>pOH = -log[OH⁻] = -log(4,8 × 10<sup>-3</sup>) = 2,32</p>
+                                <p>pH = 14 - pOH = 14 - 2,32 = 11,68</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Force des acides et des bases -->
+    <div class="method-section">
+        <h2>3. Force des Acides et des Bases</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Constantes d'acidité et de basicité</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Constante d'acidité K<sub>a</sub></h4>
+                    <div class="concept-card">
+                        <p>Pour un acide faible HA en solution aqueuse, l'équilibre de dissociation s'écrit :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">HA + H₂O ⇌ A⁻ + H₃O⁺</span></p>
+                        </div>
+                        
+                        <p>La constante d'acidité K<sub>a</sub> caractérise cet équilibre :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">K<sub>a</sub> = [A⁻][H₃O⁺]/[HA]</span></p>
+                        </div>
+                        
+                        <p>On utilise souvent le pK<sub>a</sub>, défini comme :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">pK<sub>a</sub> = -log K<sub>a</sub></span></p>
+                        </div>
+                        
+                        <p>Plus K<sub>a</sub> est grand (ou plus pK<sub>a</sub> est petit), plus l'acide est fort.</p>
+                        
+                        <div class="important-note">
+                            <p>Pour un acide fort, la dissociation est totale en solution aqueuse diluée. Pour un acide faible, la dissociation est partielle et caractérisée par K<sub>a</sub>.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Constante de basicité K<sub>b</sub></h4>
+                    <div class="concept-card">
+                        <p>Pour une base faible B en solution aqueuse, l'équilibre s'écrit :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">B + H₂O ⇌ BH⁺ + OH⁻</span></p>
+                        </div>
+                        
+                        <p>La constante de basicité K<sub>b</sub> caractérise cet équilibre :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">K<sub>b</sub> = [BH⁺][OH⁻]/[B]</span></p>
+                        </div>
+                        
+                        <p>De même, on définit le pK<sub>b</sub> :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">pK<sub>b</sub> = -log K<sub>b</sub></span></p>
+                        </div>
+                        
+                        <p>Pour un couple acide/base conjugué (HA/A⁻), on a la relation :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">K<sub>a</sub> × K<sub>b</sub> = K<sub>e</sub></span></p>
+                            <p><span class="math-formula">pK<sub>a</sub> + pK<sub>b</sub> = 14</span> (à 25°C)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Classification des acides et des bases</h4>
+                    <div class="concept-card">
+                        <p>On peut classer les acides et les bases selon leur force :</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Type</div>
+                                <div class="summary-cell">Caractéristiques</div>
+                                <div class="summary-cell">Exemples</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Acides forts</strong></div>
+                                <div class="summary-cell">Dissociation totale<br>K<sub>a</sub> > 1</div>
+                                <div class="summary-cell">HCl, HNO₃, H₂SO₄, HClO₄</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Acides faibles</strong></div>
+                                <div class="summary-cell">Dissociation partielle<br>K<sub>a</sub> < 1</div>
+                                <div class="summary-cell">CH₃COOH, H��CO₃, H₃PO₄</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Bases fortes</strong></div>
+                                <div class="summary-cell">Dissociation totale<br>K<sub>b</sub> > 1</div>
+                                <div class="summary-cell">NaOH, KOH, Ca(OH)₂</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell"><strong>Bases faibles</strong></div>
+                                <div class="summary-cell">Dissociation partielle<br>K<sub>b</sub> < 1</div>
+                                <div class="summary-cell">NH₃, CH₃NH₂, CO₃²⁻</div>
+                            </div>
+                        </div>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Acidity_vs_pKa.svg/800px-Acidity_vs_pKa.svg.png" alt="Échelle de pKa" width="600">
+                            <p class="caption">Échelle de pK<sub>a</sub> pour différents acides courants</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Facteurs influençant la force des acides et des bases</h4>
+                    <div class="concept-card">
+                        <p>Plusieurs facteurs structuraux influencent la force d'un acide ou d'une base :</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Électronégativité</h5>
+                                    <p>Plus l'atome lié à l'hydrogène est électronégatif, plus l'acide est fort. Exemple : HF > H₂O > NH₃ > CH₄ (en termes d'acidité)</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Stabilité de la base conjuguée</h5>
+                                    <p>Plus la base conjuguée est stable (par délocalisation de la charge, par exemple), plus l'acide est fort. Exemple : les acides carboxyliques sont plus forts que les alcools car leur base conjuguée est stabilisée par résonance.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Taille de l'atome</h5>
+                                    <p>Dans un même groupe du tableau périodique, l'acidité augmente généralement avec la taille de l'atome. Exemple : HI > HBr > HCl > HF (en termes d'acidité dans l'eau)</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Effets inductifs</h5>
+                                    <p>Les groupes électroattracteurs augmentent l'acidité en stabilisant la charge négative de la base conjuguée. Exemple : CF₃COOH est un acide plus fort que CH₃COOH.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Classez les acides suivants par ordre croissant de force, en justifiant votre réponse :</div>
+                            <div class="practice-question">HCl, CH₃COOH, H₂O, NH₄⁺</div>
+                            <div class="practice-solution">
+                                <p>Ordre croissant de force (du plus faible au plus fort) :</p>
+                                <p>H₂O < NH₄⁺ < CH₃COOH < HCl</p>
+                                <p>Justification :</p>
+                                <ul>
+                                    <li>H₂O est un acide très faible (pK<sub>a</sub> ≈ 14)</li>
+                                    <li>NH₄⁺ est un acide faible (pK<sub>a</sub> ≈ 9,2)</li>
+                                    <li>CH₃COOH est un acide faible mais plus fort que NH₄⁺ (pK<sub>a</sub> ≈ 4,8)</li>
+                                    <li>HCl est un acide fort qui se dissocie totalement en solution aqueuse</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. L'acide acétique (CH₃COOH) a un pK<sub>a</sub> de 4,8. Calculez :</div>
+                            <div class="practice-question">a) La valeur de K<sub>a</sub></div>
+                            <div class="practice-question">b) Le pK<sub>b</sub> de sa base conjuguée (l'ion acétate CH₃COO⁻)</div>
+                            <div class="practice-solution">
+                                <p>a) K<sub>a</sub> = 10<sup>-pKa</sup> = 10<sup>-4,8</sup> = 1,58 × 10<sup>-5</sup> mol·L<sup>-1</sup></p>
+                                <p>b) pK<sub>b</sub> (acétate) = 14 - pK<sub>a</sub> (acide acétique) = 14 - 4,8 = 9,2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Équilibres acido-basiques -->
+    <div class="method-section">
+        <h2>4. Équilibres Acido-Basiques en Solution Aqueuse</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Calcul du pH de différentes solutions</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>pH des acides forts</h4>
+                    <div class="concept-card">
+                        <p>Un acide fort HA se dissocie totalement en solution aqueuse selon :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">HA + H₂O → A⁻ + H₃O⁺</span></p>
+                        </div>
+                        
+                        <p>Pour une solution d'acide fort de concentration C<sub>a</sub>, on a :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">[H₃O⁺] = C<sub>a</sub></span></p>
+                            <p><span class="math-formula">pH = -log C<sub>a</sub></span></p>
+                        </div>
+                        
+                        <p>Cette formule est valable pour des solutions suffisamment concentrées (C<sub>a</sub> > 10<sup>-6</sup> mol·L<sup>-1</sup>) où l'on peut négliger l'autoprotolyse de l'eau.</p>
+                        
+                        <div class="examples-box">
+                            <h5>Exemple : Solution d'acide chlorhydrique</h5>
+                            <div class="example">
+                                <p>Pour une solution de HCl à 0,01 mol·L<sup>-1</sup> :</p>
+                                <p>pH = -log(0,01) = 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>pH des bases fortes</h4>
+                    <div class="concept-card">
+                        <p>Une base forte BOH se dissocie totalement en solution aqueuse selon :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">BOH → B⁺ + OH⁻</span></p>
+                        </div>
+                        
+                        <p>Pour une solution de base forte de concentration C<sub>b</sub>, on a :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">[OH⁻] = C<sub>b</sub></span></p>
+                            <p><span class="math-formula">pOH = -log C<sub>b</sub></span></p>
+                            <p><span class="math-formula">pH = 14 - pOH = 14 + log C<sub>b</sub></span></p>
+                        </div>
+                        
+                        <div class="examples-box">
+                            <h5>Exemple : Solution d'hydroxyde de sodium</h5>
+                            <div class="example">
+                                <p>Pour une solution de NaOH à 0,001 mol·L<sup>-1</sup> :</p>
+                                <p>pOH = -log(0,001) = 3</p>
+                                <p>pH = 14 - 3 = 11</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>pH des acides faibles</h4>
+                    <div class="concept-card">
+                        <p>Pour un acide faible HA de concentration C<sub>a</sub> et de constante d'acidité K<sub>a</sub>, l'équilibre s'écrit :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">HA + H₂O ⇌ A⁻ + H₃O⁺</span></p>
+                        </div>
+                        
+                        <p>En posant h = [H₃O⁺] = [A⁻] et en appliquant la loi d'action de masse :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">K<sub>a</sub> = [A⁻][H₃O⁺]/[HA] = h²/(C<sub>a</sub> - h)</span></p>
+                        </div>
+                        
+                        <p>Si l'acide est suffisamment faible (K<sub>a</sub> < 10<sup>-2</sup>) et la solution suffisamment concentrée, on peut faire l'approximation C<sub>a</sub> - h ≈ C<sub>a</sub>, ce qui donne :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">K<sub>a</sub> ≈ h²/C<sub>a</sub></span></p>
+                            <p><span class="math-formula">h ≈ √(K<sub>a</sub> × C<sub>a</sub>)</span></p>
+                            <p><span class="math-formula">pH ≈ ½(pK<sub>a</sub> - log C<sub>a</sub>)</span></p>
+                        </div>
+                        
+                        <div class="examples-box">
+                            <h5>Exemple : Solution d'acide acétique</h5>
+                            <div class="example">
+                                <p>Pour une solution d'acide acétique (pK<sub>a</sub> = 4,8) à 0,1 mol·L<sup>-1</sup> :</p>
+                                <p>pH ≈ ½(4,8 - log(0,1)) = ½(4,8 + 1) = 2,9</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>pH des bases faibles</h4>
+                    <div class="concept-card">
+                        <p>Pour une base faible B de concentration C<sub>b</sub> et de constante de basicité K<sub>b</sub>, l'équilibre s'écrit :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">B + H₂O ⇌ BH⁺ + OH⁻</span></p>
+                        </div>
+                        
+                        <p>Par un raisonnement similaire à celui des acides faibles, on obtient :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">[OH⁻] ≈ √(K<sub>b</sub> × C<sub>b</sub>)</span></p>
+                            <p><span class="math-formula">pOH ≈ ½(pK<sub>b</sub> - log C<sub>b</sub>)</span></p>
+                            <p><span class="math-formula">pH ≈ 14 - ½(pK<sub>b</sub> - log C<sub>b</sub>)</span></p>
+                        </div>
+                        
+                        <p>On peut aussi utiliser la relation pK<sub>b</sub> = 14 - pK<sub>a</sub> pour exprimer le pH en fonction du pK<sub>a</sub> de l'acide conjugué :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">pH ≈ 14 - ½(14 - pK<sub>a</sub> - log C<sub>b</sub>) = 7 + ½(pK<sub>a</sub> + log C<sub>b</sub>)</span></p>
+                        </div>
+                        
+                        <div class="examples-box">
+                            <h5>Exemple : Solution d'ammoniac</h5>
+                            <div class="example">
+                                <p>Pour une solution d'ammoniac NH₃ (pK<sub>a</sub>(NH₄⁺) = 9,2) à 0,01 mol·L<sup>-1</sup> :</p>
+                                <p>pH ≈ 7 + ½(9,2 + log(0,01)) = 7 + ½(9,2 - 2) = 7 + 3,6 = 10,6</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Solutions tampons</h4>
+                    <div class="concept-card">
+                        <p>Une solution tampon est un mélange d'un acide faible et de sa base conjuguée (ou d'une base faible et de son acide conjugué) qui résiste aux variations de pH lors de l'ajout modéré d'acide ou de base.</p>
+                        
+                        <p>Pour une solution contenant un acide faible HA de concentration C<sub>a</sub> et sa base conjuguée A⁻ de concentration C<sub>b</sub>, le pH est donné par l'équation d'Henderson-Hasselbalch :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">pH = pK<sub>a</sub> + log([A⁻]/[HA]) = pK<sub>a</sub> + log(C<sub>b</sub>/C<sub>a</sub>)</span></p>
+                        </div>
+                        
+                        <p>Propriétés des solutions tampons :</p>
+                        <ul>
+                            <li>Le pouvoir tampon est maximal lorsque C<sub>a</sub> ≈ C<sub>b</sub>, ce qui donne pH ≈ pK<sub>a</sub></li>
+                            <li>Le pouvoir tampon est proportionnel à la concentration totale (C<sub>a</sub> + C<sub>b</sub>)</li>
+                            <li>La zone de tamponnage efficace se situe généralement dans l'intervalle pH = pK<sub>a</sub> ± 1</li>
+                        </ul>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Buffer_solution_pH_change_with_strong_acid_or_base.png/800px-Buffer_solution_pH_change_with_strong_acid_or_base.png" alt="Effet tampon" width="600">
+                            <p class="caption">Comparaison de l'évolution du pH lors de l'ajout d'acide ou de base dans une solution tampon et dans l'eau pure</p>
+                        </div>
+                        
+                        <div class="examples-box">
+                            <h5>Exemple : Tampon acétate</h5>
+                            <div class="example">
+                                <p>Pour une solution contenant de l'acide acétique (pK<sub>a</sub> = 4,8) à 0,1 mol·L<sup>-1</sup> et de l'acétate de sodium à 0,2 mol·L<sup>-1</sup> :</p>
+                                <p>pH = 4,8 + log(0,2/0,1) = 4,8 + log(2) = 4,8 + 0,3 = 5,1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. Calculez le pH des solutions suivantes :</div>
+                            <div class="practice-question">a) HNO₃ à 0,005 mol·L<sup>-1</sup></div>
+                            <div class="practice-question">b) CH₃COOH à 0,1 mol·L<sup>-1</sup> (pK<sub>a</sub> = 4,8)</div>
+                            <div class="practice-question">c) NH₃ à 0,05 mol·L<sup>-1</sup> (pK<sub>a</sub>(NH₄⁺) = 9,2)</div>
+                            <div class="practice-solution">
+                                <p>a) HNO₃ à 0,005 mol·L<sup>-1</sup> (acide fort)</p>
+                                <p>pH = -log[H₃O⁺] = -log(0,005) = 2,3</p>
+                                
+                                <p>b) CH₃COOH à 0,1 mol·L<sup>-1</sup> (acide faible, pK<sub>a</sub> = 4,8)</p>
+                                <p>pH ≈ ½(pK<sub>a</sub> - log C<sub>a</sub>) = ½(4,8 - log(0,1)) = ½(4,8 + 1) = 2,9</p>
+                                
+                                <p>c) NH₃ à 0,05 mol·L<sup>-1</sup> (base faible, pK<sub>a</sub>(NH₄⁺) = 9,2)</p>
+                                <p>pH ≈ 7 + ½(pK<sub>a</sub> + log C<sub>b</sub>) = 7 + ½(9,2 + log(0,05))</p>
+                                <p>pH ≈ 7 + ½(9,2 - 1,3) = 7 + 3,95 = 10,95</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. On souhaite préparer une solution tampon de pH = 7,4 à partir d'un mélange de dihydrogénophosphate de potassium (KH₂PO₄) et d'hydrogénophosphate de potassium (K₂HPO₄). Sachant que le pK<sub>a</sub> du couple H₂PO₄⁻/HPO₄²⁻ est de 7,2, calculez le rapport [HPO₄²⁻]/[H₂PO₄⁻] nécessaire.</div>
+                            <div class="practice-solution">
+                                <p>On utilise l'équation d'Henderson-Hasselbalch :</p>
+                                <p>pH = pK<sub>a</sub> + log([HPO₄²⁻]/[H₂PO₄⁻])</p>
+                                <p>7,4 = 7,2 + log([HPO₄²⁻]/[H₂PO₄⁻])</p>
+                                <p>log([HPO₄²⁻]/[H₂PO₄⁻]) = 7,4 - 7,2 = 0,2</p>
+                                <p>[HPO₄²⁻]/[H₂PO₄⁻] = 10<sup>0,2</sup> ≈ 1,58</p>
+                                <p>Le rapport molaire K₂HPO₄/KH₂PO₄ doit donc être d'environ 1,6/1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Réactions acido-basiques -->
+    <div class="method-section">
+        <h2>5. Réactions Acido-Basiques</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Transferts de protons et applications</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Réactions de neutralisation</h4>
+                    <div class="concept-card">
+                        <p>Une réaction de neutralisation est une réaction entre un acide et une base qui conduit à la formation d'eau et d'un sel.</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">Acide + Base → Sel + Eau</span></p>
+                            <p><span class="math-formula">HCl + NaOH → NaCl + H₂O</span></p>
+                        </div>
+                        
+                        <p>En termes de transfert de protons (théorie de Brønsted-Lowry), cette réaction s'écrit :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">H₃O⁺ + OH⁻ → 2 H₂O</span></p>
+                        </div>
+                        
+                        <p>Cette réaction est exothermique et pratiquement totale (K ≈ 10<sup>14</sup> à 25°C).</p>
+                        
+                        <div class="examples-box">
+                            <h5>Exemple : Titrage acido-basique</h5>
+                            <div class="example">
+                                <p>Lors du titrage d'une solution d'acide chlorhydrique par une solution d'hydroxyde de sodium, la réaction est :</p>
+                                <p>H₃O⁺ + OH⁻ → 2 H₂O</p>
+                                <p>À l'équivalence, les quantités de matière d'acide et de base sont dans les proportions stœchiométriques de la réaction : n(H₃O⁺) = n(OH⁻)</p>
+                                <p>Ce qui donne : C<sub>a</sub> × V<sub>a</sub> = C<sub>b</sub> × V<sub>b</sub></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Prédiction du sens d'une réaction acido-basique</h4>
+                    <div class="concept-card">
+                        <p>Pour une réaction entre un acide HA₁ et une base A₂⁻ :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">HA₁ + A₂⁻ ⇌ A₁⁻ + HA₂</span></p>
+                        </div>
+                        
+                        <p>La constante d'équilibre K de cette réaction est liée aux constantes d'acidité des deux couples :</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">K = K<sub>a1</sub>/K<sub>a2</sub> = 10<sup>(pK<sub>a2</sub> - pK<sub>a1</sub>)</sup></span></p>
+                        </div>
+                        
+                        <p>Règle générale :</p>
+                        <ul>
+                            <li>Si pK<sub>a1</sub> < pK<sub>a2</sub> (ou K<sub>a1</sub> > K<sub>a2</sub>), alors K > 1 et la réaction est favorisée dans le sens direct.</li>
+                            <li>Si pK<sub>a1</sub> > pK<sub>a2</sub> (ou K<sub>a1</sub> < K<sub>a2</sub>), alors K < 1 et la réaction est favorisée dans le sens inverse.</li>
+                        </ul>
+                        <p>En d'autres termes : <strong>un acide réagit spontanément avec la base conjuguée d'un acide plus faible que lui</strong>.</p>
+                        
+                        <div class="examples-box">
+                            <h5>Exemple : Réaction entre l'acide acétique et l'ion carbonate</h5>
+                            <div class="example">
+                                <p>Considérons la réaction : CH₃COOH + CO₃²⁻ ⇌ CH₃COO⁻ + HCO₃⁻</p>
+                                <p>pK<sub>a</sub>(CH₃COOH) = 4,8 et pK<sub>a</sub>(HCO₃⁻) = 10,3</p>
+                                <p>Comme pK<sub>a</sub>(CH₃COOH) < pK<sub>a</sub>(HCO₃⁻), la réaction est favorisée dans le sens direct.</p>
+                                <p>K = 10<sup>(10,3 - 4,8)</sup> = 10<sup>5,5</sup> ≈ 3,2 × 10<sup>5</sup></p>
+                                <p>La réaction est donc fortement déplacée vers la droite.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Titrages acido-basiques</h4>
+                    <div class="concept-card">
+                        <p>Un titrage acido-basique permet de déterminer la concentration d'une solution acide ou basique à l'aide d'une solution titrante de concentration connue.</p>
+                        
+                        <div class="method-steps">
+                            <div class="method-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Principe</h5>
+                                    <p>On ajoute progressivement la solution titrante à la solution à titrer jusqu'à l'équivalence, point où les réactifs ont été introduits dans les proportions stœchiométriques.</p>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Détection de l'équivalence</h5>
+                                    <p>L'équivalence peut être détectée par :</p>
+                                    <ul>
+                                        <li>Un indicateur coloré qui change de couleur à un pH proche du pH à l'équivalence</li>
+                                        <li>Un pH-mètre qui permet de suivre l'évolution du pH et de déterminer le point d'inflexion de la courbe</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="method-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Calcul de la concentration</h5>
+                                    <p>À l'équivalence : C<sub>a</sub> × V<sub>a</sub> = C<sub>b</sub> × V<sub>b</sub> (pour une réaction mol à mol)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>Le pH à l'équivalence dépend de la nature des espèces en présence :</p>
+                        <ul>
+                            <li>Acide fort + Base forte : pH = 7</li>
+                            <li>Acide faible + Base forte : pH > 7 (solution basique)</li>
+                            <li>Acide fort + Base faible : pH < 7 (solution acide)</li>
+                        </ul>
+                        
+                        <div class="illustration-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Acide_fort_base_forte.svg/800px-Acide_fort_base_forte.svg.png" alt="Courbe de titrage acide fort-base forte" width="600">
+                            <p class="caption">Courbe de titrage d'un acide fort par une base forte</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Indicateurs colorés</h4>
+                    <div class="concept-card">
+                        <p>Un indicateur coloré est une substance qui change de couleur selon le pH du milieu. Il s'agit généralement d'un acide faible (noté HIn) dont la forme acide et la forme basique (In⁻) ont des couleurs différentes.</p>
+                        
+                        <div class="formula-box">
+                            <p><span class="math-formula">HIn + H₂O ⇌ H₃O⁺ + In⁻</span></p>
+                            <p><span class="math-formula">Couleur 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Couleur 2</span></p>
+                        </div>
+                        
+                        <p>La zone de virage d'un indicateur se situe généralement dans l'intervalle [pK<sub>a</sub> - 1 ; pK<sub>a</sub> + 1], où les deux formes coexistent en quantités significatives.</p>
+                        
+                        <div class="summary-table">
+                            <div class="summary-row header">
+                                <div class="summary-cell">Indicateur</div>
+                                <div class="summary-cell">Zone de virage</div>
+                                <div class="summary-cell">Couleurs (acide → basique)</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Hélianthine</div>
+                                <div class="summary-cell">3,1 - 4,4</div>
+                                <div class="summary-cell">Rouge → Jaune</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Bleu de bromothymol</div>
+                                <div class="summary-cell">6,0 - 7,6</div>
+                                <div class="summary-cell">Jaune → Bleu</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-cell">Phénolphtaléine</div>
+                                <div class="summary-cell">8,2 - 10,0</div>
+                                <div class="summary-cell">Incolore → Rose</div>
+                            </div>
+                        </div>
+                        
+                        <p>Le choix de l'indicateur pour un titrage dépend du pH à l'équivalence :</p>
+                        <ul>
+                            <li>Acide fort + Base forte : Indicateurs virant autour de pH 7 (bleu de bromothymol)</li>
+                            <li>Acide faible + Base forte : Indicateurs virant en milieu basique (phénolphtaléine)</li>
+                            <li>Acide fort + Base faible : Indicateurs virant en milieu acide (hélianthine)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="practice-box">
+                    <h5>Exercices d'application</h5>
+                    <div class="practice-items">
+                        <div class="practice-item">
+                            <div class="practice-question">1. On titre 20,0 mL d'une solution d'acide chlorhydrique par une solution d'hydroxyde de sodium à 0,100 mol·L<sup>-1</sup>. Le volume équivalent est de 15,0 mL. Calculez la concentration de la solution d'acide chlorhydrique.</div>
+                            <div class="practice-solution">
+                                <p>À l'équivalence : C<sub>a</sub> × V<sub>a</sub> = C<sub>b</sub> × V<sub>b</sub></p>
+                                <p>C<sub>a</sub> × 20,0 = 0,100 × 15,0</p>
+                                <p>C<sub>a</sub> = (0,100 × 15,0) / 20,0 = 0,075 mol·L<sup>-1</sup></p>
+                                <p>La concentration de la solution d'acide chlorhydrique est de 0,075 mol·L<sup>-1</sup>.</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <div class="practice-question">2. Prédisez si les réactions suivantes sont favorisées dans le sens direct, et calculez leur constante d'équilibre :</div>
+                            <div class="practice-question">a) HCN + OH⁻ ⇌ CN⁻ + H₂O (pK<sub>a</sub>(HCN) = 9,2)</div>
+                            <div class="practice-question">b) NH₄⁺ + CO₃²⁻ ⇌ NH₃ + HCO₃⁻ (pK<sub>a</sub>(NH₄⁺) = 9,2 et pK<sub>a</sub>(HCO₃⁻) = 10,3)</div>
+                            <div class="practice-solution">
+                                <p>a) HCN + OH⁻ ⇌ CN⁻ + H₂O</p>
+                                <p>Cette réaction met en jeu les couples HCN/CN⁻ (pK<sub>a</sub> = 9,2) et H₂O/OH⁻ (pK<sub>a</sub> = 14).</p>
+                                <p>Comme pK<sub>a</sub>(HCN) < pK<sub>a</sub>(H₂O), la réaction est favorisée dans le sens direct.</p>
+                                <p>K = 10<sup>(14 - 9,2)</sup> = 10<sup>4,8</sup> ≈ 6,3 × 10<sup>4</sup></p>
+                                
+                                <p>b) NH₄⁺ + CO₃²⁻ ⇌ NH₃ + HCO₃⁻</p>
+                                <p>Cette réaction met en jeu les couples NH₄⁺/NH₃ (pK<sub>a</sub> = 9,2) et HCO₃⁻/CO₃²⁻ (pK<sub>a</sub> = 10,3).</p>
+                                <p>Comme pK<sub>a</sub>(NH₄⁺) < pK<sub>a</sub>(HCO₃⁻), la réaction est favorisée dans le sens direct.</p>
+                                <p>K = 10<sup>(10,3 - 9,2)</sup> = 10<sup>1,1</sup> ≈ 12,6</p>
+                                <p>La réaction est modérément déplacée vers la droite.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications des acides et des bases -->
+    <div class="method-section">
+        <h2>6. Applications des Acides et des Bases</h2>
+        
+        <div class="method-card">
+            <div class="method-header">
+                <h3>Utilisations dans la vie quotidienne et l'industrie</h3>
+            </div>
+            <div class="method-content">
+                <div class="subsection">
+                    <h4>Applications domestiques</h4>
+                    <div class="concept-card">
+                        <p>Les acides et les bases sont présents dans de nombreux produits d'usage courant :</p>
+                        
+                        <div class="uses-grid">
+                            <div class="use-card">
+                                <div class="use-icon">🧹</div>
+                                <h5>Produits d'entretien</h5>
+                                <ul>
+                                    <li><strong>Bases</strong> : Détergents, savons, déboucheurs (NaOH)</li>
+                                    <li><strong>Acides</strong> : Détartrants (acide citrique, acide acétique), nettoyants pour toilettes (HCl dilué)</li>
+                                </ul>
+                            </div>
+                            <div class="use-card">
+                                <div class="use-icon">🍋</div>
+                                <h5>Alimentation</h5>
+                                <ul>
+                                    <li><strong>Acides</strong> : Conservateurs (acide citrique, acide benzoïque), régulateurs de goût (acide tartrique dans les bonbons)</li>
+                                    <li><strong>Bases</strong> : Levure chimique (bicarbonate de sodium), attendrisseurs de viande</li>
+                                </ul>
+                            </div>
+                            <div class="use-card">
+                                <div class="use-icon">💊</div>
+                                <h5>Médicaments</h5>
+                                <ul>
+                                    <li><strong>Acides</strong> : Aspirine (acide acétylsalicylique), antiacides (sels d'aluminium)</li>
+                                    <li><strong>Bases</strong> : Antiacides (bicarbonate de sodium, hydroxyde de magnésium)</li>
+                                </ul>
+                            </div>
+                            <div class="use-card">
+                                <div class="use-icon">🔋</div>
+                                <h5>Piles et batteries</h5>
+                                <ul>
+                                    <li><strong>Acides</strong> : Électrolytes dans les batteries au plomb (H₂SO₄)</li>
+                                    <li><strong>Bases</strong> : Électrolytes dans les piles alcalines (KOH)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h4>Applications industrielles</h4>
+                    <div class="concept-card">
+                        <p>Les acides et les bases sont des produits chimiques fondamentaux pour l'industrie :</p>
+                        
+                        <div class="uses-grid">
+                            <div class="use-card">
+                                <div class="use-icon">🏭</div>
+                                <h5>Industrie chimique</h5>
+                                <ul>
+                                    <li><strong>H₂SO₄</strong> : Production d'engrais, de détergents, de pigments</li>
+                                    <li><strong>HNO₃</strong> : Fabrication d'explosifs, d'engrais, de colorants</li>
+                                    <li><strong>NaOH</strong> : Production de savons, de papier, de textiles</li>
+                                </ul>
+                            </div>
+                            <div class="use-card">
+                                <div class="use-icon">🚗</div>
+                                <h5>Métallurgie</h5>
+                                <ul>
+                                    <ul>
+                                        <li><strong>Acides</strong> : Décapage des métaux, gravure, traitement de surface</li>
+                                        <li><strong>Bases</strong> : Extraction de l'aluminium (procédé Bayer), traitement des minerais</li>
+                                    </ul>
+                                </div>
+                                <div class="use-card">
+                                    <div class="use-icon">🌾</div>
+                                    <h5>Agriculture</h5>
+                                    <ul>
+                                        <li><strong>Acides</strong> : Fabrication d'engrais phosphatés et azotés</li>
+                                        <li><strong>Bases</strong> : Correction de l'acidité des sols (chaux, calcaire)</li>
+                                        <li><strong>Tampons</strong> : Régulation du pH des solutions nutritives</li>
+                                    </ul>
+                                </div>
+                                <div class="use-card">
+                                    <div class="use-icon">💧</div>
+                                    <h5>Traitement des eaux</h5>
+                                    <ul>
+                                        <li><strong>Acides/Bases</strong> : Ajustement du pH des eaux potables et usées</li>
+                                        <li><strong>Coagulants</strong> : Sels d'aluminium acides pour la floculation</li>
+                                        <li><strong>Désinfection</strong> : Chloration en milieu contrôlé</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="important-note">
+                                <p>L'acide sulfurique (H₂SO₄) est le produit chimique le plus fabriqué dans le monde, avec une production annuelle dépassant 200 millions de tonnes. Il est souvent considéré comme un indicateur de l'activité industrielle d'un pays.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4>Applications biologiques et médicales</h4>
+                        <div class="concept-card">
+                            <p>Les équilibres acido-basiques sont essentiels dans les systèmes biologiques :</p>
+                            
+                            <div class="uses-grid">
+                                <div class="use-card">
+                                    <div class="use-icon">🩸</div>
+                                    <h5>Équilibre acido-basique du sang</h5>
+                                    <ul>
+                                        <li>pH sanguin maintenu entre 7,35 et 7,45</li>
+                                        <li>Système tampon principal : H₂CO₃/HCO₃⁻</li>
+                                        <li>Acidose (pH < 7,35) et alcalose (pH > 7,45) peuvent être fatales</li>
+                                    </ul>
+                                </div>
+                                <div class="use-card">
+                                    <div class="use-icon">🧬</div>
+                                    <h5>Enzymes et protéines</h5>
+                                    <ul>
+                                        <li>Activité enzymatique dépendante du pH</li>
+                                        <li>Structure des protéines influencée par le pH</li>
+                                        <li>Acides aminés : molécules amphotères</li>
+                                    </ul>
+                                </div>
+                                <div class="use-card">
+                                    <div class="use-icon">🦷</div>
+                                    <h5>Santé bucco-dentaire</h5>
+                                    <ul>
+                                        <li>Déminéralisation de l'émail dentaire en milieu acide</li>
+                                        <li>Caries favorisées par les acides produits par les bactéries</li>
+                                        <li>Dentifrices contenant des tampons pour neutraliser les acides</li>
+                                    </ul>
+                                </div>
+                                <div class="use-card">
+                                    <div class="use-icon">🧪</div>
+                                    <h5>Analyses médicales</h5>
+                                    <ul>
+                                        <li>Mesure du pH sanguin et urinaire</li>
+                                        <li>Tampons pour préserver les échantillons biologiques</li>
+                                        <li>Réactifs de diagnostic à pH contrôlé</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="illustration-box">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Buffer_solution_pH_blood.svg/800px-Buffer_solution_pH_blood.svg.png" alt="Système tampon du sang" width="600">
+                                <p class="caption">Système tampon bicarbonate/acide carbonique dans le sang</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4>Problématiques environnementales</h4>
+                        <div class="concept-card">
+                            <p>Les acides et les bases sont impliqués dans plusieurs problèmes environnementaux :</p>
+                            
+                            <div class="method-steps">
+                                <div class="method-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h5>Pluies acides</h5>
+                                        <p>Les oxydes de soufre (SO₂) et d'azote (NO<sub>x</sub>) émis par les activités humaines réagissent avec l'eau atmosphérique pour former des acides (H₂SO₄, HNO₃) qui retombent sous forme de précipitations acides.</p>
+                                        <p>Conséquences : acidification des lacs et des sols, dégradation des forêts, corrosion des bâtiments.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h5>Acidification des océans</h5>
+                                        <p>L'augmentation du CO₂ atmosphérique entraîne une absorption accrue par les océans, formant de l'acide carbonique et abaissant le pH de l'eau de mer.</p>
+                                        <p>Conséquences : dissolution des squelettes calcaires des organismes marins, perturbation des écosystèmes coralliens.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h5>Pollution industrielle</h5>
+                                        <p>Rejets d'acides ou de bases dans l'environnement par les industries chimiques, minières ou métallurgiques.</p>
+                                        <p>Conséquences : destruction de la faune et de la flore aquatiques, contamination des sols.</p>
+                                    </div>
+                                </div>
+                                <div class="method-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h5>Solutions et remèdes</h5>
+                                        <p>Réduction des émissions polluantes, chaulage des lacs et des sols acides, traitement des effluents industriels, développement de procédés industriels plus propres.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="illustration-box">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Ocean_acidification_mechanism.png/800px-Ocean_acidification_mechanism.png" alt="Mécanisme d'acidification des océans" width="600">
+                                <p class="caption">Mécanisme d'acidification des océans par absorption du CO₂ atmosphérique</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-box">
+                        <h5>Exercices d'application</h5>
+                        <div class="practice-items">
+                            <div class="practice-item">
+                                <div class="practice-question">1. Le pH normal du sang est d'environ 7,4. Calculez le rapport [HCO₃⁻]/[H₂CO₃] dans le sang, sachant que le pK<sub>a</sub> du couple H₂CO₃/HCO₃⁻ est de 6,1.</div>
+                                <div class="practice-solution">
+                                    <p>On utilise l'équation d'Henderson-Hasselbalch :</p>
+                                    <p>pH = pK<sub>a</sub> + log([HCO₃⁻]/[H₂CO₃])</p>
+                                    <p>7,4 = 6,1 + log([HCO₃⁻]/[H₂CO₃])</p>
+                                    <p>log([HCO₃⁻]/[H₂CO₃]) = 7,4 - 6,1 = 1,3</p>
+                                    <p>[HCO₃⁻]/[H₂CO₃] = 10<sup>1,3</sup> ≈ 20</p>
+                                    <p>Le rapport [HCO₃⁻]/[H₂CO₃] dans le sang est d'environ 20/1, ce qui signifie que la concentration en ions bicarbonate est environ 20 fois plus élevée que celle en acide carbonique.</p>
+                                </div>
+                            </div>
+                            <div class="practice-item">
+                                <div class="practice-question">2. L'eau de pluie non polluée a un pH d'environ 5,6 en raison de la dissolution du CO₂ atmosphérique. Calculez la concentration en ions H₃O⁺ dans cette eau et expliquez pourquoi son pH est inférieur à 7.</div>
+                                <div class="practice-solution">
+                                    <p>Concentration en ions H₃O⁺ :</p>
+                                    <p>[H₃O⁺] = 10<sup>-pH</sup> = 10<sup>-5,6</sup> ≈ 2,5 × 10<sup>-6</sup> mol·L<sup>-1</sup></p>
+                                    <p>Explication :</p>
+                                    <p>Le CO₂ atmosphérique se dissout dans l'eau de pluie selon les équilibres suivants :</p>
+                                    <p>CO₂(g) + H₂O ⇌ H₂CO₃(aq)</p>
+                                    <p>H₂CO₃(aq) + H₂O ⇌ HCO₃⁻(aq) + H₃O⁺(aq)</p>
+                                    <p>La formation d'acide carbonique (H₂CO₃) et sa dissociation partielle libèrent des ions H₃O⁺, ce qui abaisse le pH de l'eau de pluie en-dessous de la neutralité (pH 7). Cette acidité naturelle (pH ≈ 5,6) est différente des pluies acides (pH < 5) causées par la pollution atmosphérique (SO₂, NO<sub>x</sub>).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Conclusion -->
+        <div class="method-section">
+            <h2>Conclusion : Les Acides et les Bases</h2>
+            
+            <div class="method-card">
+                <div class="method-header">
+                    <h3>Synthèse et perspectives</h3>
+                </div>
+                <div class="method-content">
+                    <div class="conclusion-box">
+                        <h4>Points clés à retenir</h4>
+                        <div class="key-points-grid">
+                            <div class="key-point">
+                                <div class="key-point-icon">����</div>
+                                <div class="key-point-content">
+                                    <h5>Définitions</h5>
+                                    <p>Les acides et les bases peuvent être définis selon plusieurs théories (Arrhenius, Brønsted-Lowry, Lewis), chacune offrant une perspective complémentaire sur ces espèces chimiques.</p>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point-icon">📌</div>
+                                <div class="key-point-content">
+                                    <h5>Équilibres en solution</h5>
+                                    <p>L'autoprotolyse de l'eau, caractérisée par K<sub>e</sub> = 10<sup>-14</sup> à 25°C, est à la base de l'échelle de pH. Les équilibres acido-basiques sont régis par les constantes d'acidité K<sub>a</sub> et de basicité K<sub>b</sub>.</p>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point-icon">📌</div>
+                                <div class="key-point-content">
+                                    <h5>Réactions et titrages</h5>
+                                    <p>Les réactions acido-basiques impliquent un transfert de protons. Leur sens d'évolution peut être prédit en comparant les pK<sub>a</sub>. Les titrages permettent de déterminer la concentration d'une espèce acide ou basique.</p>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point-icon">📌</div>
+                                <div class="key-point-content">
+                                    <h5>Applications</h5>
+                                    <p>Les acides et les bases sont omniprésents dans notre quotidien, l'industrie, la médecine et l'environnement. Leur maîtrise est essentielle pour comprendre de nombreux phénomènes naturels et processus technologiques.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4>Importance dans la vie quotidienne</h4>
+                        <div class="concept-card">
+                            <p>Les acides et les bases sont parmi les espèces chimiques les plus importantes et les plus utilisées :</p>
+                            <ul>
+                                <li>Ils sont présents dans de nombreux produits d'usage courant (aliments, médicaments, produits d'entretien)</li>
+                                <li>Ils jouent un rôle crucial dans les processus biologiques (digestion, respiration, métabolisme)</li>
+                                <li>Ils sont à la base de nombreux procédés industriels (métallurgie, chimie, agroalimentaire)</li>
+                                <li>Leur équilibre est essentiel pour la santé humaine et l'environnement</li>
+                            </ul>
+                            <p>Comprendre les propriétés et les réactions des acides et des bases permet non seulement d'expliquer de nombreux phénomènes quotidiens, mais aussi de développer des solutions aux problèmes environnementaux et sanitaires.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4>Perspectives et développements</h4>
+                        <div class="concept-card">
+                            <p>La recherche sur les acides et les bases continue d'évoluer dans plusieurs directions :</p>
+                            <ul>
+                                <li><strong>Chimie verte</strong> : Développement de procédés industriels utilisant des acides et des bases moins dangereux et plus respectueux de l'environnement</li>
+                                <li><strong>Catalyse acido-basique</strong> : Conception de nouveaux catalyseurs pour des réactions plus efficaces et sélectives</li>
+                                <li><strong>Matériaux intelligents</strong> : Création de polymères et de surfaces sensibles au pH pour des applications en médecine et en électronique</li>
+                                <li><strong>Biochimie</strong> : Meilleure compréhension du rôle des équilibres acido-basiques dans les processus cellulaires et les maladies</li>
+                                <li><strong>Environnement</strong> : Solutions innovantes pour lutter contre l'acidification des océans et la pollution acide</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="quote-box">
+                        <p>"Les acides et les bases sont comme les deux faces d'une même médaille, opposés mais complémentaires, et leur équilibre est au cœur de la chimie comme de la vie elle-même."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Ressources -->
+        <div class="resources-section">
+            <h2>Pour approfondir</h2>
+            
+            <div class="resources-grid">
+                <div class="resource">
+                    <div class="resource-icon">📚</div>
+                    <div class="resource-content">
+                        <h4>Exercices complémentaires</h4>
+                        <p>Téléchargez des fiches d'exercices pour vous entraîner :</p>
+                        <div class="download-box">
+                            <a href="#" class="download-button">
+                                <span class="download-icon">📥</span>
+                                <span class="download-text">Exercices sur les acides et les bases</span>
+                            </a>
+                            <p class="download-info">PDF - 5 pages d'exercices avec corrigés</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource">
+                    <div class="resource-icon">🔍</div>
+                    <div class="resource-content">
+                        <h4>Points à réviser</h4>
+                        <ul>
+                            <li>Les différentes théories des acides et des bases</li>
+                            <li>Le calcul du pH dans différentes situations</li>
+                            <li>Les facteurs influençant la force des acides et des bases</li>
+                            <li>Les réactions de neutralisation et les titrages</li>
+                            <li>Les applications des acides et des bases</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="resource">
+                    <div class="resource-icon">🎯</div>
+                    <div class="resource-content">
+                        <h4>Préparation à l'examen</h4>
+                        <p>Les acides et les bases sont un sujet fondamental du programme de Terminale S, souvent abordé dans les épreuves de chimie.</p>
+                        <p>Points d'attention pour l'examen :</p>
+                        <ul>
+                            <li>Maîtriser les calculs de pH dans différentes situations</li>
+                            <li>Savoir interpréter et exploiter une courbe de titrage</li>
+                            <li>Comprendre les équilibres acido-basiques et leur déplacement</li>
+                            <li>Connaître les applications pratiques des acides et des bases</li>
+                            <li>Faire le lien entre structure moléculaire et force des acides/bases</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="resource">
+                    <div class="resource-icon">🌐</div>
+                    <div class="resource-content">
+                        <h4>Ressources en ligne</h4>
+                        <ul>
+                            <li><a href="#">Simulateur de titrages acido-basiques</a></li>
+                            <li><a href="#">Animations interactives sur les équilibres chimiques</a></li>
+                            <li><a href="#">Vidéos d'expériences sur les propriétés des acides et des bases</a></li>
+                            <li><a href="#">Quiz en ligne pour tester vos connaissances</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+    /* Styles généraux */
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2c3e50;
+        --accent-color: #e74c3c;
+        --light-bg: #f5f7fa;
+        --dark-bg: #34495e;
+        --text-color: #333;
+        --light-text: #7f8c8d;
+        --border-radius: 8px;
+        --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--light-bg);
+        margin: 0;
+        padding: 0;
+    }
+    
+    .content-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* En-tête du cours */
+    .course-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 40px 0;
+        margin-bottom: 30px;
+    }
+    
+    .subject-tag {
+        display: inline-block;
+        background: rgba(255,255,255,0.2);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        margin-bottom: 10px;
+    }
+    
+    .course-title {
+        font-size: 2.5em;
+        margin: 10px 0;
+        font-weight: 700;
+    }
+    
+    .course-subtitle {
+        font-size: 1.2em;
+        opacity: 0.9;
+        margin-bottom: 20px;
+    }
+    
+    .course-actions {
+        margin-top: 20px;
+    }
+    
+    .action-button {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .action-button.primary {
+        background: white;
+        color: var(--primary-color);
+    }
+    
+    .action-button.secondary {
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+    
+    /* Section d'introduction */
+    .intro-section {
+        margin-bottom: 40px;
+    }
+    
+    .alert-box {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        box-shadow: var(--box-shadow);
+        margin-bottom: 20px;
+    }
+    
+    .alert-box h3 {
+        margin-top: 0;
+        color: var(--primary-color);
+    }
+    
+    .key-points {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+    
+    .point-item {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        box-shadow: var(--box-shadow);
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .point-icon {
+        font-size: 1.5em;
+        margin-right: 15px;
+        color: var(--primary-color);
+    }
+    
+    .point-content h4 {
+        margin-top: 0;
+        color: var(--secondary-color);
+    }
+    
+    .check-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .check-list li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 10px;
+    }
+    
+    .check-list li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+    }
+    
+    .examples-box {
+        background: var(--light-bg);
+        border-radius: var(--border-radius);
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .example {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+    }
+    
+    .example:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+    }
+    
+    .example:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* Sections de méthode */
+    .method-section {
+        margin-bottom: 40px;
+    }
+    
+    .method-section h2 {
+        color: var(--secondary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .method-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        overflow: hidden;
+    }
+    
+    .method-header {
+        background: var(--secondary-color);
+        color: white;
+        padding: 15px 20px;
+    }
+    
+    .method-header h3 {
+        margin: 0;
+    }
+    
+    .method-content {
+        padding: 20px;
+    }
+    
+    .subsection {
+        margin-bottom: 30px;
+    }
+    
+    .subsection:last-child {
+        margin-bottom: 0;
+    }
+    
+    .subsection h4 {
+        color: var(--primary-color);
+        margin-top: 0;
+    }
+    
+    .concept-card {
+        background: var(--light-bg);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .formula-box {
+        background: white;
+        border-left: 4px solid var(--primary-color);
+        padding: 10px 15px;
+        margin: 15px 0;
+    }
+    
+    .math-formula {
+        font-family: 'Cambria Math', Georgia, serif;
+        font-style: italic;
+    }
+    
+    .important-note {
+        background: #fef9e7;
+        border-left: 4px solid #f39c12;
+        padding: 10px 15px;
+        margin: 15px 0;
+    }
+    
+    .illustration-box {
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .illustration-box img {
+        max-width: 100%;
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .caption {
+        font-size: 0.9em;
+        color: var(--light-text);
+        margin-top: 10px;
+    }
+    
+    /* Tableaux */
+    .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .summary-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .summary-row.header {
+        background: var(--secondary-color);
+        color: white;
+        font-weight: bold;
+    }
+    
+    .summary-row:last-child {
+        border-bottom: none;
+    }
+    
+    .summary-cell {
+        padding: 10px 15px;
+    }
+    
+    /* Étapes de méthode */
+    .method-steps {
+        margin: 20px 0;
+    }
+    
+    .method-step {
+        display: flex;
+        margin-bottom: 15px;
+        align-items: flex-start;
+    }
+    
+    .step-number {
+        background: var(--primary-color);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    
+    .step-content {
+        flex-grow: 1;
+    }
+    
+    .step-content h5 {
+        margin-top: 0;
+        color: var(--secondary-color);
+    }
+    
+    /* Exercices */
+    .practice-box {
+        background: #f0f4f8;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-top: 30px;
+    }
+    
+    .practice-items {
+        margin-top: 15px;
+    }
+    
+    .practice-item {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .practice-question {
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+    }
+    
+    .practice-solution {
+        border-top: 1px solid #eee;
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+    
+    /* Applications */
+    .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+    
+    .use-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        box-shadow: var(--box-shadow);
+    }
+    
+    .use-icon {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+        text-align: center;
+        display: block;
+    }
+    
+    .use-card h5 {
+        margin-top: 0;
+        color: var(--secondary-color);
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    .use-card ul {
+        padding-left: 20px;
+        margin: 0;
+    }
+    
+    .use-card li {
+        margin-bottom: 8px;
+    }
+    
+    /* Citations */
+    .quote-box {
+        background: #f0f4f8;
+        border-left: 4px solid var(--primary-color);
+        padding: 20px;
+        margin: 20px 0;
+        font-style: italic;
+        color: var(--secondary-color);
+    }
+    
+    /* Conclusion */
+    .conclusion-box {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: var(--box-shadow);
+    }
+    
+    .key-points-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .key-point {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    
+    .key-point-icon {
+        font-size: 1.2em;
+        margin-right: 10px;
+        color: var(--primary-color);
+    }
+    
+    .key-point-content h5 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        color: var(--secondary-color);
+    }
+    
+    .key-point-content p {
+        margin: 0;
+    }
+    
+    /* Ressources */
+    .resources-section {
+        margin-top: 40px;
+        margin-bottom: 60px;
+    }
+    
+    .resources-section h2 {
+        color: var(--secondary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    
+    .resource {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        box-shadow: var(--box-shadow);
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .resource-icon {
+        font-size: 1.5em;
+        margin-right: 15px;
+        color: var(--primary-color);
+    }
+    
+    .resource-content h4 {
+        margin-top: 0;
+        color: var(--secondary-color);
+    }
+    
+    .download-box {
+        background: var(--light-bg);
+        border-radius: var(--border-radius);
+        padding: 15px;
+        margin-top: 10px;
+    }
+    
+    .download-button {
+        display: flex;
+        align-items: center;
+        background: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: var(--border-radius);
+        transition: all 0.3s ease;
+    }
+    
+    .download-icon {
+        margin-right: 10px;
+    }
+    
+    .download-info {
+        font-size: 0.9em;
+        color: var(--light-text);
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    </style>
+    {% endblock %}
+    
+                        
