@@ -554,6 +554,11 @@ def philo_chapitre8():
 def philo_premiere():
     return render_template('cours/philo/philo_premiere.html')
 
+@app.route('/cours/philo/seconde')
+@login_required
+def philo_seconde():
+    return render_template('cours/philo/philo_seconde.html')
+
 # Mathématiques
 @app.route('/cours/mathematiques/terminale')
 @login_required
@@ -604,6 +609,11 @@ def mathematiques_chapitre8():
 @login_required
 def mathematiques_premiere():
     return render_template('cours/maths/maths_premiere.html')
+
+@app.route('/cours/mathematiques/seconde')
+@login_required
+def mathematiques_seconde():
+    return render_template('cours/maths/maths_seconde.html')
 
 # Histoire
 @app.route('/cours/histoire/terminale')
@@ -656,6 +666,11 @@ def histoire_chapitre8():
 def histoire_premiere():
     return render_template('cours/histoire/histoire_premiere.html')
 
+@app.route('/cours/histoire/seconde')
+@login_required
+def histoire_seconde():
+    return render_template('cours/histoire/histoire_seconde.html')
+
 # Anglais 
 @app.route('/cours/anglais/terminale')
 @login_required
@@ -707,6 +722,11 @@ def anglais_chapitre8():
 def anglais_premiere():
     return render_template('cours/anglais/anglais_premiere.html')
 
+@app.route('/cours/anglais/seconde')
+@login_required
+def anglais_seconde():
+    return render_template('cours/anglais/anglais_seconde.html')
+
 
 
 # SVT
@@ -734,6 +754,11 @@ def svt_chapitre3():
 @login_required
 def svt_premiere():
     return render_template('cours/svt/svt_premiere.html')
+
+@app.route('/cours/svt/seconde')
+@login_required
+def svt_seconde():
+    return render_template('cours/svt/svt_seconde.html')
 
 # Physique-Chimie
 @app.route('/cours/physique-chimie/terminale')
@@ -785,6 +810,11 @@ def PC_chapitre8():
 @login_required
 def physique_chimie_premiere():
     return render_template('cours/physique-chimie/physique_chimie_premiere.html')
+
+@app.route('/cours/physique-chimie/seconde')
+@login_required
+def physique_chimie_seconde():
+    return render_template('cours/physique-chimie/physique_chimie_seconde.html')
 
 # Routes de test
 @app.route('/test/users')
