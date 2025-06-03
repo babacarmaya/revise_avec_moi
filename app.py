@@ -130,7 +130,7 @@ def login():
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
             session['niveau'] = user.niveau
-            flash('Connexion réussie !', 'success')
+            flash('thia kaw ; thia kanam !', 'success')
             return redirect(url_for('home'))
         flash('Email ou mot de passe incorrect', 'error')
     return render_template('auth/login.html')
@@ -164,7 +164,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         
-        flash('Inscription réussie !', 'success')
+        flash('aythia niou dem !', 'success')
         return redirect(url_for('login'))
     return render_template('auth/register.html')
 
