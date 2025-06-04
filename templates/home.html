@@ -7,6 +7,54 @@
         
         </div>
     </div>
+
+    <script>
+// Date du bac (1er juillet 2025)
+const bacDate = new Date('July 1, 2025 08:00:00').getTime();
+
+// Mise à jour du compte à rebours toutes les secondes
+const countdownTimer = setInterval(function() {
+    // Date et heure actuelles
+    const now = new Date().getTime();
+    
+    // Différence entre la date du bac et maintenant
+    const distance = bacDate - now;
+    
+    // Calculs pour jours, heures, minutes et secondes
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Affichage du résultat
+    document.getElementById("countdown-days").innerHTML = days;
+    document.getElementById("countdown-hours").innerHTML = hours;
+    document.getElementById("countdown-minutes").innerHTML = minutes;
+    document.getElementById("countdown-seconds").innerHTML = seconds;
+    
+    // Messages personnalisés selon le temps restant
+    if (days <= 7) {
+        document.getElementById("countdown-message").innerHTML = "Dernière ligne droite, restez concentrés !";
+    }
+    if (days <= 3) {
+        document.getElementById("countdown-message").innerHTML = "Plus que quelques jours, vous êtes prêts !";
+    }
+    if (days <= 1) {
+        document.getElementById("countdown-message").innerHTML = "C'est demain, reposez-vous bien ce soir !";
+    }
+    
+    // Si la date est passée
+    if (distance < 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("countdown-days").innerHTML = "0";
+        document.getElementById("countdown-hours").innerHTML = "0";
+        document.getElementById("countdown-minutes").innerHTML = "0";
+        document.getElementById("countdown-seconds").innerHTML = "0";
+        document.getElementById("countdown-message").innerHTML = "Les épreuves ont commencé. Bonne chance !";
+    }
+}, 1000);
+</script>
+
     
 
     <div class="hero-content">
@@ -37,177 +85,574 @@
     </div>
 
 </div>
+<!-- Compte à rebours pour le Bac -->
+<div class="countdown-container">
+    <div class="countdown-header">
+        <h3>Baccalauréat 2025</h3>
+        <div class="countdown-subtitle">Début des épreuves le 1er juillet</div>
+    </div>
+    <div class="countdown-timer">
+        <div class="countdown-item">
+            <div class="countdown-value" id="countdown-days">--</div>
+            <div class="countdown-label">Jours</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-value" id="countdown-hours">--</div>
+            <div class="countdown-label">Heures</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-value" id="countdown-minutes">--</div>
+            <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-value" id="countdown-seconds">--</div>
+            <div class="countdown-label">Secondes</div>
+        </div>
+    </div>
+    <div class="countdown-message" id="countdown-message">
+        Courage, vous êtes sur la bonne voie !
+    </div>
+</div>
 
-<style>
-    :root {
-        --background-dark:rgb(168, 168, 168);
-        --background-card:rgb(0, 0, 0);
-        --text-cream: #f5f5dc;
-        --button-yellow: #ffc94d;
-        --accent-blue: #4d9eff;
-    }
 
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(135deg, #111827 0%, #1e1e3f 100%);
-        min-height: 100vh;
-        color: var(--text-cream§);
-    }
 
-    .main-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 0;
-        margin-bottom: 40px;
-    }
 
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
 
-    .logo-icon {
-        background-color: #4caf50;
-        width: 45px;
-        height: 45px;
-        border-radius: 8px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 
-    .book {
-        width: 30px;
-        height: 25px;
-        background-color: #f5f5dc;
-        border-radius: 2px;
-    }
 
-    .line {
-        position: absolute;
-        bottom: 8px;
-        width: 25px;
-        height: 3px;
-        background-color: #f5f5dc;
-    }
 
-   
-    .user-dot {
-        width: 15px;
-        height: 15px;
-        background-color: #111827;
-        border-radius: 50%;
-    }
 
-    .hero-content {
-        text-align: left;
-        margin: 60px 0;
-    }
 
-    h1 {
-        font-size: 3.5rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        line-height: 1.1;
-        color: var(--text-cream);
-    }
 
-    .sparkle {
-        color: #ffd700;
-        font-size: 3rem;
-        position: relative;
-        top: -10px;
-    }
 
-    .subtitle {
-        font-size: 1.5rem;
-        margin-bottom: 40px;
-        color: #4d9eff;
-    }
 
-    .start-button {
-        display: inline-flex;
-        align-items: center;
-        background-color: var(--button-yellow);
-        color: #5a3e00;
-        padding: 15px 30px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.2rem;
-        transition: all 0.3s ease;
-        margin-bottom: 40px;
-    }
 
-    .target-icon {
-        margin-right: 15px;
-        font-size: 1.5rem;
-    }
 
-    .levels-section {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin-bottom: 40px;
-    }
 
-    .level-card {
-        background: var(--background-card);
-        padding: 20px 30px;
-        border-radius: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
-    h2 {
-        color: var(--text-cream);
-        font-size: 1.8rem;
-        margin: 0;
-    }
 
-    .access-button {
-        display: inline-block;
-        background: #111827;
-        color: white;
-        padding: 10px 30px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
 
-    .footer {
-        text-align: center;
-        padding: 20px 0;
-        color: rgba(245, 245, 220, 0.7);
-        font-size: 0.9rem;
-    }
 
-    @media (max-width: 768px) {
-        h1 {
-            font-size: 2.5rem;
+
+
+
+
+
+
+<!-- Chatbot Pédagogique -->
+<div class="coach-bot-container">
+    <div class="coach-bot-icon" id="coach-bot-toggle">
+        <div class="coach-icon">🧑‍🏫</div>
+        <div class="coach-notification" id="coach-notification">1</div>
+    </div>
+    
+    <div class="coach-bot-panel" id="coach-bot-panel">
+        <div class="coach-header">
+            <div class="coach-title">
+                <div class="coach-avatar">🧑‍🏫</div>
+                <div class="coach-info">
+                    <div class="coach-name">Babs</div>
+                    <div class="coach-status">on line</div>
+                </div>
+            </div>
+            <div class="coach-close" id="coach-close">×</div>
+        </div>
+        
+        <div class="coach-messages" id="coach-messages">
+            <!-- Les messages s'afficheront ici -->
+        </div>
+        
+            <div class="coach-suggestions">
+        <p>
+            
+        </p>
+    </div>  
+        <div class="coach-input">
+            <input type="text" id="coach-message-input" placeholder="Pose ta question ici..." onkeypress="handleKeyPress(event)">
+            <button id="coach-send-btn" onclick="sendMessage()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+// Initialisation du chatbot
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('coach-bot-toggle');
+    const closeBtn = document.getElementById('coach-close');
+    const panel = document.getElementById('coach-bot-panel');
+    const notification = document.getElementById('coach-notification');
+    const messagesContainer = document.getElementById('coach-messages');
+    
+    // Ouvrir/fermer le chatbot
+    toggleBtn.addEventListener('click', function() {
+        panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
+        notification.style.display = 'none';
+        
+        // Message de bienvenue si c'est la première ouverture
+        if (messagesContainer.children.length === 0) {
+            setTimeout(() => {
+                addBotMessage("👋 Salut ! Je suis Babs, ton assistant pour réviser. Je ne suis pas une IA juste un chat entrainer avec une base de données pour des réponses optimales n'hésite pas à utiliser des mots clefs avec la bonne orthographe. Que puis-je t'expliquer aujourd'hui ?");
+            }, 500);
         }
+    });
+    
+    closeBtn.addEventListener('click', function() {
+        panel.style.display = 'none';
+    });
+});
 
-        .subtitle {
-            font-size: 1.2rem;
-        }
-
-        .start-button {
-            padding: 12px 25px;
-            font-size: 1rem;
-        }
+// Envoyer un message
+function sendMessage() {
+    const input = document.getElementById('coach-message-input');
+    const message = input.value.trim();
+    
+    if (message) {
+        addUserMessage(message);
+        showTypingIndicator();
+        
+        // Simuler une réponse après un court délai
+        setTimeout(() => {
+            removeTypingIndicator();
+            respondToMessage(message);
+        }, 1500);
+        
+        input.value = '';
     }
-</style>
+}
+
+// Gérer la touche Entrée
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+// Envoyer une suggestion prédéfinie
+function sendSuggestion(text) {
+    addUserMessage(text);
+    showTypingIndicator();
+    
+    setTimeout(() => {
+        removeTypingIndicator();
+        respondToMessage(text);
+    }, 1500);
+}
+
+// Ajouter un message de l'utilisateur
+function addUserMessage(text) {
+    const messagesContainer = document.getElementById('coach-messages');
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', 'user');
+    messageElement.textContent = text;
+    messagesContainer.appendChild(messageElement);
+    scrollToBottom();
+}
+
+// Ajouter un message du bot
+function addBotMessage(text) {
+    const messagesContainer = document.getElementById('coach-messages');
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', 'bot');
+    messageElement.textContent = text;
+    messagesContainer.appendChild(messageElement);
+    scrollToBottom();
+}
+
+// Afficher l'indicateur de frappe
+function showTypingIndicator() {
+    const messagesContainer = document.getElementById('coach-messages');
+    const typingIndicator = document.createElement('div');
+    typingIndicator.classList.add('typing-indicator');
+    typingIndicator.id = 'typing-indicator';
+    
+    for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('typing-dot');
+        typingIndicator.appendChild(dot);
+    }
+    
+    messagesContainer.appendChild(typingIndicator);
+    scrollToBottom();
+}
+
+// Supprimer l'indicateur de frappe
+function removeTypingIndicator() {
+    const typingIndicator = document.getElementById('typing-indicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+// Faire défiler vers le bas
+function scrollToBottom() {
+    const messagesContainer = document.getElementById('coach-messages');
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+// Répondre au message de l'utilisateur
+function respondToMessage(message) {
+    const lowerMessage = message.toLowerCase();
+    
+    // Réponses prédéfinies
+    if (lowerMessage.includes('acides et bases')) {
+        addBotMessage("🧪 Résumé sur les acides et bases :\n\n• Acide : donneur de protons H+ (Brønsted) ou accepteur d'électrons (Lewis)\n• Base : accepteur de protons ou donneur d'électrons\n• pH = -log[H3O+], échelle de 0 à 14\n• Acide fort : dissociation totale (HCl, HNO3)\n• Acide faible : dissociation partielle (CH3COOH)\n• Réaction de neutralisation : acide + base → sel + eau\n• Solution tampon : résiste aux variations de pH\n\nBesoin de plus de détails sur un point particulier ?");
+    }
+    else if (lowerMessage.includes('fonctions affines')) {
+        addBotMessage("📊 Voici une question sur les fonctions affines :\n\nSoit f(x) = 3x - 5 une fonction affine.\n1) Calcule l'image de 2 par cette fonction.\n2) Détermine l'antécédent de 10.\n3) Quelle est la signification graphique du coefficient directeur 3 ?\n\nTu veux que je te donne la solution ?");
+    }
+    else if (lowerMessage.includes('bonjour') || lowerMessage.includes('salut') || lowerMessage.includes('hello')) {
+        addBotMessage("👋 Salut ! Comment je peux t'aider dans tes révisions aujourd'hui ?");
+    }
+        else if (lowerMessage.includes('merci')) {
+        addBotMessage("😊 De rien ! C'est un plaisir de t'aider. N'hésite pas si tu as d'autres questions !");
+    }
+    else if (lowerMessage.includes('bac') || lowerMessage.includes('examen')) {
+        addBotMessage("🎓 Le bac approche, mais pas de stress ! La clé est d'organiser tes révisions, de faire des fiches synthétiques et de t'entraîner avec des annales. Tu veux des conseils pour réviser une matière en particulier ?");
+    }
+    else if (lowerMessage.includes('solution')) {
+        addBotMessage("✅ Voici la solution :\n\n1) f(2) = 3×2 - 5 = 6 - 5 = 1\n2) Pour trouver l'antécédent de 10 : 3x - 5 = 10 → 3x = 15 → x = 5\n3) Le coefficient directeur 3 représente la pente de la droite. Il indique que lorsque x augmente de 1, y augmente de 3.");
+    }
+    else if (lowerMessage.includes('pythagore')) {
+        addBotMessage("📐 Le théorème de Pythagore s'applique dans un triangle rectangle : le carré de l'hypoténuse (côté opposé à l'angle droit) est égal à la somme des carrés des deux autres côtés. Si ABC est un triangle rectangle en A, alors BC² = AB² + AC².");
+    }
+    else if (lowerMessage.includes('équation') || lowerMessage.includes('equation')) {
+        addBotMessage("🔢 Pour résoudre une équation du premier degré ax + b = 0 :\n1) Isole les termes avec x d'un côté\n2) Isole les termes sans x de l'autre côté\n3) Divise par le coefficient de x\n\nPour une équation du second degré ax² + bx + c = 0, utilise le discriminant Δ = b² - 4ac, puis la formule x = (-b ± √Δ)/2a");
+    }
+    else if (lowerMessage.includes('dérivée') || lowerMessage.includes('derivee')) {
+        addBotMessage("📈 Les dérivées permettent de calculer la pente de la tangente à une courbe en un point. Quelques règles :\n• (k)' = 0 (constante)\n• (x^n)' = n×x^(n-1)\n• (u+v)' = u' + v'\n• (u×v)' = u'×v + u×v'\n• (u/v)' = (u'×v - u×v')/v²\n\nTu veux un exemple concret ?");
+    }
+    else if (lowerMessage.includes('limite')) {
+        addBotMessage("🔍 Les limites permettent d'étudier le comportement d'une fonction quand x tend vers une valeur ou vers l'infini. Astuces de calcul :\n• lim(x→∞) 1/x = 0\n• lim(x→∞) x^n/x^m = 0 si n < m\n• lim(x→∞) x^n/x^m = ∞ si n > m\n• Pour les formes indéterminées (∞/∞, 0/0), utilise les développements limités ou la règle de l'Hôpital");
+    }
+    else if (lowerMessage.includes('intégrale')) {
+        addBotMessage("∫ L'intégrale représente l'aire sous la courbe. Quelques formules :\n• ∫ k dx = kx + C\n• ∫ x^n dx = x^(n+1)/(n+1) + C (si n ≠ -1)\n• ∫ 1/x dx = ln|x| + C\n• ∫ e^x dx = e^x + C\n\nPour calculer une intégrale définie ∫[a,b] f(x)dx, calcule la primitive F(x) puis F(b) - F(a).");
+    }
+    else if (lowerMessage.includes('probabilité') || lowerMessage.includes('probabilite')) {
+        addBotMessage("🎲 En probabilités, on a :\n• P(A∪B) = P(A) + P(B) - P(A∩B)\n• Si A et B sont indépendants : P(A∩B) = P(A)×P(B)\n• Probabilité conditionnelle : P(A|B) = P(A∩B)/P(B)\n• Loi binomiale : P(X=k) = C(n,k)×p^k×(1-p)^(n-k)\n\nTu veux un exercice sur les probabilités ?");
+    }
+    else if (lowerMessage.includes('svt') || lowerMessage.includes('biologie')) {
+        addBotMessage("🧬 En SVT, les grands thèmes du programme sont :\n• La Terre dans l'Univers et son évolution\n• Le maintien de l'intégrité de l'organisme\n• Corps humain et santé\n• Génétique et évolution\n• Écosystèmes et activités humaines\n\nQuel chapitre t'intéresse particulièrement ?");
+    }
+    else if (lowerMessage.includes('physique')) {
+        addBotMessage("⚛️ En physique, les principaux domaines sont :\n• Mécanique (forces, mouvements, énergie)\n• Électricité et magnétisme\n• Optique\n• Ondes\n• Thermodynamique\n• Physique nucléaire\n\nSur quel sujet as-tu besoin d'aide ?");
+    }
+    else if (lowerMessage.includes('chimie')) {
+        addBotMessage("🧪 En chimie, les grands thèmes sont :\n• Structure de la matière (atomes, liaisons)\n• Transformations chimiques\n• Cinétique et équilibres chimiques\n• Oxydoréduction\n• Chimie organique\n• Acides et bases\n\nQuel aspect de la chimie veux-tu réviser ?");
+    }
+    else if (lowerMessage.includes('histoire')) {
+        addBotMessage("📜 En histoire, le programme de Terminale couvre :\n• Les relations internationales depuis 1945\n• La décolonisation\n• La construction européenne\n• La France depuis 1945\n• Les grandes puissances (USA, URSS/Russie, Chine)\n\nSur quelle période historique as-tu des questions ?");
+    }
+    else if (lowerMessage.includes('géographie') || lowerMessage.includes('geographie')) {
+        addBotMessage("🌍 En géographie, le programme de Terminale aborde :\n• La mondialisation\n• Les dynamiques territoriales\n• L'Afrique, les Amériques et l'Asie\n• Les enjeux du développement\n• L'aménagement des territoires\n\nQuel thème géographique t'intéresse ?");
+    }
+    else if (lowerMessage.includes('philosophie') || lowerMessage.includes('philo')) {
+        addBotMessage("🤔 En philosophie, les notions principales sont :\n• La conscience\n• La perception\n• La liberté\n• Le devoir\n• Le bonheur\n• La vérité\n• La justice\n• L'État\n• La science\n• L'art\n\nSur quelle notion philosophique veux-tu réfléchir ?");
+    }
+    else if (lowerMessage.includes('anglais')) {
+        addBotMessage("🇬🇧 Pour l'anglais, concentre-toi sur :\n• La compréhension écrite et orale\n• L'expression écrite (essais, lettres)\n• L'expression orale\n• Le vocabulaire thématique\n• Les points grammaticaux essentiels\n\nWhat specific aspect of English would you like to practice?");
+    }
+    else if (lowerMessage.includes('espagnol')) {
+        addBotMessage("🇪🇸 Para el español, debes concentrarte en :\n• La comprensión escrita y oral\n• La expresión escrita\n• La expresión oral\n• El vocabulario temático\n• Los puntos gramaticales esenciales\n\n¿Qué aspecto del español quieres practicar?");
+    }
+    else if (lowerMessage.includes('stress') || lowerMessage.includes('anxiété') || lowerMessage.includes('anxiete')) {
+        addBotMessage("😌 Le stress avant les examens est normal ! Quelques conseils :\n• Fais des pauses régulières\n• Pratique la respiration profonde\n• Organise ton temps de révision\n• Dors suffisamment\n• Fais de l'exercice physique\n• Parle de tes inquiétudes\n\nTu te sentiras mieux préparé(e) et plus confiant(e) !");
+    }
+    // MATHÉMATIQUES - ANALYSE
+    else if (lowerMessage.includes('limite') && lowerMessage.includes('infini')) {
+        addBotMessage("📈 Pour les limites à l'infini, voici les règles essentielles :\n\n• lim(x→∞) 1/x^n = 0 (pour n > 0)\n• lim(x→∞) x^n/x^m = 0 (si n < m)\n• lim(x→∞) x^n/x^m = ∞ (si n > m)\n• lim(x→∞) x^n/x^m = 1 (si n = m)\n• lim(x→∞) (ax^n + bx^(n-1) + ...)/(cx^m + dx^(m-1) + ...) = (a/c)×lim(x→∞) x^(n-m) (si c ≠ 0)\n\nPour les formes indéterminées (∞/∞, 0/0), utilise les développements limités ou la règle de l'Hôpital.");
+    }
+    else if (lowerMessage.includes('limite') && lowerMessage.includes('continuite') || lowerMessage.includes('continuité')) {
+        addBotMessage("📊 Une fonction f est continue en un point a si lim(x→a) f(x) = f(a). Cela signifie que :\n\n1. f(a) existe (f est définie en a)\n2. lim(x→a) f(x) existe\n3. Ces deux valeurs sont égales\n\nPropriétés :\n• La somme, le produit et le quotient de fonctions continues sont continus (sauf si dénominateur = 0)\n• La composée de fonctions continues est continue\n• Une fonction continue sur un intervalle fermé [a,b] est bornée et atteint ses bornes\n• Théorème des valeurs intermédiaires : si f est continue sur [a,b] et k est entre f(a) et f(b), alors il existe c ∈ [a,b] tel que f(c) = k");
+    }
+    else if (lowerMessage.includes('dérivation') || lowerMessage.includes('derivation')) {
+        addBotMessage("📉 La dérivée f'(a) représente le taux de variation instantané de f en a, ou la pente de la tangente à la courbe en ce point.\n\nRègles de dérivation :\n• (k)' = 0 (constante)\n• (x^n)' = n×x^(n-1)\n• (u+v)' = u' + v'\n• (u×v)' = u'×v + u×v'\n• (u/v)' = (u'×v - u×v')/v² (si v ≠ 0)\n• (f∘g)' = (f'∘g)×g'\n\nApplications :\n• Étude des variations : f croissante ⟺ f' ≥ 0\n• Points critiques : f'(a) = 0 ou f'(a) n'existe pas\n• Extrema locaux : si f'(a) = 0 et f' change de signe en a");
+    }
+    else if (lowerMessage.includes('primitive') || lowerMessage.includes('fonction logarithmique') || lowerMessage.includes('fonction exponentielle')) {
+        addBotMessage("📊 **Primitives** : Une primitive F de f est telle que F' = f. Sur un intervalle, deux primitives diffèrent d'une constante.\n\nPrimitives usuelles :\n• ∫ x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)\n• ∫ 1/x dx = ln|x| + C\n• ∫ e^x dx = e^x + C\n\n**Fonction logarithme** ln(x) :\n• Définie sur ]0,+∞[\n• ln'(x) = 1/x\n• ln(ab) = ln(a) + ln(b)\n• ln(a/b) = ln(a) - ln(b)\n• ln(a^n) = n×ln(a)\n\n**Fonction exponentielle** e^x :\n• Définie sur ℝ\n• (e^x)' = e^x\n• e^(a+b) = e^a × e^b\n• e^(a-b) = e^a / e^b\n• (e^a)^b = e^(ab)");
+    }
+
+    // MATHÉMATIQUES - ALGÈBRE
+    else if (lowerMessage.includes('dénombrement') || lowerMessage.includes('denombrement')) {
+        addBotMessage("🔢 **Dénombrement** : techniques pour compter le nombre d'éléments d'un ensemble.\n\n• Principe multiplicatif : si une action A peut être réalisée de n façons, et pour chacune, une action B peut être réalisée de m façons, alors l'ensemble {A,B} peut être réalisé de n×m façons\n\n• Arrangements : A(n,p) = n!/(n-p)! (ordre important, sans répétition)\n• Permutations : P(n) = n! (ordre important, tous les éléments)\n• Combinaisons : C(n,p) = n!/[p!(n-p)!] (ordre sans importance)\n\nExemple : Pour former un code à 3 chiffres parmi 10 chiffres (0-9) :\n• Avec répétition autorisée : 10^3 = 1000 possibilités\n• Sans répétition : A(10,3) = 10×9×8 = 720 possibilités");
+    }
+    else if (lowerMessage.includes('nombre complexe') || lowerMessage.includes('similitude')) {
+        addBotMessage("🔄 **Nombres complexes** : extension des réels incluant i tel que i² = -1.\n\n• Forme algébrique : z = a + bi (a est la partie réelle, b la partie imaginaire)\n• Module : |z| = √(a² + b²)\n• Argument : arg(z) tel que z = |z|×(cos(θ) + i×sin(θ))\n• Forme exponentielle : z = |z|×e^(iθ)\n\nOpérations :\n• Addition : (a+bi) + (c+di) = (a+c) + (b+d)i\n• Multiplication : (a+bi)(c+di) = (ac-bd) + (ad+bc)i\n• En forme exponentielle : z₁×z₂ = |z₁|×|z₂|×e^(i(θ₁+θ₂))\n\n**Similitudes** : transformations qui conservent les rapports de distances et les angles. Une similitude directe peut s'écrire z' = λz + b avec λ ∈ ℂ* (λ = k×e^(iα) où k est le rapport et α l'angle de rotation).");
+    }
+    else if (lowerMessage.includes('calcul intégral')) {
+        addBotMessage("∫ **Calcul intégral** : L'intégrale définie ∫[a,b] f(x)dx représente l'aire sous la courbe de f entre a et b (si f ≥ 0).\n\n• Propriétés : ∫[a,b] [f(x)+g(x)]dx = ∫[a,b] f(x)dx + ∫[a,b] g(x)dx\n• ∫[a,b] k×f(x)dx = k×∫[a,b] f(x)dx\n• ∫[a,c] f(x)dx = ∫[a,b] f(x)dx + ∫[b,c] f(x)dx\n\n• Théorème fondamental : ∫[a,b] f(x)dx = F(b) - F(a) où F est une primitive de f\n\n• Intégration par parties : ∫[a,b] u(x)v'(x)dx = [u(x)v(x)]_a^b - ∫[a,b] u'(x)v(x)dx\n\n• Changement de variable : ∫[a,b] f(g(x))g'(x)dx = ∫[g(a),g(b)] f(t)dt (avec t = g(x))");
+    }
+
+    // MATHÉMATIQUES - ANALYSE AVANCÉE
+    else if (lowerMessage.includes('équation différentielle') || lowerMessage.includes('equation differentielle')) {
+        addBotMessage("📊 **Équations différentielles** : équations impliquant une fonction inconnue et ses dérivées.\n\n• Équation du premier ordre y' + a(x)y = b(x) :\n  - Solution générale : y(x) = e^(-A(x))[∫ b(x)e^(A(x))dx + C] où A(x) = ∫ a(x)dx\n\n• Équation du second ordre à coefficients constants ay'' + by' + cy = 0 :\n  - Équation caractéristique : ar² + br + c = 0\n  - Si deux racines réelles distinctes r₁ et r₂ : y(x) = C₁e^(r₁x) + C₂e^(r₂x)\n  - Si racine double r : y(x) = (C₁ + C₂x)e^(rx)\n  - Si racines complexes α±iβ : y(x) = e^(αx)[C₁cos(βx) + C₂sin(βx)]\n\n• Équation avec second membre : trouver d'abord la solution générale de l'équation homogène, puis une solution particulière.");
+    }
+    else if (lowerMessage.includes('suite numérique') || lowerMessage.includes('suite numerique')) {
+        addBotMessage("🔢 **Suites numériques** : fonctions définies sur ℕ.\n\n• Suite arithmétique : u(n+1) = u(n) + r\n  - Terme général : u(n) = u(0) + n��r\n  - Somme des n premiers termes : S(n) = n×[u(0) + u(n-1)]/2\n\n• Suite géométrique : u(n+1) = q×u(n)\n  - Terme général : u(n) = u(0)×q^n\n  - Somme des n premiers termes : S(n) = u(0)×(1-q^n)/(1-q) (si q≠1)\n  - Si |q| < 1, la suite converge vers 0\n  - Si q = 1, u(n) = u(0) (constante)\n  - Si |q| > 1, la suite diverge\n\n• Suites récurrentes : u(n+1) = f(u(n))\n  - Étudier les variations de f et chercher les points fixes\n  - Si |f'(l)| < 1 au point fixe l, alors la suite converge vers l");
+    }
+
+    // MATHÉMATIQUES - PROBABILITÉS ET STATISTIQUES
+    else if (lowerMessage.includes('probabilité') || lowerMessage.includes('probabilite')) {
+        addBotMessage("🎲 **Probabilités** : mesure math��matique de la chance qu'un événement se produise.\n\n• Espace probabilisé : (Ω, P) où Ω est l'univers et P la probabilité\n• Propriétés : P(A∪B) = P(A) + P(B) - P(A∩B)\n• Probabilité conditionnelle : P(A|B) = P(A∩B)/P(B)\n• Événements indépendants : P(A∩B) = P(A)×P(B)\n\n• Variables aléatoires :\n  - Espérance : E(X) = Σ x_i×P(X=x_i)\n  - Variance : V(X) = E(X²) - E(X)²\n  - Écart-type : σ(X) = √V(X)\n\n• Loi binomiale B(n,p) : X suit le nombre de succès dans n épreuves indépendantes de probabilité p\n  - P(X=k) = C(n,k)×p^k×(1-p)^(n-k)\n  - E(X) = n×p\n  - V(X) = n×p×(1-p)");
+    }
+    else if (lowerMessage.includes('statistique')) {
+        addBotMessage("📊 **Statistiques** : méthodes pour collecter, organiser, analyser et interpréter des données.\n\n• Statistique descriptive :\n  - Indicateurs de position : moyenne, médiane, mode\n  - Indicateurs de dispersion : étendue, variance, écart-type\n  - Représentations graphiques : histogrammes, diagrammes\n\n• Ajustement linéaire :\n  - Méthode des moindres carrés\n  - Droite de régression : y = ax + b\n  - Coefficient de corrélation r (entre -1 et 1)\n\n• Échantillonnage :\n  - Estimation ponctuelle\n  - Intervalle de confiance\n  - Tests d'hypothèses\n\nExemple : Pour une série {x_i} de n valeurs :\n• Moyenne : x̄ = (Σ x_i)/n\n• Variance : s² = (Σ (x_i - x̄)²)/n");
+    }
+
+    // CHIMIE - CHIMIE ORGANIQUE
+    else if (lowerMessage.includes('alcool') || lowerMessage.includes('polyalcool')) {
+        addBotMessage("🧪 **Alcools et polyalcools** : composés organiques avec un ou plusieurs groupes hydroxyle (-OH).\n\n• Classification des alcools :\n  - Primaire : R-CH₂-OH\n  - Secondaire : R₁-CHOH-R₂\n  - Tertiaire : R₁-COH-R₂-R₃\n\n• Nomenclature : nom de l'alcane + suffixe -ol\n  Ex : CH₃-CH₂-OH = éthanol\n\n• Propriétés physiques :\n  - Point d'ébullition élevé (liaisons hydrogène)\n  - Solubilité dans l'eau (pour les petits alcools)\n\n• Réactions principales :\n  - Oxydation (selon la classe de l'alcool)\n  - Déshydratation (formation d'alcènes)\n  - Estérification avec les acides carboxyliques\n\n• Polyalcools : contiennent plusieurs groupes -OH\n  Ex : éthylène glycol (antigel), glycérol (cosmétiques)");
+    }
+    else if (lowerMessage.includes('amine')) {
+        addBotMessage("🧪 **Amines** : dérivés organiques de l'ammoniac (NH₃) où un ou plusieurs H sont remplacés par des groupes alkyle ou aryle.\n\n• Classification :\n  - Primaire : R-NH₂\n  - Secondaire : R₁-NH-R₂\n  - Tertiaire : R₁-N-R₂-R₃\n\n• Nomenclature : alcanamine ou N-alkylalcanamine\n  Ex : CH₃-NH₂ = méthanamine (méthylamine)\n\n• Propriétés physiques :\n  - Bases faibles (paire d'électrons libres sur N)\n  - Odeur caractéristique (souvent désagréable)\n  - Solubilité dans l'eau (pour les petites amines)\n\n• Réactions principales :\n  - Basicité (formation de sels d'ammonium)\n  - Alkylation (formation d'amines supérieures)\n  - Acylation (formation d'amides)\n\n• Importance biologique : acides aminés, neurotransmetteurs (dopamine, sérotonine)");
+    }
+
+    // CHIMIE - ACIDES ET BASES
+    else if (lowerMessage.includes('acide') && lowerMessage.includes('base') && lowerMessage.includes('généralités')) {
+        addBotMessage("🧪 **Acides et bases en solution aqueuse** :\n\n• Théories :\n  - Arrhenius : acide libère H⁺, base libère OH⁻\n  - Brønsted-Lowry : acide = donneur de H⁺, base = accepteur de H⁺\n  - Lewis : acide = accepteur d'électrons, base = donneur d'électrons\n\n• Autoprotolyse de l'eau : H₂O + H₂O ⇌ H₃O⁺ + OH⁻\n  - Produit ionique : Ke = [H₃O⁺]×[OH⁻] = 10⁻¹⁴ à 25°C\n\n• pH = -log[H₃O⁺]\n  - pH < 7 : acide\n  - pH = 7 : neutre\n  - pH > 7 : basique\n\n• Force des acides/bases :\n  - Acide fort/base forte : dissociation totale\n  - Acide faible/base faible : équilibre, caractérisé par Ka/Kb\n  - pKa = -log(Ka), pKa + pKb = 14\n\n• Couples acide/base conjugués : HA + H₂O ⇌ A⁻ + H₃O⁺");
+    }
+    else if (lowerMessage.includes('acide carboxylique')) {
+        addBotMessage("🧪 **Acides carboxyliques** : composés organiques contenant le groupe fonctionnel -COOH.\n\n• Structure : R-COOH\n• Nomenclature : acide alcanoïque\n  Ex : CH₃-COOH = acide éthanoïque (acétique)\n\n• Propriétés physiques :\n  - Acides faibles (pKa ≈ 4-5)\n  - Dimérisation par liaisons hydrogène\n  - Points d'ébullition élevés\n\n• Réactions principales :\n  - Estérification avec les alcools\n  - Formation de sels (carboxylates)\n  - Réduction en alcools\n  - Déshydratation (anhydrides)\n\n• Dérivés d'acides carboxyliques :\n  - Esters : R-COO-R'\n  - Amides : R-CO-NH₂\n  - Chlorures d'acyle : R-CO-Cl\n  - Anhydrides : R-CO-O-CO-R'");
+    }
+    else if (lowerMessage.includes('acide aminé')) {
+        addBotMessage("🧬 **Acides α-aminés** : molécules organiques comportant un groupe carboxyle (-COOH) et un groupe amine (-NH₂) liés au même carbone α.\n\n• Structure générale : H₂N-CHR-COOH\n\n• Propriétés :\n  - Amphotères (à la fois acides et bases)\n  - Point isoélectrique (pH où la charge nette est nulle)\n  - Formes zwitterioniques (H₃N⁺-CHR-COO⁻)\n\n• Classification :\n  - Selon la chaîne latérale R (polaire, non polaire, acide, basique)\n  - 20 acides aminés standards dans les protéines\n\n• Réactions :\n  - Liaison peptidique (condensation entre -COOH et -NH₂)\n  - Réaction avec la ninhydrine (test de détection)\n\n• Importance biologique : constituants des protéines, précurseurs de neurotransmetteurs");
+    }
+    else if (lowerMessage.includes('acide fort') || lowerMessage.includes('base forte')) {
+        addBotMessage("🧪 **Acides forts et bases fortes** : espèces qui se dissocient complètement en solution aqueuse.\n\n• Acides forts courants :\n  - HCl (acide chlorhydrique)\n  - HNO₃ (acide nitrique)\n  - H₂SO₄ (acide sulfurique, 1ère dissociation)\n  - HClO₄ (acide perchlorique)\n\n• Bases fortes courantes :\n  - NaOH (hydroxyde de sodium)\n  - KOH (hydroxyde de potassium)\n  - Ca(OH)₂ (hydroxyde de calcium)\n\n• Calcul du pH :\n  - Acide fort : pH = -log[A] (où [A] est la concentration de l'acide)\n  - Base forte : pH = 14 + log[B] (où [B] est la concentration de la base)\n\n• Réactions de neutralisation : acide fort + base forte → sel + eau\n  Ex : HCl + NaOH → NaCl + H₂O");
+    }
+    else if (lowerMessage.includes('acide faible') || lowerMessage.includes('base faible')) {
+        addBotMessage("🧪 **Acides faibles et bases faibles** : espèces partiellement dissociées en solution aqueuse, caractérisées par des constantes d'équilibre.\n\n• Acides faibles courants :\n  - CH₃COOH (acide acétique)\n  - H₂CO₃ (acide carbonique)\n  - H₃PO₄ (acide phosphorique)\n\n• Bases faibles courantes :\n  - NH₃ (ammoniac)\n  - Amines (R-NH₂)\n\n• Équilibres et constantes :\n  - Acide faible : HA + H₂O ⇌ A⁻ + H₃O⁺, Ka = [A⁻][H₃O⁺]/[HA]\n  - Base faible : B + H₂O ⇌ BH⁺ + OH⁻, Kb = [BH⁺][OH⁻]/[B]\n\n• Calcul du pH :\n  - Acide faible : pH ≈ ½(pKa - log[HA])\n  - Base faible : pH ≈ 14 - ½(pKb - log[B])\n\n• Solutions tampons : mélange d'un acide faible et sa base conjuguée\n  - pH = pKa + log([A⁻]/[HA]) (équation d'Henderson-Hasselbalch)");
+    }
+
+    // PHYSIQUE - MÉCANIQUE
+    else if (lowerMessage.includes('oscillation') && lowerMessage.includes('mécanique')) {
+        addBotMessage("🔄 **Oscillations mécaniques libres** : mouvements périodiques autour d'une position d'équilibre.\n\n• Oscillateur harmonique : F = -kx (force de rappel proportionnelle à l'élongation)\n\n• Équation différentielle : m(d²x/dt²) + kx = 0\n\n• Solution : x(t) = A×cos(ωt + φ)\n  - A : amplitude\n  - ω : pulsation (ω = √(k/m))\n  - φ : phase à l'origine\n  - T = 2π/ω : période\n  - f = 1/T : fréquence\n\n• Énergie mécanique : E = ½mv² + ½kx² = constante\n\n• Oscillations amorties : m(d²x/dt²) + λ(dx/dt) + kx = 0\n  - λ : coefficient d'amortissement\n  - Régimes : pseudopériodique, critique, apériodique\n\n• Exemples : pendule simple, système masse-ressort");
+    }
+    else if (lowerMessage.includes('mouvement') && lowerMessage.includes('centre d\'inertie')) {
+        addBotMessage("🔄 **Mouvement du centre d'inertie d'un solide** : étude du mouvement global d'un corps solide.\n\n• Centre d'inertie (G) : point où se concentre toute la masse du solide pour l'étude du mouvement global\n\n• Principe fondamental de la dynamique appliqué au centre d'inertie :\n  - Σ F_ext = m × a_G\n  - Le mouvement du centre d'inertie est identique à celui d'un point matériel de même masse soumis aux mêmes forces\n\n• Théorème de l'énergie cinétique : ��E_c = W_ext\n\n• Conservation de la quantité de mouvement : si Σ F_ext = 0, alors p = m × v_G = constante\n\n• Applications :\n  - Mouvements de translation\n  - Mouvements de rotation autour d'un axe fixe\n  - Mouvements combinés (roulement sans glissement)");
+    }
+    else if (lowerMessage.includes('mouvement') && lowerMessage.includes('champ uniforme')) {
+        addBotMessage("🔄 **Mouvements dans les champs uniformes** : étude des trajectoires sous l'influence de forces constantes.\n\n• Champ de pesanteur uniforme (mouvement vertical) :\n  - Équation : m(d²z/dt²) = -mg\n  - Accélération : a = -g (≈ 9,81 m/s²)\n  - Vitesse : v(t) = v₀ - gt\n  - Position : z(t) = z₀ + v₀t - ½gt²\n\n• Mouvement parabolique (projectile) :\n  - Décomposition en mouvements horizontal (uniforme) et vertical (uniformément accéléré)\n  - Trajectoire : parabole d'équation y = x×tan(α) - (g×x²)/(2v₀²×cos²(α))\n  - Portée : R = (v₀²×sin(2α))/g (maximale pour α = 45°)\n\n• Champ électrique uniforme :\n  - Force : F = qE\n  - Trajectoire : parabole pour une particule chargée avec vitesse initiale non parallèle au champ");
+    }
+
+    // PHYSIQUE - ÉLECTRICITÉ
+    else if (lowerMessage.includes('puissance') && lowerMessage.includes('régime sinusoïdal')) {
+        addBotMessage("⚡ **Puissance en régime sinusoïdal** : étude de la puissance dans les circuits alimentés par une tension alternative sinusoïdale.\n\n• Tension et courant sinusoïdaux :\n  - u(t) = U_m×cos(ωt)\n  - i(t) = I_m×cos(ωt + φ)\n  où φ est le déphasage entre i et u\n\n• Puissance instantanée : p(t) = u(t)×i(t)\n\n• Puissance moyenne : P = (U_m×I_m×cos(φ))/2 = U_eff×I_eff×cos(φ)\n  - U_eff = U_m/√2 : valeur efficace de la tension\n  - I_eff = I_m/√2 : valeur efficace du courant\n  - cos(φ) : facteur de puissance\n\n• Types de puissance :\n  - Puissance active P = U_eff×I_eff×cos(φ) (en watts, W)\n  - Puissance réactive Q = U_eff×I_eff×sin(φ) (en vars, VAR)\n  - Puissance apparente S = U_eff×I_eff (en voltampères, VA)\n\n• Triangle des puissances : S² = P² + Q²");
+    }
+    else if (lowerMessage.includes('résonance') && lowerMessage.includes('circuit rlc')) {
+        addBotMessage("⚡ **Résonance d'intensité d'un circuit RLC série** : phénomène où l'amplitude du courant est maximale à une fréquence particulière.\n\n• Circuit RLC série : résistance R, inductance L, condensateur C en série\n\n• Équation différentielle : L(di/dt) + Ri + q/C = E_m×cos(ωt)\n\n• Impédance complexe : Z = R + j(Lω - 1/(Cω))\n\n• Module de l'impédance : |Z| = √(R² + (Lω - 1/(Cω))²)\n\n• Intensité efficace : I_eff = U_eff/|Z|\n\n• Résonance d'intensité :\n  - Condition : Lω₀ = 1/(Cω₀) ou ω₀ = 1/√(LC)\n  - Fréquence de résonance : f₀ = ω₀/(2π) = 1/(2π√(LC))\n  - Intensité maximale : I_max = U_eff/R\n  - Facteur de qualité : Q = (1/R)×√(L/C) = Lω₀/R\n\n• Bande passante : Δω = ω₀/Q = R/L");
+    }
+    else if (lowerMessage.includes('circuit rlc') && lowerMessage.includes('régime sinusoïdal forcé')) {
+        addBotMessage("⚡ **Circuit RLC série en régime sinusoïdal forcé** : comportement d'un circuit RLC soumis à une tension sinusoïdale.\n\n• Équation différentielle : L(d²q/dt²) + R(dq/dt) + q/C = E_m×cos(ωt)\n\n• Solution en régime permanent : i(t) = I_m×cos(ωt + φ)\n\n• Impédance complexe : Z = R + j(Lω - 1/(Cω))\n\n• Déphasage : φ = arctan((1/(Cω) - Lω)/R)\n\n• Comportement selon la fréquence :\n  - Basses fréquences (ω << ω₀) : comportement capacitif, φ > 0\n  - Hautes fréquences (ω >> ω₀) : comportement inductif, φ < 0\n  - À la résonance (ω = ω₀) : comportement résistif, φ = 0\n\n• Courbe de réponse : représentation de I_eff ou |Z| en fonction de la fréquence\n\n• Applications : filtres, circuits accordés, systèmes de communication");
+    }
+
+    // SVT - SYSTÈME NERVEUX
+    else if (lowerMessage.includes('encéphale') || lowerMessage.includes('encephale')) {
+        addBotMessage("🧠 **Organisation de l'encéphale** : structure centrale du système nerveux située dans la boîte crânienne.\n\n• Principales divisions :\n  - Cerveau (télencéphale) : hémisphères cérébraux, cortex, noyaux gris centraux\n  - Diencéphale : thalamus, hypothalamus\n  - Tronc cérébral : mésencéphale, pont, bulbe rachidien\n  - Cervelet : coordination motrice, équilibre\n\n• Cortex cérébral :\n  - Substance grise (corps cellulaires des neurones)\n  - Organisation en aires fonctionnelles (motrices, sensorielles, associatives)\n  - Localisations : lobes frontaux, pariétaux, temporaux, occipitaux\n\n• Protection :\n  - Méninges : dure-mère, arachnoïde, pie-mère\n  - Liquide céphalo-rachidien (LCR)\n\n• Fonctions : contrôle moteur, intégration sensorielle, cognition, émotions, mémoire");
+    }
+    else if (lowerMessage.includes('moelle épinière') || lowerMessage.includes('moelle epiniere')) {
+        addBotMessage("🧠 **Organisation de la moelle épinière** : prolongement du système nerveux central situé dans le canal rachidien.\n\n• Structure :\n  - Substance grise centrale (en forme de H ou de papillon)\n  - Substance blanche périphérique (faisceaux de fibres)\n  - Canal de l'épendyme au centre\n\n• Segments médullaires :\n  - 8 cervicaux, 12 thoraciques, 5 lombaires, 5 sacrés, 1 coccygien\n  - Renflements cervical et lombaire (innervation des membres)\n\n• Racines des nerfs spinaux :\n  - Racine dorsale (sensitive) avec ganglion spinal\n  - Racine ventrale (motrice)\n\n• Fonctions :\n  - Conduction des influx nerveux (voies ascendantes et descendantes)\n  - Centre réflexe (réflexes médullaires)\n  - Intégration sensori-motrice\n\n• Protection : vertèbres, méninges, liquide céphalo-rachidien");
+    }
+    else if (lowerMessage.includes('tissu nerveux')) {
+        addBotMessage("🧠 **Organisation du tissu nerveux** : tissu spécialisé composé de cellules nerveuses et de cellules de soutien.\n\n• Neurones (cellules nerveuses) :\n  - Corps cellulaire (soma) contenant le noyau\n  - Dendrites : prolongements courts, réception des signaux\n  - Axone : prolongement long, transmission des signaux\n  - Terminaisons axonales : libération de neurotransmetteurs\n\n• Types de neurones :\n  - Sensoriels (afférents) : transmettent l'information vers le SNC\n  - Moteurs (efférents) : transmettent l'information du SNC vers les effecteurs\n  - Interneurones : établissent des connexions entre neurones\n\n• Cellules gliales (névroglie) :\n  - Astrocytes : soutien, nutrition, barrière hémato-encéphalique\n  - Oligodendrocytes (SNC) et cellules de Schwann (SNP) : myélinisation\n  - Microglie : défense immunitaire\n  - Épendymocytes : revêtement des cavités, production du LCR");
+    }
+    else if (lowerMessage.includes('propriété') && lowerMessage.includes('tissu nerveux')) {
+        addBotMessage("🧠 **Propriétés du tissu nerveux** : caractéristiques fonctionnelles des cellules nerveuses.\n\n• Excitabilité :\n  - Capacité à répondre à un stimulus\n  - Génération de potentiels d'action\n\n• Conductivité :\n  - Propagation de l'influx nerveux le long de l'axone\n  - Conduction saltatoire dans les fibres myélinisées\n\n• Intégration :\n  - Sommation spatiale et temporelle des signaux\n  - Modulation de la réponse neuronale\n\n• Plasticité :\n  - Modification des connexions synaptiques\n  - Base de l'apprentissage et de la mémoire\n\n• Métabolisme élevé :\n  - Forte consommation d'oxygène et de glucose\n  - Sensibilité à l'hypoxie et à l'hypoglycémie\n\n• Régénération limitée :\n  - Faible capacité de régénération dans le SNC\n  - Meilleure régénération dans le SNP");
+    }
+    else if (lowerMessage.includes('phénomène électrique') || lowerMessage.includes('influx nerveux')) {
+        addBotMessage("⚡ **Phénomènes électriques et influx nerveux** : bases de la communication neuronale.\n\n• Potentiel de repos :\n  - Différence de potentiel à travers la membrane (-70 mV)\n  - Maintenu par la pompe Na⁺/K⁺-ATPase\n  - Distribution inégale des ions (K⁺ intracellulaire, Na⁺ extracellulaire)\n\n• Potentiel d'action :\n  - Dépolarisation rapide (ouverture des canaux Na⁺)\n  - Repolarisation (ouverture des canaux K⁺)\n  - Hyperpolarisation transitoire\n  - Période réfractaire (absolue et relative)\n\n• Propagation de l'influx nerveux :\n  - Conduction continue dans les fibres non myélinisées\n  - Conduction saltatoire dans les fibres myélinisées (plus rapide)\n\n• Facteurs influençant la vitesse de conduction :\n  - Diamètre de l'axone\n  - Présence de myéline\n  - Température");
+    }
+    else if (lowerMessage.includes('synapse')) {
+        addBotMessage("🔄 **Notion de synapse** : jonction spécialisée permettant la transmission de l'information entre deux neurones ou entre un neurone et une cellule effectrice.\n\n• Types de synapses :\n  - Chimiques : utilisant des neurotransmetteurs\n  - Électriques : jonctions communicantes (gap junctions)\n\n• Structure d'une synapse chimique :\n  - Élément présynaptique : terminaison axonale avec vésicules synaptiques\n  - Fente synaptique : espace entre les deux éléments\n  - Élément postsynaptique : membrane avec récepteurs\n\n• Transmission synaptique :\n  1. Arrivée du potentiel d'action à la terminaison\n  2. Entrée de Ca²⁺ et libération de neurotransmetteurs\n  3. Diffusion dans la fente synaptique\n  4. Fixation sur les récepteurs postsynaptiques\n  5. Génération de potentiels postsynaptiques (excitateurs ou inhibiteurs)\n\n• Principaux neurotransmetteurs : acétylcholine, glutamate, GABA, dopamine, sérotonine, noradrénaline");
+    }
+    else if (lowerMessage.includes('système nerveux') && lowerMessage.includes('comportement moteur')) {
+        addBotMessage("🏃 **Rôle du système nerveux dans le comportement moteur** : contrôle et coordination des mouvements volontaires et involontaires.\n\n• Hiérarchie du contrôle moteur :\n  - Cortex moteur : planification et initiation des mouvements volontaires\n  - Ganglions de la base : sélection et fluidité des mouvements\n  - Cervelet : coordination, précision, apprentissage moteur\n  - Tronc cérébral : contrôle postural, réflexes\n  - Moelle épinière : réflexes spinaux, coordination locale\n\n• Voies motrices :\n  - Voie pyramidale (corticospinale) : mouvements volontaires précis\n  - Voies extrapyramidales : tonus musculaire, posture, mouvements automatiques\n\n• Réflexes :\n  - Myotatique (étirement) : maintien du tonus musculaire\n  - Myotatique inverse : protection contre l'étirement excessif\n  - Réflexe de retrait : protection contre les stimuli nocifs\n\n• Unité motrice : motoneurone et fibres musculaires qu'il innerve");
+    }
+
+    // SVT - SYSTÈME IMMUNITAIRE
+    else if (lowerMessage.includes('immunologie générale') || lowerMessage.includes('immunologie generale')) {
+        addBotMessage("🦠 **Immunologie générale** : étude des mécanismes de défense de l'organisme contre les agents pathogènes.\n\n• Immunité innée (non spécifique) :\n  - Barrières physiques et chimiques (peau, muqueuses, pH)\n  - Cellules phagocytaires (macrophages, neutrophiles)\n  - Inflammation\n  - Système du complément\n  - Cellules NK (Natural Killer)\n\n• Immunité adaptative (spécifique) :\n  - Lymphocytes B : immunité humorale (anticorps)\n  - Lymphocytes T : immunité cellulaire\n  - Spécificité antigénique\n  - Mémoire immunitaire\n\n• Organes lymphoïdes :\n  - Primaires : moelle osseuse, thymus\n  - Secondaires : ganglions lymphatiques, rate, MALT\n\n• Cellules présentatrices d'antigènes (CPA) :\n  - Cellules dendritiques\n  - Macrophages\n  - Lymphocytes B");
+    }
+    else if (lowerMessage.includes('réponse immunitaire')) {
+        addBotMessage("🛡️ **La réponse immunitaire** : ensemble des mécanismes de défense spécifiques mis en œuvre par l'organisme face à un antigène.\n\n• Phase de reconnaissance :\n  - Présentation de l'antigène par les CPA\n  - Reconnaissance par les lymphocytes T via le CMH\n\n• Phase d'activation :\n  - Prolifération clonale des lymphocytes spécifiques\n  - Différenciation en cellules effectrices et mémoires\n\n• Phase effectrice :\n  - Réponse humorale : production d'anticorps par les plasmocytes\n  - Réponse cellulaire : action des LT cytotoxiques\n\n• Mémoire immunitaire :\n  - Lymphocytes B et T mémoires\n  - Réponse secondaire plus rapide et plus intense\n\n• Coopération cellulaire :\n  - LT auxiliaires (CD4+) : coordination de la réponse\n  - Cytokines : messagers intercellulaires\n\n• Applications : vaccination, sérothérapie");
+    }
+    else if (lowerMessage.includes('dysfonctionnement immunitaire')) {
+        addBotMessage("⚠️ **Dysfonctionnements immunitaires** : anomalies du système immunitaire pouvant conduire à diverses pathologies.\n\n• Hypersensibilités :\n  - Type I : allergie immédiate, médiée par IgE (asthme, rhinite)\n  - Type II : cytotoxique, médiée par IgG/IgM (transfusion incompatible)\n  - Type III : complexes immuns (maladie sérique)\n  - Type IV : retardée, médiée par LT (dermatite de contact)\n\n• Maladies auto-immunes :\n  - Rupture de la tolérance au soi\n  - Exemples : diabète de type 1, sclérose en plaques, polyarthrite rhumatoïde\n\n• Déficits immunitaires :\n  - Congénitaux : déficits combinés sévères, agammaglobulinémie\n  - Acquis : SIDA, immunosuppression médicamenteuse\n\n• Rejet de greffe :\n  - Reconnaissance des antigènes du donneur comme étrangers\n  - Types : hyperaigu, aigu, chronique");
+    }
+    else if (lowerMessage.includes('sida')) {
+        addBotMessage("🦠 **Le SIDA (Syndrome d'ImmunoDéficience Acquise)** : maladie causée par le VIH (Virus de l'Immunodéficience Humaine).\n\n• Virus VIH :\n  - Rétrovirus ciblant principalement les lymphocytes T CD4+\n  - Cycle viral : fusion, transcription inverse, intégration, réplication\n\n• Transmission :\n  - Sexuelle (principale voie)\n  - Sanguine (transfusion, partage de seringues)\n  - Materno-fœtale (grossesse, accouchement, allaitement)\n\n• Évolution de l'infection :\n  - Primo-infection : syndrome grippal, séroconversion\n  - Phase asymptomatique : réplication virale, baisse progressive des CD4+\n  - Phase SIDA : CD4+ < 200/mm³, infections opportunistes, cancers\n\n• Prévention :\n  - Préservatifs, dépistage, traitement préventif (PrEP)\n  - Précautions universelles pour le personnel soignant\n\n• Traitement :\n  - Trithérapie antirétrovirale\n  - Objectif : charge virale indétectable, restauration immunitaire\n  - Pas de guérison définitive à ce jour");
+    }
+
+    // SVT - REPRODUCTION ET HÉRÉDITÉ
+    else if (lowerMessage.includes('reproduction') && lowerMessage.includes('mammifère')) {
+        addBotMessage("🧬 **La reproduction chez les mammifères** : processus de reproduction sexuée assurant la perpétuation de l'espèce.\n\n• Caractéristiques :\n  - Reproduction sexuée (fusion de gamètes)\n  - Fécondation interne\n  - Viviparité (développement embryonnaire interne)\n  - Allaitement des petits\n\n• Régulation hormonale :\n  - Axe hypothalamo-hypophyso-gonadique\n  - Hormones sexuelles : œstrogènes, progestérone, testostérone\n  - Cycles sexuels (menstruel chez la femme)\n\n• Dimorphisme sexuel :\n  - Différences anatomiques et physiologiques entre mâles et femelles\n  - Caractères sexuels primaires et secondaires\n\n• Avantages évolutifs :\n  - Brassage génétique\n  - Adaptation aux changements environnementaux\n  - Élimination des mutations délétères");
+    }
+    else if (lowerMessage.includes('appareil génitaux') || lowerMessage.includes('appareil genitaux')) {
+        addBotMessage("🧬 **Organisation des appareils génitaux** : structures anatomiques spécialisées dans la reproduction.\n\n• Appareil génital masculin :\n  - Testicules : production des spermatozoïdes et testostérone\n  - Voies spermatiques : épididyme, canal déférent, urètre\n  - Glandes annexes : vésicules séminales, prostate, glandes de Cowper\n  - Organe copulateur : pénis\n\n• Appareil génital féminin :\n  - Ovaires : production des ovocytes et hormones sexuelles\n  - Trompes de Fallope : captation de l'ovocyte, lieu de fécondation\n  - Utérus : nidation et développement embryonnaire\n  - Vagin : réception du sperme, canal d'accouchement\n  - Vulve : organes génitaux externes\n\n• Régulation hormonale :\n  - Contrôle hypothalamique et hypophysaire\n  - Rétrocontrôle par les hormones gonadiques\n  - Variations cycliques chez la femme");
+    }
+    else if (lowerMessage.includes('formation des gamètes') || lowerMessage.includes('formation des gametes')) {
+        addBotMessage("🧬 **Formation des gamètes** : processus de production des cellules reproductrices haploïdes.\n\n• Spermatogenèse (chez l'homme) :\n  - Lieu : tubes séminifères des testicules\n  - Processus continu à partir de la puberté\n  - Étapes : multiplication, croissance, maturation, différenciation\n  - Méiose : réduction chromosomique (2n → n)\n  - Spermiogenèse : différenciation en spermatozoïdes\n  - Durée : environ 74 jours\n\n• Ovogenèse (chez la femme) :\n  - Lieu : ovaires\n  - Début pendant la vie fœtale, reprise à la puberté\n  - Stock limité d'ovogonies formé avant la naissance\n  - Méiose I commencée in utero, achevée à l'ovulation\n  - Méiose II achevée uniquement si fécondation\n  - Production cyclique (généralement un ovocyte par cycle)\n\n• Gamétogenèse et brassage génétique :\n  - Brassage interchromosomique (ségrégation aléatoire)\n  - Brassage intrachromosomique (crossing-over)");
+    }
+    else if (lowerMessage.includes('fécondation') || lowerMessage.includes('fecondation') || lowerMessage.includes('gestation')) {
+        addBotMessage("🧬 **Fécondation et gestation** : processus de fusion des gamètes et développement embryonnaire.\n\n• Fécondation :\n  - Lieu : tiers externe de la trompe de Fallope\n  - Étapes : traversée de la corona radiata et zone pellucide\n  - Réaction acrosomique du spermatozoïde\n  - Fusion des membranes et des noyaux (caryogamie)\n  - Formation du zygote diploïde\n\n• Développement embryonnaire :\n  - Segmentation : divisions mitotiques sans croissance\n  - Morula → blastocyste\n  - Nidation : implantation dans l'endomètre (J6-J7)\n  - Gastrulation : formation des trois feuillets embryonnaires\n  - Organogenèse : formation des organes\n\n• Annexes embryonnaires :\n  - Placenta : échanges mère-fœtus, rôle endocrine\n  - Cordon ombilical : connexion fœtus-placenta\n  - Liquide amniotique : protection mécanique\n\n• Gestation :\n  - Durée moyenne : 9 mois (38-41 semaines)\n  - Modifications physiologiques maternelles\n  - Suivi médical : échographies, tests sanguins");
+    }
+    else if (lowerMessage.includes('hérédité humaine') || lowerMessage.includes('heredite humaine')) {
+        addBotMessage("🧬 **Hérédité humaine** : transmission des caractères génétiques chez l'espèce humaine.\n\n• Caryotype humain :\n  - 46 chromosomes (23 paires)\n  - 22 paires d'autosomes + 1 paire de chromosomes sexuels (XX ou XY)\n\n• Modes de transmission :\n  - Autosomique dominant : un seul allèle muté suffit (ex: maladie de Huntington)\n  - Autosomique récessif : deux allèles mutés nécessaires (ex: mucoviscidose)\n  - Lié à l'X dominant : un seul allèle muté sur X (ex: rachitisme vitamino-résistant)\n  - Lié à l'X récessif : allèle muté sur X, expression chez les hommes (ex: hémophilie)\n  - Holandrique : gènes portés uniquement par le chromosome Y\n\n• Outils d'étude :\n  - Arbres généalogiques\n  - Analyses chromosomiques\n  - Tests génétiques\n\n• Applications :\n  - Conseil génétique\n  - Diagnostic prénatal\n  - Médecine prédictive");
+    }
+    else if (lowerMessage.includes('génétique') || lowerMessage.includes('genetique')) {
+        addBotMessage("🧬 **La génétique** : science de l'hérédité étudiant la transmission et l'expression des gènes.\n\n• Concepts fondamentaux :\n  - Gène : unité d'information génétique\n  - Allèle : version alternative d'un gène\n  - Locus : emplacement d'un gène sur un chromosome\n  - Génotype : ensemble des allèles d'un individu\n  - Phénotype : caractères observables résultant du génotype et de l'environnement\n\n• Structure de l'ADN :\n  - Double hélice\n  - Nucléotides (A, T, G, C)\n  - Complémentarité des bases (A-T, G-C)\n\n��� Expression génique :\n  - Transcription : ADN → ARN\n  - Traduction : ARN → protéine\n  - Code génétique : triplets de nucléotides (codons)\n\n• Mutations :\n  - Ponctuelles : substitution, insertion, délétion\n  - Chromosomiques : délétion, duplication, inversion, translocation\n  - Génomiques : polyploïdie, aneuploïdie");
+    }
+    else if (lowerMessage.includes('loi') && lowerMessage.includes('hérédité') || lowerMessage.includes('loi') && lowerMessage.includes('heredite')) {
+        addBotMessage("🧬 **Lois statistiques de l'hérédité** : principes fondamentaux établis par Mendel régissant la transmission des caractères héréditaires.\n\n• Première loi de Mendel (uniformité des hybrides de première génération) :\n  - Croisement de lignées pures : tous les descendants F1 sont identiques\n  - Dominance/récessivité des allèles\n\n• Deuxième loi de Mendel (disjonction des allèles) :\n  - Ségrégation indépendante des allèles d'un même gène\n  - Proportions théoriques en F2 pour un caractère : 3:1 (dominant:récessif)\n\n• Troisième loi de Mendel (assortiment indépendant) :\n  - Transmission indépendante de caractères différents\n  - Proportions théoriques en F2 pour deux caractères : 9:3:3:1\n\n• Exceptions aux lois de Mendel :\n  - Codominance : expression simultanée des deux allèles\n  - Dominance incomplète : phénotype intermédiaire\n  - Gènes liés : transmission non indépendante\n  - Hérédité polygénique : caractère influencé par plusieurs gènes");
+    }
+
+    // HISTOIRE
+    else if (lowerMessage.includes('type') && lowerMessage.includes('dissertation')) {
+        addBotMessage("📝 **Types de sujets de dissertation** en histoire :\n\n• Dissertation analytique :\n  - Analyse d'un phénomène historique précis\n  - Ex : \"Les causes de la Première Guerre mondiale\"\n\n• Dissertation comparative :\n  - Comparaison de deux périodes, événements ou personnages\n  - Ex : \"Comparez les révolutions russe et chinoise\"\n\n• Dissertation chronologique :\n  - Étude de l'évolution d'un phénomène dans le temps\n  - Ex : \"L'évolution des relations Est-Ouest de 1945 à 1991\"\n\n• Dissertation thématique :\n  - Analyse d'un thème à travers différentes périodes\n  - Ex : \"Le rôle des femmes dans les conflits du XXe siècle\"\n\n• Dissertation problématisée :\n  - Réponse à une question historique complexe\n  - Ex : \"Dans quelle mesure peut-on parler d'un 'siècle américain' pour le XXe siècle ?\"\n\nMéthode : introduction (contexte, problématique, annonce du plan), développement (2-3 parties équilibrées), conclusion (synthèse, réponse, ouverture)");
+    }
+    else if (lowerMessage.includes('commentaire historique')) {
+        addBotMessage("📜 **Commentaire historique** : exercice d'analyse critique d'un document ou d'un ensemble de documents historiques.\n\n• Types de documents :\n  - Textes (discours, traités, mémoires, articles de presse)\n  - Iconographie (peintures, caricatures, affiches, photographies)\n  - Statistiques (tableaux, graphiques)\n  - Cartes et plans\n\n• Méthode d'analyse :\n  1. Présentation du document (nature, auteur, date, contexte)\n  2. Analyse du contenu (idées principales, arguments, vocabulaire)\n  3. Critique externe (fiabilité, objectivité, portée)\n  4. Critique interne (cohérence, non-dits, implicites)\n  5. Contextualisation et mise en perspective\n\n• Structure du commentaire :\n  - Introduction : présentation du document et problématique\n  - Développement : analyse thématique ou chronologique\n  - Conclusion : bilan de l'analyse et portée historique\n\n• Pièges à éviter :\n  - Paraphrase (simple répétition du document)\n  - Hors-sujet (digression excessive)\n  - Anachronisme (jugement avec des valeurs actuelles)");
+    }
+    else if (lowerMessage.includes('seconde guerre mondiale') && lowerMessage.includes('conséquence')) {
+        addBotMessage("🌍 **Les conséquences et règlements de la Seconde Guerre mondiale** :\n\n• Bilan humain et matériel :\n  - Plus de 50 millions de morts (dont 6 millions de Juifs dans la Shoah)\n  - Destructions massives en Europe et en Asie\n  - Déplacements de populations (réfugiés, expulsions)\n\n• Conséquences politiques :\n  - Émergence de deux superpuissances : USA et URSS\n  - Début de la Guerre froide et division de l'Europe\n  - Processus de décolonisation accéléré\n  - Création de l'ONU (1945)\n\n• Conférences de paix :\n  - Yalta (février 1945) : zones d'occupation en Allemagne, sort de la Pologne\n  - Potsdam (juillet-août 1945) : frontières, réparations, dénazification\n\n• Traités de paix (1947) :\n  - Avec l'Italie, la Roumanie, la Hongrie, la Bulgarie et la Finlande\n  - Pas de traité avec l'Allemagne (division prolongée)\n  - Traité de San Francisco avec le Japon (1951)\n\n• Procès pour crimes de guerre :\n  - Nuremberg (1945-1946) : dignitaires nazis\n  - Tokyo (1946-1948) : responsables japonais");
+    }
+    else if (lowerMessage.includes('onu') || (lowerMessage.includes('organisation') && lowerMessage.includes('nations unies'))) {
+        addBotMessage("🌐 **L'Organisation des Nations Unies (ONU)** : organisation internationale fondée en 1945 pour maintenir la paix et la sécurité mondiales.\n\n• Création :\n  - Conférence de San Francisco (avril-juin 1945)\n  - Charte des Nations Unies (26 juin 1945)\n  - Entrée en vigueur le 24 octobre 1945\n\n• Principes fondamentaux :\n  - Égalité souveraine des États membres\n  - Non-ingérence dans les affaires intérieures\n  - Règlement pacifique des différends\n  - Non-recours à la force\n\n• Structure :\n  - Assemblée générale : tous les États membres, 1 voix chacun\n  - Conseil de sécurité : 15 membres (5 permanents avec droit de veto)\n  - Secrétariat : administration, dirigé par le Secrétaire général\n  - Conseil économique et social (ECOSOC)\n  - Cour internationale de Justice\n  - Conseil de tutelle (inactif depuis 1994)\n\n• Institutions spécialisées :\n  - OMS, UNESCO, FAO, FMI, Banque mondiale, etc.\n\n• Bilan : succès dans l'aide humanitaire et le développement, mais limites dans la résolution des conflits majeurs");
+    }
+    else if (lowerMessage.includes('guerre froide') || lowerMessage.includes('est/ouest') || lowerMessage.includes('est ouest')) {
+        addBotMessage("🌍 **Les relations Est/Ouest : de la guerre froide à la chute du mur de Berlin** :\n\n• Définition : confrontation idéologique, politique, économique et culturelle (mais non militaire directe) entre le bloc occidental (États-Unis) et le bloc soviétique (URSS).\n\n• Phases principales :\n  - 1947-1953 : Guerre froide intense (doctrine Truman, plan Marshall, blocus de Berlin, OTAN, guerre de Corée)\n  - 1953-1962 : Coexistence pacifique et crises (déstalinisation, crise de Suez, mur de Berlin, crise des missiles de Cuba)\n  - 1962-1975 : Détente (téléphone rouge, traités SALT, Ostpolitik, accords d'Helsinki)\n  - 1975-1985 : Regain de tensions (invasion de l'Afghanistan, crise des euromissiles)\n  - 1985-1991 : Fin de la guerre froide (Gorbatchev, chute du mur de Berlin, dissolution de l'URSS)\n\n• Caractéristiques :\n  - Course aux armements (nucléaires notamment)\n  - Guerres périphériques (Corée, Vietnam, Afghanistan)\n  - Espionnage et propagande\n  - Compétition technologique et spatiale\n\n• Conséquences : fin du monde bipolaire, émergence des États-Unis comme unique superpuissance, transition démocratique en Europe de l'Est");
+    }
+    else if (lowerMessage.includes('chine') && (lowerMessage.includes('1945') || lowerMessage.includes('1990'))) {
+        addBotMessage("🇨🇳 **La Chine de 1945 aux années 1990** : transformation d'un pays agraire en puissance mondiale.\n\n• Guerre civile (1945-1949) :\n  - Affrontement entre nationalistes (Tchang Kaï-chek) et communistes (Mao Zedong)\n  - Victoire communiste et proclamation de la République populaire de Chine (1er octobre 1949)\n  - Repli nationaliste à Taïwan\n\n• Ère maoïste (1949-1976) :\n  - Réforme agraire et nationalisation de l'économie\n  - Grand Bond en avant (1958-1961) : catastrophe économique et famine\n  - Rupture sino-soviétique (années 1960)\n  - Révolution culturelle (1966-1976) : purges et chaos social\n\n• Réformes de Deng Xiaoping (1978-1997) :\n  - \"Quatre modernisations\" (agriculture, industrie, sciences, défense)\n  - Ouverture économique et zones économiques spéciales\n  - \"Socialisme de marché\" ou \"économie socialiste de marché\"\n  - Répression du mouvement démocratique (Tian'anmen, 1989)\n\n• Résultats :\n  - Croissance économique spectaculaire\n  - Amélioration du niveau de vie\n  - Émergence comme puissance régionale puis mondiale\n  - Maintien du monopole politique du Parti communiste");
+    }
+    else if (lowerMessage.includes('décolonisation') && lowerMessage.includes('cause')) {
+        addBotMessage("🌍 **Les causes générales de la décolonisation** : facteurs ayant conduit à l'indépendance des colonies après la Seconde Guerre mondiale.\n\n• Facteurs internationaux :\n  - Affaiblissement des puissances coloniales après les guerres mondiales\n  - Principes d'autodétermination (Charte de l'Atlantique, 1941)\n  - Pressions des nouvelles superpuissances (USA et URSS) hostiles au colonialisme\n  - Création de l'ONU et soutien aux mouvements d'indépendance\n\n• Facteurs internes aux métropoles :\n  - Coût croissant du maintien des empires\n  - Évolution de l'opinion publique (remise en question morale)\n  - Changements politiques (ex: arrivée au pouvoir de partis favorables à la décolonisation)\n\n• Facteurs dans les colonies :\n  - Émergence d'élites locales occidentalisées\n  - Développement des nationalismes\n  - Influence des idéologies (socialisme, panafricanisme, panarabisme)\n  - Rôle des anciens combattants des guerres mondiales\n\n• Effet d'entraînement :\n  - Conférence de Bandung (1955) et mouvement des non-alignés\n  - Solidarité entre mouvements indépendantistes");
+    }
+    else if (lowerMessage.includes('décolonisation') && lowerMessage.includes('forme')) {
+        addBotMessage("🌍 **Les formes de la décolonisation** : différents processus ayant mené à l'indépendance des colonies.\n\n• Décolonisation négociée :\n  - Transition pacifique et progressive\n  - Accords entre métropole et élites locales\n  - Exemples : Inde (1947), Ghana (1957), Sénégal (1960)\n\n• Décolonisation conflictuelle :\n  - Lutte armée et guerre d'indépendance\n  - Répression et violence\n  - Exemples : Indochine (1946-1954), Algérie (1954-1962), Kenya (révolte des Mau-Mau)\n\n• Décolonisation précipitée :\n  - Retrait rapide sans préparation suffisante\n  - Souvent liée à des crises internes dans la métropole\n  - Exemples : Congo belge (1960), colonies portugaises (1974-1975)\n\n• Cas particuliers :\n  - Partitions (Inde/Pakistan, Palestine)\n  - Transferts de souveraineté (Hong Kong, Macao)\n  - Départementalisation (DOM-TOM français)\n\n• Conséquences :\n  - Instabilité politique dans certains nouveaux États\n  - Maintien d'influences économiques et culturelles (néocolonialisme)\n  - Émergence du tiers-monde et des non-alignés");
+    }
+    else if ((lowerMessage.includes('décolonisation') && lowerMessage.includes('asie')) || lowerMessage.includes('inde') || lowerMessage.includes('indochine')) {
+        addBotMessage("🌏 **La décolonisation en Asie : Inde et Indochine** :\n\n• Inde britannique :\n  - Mouvement nationaliste ancien (Congrès national indien, 1885)\n  - Leadership de Gandhi : résistance non-violente (satyagraha)\n  - Rôle de Nehru et de la Ligue musulmane (Jinnah)\n  - Indépendance et partition (15 août 1947) : Inde et Pakistan\n  - Violences intercommunautaires massives lors de la partition\n  - Modèle de décolonisation négociée mais traumatique\n\n• Indochine française :\n  - Occupation japonaise pendant la Seconde Guerre mondiale\n  - Déclaration d'indépendance du Vietnam par Ho Chi Minh (2 septembre 1945)\n  - Guerre d'Indochine (1946-1954) : France contre Viet Minh\n  - Défaite française à Diên Biên Phu (mai 1954)\n  - Accords de Genève (juillet 1954) : indépendance du Laos, Cambodge, Vietnam divisé\n  - Guerre du Vietnam (1955-1975) : prolongement du conflit\n\n• Points communs et différences :\n  - Rôle des idéologies (nationalisme, communisme)\n  - Influence du contexte international (Guerre froide pour l'Indochine)\n  - Modalités différentes : négociation vs conflit armé");
+    }
+    else if (lowerMessage.includes('décolonisation') && lowerMessage.includes('algérie')) {
+        addBotMessage("🌍 **La décolonisation au Maghreb : l'Algérie** :\n\n• Spécificité de l'Algérie :\n  - Colonisation de peuplement (1 million d'Européens)\n  - Statut de départements français (depuis 1848)\n  - Forte intégration économique avec la métropole\n\n• Montée du nationalisme :\n  - Massacres de Sétif (8 mai 1945)\n  - Création du FLN (Front de Libération Nationale)\n  - Déclenchement de l'insurrection (1er novembre 1954)\n\n• Guerre d'Algérie (1954-1962) :\n  - Guérilla et terrorisme urbain\n  - Répression et torture\n  - Bataille d'Alger (1957)\n  - Crise politique en France\n  - Retour de De Gaulle au pouvoir (1958)\n\n• Processus d'indépendance :\n  - Autodétermination proposée par De Gaulle (1959)\n  - Putsch des généraux (avril 1961)\n  - Terrorisme de l'OAS\n  - Accords d'Évian (18 mars 1962)\n  - Indépendance (5 juillet 1962)\n\n• Conséquences :\n  - Exode massif des pieds-noirs\n  - Massacre des harkis\n  - Traumatisme durable dans les relations franco-algériennes\n  - Modèle de décolonisation violente");
+    }
+    else if (lowerMessage.includes('décolonisation') && lowerMessage.includes('afrique noire')) {
+        addBotMessage("🌍 **La décolonisation en Afrique noire** :\n\n• Contexte :\n  - Empires coloniaux britannique, français, belge, portugais\n  - Éveil des nationalismes après la Seconde Guerre mondiale\n  - Influence des élites formées en métropole\n\n• Décolonisation britannique :\n  - Politique progressive d'autonomie puis d'indépendance\n  - Ghana, premier pays indépendant d'Afrique noire (1957)\n  - Nigeria (1960), Kenya (1963), etc.\n\n• Décolonisation française :\n  - Loi-cadre Defferre (1956) : autonomie interne\n  - Communauté française proposée par De Gaulle (1958)\n  - Vague d'indépendances en 1960 (\"année de l'Afrique\")\n  - Cas particuliers : Guinée (1958), Mali\n\n• Autres décolonisations :\n  - Congo belge : indépendance précipitée et crise (1960)\n  - Colonies portugaises : indépendances tardives après la Révolution des Œillets (1974-1975)\n  - Rhodésie/Zimbabwe : problème des minorités blanches\n\n• Défis post-indépendance :\n  - Frontières artificielles héritées de la colonisation\n  - Dépendance économique (néocolonialisme)\n  - Instabilité politique (coups d'État, guerres civiles)\n  - Émergence de leaders charismatiques (Senghor, Nkrumah, Nyerere)");
+    }
+
+    // ANGLAIS
+    else if (lowerMessage.includes('verb tense') || lowerMessage.includes('temps verbaux')) {
+        addBotMessage("🇬🇧 **VERB TENSES** : the different forms a verb takes to indicate time.\n\n• Present tenses:\n  - Present Simple: I work (habits, facts)\n  - Present Continuous: I am working (actions in progress)\n  - Present Perfect: I have worked (past actions with present relevance)\n  - Present Perfect Continuous: I have been working (ongoing actions until now)\n\n• Past tenses:\n  - Past Simple: I worked (completed past actions)\n  - Past Continuous: I was working (actions in progress in the past)\n  - Past Perfect: I had worked (actions before another past action)\n  - Past Perfect Continuous: I had been working (ongoing actions until a past moment)\n\n• Future forms:\n  - Will: I will work (predictions, spontaneous decisions)\n  - Be going to: I am going to work (intentions, plans)\n  - Future Continuous: I will be working (actions in progress in the future)\n  - Future Perfect: I will have worked (actions completed by a future time)\n\n• Key aspects to consider: regularity, duration, completion, sequence");
+    }
+    else if (lowerMessage.includes('modal')) {
+        addBotMessage("🇬🇧 **MODALS** : auxiliary verbs that express necessity, possibility, permission or ability.\n\n• Main modal verbs:\n  - Can/Could: ability, possibility, permission\n    \"I can swim\" (ability), \"Could I leave early?\" (permission)\n  - May/Might: possibility, permission\n    \"It may rain tomorrow\" (possibility), \"May I come in?\" (permission)\n  - Must/Have to: obligation, necessity, deduction\n    \"You must study\" (obligation), \"This must be the place\" (deduction)\n  - Should/Ought to: advice, recommendation, expectation\n    \"You should exercise regularly\" (advice)\n  - Will/Would: future, willingness, habits, requests\n    \"I will help you\" (willingness), \"Would you mind helping?\" (request)\n\n• Characteristics:\n  - No -s in third person singular\n  - Followed by base form without 'to'\n  - No infinitive or -ing forms (use substitutes)\n  - Negative form: modal + not (can't, mustn't)");
+    }
+    // Présentations et informations personnelles
+    else if (lowerMessage.includes('quel âge') || lowerMessage.includes('quel age') || lowerMessage.includes('ton âge')) {
+        addBotMessage("🤖 Je suis un assistant numérique, donc je n'ai pas d'âge à proprement parler. Je suis là pour t'aider dans tes révisions, peu importe ton âge ou ton niveau scolaire. En quelle classe es-tu actuellement ?");
+    }
+    else if (lowerMessage.includes('où habites tu') || lowerMessage.includes('où vis tu') || lowerMessage.includes('tu habites où')) {
+        addBotMessage("🏠 Je suis un assistant numérique, donc je n'habite pas dans un lieu physique. Je suis accessible partout où tu as une connexion internet ! Et toi, dans quelle région étudies-tu ? Certaines académies ont des spécificités dans leurs programmes.");
+    }
+    else if (lowerMessage.includes('quelle classe') || lowerMessage.includes('quel niveau')) {
+        addBotMessage("🎓 Je peux aider les élèves de tous niveaux, du collège aux études supérieures ! Je suis particulièrement spécialisé pour les lycéens préparant le bac. En quelle classe es-tu ? Cela m'aidera à adapter mes explications à ton programme.");
+    }
+    else if (lowerMessage.includes('je suis en terminale')) {
+        addBotMessage("📚 Super ! La Terminale est une année importante. Quelle spécialité suis-tu ? Mathématiques, Physique-Chimie, SVT, SES, HGGSP, Humanités... ? Je pourrai mieux cibler mes explications en fonction de ton parcours.");
+    }
+    else if (lowerMessage.includes('je suis en première')) {
+        addBotMessage("📚 La Première, une année charnière avec le début des épreuves du bac ! Quelles spécialités as-tu choisies ? As-tu commencé à réfléchir à celle que tu pourrais abandonner en Terminale ?");
+    }
+    else if (lowerMessage.includes('je suis en seconde')) {
+        addBotMessage("📚 La Seconde, l'entrée au lycée ! C'est le moment de consolider tes bases et de réfléchir à tes spécialités pour la Première. As-tu déjà une idée des matières qui t'intéressent particulièrement ?");
+    }
+    else if (lowerMessage.includes('je suis en troisième') || lowerMessage.includes('je suis en 3ème')) {
+        addBotMessage("📚 La Troisième, l'année du brevet ! C'est aussi le moment de réfléchir �� ton orientation. As-tu déjà une idée de ce que tu veux faire après ? Seconde générale, technologique ou professionnelle ?");
+    }
+    else if (lowerMessage.includes('je suis étudiant') || lowerMessage.includes('je suis à l\'université') || lowerMessage.includes('je suis en fac')) {
+        addBotMessage("🎓 Super ! Les études supérieures demandent une bonne organisation et des méthodes de travail efficaces. Dans quel domaine étudies-tu ? Je peux t'aider sur certaines matières fondamentales ou te donner des conseils méthodologiques.");
+    }
+
+    // Santé et bien-être
+    else if (lowerMessage.includes('je suis malade') || lowerMessage.includes('je suis souffrant') || lowerMessage.includes('je ne me sens pas bien')) {
+        addBotMessage("🤒 Je suis désolé d'apprendre que tu ne te sens pas bien. Prendre soin de ta santé est prioritaire ! Assure-toi de te reposer suffisamment et de consulter un médecin si nécessaire. Si tu te sens capable de travailler un peu, concentre-toi sur des révisions légères comme la lecture de fiches ou le visionnage de vidéos explicatives. Bon rétablissement !");
+    }
+    else if (lowerMessage.includes('je suis fatigué') || lowerMessage.includes('je suis crevé') || lowerMessage.includes('je n\'ai pas dormi')) {
+        addBotMessage("😴 La fatigue peut sérieusement impacter ta capacité à apprendre. Si possible, fais une courte sieste de 20 minutes pour te revitaliser. Sinon, concentre-toi sur des tâches qui demandent moins d'effort cognitif, comme organiser tes notes ou revoir des concepts déjà maîtrisés. N'oublie pas que le sommeil est crucial pour la mémorisation - essaie de maintenir un cycle de sommeil régulier, surtout en période d'examens !");
+    }
+    else if (lowerMessage.includes('je suis stressé') || lowerMessage.includes('je panique') || lowerMessage.includes('je suis anxieux')) {
+        addBotMessage("😌 Le stress avant les examens est normal, mais il ne doit pas te paralyser. Prends quelques respirations profondes (inspire 4 secondes, retiens 2 secondes, expire 6 secondes). Rappelle-toi que tu as travaillé pour cela et que tu es préparé(e). Divise tes révisions en petites tâches gérables et célèbre chaque accomplissement. Si le stress devient trop intense, n'hésite pas à en parler à un proche ou un professionnel.");
+    }
+    else if (lowerMessage.includes('je n\'arrive pas à dormir') || lowerMessage.includes('insomnie') || lowerMessage.includes('problème de sommeil')) {
+        addBotMessage("🌙 Les problèmes de sommeil sont fréquents en période d'examens. Quelques conseils : évite les écrans 1h avant de te coucher, maintiens une routine régulière, limite la caféine après 14h, pratique des techniques de relaxation avant de dormir (méditation, respiration profonde). Si tu ne t'endors pas après 20 minutes, lève-toi et fais une activité calme jusqu'à ce que tu te sentes somnolent. Le sommeil est essentiel pour la consolidation des apprentissages !");
+    }
+    else if (lowerMessage.includes('mal de tête') || lowerMessage.includes('migraine') || lowerMessage.includes('j\'ai mal au crâne')) {
+        addBotMessage("🤕 Les maux de tête pendant les révisions peuvent être causés par le stress, la fatigue oculaire ou la déshydratation. Fais une pause, éloigne-toi des écrans, bois de l'eau et si possible, prends l'air quelques minutes. Vérifie aussi ta posture et l'éclairage de ton espace de travail. Si les maux de tête persistent ou sont sévères, n'hésite pas à consulter un médecin. Ta santé passe avant tout !");
+    }
+
+    // Situations personnelles
+    else if (lowerMessage.includes('je travaille') && (lowerMessage.includes('job étudiant') || lowerMessage.includes('temps partiel'))) {
+        addBotMessage("💼 Concilier études et travail demande une organisation solide ! Quelques conseils : planifie ta semaine à l'avance, utilise efficacement les petits créneaux disponibles (transports, pauses), priorise les révisions essentielles, et n'hésite pas à expliquer ta situation à tes professeurs si nécessaire. Ton expérience professionnelle développe aussi des compétences valorisables ! As-tu besoin d'aide pour organiser ton planning de révisions en fonction de tes horaires de travail ?");
+    }
+    else if (lowerMessage.includes('dyslexie') || lowerMessage.includes('dys') || lowerMessage.includes('trouble apprentissage')) {
+        addBotMessage("📚 Les troubles d'apprentissage comme la dyslexie nécessitent des adaptations, mais n'empêchent absolument pas la réussite ! Quelques suggestions : utilise des supports visuels et des cartes mentales, enregistre tes cours pour les réécouter, travaille avec des polices adaptées (comme OpenDyslexic), et n'hésite pas à demander des aménagements pour tes examens. As-tu des stratégies particulières qui fonctionnent bien pour toi ?");
+    }
+    else if (lowerMessage.includes('tdah') || lowerMessage.includes('trouble attention') || lowerMessage.includes('hyperactivité')) {
+        addBotMessage("🧠 Pour gérer le TDAH pendant les révisions : travaille en sessions courtes (technique Pomodoro), élimine les distractions, utilise des rappels visuels, varie les activités d'apprentissage, et trouve un environnement de travail adapté. Le mouvement peut aussi aider - certains étudient mieux en marchant ou en utilisant un fidget spinner. As-tu mis en place des stratégies particulières qui t'aident à te concentrer ?");
+    }
+    else if (lowerMessage.includes('handicap') || lowerMessage.includes('situation de handicap')) {
+        addBotMessage("♿ Les situations de handicap nécessitent souvent des adaptations spécifiques. N'hésite pas à te renseigner sur les aménagements possibles pour tes examens (tiers-temps, secrétaire, matériel adapté). De nombreuses ressources pédagogiques adaptées existent également. Si tu me précises ta situation, je pourrai peut-être te suggérer des approches plus spécifiques pour tes révisions.");
+    }
+    else if (lowerMessage.includes('étranger') || lowerMessage.includes('pas ma langue maternelle') || lowerMessage.includes('français langue étrangère')) {
+        addBotMessage("🌍 Étudier dans une langue qui n'est pas ta langue maternelle représente un défi supplémentaire, et c'est déjà une réussite en soi ! Quelques conseils : enrichis ton vocabulaire spécifique aux matières étudiées, n'hésite pas à demander des clarifications, utilise des dictionnaires spécialisés, et si possible, trouve un groupe d'étude où tu pourras pratiquer la langue. Dans quelle(s) matière(s) as-tu le plus de difficultés linguistiques ?");
+    }
+    else if (lowerMessage.includes('problème familial') || lowerMessage.includes('difficultés personnelles') || lowerMessage.includes('situation compliquée')) {
+        addBotMessage("💙 Je suis désolé d'apprendre que tu traverses des difficultés personnelles. Ces situations peuvent rendre les études plus compliquées, mais n'oublie pas que tu n'es pas seul(e). N'hésite pas à en parler à un adulte de confiance (professeur principal, CPE, psychologue scolaire) qui pourra t'orienter vers des ressources adaptées. Prends soin de toi et sois indulgent(e) envers toi-même pendant cette période.");
+    }
+
+    // Préférences et loisirs
+    else if (lowerMessage.includes('musique') && (lowerMessage.includes('réviser') || lowerMessage.includes('étudier'))) {
+        addBotMessage("🎵 La musique pendant les révisions peut être bénéfique pour certains et distrayante pour d'autres. Si tu choisis d'en écouter, privilégie :\n• Musique instrumentale ou classique\n• Sons de la nature ou bruit blanc\n• Morceaux familiers (pour éviter la curiosité)\n• Volume modéré\n\nÉvite les chansons avec paroles pour les matières verbales (langues, philosophie). Tu peux aussi essayer différentes playlists selon les matières ou ton niveau d'énergie !");
+    }
+    else if (lowerMessage.includes('sport') && (lowerMessage.includes('révision') || lowerMessage.includes('étude'))) {
+        addBotMessage("🏃 Le sport est excellent pendant les périodes de révision ! Il réduit le stress, améliore la concentration et favorise un meilleur sommeil. Idéalement, pratique une activité modérée (30-45 minutes) régulièrement. Tu peux aussi faire de courtes pauses actives entre tes sessions d'étude (5-10 minutes d'étirements, de marche ou d'exercices). Quel type d'activité physique préfères-tu ?");
+    }
+    else if (lowerMessage.includes('pause') || lowerMessage.includes('détente') || lowerMessage.includes('se relaxer')) {
+        addBotMessage("⏸️ Les pauses sont essentielles pour maintenir ta concentration et ton efficacité ! Voici quelques idées de pauses efficaces :\n• Courtes (5-10 min) : étirements, respiration profonde, petit tour dehors\n• Moyennes (15-30 min) : marche rapide, méditation, collation saine\n• Longues (1h+) : sport, activité créative, socialisation\n\nÉvite les écrans pendant tes pauses courtes, ils peuvent te distraire plus longtemps que prévu. Quelle est ta pause préférée ?");
+    }
+    else if (lowerMessage.includes('jeux vidéo') || lowerMessage.includes('gaming') || lowerMessage.includes('jeu vidéo')) {
+        addBotMessage("🎮 Les jeux vidéo peuvent être une bonne façon de décompresser, mais attention à ne pas laisser le temps de jeu empiéter sur tes révisions ! Quelques conseils :\n• Utilise-les comme récompense après une session productive\n• Fixe-toi une limite de temps stricte\n• Privilégie des sessions courtes de jeux qui ne nécessitent pas un grand investissement\n• Évite les jeux très addictifs en période d'examens\n\nCertains jeux de réflexion ou de stratégie peuvent même développer des compétences utiles !");
+    }
+    else if (lowerMessage.includes('série') || lowerMessage.includes('netflix') || lowerMessage.includes('film')) {
+        addBotMessage("🎬 Regarder des séries ou des films peut être une bonne façon de se détendre, mais avec modération pendant les révisions ! Quelques astuces :\n• Limite-toi à un épisode comme récompense après le travail\n• Évite de commencer une nouvelle série addictive juste avant les examens\n• Considère les documentaires liés à tes matières (en langue étrangère pour combiner détente et apprentissage)\n• Utilise des applications qui bloquent les plateformes de streaming pendant tes heures d'étude");
+    }
+    else if (lowerMessage.includes('réseaux sociaux') || lowerMessage.includes('instagram') || lowerMessage.includes('tiktok') || lowerMessage.includes('snapchat')) {
+        addBotMessage("📱 Les réseaux sociaux sont parmi les plus grandes sources de distraction pendant les révisions ! Quelques stratégies pour les gérer :\n• Utilise des applications de blocage pendant tes sessions d'étude\n• Désactive les notifications\n• Fixe-toi des moments précis pour les consulter (ex: 10 min après chaque heure de travail)\n• Mets ton téléphone dans une autre pièce pendant que tu travailles\n• Utilise la fonction 'temps d'écran' pour te fixer des limites\n\nTu peux aussi rejoindre des groupes d'étude sur ces plateformes pour transformer ta présence en ligne en quelque chose de productif !");
+    }
+
+    // Situations d'apprentissage spécifiques
+    else if (lowerMessage.includes('apprendre par cœur') || lowerMessage.includes('mémoriser')) {
+        addBotMessage("🧠 Pour mémoriser efficacement :\n\n• **Technique des palais mentaux** : associe les informations à des lieux familiers\n• **Cartes mentales** : organise visuellement les concepts\n• **Flashcards** : idéales pour le vocabulaire, les dates, les formules\n• **Méthode des loci** : associe chaque élément à un endroit d'un parcours familier\n• **Chunking** : regroupe les informations en blocs logiques\n• **Répétition espacée** : révise à intervalles croissants\n• **Récitation active** : récite à voix haute sans regarder tes notes\n\nLa mémorisation est plus efficace quand elle est active et multi-sensorielle. Sur quoi travailles-tu actuellement ?");
+    }
+    else {
+        // Réponse générique pour les messages non reconnus
+        const genericResponses = [
+            "🤔 Desolé je ne comprend pas. Reformule ou corrige les fautes.",
+            
+        ];
+        
+        const randomResponse = genericResponses[Math.floor(Math.random() * genericResponses.length)];
+        addBotMessage(randomResponse);
+    }
+}
+</script>
+
 {% endblock %}
