@@ -920,7 +920,6 @@ footer {
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
-
 .badge-card:hover {
     transform: translateY(-5px);
 }
@@ -1578,17 +1577,17 @@ body.dark-mode .profile-container {
 
     :root {
         --background-dark:rgb(168, 168, 168);
-        --background-card:rgb(0, 0, 0);
+        --background-card:#4a4168;
         --text-cream: #f5f5dc;
-        --button-yellow: #ffc94d;
-        --accent-blue:rgb(0, 0, 0);
+        --button-yellow: #F9A826;
+        --accent-blue:#B0B0B0;
     }
 
     body {
         margin: 0;
         padding: 0;
         font-family: 'Arial', sans-serif;
-        background: linear-gradient(135deg, #111827 0%, #1e1e3f 100%);
+        background: linear-gradient(135deg, #1e2533 0%, #1e1e3f 100%);
         min-height: 100vh;
         color: var(--text-cream§);
     }
@@ -1716,8 +1715,8 @@ body.dark-mode .profile-container {
 
     .access-button {
         display: inline-block;
-        background: #111827;
-        color: white;
+        background: #000000;
+        color: rgb(255, 255, 255);
         padding: 10px 30px;
         border-radius: 50px;
         text-decoration: none;
@@ -2088,3 +2087,7 @@ body.dark-mode .profile-container {
         right: 0;
     }
 }
+
+
+
+

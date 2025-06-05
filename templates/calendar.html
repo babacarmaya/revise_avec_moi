@@ -206,7 +206,7 @@
 
     .calendar-header h1 {
         margin: 0;
-        color: #333;
+        color: #white;
     }
 
     .calendar-actions {
@@ -333,6 +333,11 @@
         align-items: center;
         cursor: pointer;
     }
+    
+    .fc .fc-toolbar-title {
+    color: #3498db; /* Couleur bleue qui correspond à votre thème */
+    font-weight: bold;
+}
 
     .event-type input {
         margin-right: 10px;
@@ -421,7 +426,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 20px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #white;
     }
 
     .modal-header h2 {
@@ -720,6 +725,7 @@
                 left: 'prev,next today',
                 center: 'title',
                 right: ''
+                
             },
             locale: 'fr',
             firstDay: 1, // Lundi comme premier jour de la semaine

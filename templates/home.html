@@ -582,7 +582,7 @@ function respondToMessage(message) {
     }
 
     // Santé et bien-être
-    else if (lowerMessage.includes('je suis malade') || lowerMessage.includes('je suis souffrant') || lowerMessage.includes('je ne me sens pas bien')) {
+    else if (lowerMessage.includes('malade') || lowerMessage.includes('souffrant') || lowerMessage.includes(' sens pas bien')) {
         addBotMessage("🤒 Je suis désolé d'apprendre que tu ne te sens pas bien. Prendre soin de ta santé est prioritaire ! Assure-toi de te reposer suffisamment et de consulter un médecin si nécessaire. Si tu te sens capable de travailler un peu, concentre-toi sur des révisions légères comme la lecture de fiches ou le visionnage de vidéos explicatives. Bon rétablissement !");
     }
     else if (lowerMessage.includes('je suis fatigué') || lowerMessage.includes('je suis crevé') || lowerMessage.includes('je n\'ai pas dormi')) {
@@ -642,6 +642,44 @@ function respondToMessage(message) {
     else if (lowerMessage.includes('apprendre par cœur') || lowerMessage.includes('mémoriser')) {
         addBotMessage("🧠 Pour mémoriser efficacement :\n\n• **Technique des palais mentaux** : associe les informations à des lieux familiers\n• **Cartes mentales** : organise visuellement les concepts\n• **Flashcards** : idéales pour le vocabulaire, les dates, les formules\n• **Méthode des loci** : associe chaque élément à un endroit d'un parcours familier\n• **Chunking** : regroupe les informations en blocs logiques\n• **Répétition espacée** : révise à intervalles croissants\n• **Récitation active** : récite à voix haute sans regarder tes notes\n\nLa mémorisation est plus efficace quand elle est active et multi-sensorielle. Sur quoi travailles-tu actuellement ?");
     }
+   
+    else if (lowerMessage.includes('mécanique')) {
+        addBotMessage("⚙️ Petit résumé sur la mécanique :\n\n• Vecteur vitesse : direction, sens, norme\n• MRU : vitesse constante, MRUA : accélération constante\n• 2e loi de Newton : F = ma\n• Énergie cinétique : Ec = 1/2 mv²\n• Travail d'une force : W = F × d × cos(θ)\n\nTu veux un exercice pour t'entraîner ?");
+    }
+    else if (lowerMessage.includes('électricité')) {
+        addBotMessage("🔌 Résumé sur l’électricité :\n\n• Intensité I (A), Tension U (V), Résistance R (Ω)\n• Loi d'Ohm : U = RI\n• Loi des mailles : somme des tensions = 0\n• Puissance : P = UI\n• Effet Joule : énergie dissipée = R × I² × t\n\nJe peux t'expliquer un point en détail si tu veux !");
+    }
+    else if (lowerMessage.includes('dérivées')) {
+        addBotMessage("📈 Petit rappel sur les dérivées :\n\n• f'(x) = taux de variation de f\n• Dérivée de x² : 2x, de sin(x) : cos(x)\n• Tangente : droite dont le coefficient est f'(x)\n• Étude de signe de f' pour les variations\n\nTu veux une application avec un exercice ?");
+    }
+    else if (lowerMessage.includes('probabilités')) {
+        addBotMessage("🎲 Rappel sur les probabilités :\n\n• Expérience aléatoire : ensemble des issues\n• Probabilité d’un événement A : P(A) ∈ [0;1]\n• Événements incompatibles, indépendants\n• Loi binomiale : B(n; p)\n\nBesoin d’un exemple ou d’un exercice ?");
+    }
+    else if (lowerMessage.includes('argumentation')) {
+        addBotMessage("🗣️ À propos de l’argumentation :\n\n• Vise à convaincre/persuader\n• Types d’arguments : logique, affectif, d’autorité\n• Connecteurs logiques : donc, en effet, cependant…\n• Registre polémique, didactique, pathétique\n\nSouhaites-tu un exemple de texte argumentatif ?");
+    }
+    else if (lowerMessage.includes('figures de style')) {
+        addBotMessage("🎭 Voici quelques figures de style à connaître :\n\n• Métaphore : comparaison implicite\n• Anaphore : répétition en début de phrase\n• Antithèse : opposition forte\n• Hyperbole : exagération\n• Gradation : progression croissante/décroissante\n\nTu veux un quiz pour les reconnaître ?");
+    }
+    else if (lowerMessage.includes('guerre froide')) {
+        addBotMessage("🧊 Résumé sur la Guerre froide :\n\n• 1947–1991 : affrontement USA/URSS sans conflit direct\n• Blocs Ouest (capitaliste) vs Est (communiste)\n• Crise de Cuba (1962), chute du mur de Berlin (1989)\n• Fin de l’URSS en 1991\n\nSouhaites-tu une frise chronologique ?");
+    }
+    else if (lowerMessage.includes('géopolitique')) {
+        addBotMessage("🌐 Notions de base en géopolitique :\n\n• Puissance : capacité d’influence d’un État\n• Mondialisation : interconnexion croissante\n• Frontières : limites politiques parfois contestées\n• Tensions : zones de conflits ou d’enjeux majeurs\n\nTu veux un exemple de conflit géopolitique récent ?");
+    }
+    else if (lowerMessage.includes('liberté')) {
+        addBotMessage("🧠 Réflexion philosophique sur la liberté :\n\n• Être libre : agir sans contrainte extérieure\n• Déterminisme : tout est causé par des lois\n• Libre arbitre : faculté de choisir\n• Spinoza, Sartre, Kant → approches différentes\n\nTu veux une problématique de dissertation ?");
+    }
+    else if (lowerMessage.includes('bonheur')) {
+        addBotMessage("😊 Réflexion sur le bonheur :\n\n• Le bonheur : état de satisfaction durable\n• Différence avec le plaisir : éphémère\n• Philosophes : Epicure, Kant, Rousseau\n• Peut-on être heureux seul ou en société ?\n\nTu veux un plan de dissertation sur ce thème ?");
+    }
+    else if (lowerMessage.includes('je stresse')) {
+        addBotMessage("😰 Le stress est normal avant un examen. Respire !\n\nConseils :\n• Organise tes révisions en petites sessions\n• Dors bien, mange équilibré\n• Parle à quelqu’un, fais des pauses\n\nTu veux une technique de respiration pour te calmer ?");
+    }
+    else if (lowerMessage.includes('je suis nul')) {
+        addBotMessage("🤗 Personne n’est nul, tout s’apprend avec du temps !\n\n• Réviser un peu chaque jour, pas tout d’un coup\n• Demande de l’aide quand tu bloques\n• Valorise tes progrès, même petits\n\nTu veux que je t’aide sur un point particulier ?");
+    }
+
     else {
         // Réponse générique pour les messages non reconnus
         const genericResponses = [

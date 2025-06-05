@@ -4,7 +4,40 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime, timedelta
 from flask_migrate import Migrate
+import os
+from flask_mail import Mail, Message
+from flask_apscheduler import APScheduler
+from dotenv import load_dotenv
+from functools import wraps
+load_dotenv()  # Charger les variables d'environnement depuis le fichier .env
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+# Création de l'application Flask
+app = Flask(__name__)
+
+# Configuration
+app.config['SECRET_KEY'] = 'votre_clé_secrète'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///education.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Configuration de Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('babsjr28@gmail.com', 'votre_email@gmail.com')
+app.config['MAIL_PASSWORD'] = os.environ.get('kipl ioor pyko sith', 'votre_mot_de_passe')
+app.config['MAIL_DEFAULT_SENDER'] = ('Edu App', os.environ.get('MAIL_USERNAME', 'votre_email@gmail.com'))
+
+db = SQLAlchemy(app)
+mail = Mail(app)
+scheduler = APScheduler()
+scheduler.init_app(app)
 
 # Création de l'application Flask
 app = Flask(__name__)
@@ -40,14 +73,16 @@ class CalendarEvent(db.Model):
     description = db.Column(db.Text)
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
-    color = db.Column(db.String(20), default='#3498db')  # Couleur de l'événement
-    type = db.Column(db.String(20), default='other')  # cours, exercice, examen, rappel, etc.
+    color = db.Column(db.String(20), default='#3498db')
+    type = db.Column(db.String(20), default='other')
     completed = db.Column(db.Boolean, default=False)
     reminder = db.Column(db.Boolean, default=False)
     reminder_time = db.Column(db.DateTime)
+    reminder_sent = db.Column(db.Boolean, default=False)  # Nouveau champ
     
     # Relation avec l'utilisateur
     user = db.relationship('User', backref=db.backref('calendar_events', lazy=True, cascade="all, delete-orphan"))
+
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -109,6 +144,129 @@ class CourseContent(db.Model):
     title = db.Column(db.String(200))
     content = db.Column(db.Text)
     is_locked = db.Column(db.Boolean, default=True)
+
+def send_reminder_email(event, user):
+    
+    subject = f"Rappel : {event.title}"
+    
+    # Formatage de la date et heure
+    start_time = event.start_date.strftime("%d/%m/%Y à %H:%M")
+    
+    # Corps du message
+    body = f"""
+    Bonjour {user.prenom} {user.nom},
+    
+    Ceci est un rappel pour votre événement "{event.title}" qui commence le {start_time}.
+    
+    Description : {event.description or 'Aucune description'}
+    
+    Bonne journée !
+    """
+    
+    msg = Message(
+        subject=subject,
+        recipients=[user.email],
+        body=body
+    )
+    
+    try:
+        mail.send(msg)
+        print(f"Email de rappel envoyé à {user.email} pour l'événement '{event.title}'")
+        return True
+    except Exception as e:
+        print(f"Erreur lors de l'envoi de l'email: {str(e)}")
+        return False
+
+def check_reminders():
+    """Vérifie les rappels à envoyer et envoie les emails"""
+    print("Vérification des rappels en cours...")
+    now = datetime.utcnow()
+    
+    # Trouver tous les événements avec rappel activé, non envoyé, et dont le temps de rappel est passé
+    upcoming_reminders = CalendarEvent.query.filter(
+        CalendarEvent.reminder == True,
+        CalendarEvent.reminder_sent == False,
+        CalendarEvent.reminder_time <= now,
+        CalendarEvent.start_date > now  # L'événement n'a pas encore commencé
+    ).all()
+    
+    print(f"Nombre de rappels à envoyer : {len(upcoming_reminders)}")
+    
+    for event in upcoming_reminders:
+        user = User.query.get(event.user_id)
+        if user:
+            success = send_reminder_email(event, user)
+            if success:
+                # Marquer le rappel comme envoyé
+                event.reminder_sent = True
+                db.session.commit()
+                print(f"Rappel envoyé pour l'événement {event.id} à {user.email}")
+
+
+
+# Planifier la tâche pour qu'elle s'exécute toutes les 5 minutes
+@scheduler.task('interval', id='check_reminders', seconds=300)
+def scheduled_check_reminders():
+    with app.app_context():
+        check_reminders()
+
+
+
+@app.route('/test_email')
+def test_email():
+    try:
+        msg = Message(
+            subject="Test d'email",
+            recipients=[os.environ.get('MAIL_USERNAME')],  # Envoyez à vous-même pour tester
+            body="Ceci est un test d'envoi d'email depuis votre application Flask."
+        )
+        mail.send(msg)
+        return "Email envoyé avec succès!"
+    except Exception as e:
+        return f"Erreur lors de l'envoi de l'email: {str(e)}"
+
+
+@app.route('/check_reminders_now')
+def check_reminders_now():
+    try:
+        check_reminders()
+        return "Vérification des rappels effectuée. Consultez les logs du serveur pour plus de détails."
+    except Exception as e:
+        return f"Erreur lors de la vérification des rappels: {str(e)}"
+    
+@app.route('/create_test_reminder')
+@login_required
+def create_test_reminder():
+        user_id = session['user_id']
+        
+        # Créer un événement qui commence dans 10 minutes
+        start_date = datetime.utcnow() + timedelta(minutes=10)
+        end_date = start_date + timedelta(hours=1)
+        
+        # Le rappel est défini pour 2 minutes à partir de maintenant
+        reminder_time = datetime.utcnow() + timedelta(minutes=2)
+        
+        test_event = CalendarEvent(
+            user_id=user_id,
+            title="Événement de test pour rappel",
+            description="Ceci est un test du système de rappel par email",
+            start_date=start_date,
+            end_date=end_date,
+            color="#3498db",
+            type="other",
+            reminder=True,
+            reminder_time=reminder_time,
+            reminder_sent=False
+        )
+        
+        db.session.add(test_event)
+        
+        try:
+            db.session.commit()
+            return f"Événement de test créé. Un rappel sera envoyé dans environ 2 minutes. ID de l'événement: {test_event.id}"
+        except Exception as e:
+            db.session.rollback()
+            return f"Erreur lors de la création de l'événement de test: {str(e)}"    
 
 # Protection des routes
 def login_required(f):
@@ -304,6 +462,14 @@ def view_chapter(subject, chapter_number):
                          chapter=chapter,
                          subject=subject)
 
+# boite a outils 
+@app.route('/toolbox')
+def toolbox():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    return render_template('toolbox.html')
+
+
 # Routes API pour le calendrier
 @app.route('/api/events', methods=['GET'])
 @login_required
@@ -359,12 +525,13 @@ def create_event():
     new_event = CalendarEvent(
         user_id=user_id,
         title=data['title'],
-                description=data.get('description', ''),
+        description=data.get('description', ''),
         start_date=start_date,
         end_date=end_date,
         color=data.get('color', '#3498db'),
         type=data.get('type', 'other'),
-        reminder=data.get('reminder', False)
+        reminder=data.get('reminder', False),
+        reminder_sent=False  # Initialiser à False
     )
     
     # Ajouter un rappel si demandé
@@ -388,6 +555,7 @@ def create_event():
             'status': 'error',
             'message': str(e)
         }), 500
+
 
 @app.route('/api/events/<int:event_id>', methods=['PUT'])
 @login_required
@@ -501,6 +669,184 @@ def complete_event(event_id):
             'status': 'error',
             'message': str(e)
         }), 500
+
+
+
+
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relation avec l'utilisateur
+    user = db.relationship('User', backref=db.backref('notes', lazy=True, cascade="all, delete-orphan"))
+# Routes API pour les notes
+@app.route('/api/notes', methods=['GET'])
+@login_required
+def get_notes():
+    user_id = session['user_id']
+    notes = Note.query.filter_by(user_id=user_id).order_by(Note.updated_at.desc()).all()
+    
+    notes_data = []
+    for note in notes:
+        notes_data.append({
+            'id': note.id,
+            'title': note.title,
+            'content': note.content,
+            'created_at': note.created_at.isoformat(),
+            'updated_at': note.updated_at.isoformat()
+        })
+    
+    return jsonify(notes_data)
+
+@app.route('/api/notes', methods=['POST'])
+@login_required
+def create_note():
+    user_id = session['user_id']
+    data = request.json
+    
+    new_note = Note(
+        user_id=user_id,
+        title=data.get('title', 'Sans titre'),
+        content=data.get('content', '')
+    )
+    
+    db.session.add(new_note)
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            'status': 'success',
+            'id': new_note.id,
+            'message': 'Note créée avec succès'
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+
+
+
+#note            
+
+
+
+@app.route('/api/notes/<int:note_id>', methods=['PUT'])
+@login_required
+def update_note(note_id):
+    user_id = session['user_id']
+    data = request.json
+    
+    note = Note.query.filter_by(id=note_id, user_id=user_id).first()
+    
+    if not note:
+        return jsonify({
+            'status': 'error',
+            'message': 'Note non trouvée'
+        }), 404
+    
+    note.title = data.get('title', note.title)
+    note.content = data.get('content', note.content)
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            'status': 'success',
+            'message': 'Note mise à jour avec succès'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+
+
+
+
+from flask_mail import Mail, Message
+
+# Configuration de Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # ou votre serveur SMTP
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'babsjr28@gmail.com'  # à remplacer
+app.config['MAIL_PASSWORD'] = 'kipl ioor pyko sith'  # à remplacer
+app.config['MAIL_DEFAULT_SENDER'] = ('revise avec moi', 'babsjr28@gmail.com')
+
+mail = Mail(app)
+def send_reminder_email(event, user):
+    """Envoie un email de rappel pour un événement"""
+    subject = f"Rappel : {event.title}"
+    
+    # Formatage de la date et heure
+    start_time = event.start_date.strftime("%d/%m/%Y à %H:%M")
+    
+    # Corps du message
+    body = f"""
+    Bonjour {user.prenom} {user.nom},
+    
+    Ceci est un rappel pour votre événement "{event.title}" qui commence le {start_time}.
+    
+    Description : {event.description or 'Aucune description'}
+    
+    Bonne journée !
+    """
+    
+    msg = Message(
+        subject=subject,
+        recipients=[user.email],
+        body=body
+    )
+    
+    try:
+        mail.send(msg)
+        return True
+    except Exception as e:
+        print(f"Erreur lors de l'envoi de l'email: {str(e)}")
+        return False
+    
+    
+
+
+
+
+
+@app.route('/api/notes/<int:note_id>', methods=['DELETE'])
+@login_required
+def delete_note(note_id):
+    user_id = session['user_id']
+    
+    note = Note.query.filter_by(id=note_id, user_id=user_id).first()
+    
+    if not note:
+        return jsonify({
+            'status': 'error',
+            'message': 'Note non trouvée'
+        }), 404
+    
+    db.session.delete(note)
+    
+    try:
+        db.session.commit()
+        return jsonify({
+            'status': 'success',
+            'message': 'Note supprimée avec succès'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
 
 # Routes pour les matières de terminale
 # PHILO
@@ -842,7 +1188,9 @@ def test_db():
 with app.app_context():
     db.create_all()
     migrate = Migrate(app, db)
+    
 
+scheduler.start()
 # Lancement de l'applications
 if __name__ == '__main__':
     app.run(debug=True)

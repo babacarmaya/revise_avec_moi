@@ -1,0 +1,537 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Styles pour la boîte à outils de notes */
+    .notes-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        overflow: hidden;
+        height: 70vh;
+    }
+
+    .notes-sidebar {
+        width: 30%;
+        background-color: #f8f9fa;
+        border-right: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .sidebar-header {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sidebar-header h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .search-box {
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .notes-list {
+        list-style: none;
+        overflow-y: auto;
+        flex: 1;
+        padding: 0;
+        margin: 0;
+    }
+
+    .note-item {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .note-item:hover {
+        background-color: #f0f0f0;
+    }
+
+    .note-item.active {
+        background-color: #e3f2fd;
+        border-left: 3px solid #3498db;
+    }
+
+    .note-title {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .note-preview {
+        font-size: 0.85rem;
+        color: #95a5a6;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .note-date {
+        font-size: 0.75rem;
+        color: #95a5a6;
+        margin-top: 5px;
+    }
+
+    .notes-editor {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .editor-header {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .editor-header input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .editor-tools {
+        display: flex;
+        gap: 5px;
+    }
+
+    .editor-tools button {
+        background: none;
+        color: #2c3e50;
+        padding: 5px 8px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .editor-tools button:hover {
+        background-color: #f0f0f0;
+    }
+
+    .editor-content {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        outline: none;
+        line-height: 1.6;
+    }
+
+    .editor-footer {
+        padding: 10px 15px;
+        border-top: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #saveStatus {
+        font-size: 0.85rem;
+        color: #95a5a6;
+    }
+
+    .editor-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .editor-actions button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    #saveNote {
+        background-color: #3498db;
+        color: white;
+    }
+
+    #saveNote:hover {
+        background-color: #2980b9;
+    }
+
+    #deleteNote {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    #deleteNote:hover {
+        background-color: #c0392b;
+    }
+
+    /* Styles responsifs */
+    @media (max-width: 768px) {
+        .notes-container {
+            width: 95%;
+        }
+        
+        .notes-sidebar {
+            width: 40%;
+        }
+        
+        .editor-tools {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .notes-container {
+            flex-direction: column;
+            height: auto;
+        }
+        
+        .notes-sidebar {
+            width: 100%;
+            height: 200px;
+            border-right: none;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .notes-editor {
+            height: 400px;
+        }
+    }
+</style>
+
+<h1 class="page-title">NOTES</h1>
+
+<div class="notes-container">
+    <div class="notes-sidebar">
+        <div class="sidebar-header">
+            <h3>Mes notes</h3>
+            <button id="newNote">+ Nouvelle note</button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchNotes" placeholder="Rechercher...">
+        </div>
+        <ul class="notes-list" id="notesList">
+            <!-- Les notes seront ajoutées ici dynamiquement -->
+        </ul>
+    </div>
+    <div class="notes-editor">
+        <div class="editor-header">
+            <input type="text" id="noteTitle" placeholder="Titre de la note">
+            <div class="editor-tools">
+                <button data-command="bold" title="Gras"><i class="fas fa-bold"></i></button>
+                <button data-command="italic" title="Italique"><i class="fas fa-italic"></i></button>
+                <button data-command="underline" title="Souligné"><i class="fas fa-underline"></i></button>
+                <button data-command="insertUnorderedList" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
+                <button data-command="insertOrderedList" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
+            </div>
+        </div>
+        <div class="editor-content" id="noteContent" contenteditable="true"></div>
+        <div class="editor-footer">
+            <span id="saveStatus">Toutes les modifications sont enregistrées</span>
+            <div class="editor-actions">
+                <button id="saveNote"><i class="fas fa-save"></i> Enregistrer</button>
+                <button id="deleteNote"><i class="fas fa-trash"></i> Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Script de notes chargé");
+        
+        // Éléments DOM
+        const notesList = document.getElementById('notesList');
+        const newNoteBtn = document.getElementById('newNote');
+        const noteTitle = document.getElementById('noteTitle');
+        const noteContent = document.getElementById('noteContent');
+        const saveNoteBtn = document.getElementById('saveNote');
+        const deleteNoteBtn = document.getElementById('deleteNote');
+        const searchNotesInput = document.getElementById('searchNotes');
+        const saveStatus = document.getElementById('saveStatus');
+        const editorTools = document.querySelectorAll('.editor-tools button');
+        
+        // Variables
+        let currentNoteId = null;
+        let notes = [];
+        let autoSaveTimer = null;
+        
+        // Charger les notes depuis l'API
+        loadNotes();
+        
+        // Événements
+        newNoteBtn.addEventListener('click', function() {
+            console.log("Création d'une nouvelle note");
+            createNewNote();
+        });
+        
+        saveNoteBtn.addEventListener('click', function() {
+            console.log("Sauvegarde de la note");
+            saveNote();
+        });
+        
+        deleteNoteBtn.addEventListener('click', function() {
+            console.log("Suppression de la note");
+            confirmDeleteNote();
+        });
+        
+        noteContent.addEventListener('input', function() {
+            saveStatus.textContent = "Modifications non enregistrées...";
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(saveNote, 3000);
+        });
+        
+        noteTitle.addEventListener('input', function() {
+            saveStatus.textContent = "Modifications non enregistrées...";
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(saveNote, 3000);
+        });
+        
+        searchNotesInput.addEventListener('input', searchNotes);
+        
+        // Outils d'édition
+        editorTools.forEach(tool => {
+            tool.addEventListener('click', function() {
+                document.execCommand(tool.dataset.command, false, null);
+                noteContent.focus();
+            });
+        });
+        
+        // Fonctions
+        function loadNotes() {
+            fetch('/api/notes')
+                .then(response => response.json())
+                .then(data => {
+                    notes = data;
+                    console.log(`${notes.length} notes chargées`);
+                    renderNotesList();
+                    
+                    // Charger la note la plus récente si aucune n'est sélectionnée
+                    if (!currentNoteId && notes.length > 0) {
+                        loadNote(notes[0].id);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des notes:', error);
+                });
+        }
+        
+        function createNewNote() {
+            const newNoteData = {
+                title: 'Nouvelle note',
+                content: ''
+            };
+            
+            fetch('/api/notes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newNoteData)
+            })
+            .then(response => response.json())
+                            .then(data => {
+                    if (data.status === 'success') {
+                        currentNoteId = data.id;
+                        noteTitle.value = 'Nouvelle note';
+                        noteContent.innerHTML = '';
+                        saveStatus.textContent = "Note créée avec succès";
+                        
+                        // Recharger la liste des notes
+                        loadNotes();
+                    } else {
+                        console.error('Erreur lors de la création de la note:', data.message);
+                        saveStatus.textContent = "Erreur lors de la création de la note";
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la création de la note:', error);
+                    saveStatus.textContent = "Erreur lors de la création de la note";
+                });
+        }
+        
+        function saveNote() {
+            if (!currentNoteId) return;
+            
+            const title = noteTitle.value.trim() || 'Sans titre';
+            const content = noteContent.innerHTML;
+            
+            const noteData = {
+                title: title,
+                content: content
+            };
+            
+            fetch(`/api/notes/${currentNoteId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(noteData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    saveStatus.textContent = "Toutes les modifications sont enregistrées";
+                    
+                    // Mettre à jour la liste des notes
+                    loadNotes();
+                } else {
+                    console.error('Erreur lors de la sauvegarde de la note:', data.message);
+                    saveStatus.textContent = "Erreur lors de la sauvegarde";
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la sauvegarde de la note:', error);
+                saveStatus.textContent = "Erreur lors de la sauvegarde";
+            });
+        }
+        
+        function deleteNote() {
+            if (!currentNoteId) return;
+            
+            fetch(`/api/notes/${currentNoteId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Réinitialiser l'éditeur
+                    currentNoteId = null;
+                    noteTitle.value = '';
+                    noteContent.innerHTML = '';
+                    saveStatus.textContent = "Note supprimée";
+                    
+                    // Recharger la liste des notes
+                    loadNotes();
+                } else {
+                    console.error('Erreur lors de la suppression de la note:', data.message);
+                    saveStatus.textContent = "Erreur lors de la suppression";
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la suppression de la note:', error);
+                saveStatus.textContent = "Erreur lors de la suppression";
+            });
+        }
+        
+        function confirmDeleteNote() {
+            if (!currentNoteId) return;
+            
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette note ?")) {
+                deleteNote();
+            }
+        }
+        
+        function loadNote(id) {
+            const note = notes.find(note => note.id === id);
+            if (note) {
+                currentNoteId = note.id;
+                noteTitle.value = note.title;
+                noteContent.innerHTML = note.content;
+                saveStatus.textContent = "Toutes les modifications sont enregistrées";
+                
+                // Mettre à jour la sélection dans la liste
+                const noteItems = document.querySelectorAll('.note-item');
+                noteItems.forEach(item => {
+                    if (parseInt(item.dataset.id) === id) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        function renderNotesList() {
+            notesList.innerHTML = '';
+            
+            if (notes.length === 0) {
+                const emptyMessage = document.createElement('li');
+                emptyMessage.className = 'note-item empty';
+                emptyMessage.textContent = 'Aucune note. Cliquez sur "Nouvelle note" pour commencer.';
+                notesList.appendChild(emptyMessage);
+                return;
+            }
+            
+            notes.forEach(note => {
+                const noteItem = document.createElement('li');
+                noteItem.className = 'note-item';
+                noteItem.dataset.id = note.id;
+                
+                if (currentNoteId === note.id) {
+                    noteItem.classList.add('active');
+                }
+                
+                // Créer un aperçu du contenu sans les balises HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = note.content;
+                const contentPreview = tempDiv.textContent || tempDiv.innerText;
+                
+                // Formater la date
+                const noteDate = new Date(note.updated_at);
+                const formattedDate = noteDate.toLocaleDateString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                noteItem.innerHTML = `
+                    <div class="note-title">${note.title}</div>
+                    <div class="note-preview">${contentPreview.substring(0, 60)}${contentPreview.length > 60 ? '...' : ''}</div>
+                    <div class="note-date">${formattedDate}</div>
+                `;
+                
+                noteItem.addEventListener('click', function() {
+                    loadNote(note.id);
+                });
+                
+                notesList.appendChild(noteItem);
+            });
+        }
+        
+        function searchNotes() {
+            const searchTerm = searchNotesInput.value.toLowerCase();
+            const noteItems = document.querySelectorAll('.note-item');
+            
+            noteItems.forEach(item => {
+                if (item.classList.contains('empty')) return;
+                
+                const title = item.querySelector('.note-title').textContent.toLowerCase();
+                const preview = item.querySelector('.note-preview').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || preview.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
