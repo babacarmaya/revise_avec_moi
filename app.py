@@ -8,16 +8,11 @@ import os
 from flask_mail import Mail, Message
 from flask_apscheduler import APScheduler
 from dotenv import load_dotenv
-from functools import wraps
-load_dotenv()  # Charger les variables d'environnement depuis le fichier .env
+import pytz
 
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' not in session:
-            return redirect(url_for('login'))
-        return f(*args, **kwargs)
-    return decorated_function
+# Charger les variables d'environnement
+load_dotenv()
+
 # Création de l'application Flask
 app = Flask(__name__)
 
@@ -30,23 +25,25 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('', 'votre_email@gmail.com')
-app.config['MAIL_PASSWORD'] = os.environ.get('', 'votre_mot_de_passe')
-app.config['MAIL_DEFAULT_SENDER'] = ('Edu App', os.environ.get('MAIL_USERNAME', 'votre_email@gmail.com'))
+app.config['MAIL_USERNAME'] = 'babsjr28@gmail.com'
+app.config['MAIL_PASSWORD'] = 'kipl ioor pyko sith'
+app.config['MAIL_DEFAULT_SENDER'] = ('revise avec moi', 'reviseavecmoi@gmail.com')
 
+# Initialisation des extensions
 db = SQLAlchemy(app)
 mail = Mail(app)
 scheduler = APScheduler()
+scheduler.api_enabled = True
 scheduler.init_app(app)
 
-# Création de l'application Flask
-app = Flask(__name__)
-
-# Configuration
-app.config['SECRET_KEY'] = 'votre_clé_secrète'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///education.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+# Protection des routes
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Modèles de base de données
 class User(db.Model):
@@ -64,7 +61,6 @@ class User(db.Model):
     quiz_results = db.relationship('QuizResult', backref='user', lazy=True)
     badges = db.relationship('Badge', secondary='user_badges', backref='users', lazy=True)
     events = db.relationship('Event', backref='user', lazy=True)
-    # Relation avec CalendarEvent définie dans le modèle CalendarEvent
 
 class CalendarEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,11 +74,10 @@ class CalendarEvent(db.Model):
     completed = db.Column(db.Boolean, default=False)
     reminder = db.Column(db.Boolean, default=False)
     reminder_time = db.Column(db.DateTime)
-    reminder_sent = db.Column(db.Boolean, default=False)  # Nouveau champ
+    reminder_sent = db.Column(db.Boolean, default=False)
     
     # Relation avec l'utilisateur
     user = db.relationship('User', backref=db.backref('calendar_events', lazy=True, cascade="all, delete-orphan"))
-
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -145,18 +140,39 @@ class CourseContent(db.Model):
     content = db.Column(db.Text)
     is_locked = db.Column(db.Boolean, default=True)
 
-def send_reminder_email(event, user):
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
+    # Relation avec l'utilisateur
+    user = db.relationship('User', backref=db.backref('notes', lazy=True, cascade="all, delete-orphan"))
+
+# Fonctions utilitaires
+def send_reminder_email(event, user):
+    """Envoie un email de rappel pour un événement"""
     subject = f"Rappel : {event.title}"
     
-    # Formatage de la date et heure
-    start_time = event.start_date.strftime("%d/%m/%Y à %H:%M")
+    # Convertir l'heure UTC stockée en heure locale (Paris)
+    paris_tz = pytz.timezone('Europe/Paris')
+    if event.start_date.tzinfo is None:  # Si la date n'a pas de timezone (naive)
+        start_date_utc = pytz.utc.localize(event.start_date)
+    else:
+        start_date_utc = event.start_date
+    
+    start_date_local = start_date_utc.astimezone(paris_tz)
+    
+    # Formatage de la date et heure en heure locale
+    start_time = start_date_local.strftime("%d/%m/%Y à %H:%M")
     
     # Corps du message
     body = f"""
-    Bonjour {user.prenom} {user.nom},
+    Salem mon frére {user.prenom} {user.nom},
     
-    Ceci est un rappel pour votre événement "{event.title}" qui commence le {start_time}.
+    Ceci est un rappel pour votre événement "{event.title}" qui commence le {start_time} in sha allah .
     
     Description : {event.description or 'Aucune description'}
     
@@ -180,102 +196,59 @@ def send_reminder_email(event, user):
 def check_reminders():
     """Vérifie les rappels à envoyer et envoie les emails"""
     print("Vérification des rappels en cours...")
-    now = datetime.utcnow()
     
-    # Trouver tous les événements avec rappel activé, non envoyé, et dont le temps de rappel est passé
-    upcoming_reminders = CalendarEvent.query.filter(
-        CalendarEvent.reminder == True,
-        CalendarEvent.reminder_sent == False,
-        CalendarEvent.reminder_time <= now,
-        CalendarEvent.start_date > now  # L'événement n'a pas encore commencé
-    ).all()
+    # Vérifier si nous sommes dans un contexte d'application
+    ctx = None
+    if not app.app_context():
+        ctx = app.app_context()
+        ctx.push()
     
-    print(f"Nombre de rappels à envoyer : {len(upcoming_reminders)}")
-    
-    for event in upcoming_reminders:
-        user = User.query.get(event.user_id)
-        if user:
-            success = send_reminder_email(event, user)
-            if success:
-                # Marquer le rappel comme envoyé
-                event.reminder_sent = True
-                db.session.commit()
-                print(f"Rappel envoyé pour l'événement {event.id} à {user.email}")
-
-
+    try:
+        # Utiliser pytz pour une gestion précise des fuseaux horaires
+        paris_tz = pytz.timezone('Europe/Paris')
+        now = datetime.now(paris_tz)
+        
+        print(f"Heure actuelle (Paris): {now}")
+        
+        # Convertir en UTC pour la comparaison avec la base de données
+        now_utc = now.astimezone(pytz.UTC)
+        print(f"Heure actuelle (UTC): {now_utc}")
+        
+        # Trouver tous les événements avec rappel activé, non envoyé, et dont le temps de rappel est passé
+        upcoming_reminders = CalendarEvent.query.filter(
+            CalendarEvent.reminder == True,
+            CalendarEvent.reminder_sent == False,
+            CalendarEvent.reminder_time <= now_utc,
+            CalendarEvent.start_date > now_utc  # L'événement n'a pas encore commencé
+        ).all()
+        
+        print(f"Nombre de rappels à envoyer : {len(upcoming_reminders)}")
+        
+        for event in upcoming_reminders:
+            print(f"Événement trouvé: {event.id}, titre: {event.title}")
+            print(f"  Heure de rappel: {event.reminder_time}")
+            print(f"  Heure de début: {event.start_date}")
+            
+            user = User.query.get(event.user_id)
+            if user:
+                success = send_reminder_email(event, user)
+                if success:
+                    # Marquer le rappel comme envoyé
+                    event.reminder_sent = True
+                    db.session.commit()
+                    print(f"Rappel envoyé pour l'événement {event.id} à {user.email}")
+    finally:
+        # Libérer le contexte si nous l'avons créé
+        if ctx:
+            ctx.pop()
 
 # Planifier la tâche pour qu'elle s'exécute toutes les 5 minutes
-@scheduler.task('interval', id='check_reminders', seconds=300)
+@scheduler.task('interval', id='check_reminders', seconds=2)
 def scheduled_check_reminders():
+    print(f"[{datetime.now()}] Exécution planifiée de la vérification des rappels")
     with app.app_context():
         check_reminders()
-
-
-
-@app.route('/test_email')
-def test_email():
-    try:
-        msg = Message(
-            subject="Test d'email",
-            recipients=[os.environ.get('MAIL_USERNAME')],  # Envoyez à vous-même pour tester
-            body="Ceci est un test d'envoi d'email depuis votre application Flask."
-        )
-        mail.send(msg)
-        return "Email envoyé avec succès!"
-    except Exception as e:
-        return f"Erreur lors de l'envoi de l'email: {str(e)}"
-
-
-@app.route('/check_reminders_now')
-def check_reminders_now():
-    try:
-        check_reminders()
-        return "Vérification des rappels effectuée. Consultez les logs du serveur pour plus de détails."
-    except Exception as e:
-        return f"Erreur lors de la vérification des rappels: {str(e)}"
-    
-@app.route('/create_test_reminder')
-@login_required
-def create_test_reminder():
-        user_id = session['user_id']
-        
-        # Créer un événement qui commence dans 10 minutes
-        start_date = datetime.utcnow() + timedelta(minutes=10)
-        end_date = start_date + timedelta(hours=1)
-        
-        # Le rappel est défini pour 2 minutes à partir de maintenant
-        reminder_time = datetime.utcnow() + timedelta(minutes=2)
-        
-        test_event = CalendarEvent(
-            user_id=user_id,
-            title="Événement de test pour rappel",
-            description="Ceci est un test du système de rappel par email",
-            start_date=start_date,
-            end_date=end_date,
-            color="#3498db",
-            type="other",
-            reminder=True,
-            reminder_time=reminder_time,
-            reminder_sent=False
-        )
-        
-        db.session.add(test_event)
-        
-        try:
-            db.session.commit()
-            return f"Événement de test créé. Un rappel sera envoyé dans environ 2 minutes. ID de l'événement: {test_event.id}"
-        except Exception as e:
-            db.session.rollback()
-            return f"Erreur lors de la création de l'événement de test: {str(e)}"    
-
-# Protection des routes
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' not in session:
-            return redirect(url_for('login'))
-        return f(*args, **kwargs)
-    return decorated_function
+    print(f"[{datetime.now()}] Fin de la vérification planifiée des rappels")
 
 # Routes pour l'authentification
 @app.route('/login', methods=['GET', 'POST'])
@@ -325,6 +298,68 @@ def register():
         flash('aythia niou dem !', 'success')
         return redirect(url_for('login'))
     return render_template('auth/register.html')
+
+
+
+
+@app.route('/debug_event/<int:event_id>')
+@login_required
+def debug_event(event_id):
+    event = CalendarEvent.query.get_or_404(event_id)
+    
+    # Vérifier que l'utilisateur connecté est bien le propriétaire de l'événement
+    if event.user_id != session['user_id']:
+        return "Vous n'êtes pas autorisé à voir cet événement"
+    
+    from datetime import datetime, timezone
+    import pytz
+    
+    # Heure actuelle
+    now_utc = datetime.now(timezone.utc)
+    paris_tz = pytz.timezone('Europe/Paris')
+    now_paris = datetime.now(paris_tz)
+    
+    # Convertir les dates de l'événement en heure de Paris
+    if event.start_date.tzinfo is None:  # Si la date n'a pas de timezone (naive)
+        start_date_utc = pytz.utc.localize(event.start_date)
+        end_date_utc = pytz.utc.localize(event.end_date)
+        reminder_time_utc = pytz.utc.localize(event.reminder_time) if event.reminder_time else None
+    else:
+        start_date_utc = event.start_date
+        end_date_utc = event.end_date
+        reminder_time_utc = event.reminder_time
+    
+    start_date_paris = start_date_utc.astimezone(paris_tz) if start_date_utc else None
+    end_date_paris = end_date_utc.astimezone(paris_tz) if end_date_utc else None
+    reminder_time_paris = reminder_time_utc.astimezone(paris_tz) if reminder_time_utc else None
+    
+    return {
+        "event_id": event.id,
+        "title": event.title,
+        "current_time": {
+            "utc": str(now_utc),
+            "paris": str(now_paris)
+        },
+        "start_date": {
+            "raw": str(event.start_date),
+            "utc": str(start_date_utc),
+            "paris": str(start_date_paris)
+        },
+        "end_date": {
+            "raw": str(event.end_date),
+            "utc": str(end_date_utc),
+            "paris": str(end_date_paris)
+        },
+        "reminder": {
+            "enabled": event.reminder,
+            "sent": event.reminder_sent,
+            "time": {
+                "raw": str(event.reminder_time),
+                "utc": str(reminder_time_utc),
+                "paris": str(reminder_time_paris)
+            } if event.reminder_time else None
+        }
+    }
 
 
 @app.route('/logout')
@@ -379,7 +414,7 @@ def profile():
                          user=user,
                          total_quizzes=total_quizzes,
                          average_score=average_score,
-                         recent_results=recent_results)
+                                                  recent_results=recent_results)
 
 @app.route('/update_profile', methods=['POST'])
 @login_required
@@ -469,7 +504,6 @@ def toolbox():
         return redirect(url_for('login'))
     return render_template('toolbox.html')
 
-
 # Routes API pour le calendrier
 @app.route('/api/events', methods=['GET'])
 @login_required
@@ -513,13 +547,33 @@ def get_events():
 
 @app.route('/api/events', methods=['POST'])
 @login_required
+@app.route('/api/events', methods=['POST'])
+@login_required
 def create_event():
     user_id = session['user_id']
     data = request.json
     
-    # Convertir les dates de chaîne ISO à objets datetime
+    print(f"Données reçues: {data}")
+    
+    # Convertir les dates de chaîne ISO à objets datetime avec timezone
+    from datetime import datetime, timezone
+    
+    # Afficher les dates brutes pour le débogage
+    print(f"Date de début brute: {data['start']}")
+    print(f"Date de fin brute: {data['end']}")
+    
+    # Convertir en objets datetime avec timezone
     start_date = datetime.fromisoformat(data['start'].replace('Z', '+00:00'))
     end_date = datetime.fromisoformat(data['end'].replace('Z', '+00:00'))
+    
+    # S'assurer que les dates sont en UTC pour le stockage
+    if start_date.tzinfo is not None:
+        start_date = start_date.astimezone(timezone.utc)
+    if end_date.tzinfo is not None:
+        end_date = end_date.astimezone(timezone.utc)
+    
+    print(f"Date de début convertie (UTC): {start_date+2}")
+    print(f"Date de fin convertie (UTC): {end_date+2}")
     
     # Créer un nouvel événement
     new_event = CalendarEvent(
@@ -531,7 +585,7 @@ def create_event():
         color=data.get('color', '#3498db'),
         type=data.get('type', 'other'),
         reminder=data.get('reminder', False),
-        reminder_sent=False  # Initialiser à False
+        reminder_sent=False
     )
     
     # Ajouter un rappel si demandé
@@ -539,6 +593,7 @@ def create_event():
         reminder_minutes = int(data.get('reminder_minutes', 30))
         reminder_time = start_date - timedelta(minutes=reminder_minutes)
         new_event.reminder_time = reminder_time
+        print(f"Rappel configuré pour: {reminder_time} ({reminder_minutes} minutes avant le début)")
     
     db.session.add(new_event)
     
@@ -555,6 +610,11 @@ def create_event():
             'status': 'error',
             'message': str(e)
         }), 500
+
+
+
+
+
 
 
 @app.route('/api/events/<int:event_id>', methods=['PUT'])
@@ -589,6 +649,8 @@ def update_event(event_id):
         event.completed = data['completed']
     if 'reminder' in data:
         event.reminder = data['reminder']
+        # Réinitialiser le statut d'envoi si le rappel est modifié
+        event.reminder_sent = False
         
         if data['reminder']:
             reminder_minutes = int(data.get('reminder_minutes', 30))
@@ -670,19 +732,6 @@ def complete_event(event_id):
             'message': str(e)
         }), 500
 
-
-
-
-class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
-    # Relation avec l'utilisateur
-    user = db.relationship('User', backref=db.backref('notes', lazy=True, cascade="all, delete-orphan"))
 # Routes API pour les notes
 @app.route('/api/notes', methods=['GET'])
 @login_required
@@ -730,13 +779,6 @@ def create_note():
             'message': str(e)
         }), 500
 
-
-
-
-#note            
-
-
-
 @app.route('/api/notes/<int:note_id>', methods=['PUT'])
 @login_required
 def update_note(note_id):
@@ -767,58 +809,6 @@ def update_note(note_id):
             'message': str(e)
         }), 500
 
-
-
-
-
-from flask_mail import Mail, Message
-
-# Configuration de Flask-Mail
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # ou votre serveur SMTP
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'babsjr28@gmail.com'  # à remplacer
-app.config['MAIL_PASSWORD'] = 'kipl ioor pyko sith'  # à remplacer
-app.config['MAIL_DEFAULT_SENDER'] = ('revise avec moi', 'babsjr28@gmail.com')
-
-mail = Mail(app)
-def send_reminder_email(event, user):
-    """Envoie un email de rappel pour un événement"""
-    subject = f"Rappel : {event.title}"
-    
-    # Formatage de la date et heure
-    start_time = event.start_date.strftime("%d/%m/%Y à %H:%M")
-    
-    # Corps du message
-    body = f"""
-    Bonjour {user.prenom} {user.nom},
-    
-    Ceci est un rappel pour votre événement "{event.title}" qui commence le {start_time}.
-    
-    Description : {event.description or 'Aucune description'}
-    
-    Bonne journée !
-    """
-    
-    msg = Message(
-        subject=subject,
-        recipients=[user.email],
-        body=body
-    )
-    
-    try:
-        mail.send(msg)
-        return True
-    except Exception as e:
-        print(f"Erreur lors de l'envoi de l'email: {str(e)}")
-        return False
-    
-    
-
-
-
-
-
 @app.route('/api/notes/<int:note_id>', methods=['DELETE'])
 @login_required
 def delete_note(note_id):
@@ -847,13 +837,144 @@ def delete_note(note_id):
             'message': str(e)
         }), 500
 
+# Routes de test pour le système de rappel
+@app.route('/test_email')
+def test_email():
+    try:
+        msg = Message(
+            subject="Test d'email",
+            recipients=[os.environ.get('MAIL_USERNAME', 'babsjr28@gmail.com')],
+            body="Ceci est un test d'envoi d'email depuis votre application Flask."
+        )
+        mail.send(msg)
+        return "Email envoyé avec succès!"
+    except Exception as e:
+        return f"Erreur lors de l'envoi de l'email: {str(e)}"
+
+@app.route('/check_reminders_now')
+def check_reminders_now():
+    try:
+        check_reminders()
+        return "Vérification des rappels effectuée. Consultez les logs du serveur pour plus de détails."
+    except Exception as e:
+        return f"Erreur lors de la vérification des rappels: {str(e)}"
+
+@app.route('/create_test_reminder')
+@login_required
+def create_test_reminder():
+    user_id = session['user_id']
+    
+    # Créer un événement qui commence dans 10 minutes
+    start_date = datetime.utcnow() + timedelta(minutes=10)
+    end_date = start_date + timedelta(hours=1)
+    
+    # Le rappel est défini pour 2 minutes à partir de maintenant
+    reminder_time = datetime.utcnow() + timedelta(minutes=2)
+    
+    test_event = CalendarEvent(
+        user_id=user_id,
+        title="Événement de test pour rappel",
+        description="Ceci est un test du système de rappel par email",
+        start_date=start_date,
+        end_date=end_date,
+        color="#3498db",
+        type="other",
+        reminder=True,
+        reminder_time=reminder_time,
+        reminder_sent=False
+    )
+    
+    db.session.add(test_event)
+    
+    try:
+        db.session.commit()
+        return f"Événement de test créé. Un rappel sera envoyé dans environ 2 minutes. ID de l'événement: {test_event.id}"
+    except Exception as e:
+        db.session.rollback()
+        return f"Erreur lors de la création de l'événement de test: {str(e)}"
+
+@app.route('/create_precise_test_reminder')
+@login_required
+def create_precise_test_reminder():
+    user_id = session['user_id']
+    
+    # Obtenir l'heure actuelle
+    from datetime import timezone
+    now = datetime.now(timezone.utc)
+    
+    # Créer un événement qui commence dans exactement 10 minutes
+    start_date = now + timedelta(minutes=10)
+    end_date = start_date + timedelta(hours=1)
+    
+    # Le rappel est défini pour exactement 1 minute à partir de maintenant
+    reminder_time = now + timedelta(minutes=1)
+    
+    print(f"Heure actuelle: {now}")
+    print(f"Heure de début: {start_date}")
+    print(f"Heure de rappel: {reminder_time}")
+    
+    test_event = CalendarEvent(
+        user_id=user_id,
+        title="Test précis de rappel",
+        description="Ceci est un test précis du système de rappel par email",
+        start_date=start_date,
+        end_date=end_date,
+        color="#3498db",
+        type="other",
+        reminder=True,
+        reminder_time=reminder_time,
+        reminder_sent=False
+    )
+    
+    db.session.add(test_event)
+    
+    try:
+        db.session.commit()
+        return f"""
+        Événement de test créé avec des heures précises:
+        - ID: {test_event.id}
+        - Heure actuelle: {now}
+        - Heure de début: {start_date} (dans 10 minutes)
+        - Heure de rappel: {reminder_time} (dans 1 minute)
+        
+        Un rappel devrait être envoyé dans environ 1 minute.
+        """
+    except Exception as e:
+        db.session.rollback()
+        return f"Erreur lors de la création de l'événement de test: {str(e)}"
+    
+
+
+
+
+
+    
+
+@app.route('/scheduler_status')
+def scheduler_status():
+    jobs = []
+    for job in scheduler.get_jobs():
+        jobs.append({
+            'id': job.id,
+            'next_run_time': str(job.next_run_time),
+            'trigger': str(job.trigger)
+        })
+    
+    return {
+        'running': scheduler.running,
+        'jobs': jobs
+    }
+
+
+
+
 
 # Routes pour les matières de terminale
 # PHILO
 @app.route('/cours/philo/terminale')
 @login_required
 def philo_terminale():
-    return render_template('cours/philo/philo_terminal.html')  # Assurez-vous que ce chemin est correct
+    return render_template('cours/philo/philo_terminal.html')
 
 @app.route('/cours/philo/chapitre1')
 @login_required
@@ -1073,8 +1194,6 @@ def anglais_premiere():
 def anglais_seconde():
     return render_template('cours/anglais/anglais_seconde.html')
 
-
-
 # SVT
 @app.route('/cours/svt/terminale')
 @login_required
@@ -1188,10 +1307,10 @@ def test_db():
 with app.app_context():
     db.create_all()
     migrate = Migrate(app, db)
-    
 
+# Démarrer le planificateur
 scheduler.start()
-# Lancement de l'applications
-if __name__ == '__main__':
-    app.run(debug=True)
 
+# Lancement de l'application
+if __name__ == '__main__':
+    app.run(debug=False)  # Désactiver le mode debug pour tester

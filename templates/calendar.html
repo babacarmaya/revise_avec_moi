@@ -810,18 +810,22 @@
         
         // Fonction pour ouvrir la modal d'édition d'événement
         function openEditEventModal(event) {
-            modalTitle.textContent = 'Modifier l\'événement';
-            eventId.value = event.id;
-            eventTitle.value = event.title;
-            eventDescription.value = event.extendedProps.description || '';
-            
-            const startDate = new Date(event.start);
-            const endDate = event.end ? new Date(event.end) : new Date(startDate);
-            
-            eventStartDate.value = formatDate(startDate);
-            eventStartTime.value = formatTime(startDate);
-            eventEndDate.value = formatDate(endDate);
-            eventEndTime.value = formatTime(endDate);
+    modalTitle.textContent = 'Modifier l\'événement';
+    eventId.value = event.id;
+    eventTitle.value = event.title;
+    eventDescription.value = event.extendedProps.description || '';
+    
+    // Déboguer les dates reçues
+    debugDate('Date de début reçue', event.start);
+    debugDate('Date de fin reçue', event.end || new Date(event.start.getTime() + 3600000));
+    
+    const startDate = event.start;
+    const endDate = event.end || new Date(event.start.getTime() + 3600000);
+    
+    eventStartDate.value = formatDate(startDate);
+    eventStartTime.value = formatTime(startDate);
+    eventEndDate.value = formatDate(endDate);
+    eventEndTime.value = formatTime(endDate);
             
             eventType.value = event.extendedProps.type || 'other';
             eventColor.value = event.backgroundColor || '#3498db';
@@ -1086,6 +1090,41 @@
                 calendar.refetchEvents();
             });
         }
+
+
+        // Fonction pour formater une date en tenant compte du fuseau horaire
+function formatLocalDateTime(isoString) {
+    const date = new Date(isoString);
+    return {
+        date: date.toLocaleDateString(),
+        time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+}
+
+// Utiliser cette fonction lors de l'affichage des événements
+function showReminderNotification(event) {
+    const eventStart = new Date(event.start);
+    const now = new Date();
+    const diffMinutes = Math.round((eventStart - now) / 60000);
+    
+    const formattedTime = formatLocalDateTime(event.start);
+    
+    reminderMessage.textContent = `${event.title}`;
+    
+    if (diffMinutes > 0) {
+        reminderTimeInfo.textContent = `Commence dans ${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} (${formattedTime.time})`;
+    } else if (diffMinutes === 0) {
+        reminderTimeInfo.textContent = `Commence maintenant (${formattedTime.time})`;
+    } else {
+        reminderTimeInfo.textContent = `A commencé il y a ${Math.abs(diffMinutes)} minute${Math.abs(diffMinutes) > 1 ? 's' : ''} (${formattedTime.time})`;
+    }
+    
+    reminderNotification.style.display = 'block';
+    
+    // Stocker l'ID de l'événement pour le snooze
+    snoozeReminder.dataset.eventId = event.id;
+}
+
         
         // Fonction pour supprimer un événement
         function deleteEvent(eventId) {
@@ -1174,37 +1213,77 @@
         
         // Soumettre le formulaire
         eventForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Récupérer les données du formulaire
-            const id = eventId.value;
-            const title = eventTitle.value;
-            const description = eventDescription.value;
-            
-            // Construire les dates de début et de fin
-            const startDateTime = new Date(`${eventStartDate.value}T${eventStartTime.value}`);
-            const endDateTime = new Date(`${eventEndDate.value}T${eventEndTime.value}`);
-            
-            // Vérifier que la date de fin est après la date de début
-            if (endDateTime <= startDateTime) {
-                alert('La date de fin doit être après la date de début');
-                return;
-            }
-            
-            const eventData = {
-                title: title,
-                description: description,
-                start: startDateTime.toISOString(),
-                end: endDateTime.toISOString(),
-                color: eventColor.value,
-                type: eventType.value,
-                reminder: eventReminder.checked
-            };
-            
-            // Ajouter les informations de rappel si activé
-            if (eventReminder.checked) {
-                eventData.reminder_minutes = parseInt(reminderTime.value);
-            }
+    e.preventDefault();
+    
+
+const calendar = new FullCalendar.Calendar(calendarEl, {
+    // Autres options...
+    timeZone: 'local', // Utiliser le fuseau horaire local
+    eventTimeFormat: {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    },
+    // Reste de la configuration...
+});
+
+
+// Fonction de débogage des dates
+function debugDate(label, date) {
+    console.log(`${label}:`);
+    console.log(`  - Date locale: ${date}`);
+    console.log(`  - ISO: ${date.toISOString()}`);
+    console.log(`  - Fuseau horaire local: ${date.getTimezoneOffset() / -60}h`);
+}
+
+// Utiliser cette fonction lors de la création/édition d'événements
+function createEvent(eventData) {
+    // Déboguer les dates
+    debugDate('Date de début envoyée', new Date(eventData.start));
+    debugDate('Date de fin envoyée', new Date(eventData.end));
+    
+    // Reste du code...
+}
+
+
+
+    // Récupérer les données du formulaire
+    const id = eventId.value;
+    const title = eventTitle.value;
+    const description = eventDescription.value;
+    
+    // Construire les dates de début et de fin avec le fuseau horaire local
+    const startDateTime = new Date(`${eventStartDate.value}T${eventStartTime.value}`);
+    const endDateTime = new Date(`${eventEndDate.value}T${eventEndTime.value}`);
+    
+    // Vérifier que la date de fin est après la date de début
+    if (endDateTime <= startDateTime) {
+        alert('La date de fin doit être après la date de début');
+        return;
+    }
+    
+    // Ajouter l'information de fuseau horaire aux dates ISO
+    // Cela garantit que le serveur sait que ces dates sont dans le fuseau horaire local
+    const startISO = startDateTime.toISOString();
+    const endISO = endDateTime.toISOString();
+    
+    console.log('Date de début locale:', startDateTime);
+    console.log('Date de début ISO:', startISO);
+    
+    const eventData = {
+        title: title,
+        description: description,
+        start: startISO,
+        end: endISO,
+        color: eventColor.value,
+        type: eventType.value,
+        reminder: eventReminder.checked
+    };
+    
+    // Ajouter les informations de rappel si activé
+    if (eventReminder.checked) {
+        eventData.reminder_minutes = parseInt(reminderTime.value);
+    }
             
             if (id) {
                 // Mettre à jour un événement existant
