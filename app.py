@@ -27,7 +27,7 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'babsjr28@gmail.com'
 app.config['MAIL_PASSWORD'] = 'kipl ioor pyko sith'
-app.config['MAIL_DEFAULT_SENDER'] = ('revise avec moi', 'reviseavecmoi@gmail.com')
+app.config['MAIL_DEFAULT_SENDER'] = ('revise avec moi', 'babsjr28@gmail.com')
 
 # Initialisation des extensions
 db = SQLAlchemy(app)
@@ -545,8 +545,7 @@ def get_events():
     
     return jsonify(events_data)
 
-@app.route('/api/events', methods=['POST'])
-@login_required
+
 @app.route('/api/events', methods=['POST'])
 @login_required
 def create_event():

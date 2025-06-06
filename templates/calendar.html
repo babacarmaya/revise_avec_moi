@@ -810,22 +810,18 @@
         
         // Fonction pour ouvrir la modal d'édition d'événement
         function openEditEventModal(event) {
-    modalTitle.textContent = 'Modifier l\'événement';
-    eventId.value = event.id;
-    eventTitle.value = event.title;
-    eventDescription.value = event.extendedProps.description || '';
-    
-    // Déboguer les dates reçues
-    debugDate('Date de début reçue', event.start);
-    debugDate('Date de fin reçue', event.end || new Date(event.start.getTime() + 3600000));
-    
-    const startDate = event.start;
-    const endDate = event.end || new Date(event.start.getTime() + 3600000);
-    
-    eventStartDate.value = formatDate(startDate);
-    eventStartTime.value = formatTime(startDate);
-    eventEndDate.value = formatDate(endDate);
-    eventEndTime.value = formatTime(endDate);
+            modalTitle.textContent = 'Modifier l\'événement';
+            eventId.value = event.id;
+            eventTitle.value = event.title;
+            eventDescription.value = event.extendedProps.description || '';
+            
+            const startDate = new Date(event.start);
+            const endDate = event.end ? new Date(event.end) : new Date(startDate);
+            
+            eventStartDate.value = formatDate(startDate);
+            eventStartTime.value = formatTime(startDate);
+            eventEndDate.value = formatDate(endDate);
+            eventEndTime.value = formatTime(endDate);
             
             eventType.value = event.extendedProps.type || 'other';
             eventColor.value = event.backgroundColor || '#3498db';
@@ -1228,23 +1224,7 @@ const calendar = new FullCalendar.Calendar(calendarEl, {
 });
 
 
-// Fonction de débogage des dates
-function debugDate(label, date) {
-    console.log(`${label}:`);
-    console.log(`  - Date locale: ${date}`);
-    console.log(`  - ISO: ${date.toISOString()}`);
-    console.log(`  - Fuseau horaire local: ${date.getTimezoneOffset() / -60}h`);
-}
-
-// Utiliser cette fonction lors de la création/édition d'événements
-function createEvent(eventData) {
-    // Déboguer les dates
-    debugDate('Date de début envoyée', new Date(eventData.start));
-    debugDate('Date de fin envoyée', new Date(eventData.end));
-    
-    // Reste du code...
-}
-
+debugDate('Date de début envoyée', new Date(eventData.start));
 
 
     // Récupérer les données du formulaire
