@@ -206,7 +206,7 @@
 
     .calendar-header h1 {
         margin: 0;
-        color: #white;
+        color: #333;
     }
 
     .calendar-actions {
@@ -335,9 +335,9 @@
     }
     
     .fc .fc-toolbar-title {
-    color: #3498db; /* Couleur bleue qui correspond à votre thème */
-    font-weight: bold;
-}
+        color: #3498db; /* Couleur bleue qui correspond à votre thème */
+        font-weight: bold;
+    }
 
     .event-type input {
         margin-right: 10px;
@@ -426,7 +426,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 20px;
-        border-bottom: 1px solid #white;
+        border-bottom: 1px solid #eee;
     }
 
     .modal-header h2 {
@@ -466,7 +466,7 @@
     .form-group label {
         display: block;
         margin-bottom: 5px;
-        font-weight: bold;
+                font-weight: bold;
         color: #555;
     }
 
@@ -680,8 +680,10 @@
     }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<!-- Dépendances FullCalendar -->
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/fr.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -718,6 +720,14 @@
         const reminderMessage = document.getElementById('reminder-message');
         const reminderTimeInfo = document.getElementById('reminder-time-info');
         
+        // Fonction de débogage des dates
+        function debugDate(label, date) {
+            console.log(`${label}:`);
+            console.log(`  - Date locale: ${date}`);
+            console.log(`  - ISO: ${date.toISOString()}`);
+            console.log(`  - Fuseau horaire local: ${date.getTimezoneOffset() / -60}h`);
+        }
+        
         // Initialiser le calendrier
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
@@ -725,7 +735,6 @@
                 left: 'prev,next today',
                 center: 'title',
                 right: ''
-                
             },
             locale: 'fr',
             firstDay: 1, // Lundi comme premier jour de la semaine
@@ -734,6 +743,12 @@
             selectMirror: true,
             editable: true,
             dayMaxEvents: true,
+            timeZone: 'local', // Utiliser le fuseau horaire local
+            eventTimeFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            },
             events: '/api/events',
             select: function(info) {
                 // Ouvrir la modal pour ajouter un événement
@@ -892,6 +907,7 @@
                     events.sort((a, b) => new Date(a.start) - new Date(b.start));
                     
                     // Limiter à 5 événements
+                                        // Limiter à 5 événements
                     const limitedEvents = events.slice(0, 5);
                     
                     // Générer le HTML
@@ -976,20 +992,31 @@
                 });
         }
         
+        // Fonction pour formater une date en tenant compte du fuseau horaire
+        function formatLocalDateTime(isoString) {
+            const date = new Date(isoString);
+            return {
+                date: date.toLocaleDateString(),
+                time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+        }
+        
         // Fonction pour afficher une notification de rappel
         function showReminderNotification(event) {
             const eventStart = new Date(event.start);
             const now = new Date();
             const diffMinutes = Math.round((eventStart - now) / 60000);
             
+            const formattedTime = formatLocalDateTime(event.start);
+            
             reminderMessage.textContent = `${event.title}`;
             
             if (diffMinutes > 0) {
-                reminderTimeInfo.textContent = `Commence dans ${diffMinutes} minute${diffMinutes > 1 ? 's' : ''}`;
+                reminderTimeInfo.textContent = `Commence dans ${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} (${formattedTime.time})`;
             } else if (diffMinutes === 0) {
-                reminderTimeInfo.textContent = `Commence maintenant`;
+                reminderTimeInfo.textContent = `Commence maintenant (${formattedTime.time})`;
             } else {
-                reminderTimeInfo.textContent = `A commencé il y a ${Math.abs(diffMinutes)} minute${Math.abs(diffMinutes) > 1 ? 's' : ''}`;
+                reminderTimeInfo.textContent = `A commencé il y a ${Math.abs(diffMinutes)} minute${Math.abs(diffMinutes) > 1 ? 's' : ''} (${formattedTime.time})`;
             }
             
             reminderNotification.style.display = 'block';
@@ -1086,41 +1113,6 @@
                 calendar.refetchEvents();
             });
         }
-
-
-        // Fonction pour formater une date en tenant compte du fuseau horaire
-function formatLocalDateTime(isoString) {
-    const date = new Date(isoString);
-    return {
-        date: date.toLocaleDateString(),
-        time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-}
-
-// Utiliser cette fonction lors de l'affichage des événements
-function showReminderNotification(event) {
-    const eventStart = new Date(event.start);
-    const now = new Date();
-    const diffMinutes = Math.round((eventStart - now) / 60000);
-    
-    const formattedTime = formatLocalDateTime(event.start);
-    
-    reminderMessage.textContent = `${event.title}`;
-    
-    if (diffMinutes > 0) {
-        reminderTimeInfo.textContent = `Commence dans ${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} (${formattedTime.time})`;
-    } else if (diffMinutes === 0) {
-        reminderTimeInfo.textContent = `Commence maintenant (${formattedTime.time})`;
-    } else {
-        reminderTimeInfo.textContent = `A commencé il y a ${Math.abs(diffMinutes)} minute${Math.abs(diffMinutes) > 1 ? 's' : ''} (${formattedTime.time})`;
-    }
-    
-    reminderNotification.style.display = 'block';
-    
-    // Stocker l'ID de l'événement pour le snooze
-    snoozeReminder.dataset.eventId = event.id;
-}
-
         
         // Fonction pour supprimer un événement
         function deleteEvent(eventId) {
@@ -1209,61 +1201,44 @@ function showReminderNotification(event) {
         
         // Soumettre le formulaire
         eventForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-
-const calendar = new FullCalendar.Calendar(calendarEl, {
-    // Autres options...
-    timeZone: 'local', // Utiliser le fuseau horaire local
-    eventTimeFormat: {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    },
-    // Reste de la configuration...
-});
-
-
-debugDate('Date de début envoyée', new Date(eventData.start));
-
-
-    // Récupérer les données du formulaire
-    const id = eventId.value;
-    const title = eventTitle.value;
-    const description = eventDescription.value;
-    
-    // Construire les dates de début et de fin avec le fuseau horaire local
-    const startDateTime = new Date(`${eventStartDate.value}T${eventStartTime.value}`);
-    const endDateTime = new Date(`${eventEndDate.value}T${eventEndTime.value}`);
-    
-    // Vérifier que la date de fin est après la date de début
-    if (endDateTime <= startDateTime) {
-        alert('La date de fin doit être après la date de début');
-        return;
-    }
-    
-    // Ajouter l'information de fuseau horaire aux dates ISO
-    // Cela garantit que le serveur sait que ces dates sont dans le fuseau horaire local
-    const startISO = startDateTime.toISOString();
-    const endISO = endDateTime.toISOString();
-    
-    console.log('Date de début locale:', startDateTime);
-    console.log('Date de début ISO:', startISO);
-    
-    const eventData = {
-        title: title,
-        description: description,
-        start: startISO,
-        end: endISO,
-        color: eventColor.value,
-        type: eventType.value,
-        reminder: eventReminder.checked
-    };
-    
-    // Ajouter les informations de rappel si activé
-    if (eventReminder.checked) {
-        eventData.reminder_minutes = parseInt(reminderTime.value);
-    }
+            e.preventDefault();
+            
+            // Récupérer les données du formulaire
+            const id = eventId.value;
+            const title = eventTitle.value;
+            const description = eventDescription.value;
+            
+            // Construire les dates de début et de fin avec le fuseau horaire local
+            const startDateTime = new Date(`${eventStartDate.value}T${eventStartTime.value}`);
+            const endDateTime = new Date(`${eventEndDate.value}T${eventEndTime.value}`);
+            
+            // V��rifier que la date de fin est après la date de début
+            if (endDateTime <= startDateTime) {
+                alert('La date de fin doit être après la date de début');
+                return;
+            }
+            
+            // Ajouter l'information de fuseau horaire aux dates ISO
+            const startISO = startDateTime.toISOString();
+            const endISO = endDateTime.toISOString();
+            
+            console.log('Date de début locale:', startDateTime);
+            console.log('Date de début ISO:', startISO);
+            
+            const eventData = {
+                title: title,
+                description: description,
+                start: startISO,
+                end: endISO,
+                color: eventColor.value,
+                type: eventType.value,
+                reminder: eventReminder.checked
+            };
+            
+            // Ajouter les informations de rappel si activé
+            if (eventReminder.checked) {
+                eventData.reminder_minutes = parseInt(reminderTime.value);
+            }
             
             if (id) {
                 // Mettre à jour un événement existant
@@ -1280,7 +1255,7 @@ debugDate('Date de début envoyée', new Date(eventData.start));
                         // Rafraîchir le calendrier
                         calendar.refetchEvents();
                         
-                        // Mettre à jour les événements à venir et les statistiques
+                        // Mettre à jour les év��nements à venir et les statistiques
                         loadUpcomingEvents();
                         updateStatistics();
                         
@@ -1331,6 +1306,7 @@ debugDate('Date de début envoyée', new Date(eventData.start));
         });
         
         // Filtrer les types d'événements
+                // Filtrer les types d'événements
         typeFilters.forEach(filter => {
             filter.addEventListener('change', function() {
                 const checkedTypes = Array.from(typeFilters)
@@ -1401,5 +1377,93 @@ debugDate('Date de début envoyée', new Date(eventData.start));
         });
     });
 </script>
-{% endblock %}
 
+<!-- Script de débogage -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Page chargée, vérification du calendrier...");
+        
+        // Vérifier si le calendrier est correctement initialisé
+        const calendarEl = document.getElementById('calendar');
+        if (!calendarEl) {
+            console.error("Élément #calendar non trouvé dans le DOM");
+        } else {
+            console.log("Élément #calendar trouvé");
+        }
+        
+        // Vérifier les dépendances FullCalendar
+        if (typeof FullCalendar === 'undefined') {
+            console.error("La bibliothèque FullCalendar n'est pas chargée");
+        } else {
+            console.log("FullCalendar est disponible, version:", FullCalendar.version);
+        }
+        
+        // Tester l'API d'événements
+        fetch('/api/events')
+            .then(response => {
+                console.log("Réponse de l'API d'événements:", response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Événements récupérés:", data.length);
+                console.log("Premier événement (si disponible):", data[0] || "Aucun événement");
+            })
+            .catch(error => {
+                console.error("Erreur lors de la récupération des événements:", error);
+            });
+        
+        // Créer un bouton de test pour ajouter un événement
+        const testButton = document.createElement('button');
+        testButton.textContent = 'Créer événement test';
+        testButton.style.position = 'fixed';
+        testButton.style.bottom = '20px';
+        testButton.style.right = '20px';
+        testButton.style.zIndex = '9999';
+        testButton.style.padding = '10px';
+        testButton.style.backgroundColor = '#3498db';
+        testButton.style.color = 'white';
+        testButton.style.border = 'none';
+        testButton.style.borderRadius = '5px';
+        testButton.style.cursor = 'pointer';
+        
+        testButton.addEventListener('click', function() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const eventData = {
+                title: "Événement test " + now.toLocaleTimeString(),
+                description: "Ceci est un événement de test",
+                start: now.toISOString(),
+                end: tomorrow.toISOString(),
+                color: "#3498db",
+                type: "cours",
+                reminder: false
+            };
+            
+            fetch('/api/events', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(eventData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert("Événement créé avec succès!");
+                    location.reload();
+                } else {
+                    alert(`Erreur: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la création de l\'événement');
+            });
+        });
+        
+        document.body.appendChild(testButton);
+    });
+</script>
+{% endblock %}

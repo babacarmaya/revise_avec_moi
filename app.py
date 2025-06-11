@@ -2,13 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from flask_migrate import Migrate
 import os
+import pytz
 from flask_mail import Mail, Message
 from flask_apscheduler import APScheduler
 from dotenv import load_dotenv
-import pytz
 
 # Charger les variables d'environnement
 load_dotenv()
@@ -243,7 +243,7 @@ def check_reminders():
             ctx.pop()
 
 # Planifier la tâche pour qu'elle s'exécute toutes les 5 minutes
-@scheduler.task('interval', id='check_reminders', seconds=2)
+@scheduler.task('interval', id='check_reminders', seconds=30)
 def scheduled_check_reminders():
     print(f"[{datetime.now()}] Exécution planifiée de la vérification des rappels")
     with app.app_context():
@@ -299,9 +299,6 @@ def register():
         return redirect(url_for('login'))
     return render_template('auth/register.html')
 
-
-
-
 @app.route('/debug_event/<int:event_id>')
 @login_required
 def debug_event(event_id):
@@ -310,9 +307,6 @@ def debug_event(event_id):
     # Vérifier que l'utilisateur connecté est bien le propriétaire de l'événement
     if event.user_id != session['user_id']:
         return "Vous n'êtes pas autorisé à voir cet événement"
-    
-    from datetime import datetime, timezone
-    import pytz
     
     # Heure actuelle
     now_utc = datetime.now(timezone.utc)
@@ -360,7 +354,6 @@ def debug_event(event_id):
             } if event.reminder_time else None
         }
     }
-
 
 @app.route('/logout')
 def logout():
@@ -414,7 +407,7 @@ def profile():
                          user=user,
                          total_quizzes=total_quizzes,
                          average_score=average_score,
-                                                  recent_results=recent_results)
+                         recent_results=recent_results)
 
 @app.route('/update_profile', methods=['POST'])
 @login_required
@@ -512,223 +505,349 @@ def get_events():
     start = request.args.get('start', '')
     end = request.args.get('end', '')
     
-    # Convertir les dates de chaîne ISO à objets datetime
-    if start and end:
-        start_date = datetime.fromisoformat(start.replace('Z', '+00:00'))
-        end_date = datetime.fromisoformat(end.replace('Z', '+00:00'))
+    try:
+        # Convertir les dates de chaîne ISO à objets datetime
+        if start and end:
+            start_date = datetime.fromisoformat(start.replace('Z', '+00:00'))
+            end_date = datetime.fromisoformat(end.replace('Z', '+00:00'))
+            
+            # Convertir en UTC pour la comparaison avec la base de données
+            if start_date.tzinfo is not None:
+                start_date = start_date.astimezone(pytz.UTC)
+            if end_date.tzinfo is not None:
+                end_date = end_date.astimezone(pytz.UTC)
+            
+            events = CalendarEvent.query.filter(
+                CalendarEvent.user_id == user_id,
+                CalendarEvent.start_date >= start_date,
+                CalendarEvent.end_date <= end_date
+            ).all()
+        else:
+            events = CalendarEvent.query.filter_by(user_id=user_id).all()
         
-        events = CalendarEvent.query.filter(
-            CalendarEvent.user_id == user_id,
-            CalendarEvent.start_date >= start_date,
-            CalendarEvent.end_date <= end_date
-        ).all()
-    else:
-        events = CalendarEvent.query.filter_by(user_id=user_id).all()
-    
-    # Formater les événements pour FullCalendar
-    events_data = []
-    for event in events:
-        events_data.append({
-            'id': event.id,
-            'title': event.title,
-            'description': event.description,
-            'start': event.start_date.isoformat(),
-            'end': event.end_date.isoformat(),
-            'color': event.color,
-            'extendedProps': {
-                'type': event.type,
-                'completed': event.completed,
-                'reminder': event.reminder,
-                'reminder_time': event.reminder_time.isoformat() if event.reminder_time else None
-            }
-        })
-    
-    return jsonify(events_data)
-
+        # Formater les événements pour FullCalendar
+        events_data = []
+        for event in events:
+            # Convertir les dates UTC en ISO pour le client
+            start_iso = event.start_date.isoformat() if event.start_date.tzinfo else pytz.UTC.localize(event.start_date).isoformat()
+            end_iso = event.end_date.isoformat() if event.end_date.tzinfo else pytz.UTC.localize(event.end_date).isoformat()
+            
+            reminder_time_iso = None
+            if event.reminder_time:
+                reminder_time_iso = event.reminder_time.isoformat() if event.reminder_time.tzinfo else pytz.UTC.localize(event.reminder_time).isoformat()
+            
+            events_data.append({
+                'id': event.id,
+                'title': event.title,
+                'description': event.description,
+                'start': start_iso,
+                'end': end_iso,
+                'color': event.color,
+                'extendedProps': {
+                    'type': event.type,
+                    'completed': event.completed,
+                    'reminder': event.reminder,
+                    'reminder_time': reminder_time_iso
+                }
+            })
+        
+        return jsonify(events_data)
+    except Exception as e:
+        print(f"Erreur lors de la récupération des événements: {str(e)}")
+        return jsonify([])
 
 @app.route('/api/events', methods=['POST'])
 @login_required
 def create_event():
-    user_id = session['user_id']
-    data = request.json
-    
-    print(f"Données reçues: {data}")
-    
-    # Convertir les dates de chaîne ISO à objets datetime avec timezone
-    from datetime import datetime, timezone
-    
-    # Afficher les dates brutes pour le débogage
-    print(f"Date de début brute: {data['start']}")
-    print(f"Date de fin brute: {data['end']}")
-    
-    # Convertir en objets datetime avec timezone
-    start_date = datetime.fromisoformat(data['start'].replace('Z', '+00:00'))
-    end_date = datetime.fromisoformat(data['end'].replace('Z', '+00:00'))
-    
-    # S'assurer que les dates sont en UTC pour le stockage
-    if start_date.tzinfo is not None:
-        start_date = start_date.astimezone(timezone.utc)
-    if end_date.tzinfo is not None:
-        end_date = end_date.astimezone(timezone.utc)
-    
-    print(f"Date de début convertie (UTC): {start_date+2}")
-    print(f"Date de fin convertie (UTC): {end_date+2}")
-    
-    # Créer un nouvel événement
-    new_event = CalendarEvent(
-        user_id=user_id,
-        title=data['title'],
-        description=data.get('description', ''),
-        start_date=start_date,
-        end_date=end_date,
-        color=data.get('color', '#3498db'),
-        type=data.get('type', 'other'),
-        reminder=data.get('reminder', False),
-        reminder_sent=False
-    )
-    
-    # Ajouter un rappel si demandé
-    if data.get('reminder'):
-        reminder_minutes = int(data.get('reminder_minutes', 30))
-        reminder_time = start_date - timedelta(minutes=reminder_minutes)
-        new_event.reminder_time = reminder_time
-        print(f"Rappel configuré pour: {reminder_time} ({reminder_minutes} minutes avant le début)")
-    
-    db.session.add(new_event)
-    
     try:
-        db.session.commit()
-        return jsonify({
-            'status': 'success',
-            'id': new_event.id,
-            'message': 'Événement créé avec succès'
-        }), 201
+        user_id = session['user_id']
+        data = request.json
+        
+        print(f"Données reçues complètes: {data}")
+        
+        # Vérifier que les champs requis sont présents
+        required_fields = ['title', 'start', 'end']
+        for field in required_fields:
+            if field not in data:
+                print(f"Champ requis manquant: {field}")
+                return jsonify({
+                    'status': 'error',
+                    'message': f'Le champ {field} est requis'
+                }), 400
+        
+        # Convertir les dates de chaîne ISO à objets datetime avec timezone
+        from datetime import datetime, timezone
+        
+        # Afficher les dates brutes pour le débogage
+        print(f"Date de début brute: {data['start']}")
+        print(f"Date de fin brute: {data['end']}")
+        
+        try:
+            # Convertir en objets datetime avec timezone
+            start_date = datetime.fromisoformat(data['start'].replace('Z', '+00:00'))
+            end_date = datetime.fromisoformat(data['end'].replace('Z', '+00:00'))
+            
+            # S'assurer que les dates sont en UTC pour le stockage
+            if start_date.tzinfo is not None:
+                start_date = start_date.astimezone(timezone.utc)
+            if end_date.tzinfo is not None:
+                end_date = end_date.astimezone(timezone.utc)
+            
+            print(f"Date de début convertie (UTC): {start_date}")
+            print(f"Date de fin convertie (UTC): {end_date}")
+        except Exception as e:
+            print(f"Erreur lors de la conversion des dates: {str(e)}")
+            return jsonify({
+                'status': 'error',
+                'message': f'Erreur de format de date: {str(e)}'
+            }), 400
+        
+        # Créer un nouvel événement
+        new_event = CalendarEvent(
+            user_id=user_id,
+            title=data['title'],
+            description=data.get('description', ''),
+            start_date=start_date,
+            end_date=end_date,
+            color=data.get('color', '#3498db'),
+            type=data.get('type', 'other'),
+            reminder=data.get('reminder', False),
+            reminder_sent=False
+        )
+        
+        # Ajouter un rappel si demandé
+        if data.get('reminder'):
+            reminder_minutes = int(data.get('reminder_minutes', 30))
+            reminder_time = start_date - timedelta(minutes=reminder_minutes)
+            new_event.reminder_time = reminder_time
+            print(f"Rappel configuré pour: {reminder_time} ({reminder_minutes} minutes avant le début)")
+        
+        db.session.add(new_event)
+        
+        try:
+            db.session.commit()
+            print(f"Événement créé avec succès, ID: {new_event.id}")
+            return jsonify({
+                'status': 'success',
+                'id': new_event.id,
+                'message': 'Événement créé avec succès'
+            }), 201
+        except Exception as e:
+            db.session.rollback()
+            print(f"Erreur lors de la création de l'événement dans la base de données: {str(e)}")
+            return jsonify({
+                'status': 'error',
+                'message': f'Erreur de base de données: {str(e)}'
+            }), 500
     except Exception as e:
-        db.session.rollback()
+        print(f"Erreur générale dans create_event: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': str(e)
+            'message': f'Erreur serveur: {str(e)}'
         }), 500
 
-
-
-
-
-
+@app.route('/test_create_event')
+@login_required
+def test_create_event():
+    try:
+        user_id = session['user_id']
+        
+        # Créer un événement de test avec des valeurs fixes
+        from datetime import datetime, timedelta, timezone
+        
+        now = datetime.now(timezone.utc)
+        start_date = now + timedelta(hours=1)
+        end_date = start_date + timedelta(hours=1)
+        
+        test_event = CalendarEvent(
+            user_id=user_id,
+            title="Événement de test automatique",
+            description="Ceci est un test de création d'événement",
+            start_date=start_date,
+            end_date=end_date,
+            color="#3498db",
+            type="other",
+            reminder=False,
+            reminder_sent=False
+        )
+        
+        db.session.add(test_event)
+        db.session.commit()
+        
+        return jsonify({
+            'status': 'success',
+            'message': f'Événement de test créé avec succès, ID: {test_event.id}',
+            'event': {
+                'id': test_event.id,
+                'title': test_event.title,
+                'start': test_event.start_date.isoformat(),
+                'end': test_event.end_date.isoformat()
+            }
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': f'Erreur lors du test: {str(e)}'
+        })
 
 @app.route('/api/events/<int:event_id>', methods=['PUT'])
 @login_required
 def update_event(event_id):
-    user_id = session['user_id']
-    data = request.json
-    
-    # Trouver l'événement
-    event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
-    
-    if not event:
-        return jsonify({
-            'status': 'error',
-            'message': 'Événement non trouvé'
-        }), 404
-    
-    # Mettre à jour les champs
-    if 'title' in data:
-        event.title = data['title']
-    if 'description' in data:
-        event.description = data['description']
-    if 'start' in data:
-        event.start_date = datetime.fromisoformat(data['start'].replace('Z', '+00:00'))
-    if 'end' in data:
-        event.end_date = datetime.fromisoformat(data['end'].replace('Z', '+00:00'))
-    if 'color' in data:
-        event.color = data['color']
-    if 'type' in data:
-        event.type = data['type']
-    if 'completed' in data:
-        event.completed = data['completed']
-    if 'reminder' in data:
-        event.reminder = data['reminder']
-        # Réinitialiser le statut d'envoi si le rappel est modifié
-        event.reminder_sent = False
-        
-        if data['reminder']:
-            reminder_minutes = int(data.get('reminder_minutes', 30))
-            reminder_time = event.start_date - timedelta(minutes=reminder_minutes)
-            event.reminder_time = reminder_time
-        else:
-            event.reminder_time = None
-    
     try:
-        db.session.commit()
-        return jsonify({
-            'status': 'success',
-            'message': 'Événement mis à jour avec succès'
-        })
+        user_id = session['user_id']
+        data = request.json
+        
+        print(f"Données reçues pour mise à jour de l'événement {event_id}: {data}")
+        
+        # Trouver l'événement
+        event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
+        
+        if not event:
+            return jsonify({
+                'status': 'error',
+                'message': 'Événement non trouvé'
+            }), 404
+        
+        # Mettre à jour les champs
+        if 'title' in data:
+            event.title = data['title']
+        if 'description' in data:
+            event.description = data['description']
+        if 'start' in data:
+            try:
+                start_date = datetime.fromisoformat(data['start'].replace('Z', '+00:00'))
+                if start_date.tzinfo is not None:
+                    start_date = start_date.astimezone(timezone.utc)
+                event.start_date = start_date
+            except Exception as e:
+                print(f"Erreur lors de la conversion de la date de début: {str(e)}")
+                return jsonify({
+                    'status': 'error',
+                    'message': f'Format de date de début invalide: {str(e)}'
+                }), 400
+        if 'end' in data:
+            try:
+                end_date = datetime.fromisoformat(data['end'].replace('Z', '+00:00'))
+                if end_date.tzinfo is not None:
+                    end_date = end_date.astimezone(timezone.utc)
+                event.end_date = end_date
+            except Exception as e:
+                print(f"Erreur lors de la conversion de la date de fin: {str(e)}")
+                return jsonify({
+                    'status': 'error',
+                    'message': f'Format de date de fin invalide: {str(e)}'
+                }), 400
+        if 'color' in data:
+            event.color = data['color']
+        if 'type' in data:
+            event.type = data['type']
+        if 'completed' in data:
+            event.completed = data['completed']
+        if 'reminder' in data:
+            event.reminder = data['reminder']
+            # Réinitialiser le statut d'envoi si le rappel est modifié
+            event.reminder_sent = False
+            
+            if data['reminder']:
+                reminder_minutes = int(data.get('reminder_minutes', 30))
+                reminder_time = event.start_date - timedelta(minutes=reminder_minutes)
+                event.reminder_time = reminder_time
+            else:
+                event.reminder_time = None
+        
+        try:
+            db.session.commit()
+            print(f"Événement {event_id} mis à jour avec succès")
+            return jsonify({
+                'status': 'success',
+                'message': 'Événement mis à jour avec succès'
+            })
+        except Exception as e:
+            db.session.rollback()
+            print(f"Erreur lors de la mise à jour de l'événement dans la base de données: {str(e)}")
+            return jsonify({
+                'status': 'error',
+                'message': f'Erreur de base de données: {str(e)}'
+            }), 500
     except Exception as e:
-        db.session.rollback()
+        print(f"Erreur générale dans update_event: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': str(e)
+            'message': f'Erreur serveur: {str(e)}'
         }), 500
 
 @app.route('/api/events/<int:event_id>', methods=['DELETE'])
 @login_required
 def delete_event(event_id):
-    user_id = session['user_id']
-    
-    # Trouver l'événement
-    event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
-    
-    if not event:
-        return jsonify({
-            'status': 'error',
-            'message': 'Événement non trouvé'
-        }), 404
-    
-    db.session.delete(event)
-    
     try:
-        db.session.commit()
-        return jsonify({
-            'status': 'success',
-            'message': 'Événement supprimé avec succès'
-        })
+        user_id = session['user_id']
+        
+        # Trouver l'événement
+        event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
+        
+        if not event:
+            return jsonify({
+                'status': 'error',
+                'message': 'Événement non trouvé'
+            }), 404
+        
+        db.session.delete(event)
+        
+        try:
+            db.session.commit()
+            return jsonify({
+                'status': 'success',
+                'message': 'Événement supprimé avec succès'
+            })
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({
+                'status': 'error',
+                'message': str(e)
+            }), 500
     except Exception as e:
-        db.session.rollback()
+        print(f"Erreur générale dans delete_event: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': str(e)
+            'message': f'Erreur serveur: {str(e)}'
         }), 500
 
 @app.route('/api/events/complete/<int:event_id>', methods=['PUT'])
 @login_required
 def complete_event(event_id):
-    user_id = session['user_id']
-    
-    # Trouver l'événement
-    event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
-    
-    if not event:
-        return jsonify({
-            'status': 'error',
-            'message': 'Événement non trouvé'
-        }), 404
-    
-    # Inverser l'état de complétion
-    event.completed = not event.completed
-    
     try:
-        db.session.commit()
-        return jsonify({
-            'status': 'success',
-            'completed': event.completed,
-            'message': f'Événement marqué comme {"complété" if event.completed else "non complété"}'
-        })
+        user_id = session['user_id']
+        
+        # Trouver l'événement
+        event = CalendarEvent.query.filter_by(id=event_id, user_id=user_id).first()
+        
+        if not event:
+            return jsonify({
+                'status': 'error',
+                'message': 'Événement non trouvé'
+            }), 404
+        
+        # Inverser l'état de complétion
+        event.completed = not event.completed
+        
+        try:
+            db.session.commit()
+            return jsonify({
+                'status': 'success',
+                'completed': event.completed,
+                'message': f'Événement marqué comme {"complété" if event.completed else "non complété"}'
+            })
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({
+                'status': 'error',
+                'message': str(e)
+            }), 500
     except Exception as e:
-        db.session.rollback()
+        print(f"Erreur générale dans complete_event: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': str(e)
+            'message': f'Erreur serveur: {str(e)}'
         }), 500
 
 # Routes API pour les notes
@@ -898,7 +1017,6 @@ def create_precise_test_reminder():
     user_id = session['user_id']
     
     # Obtenir l'heure actuelle
-    from datetime import timezone
     now = datetime.now(timezone.utc)
     
     # Créer un événement qui commence dans exactement 10 minutes
@@ -941,13 +1059,6 @@ def create_precise_test_reminder():
     except Exception as e:
         db.session.rollback()
         return f"Erreur lors de la création de l'événement de test: {str(e)}"
-    
-
-
-
-
-
-    
 
 @app.route('/scheduler_status')
 def scheduler_status():
@@ -963,10 +1074,6 @@ def scheduler_status():
         'running': scheduler.running,
         'jobs': jobs
     }
-
-
-
-
 
 # Routes pour les matières de terminale
 # PHILO
@@ -1029,7 +1136,7 @@ def philo_seconde():
 @app.route('/cours/mathematiques/terminale')
 @login_required
 def mathematiques_terminale():
-    return render_template('cours/maths/maths_terminal.html')
+        return render_template('cours/maths/maths_terminal.html')
 
 @app.route('/cours/maths/chapitre1')
 @login_required
@@ -1312,4 +1419,4 @@ scheduler.start()
 
 # Lancement de l'application
 if __name__ == '__main__':
-    app.run(debug=False)  # Désactiver le mode debug pour tester
+    app.run(debug=True)  # Activer le mode debug pour le développement
