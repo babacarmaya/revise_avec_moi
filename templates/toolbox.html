@@ -1,499 +1,1072 @@
 {% extends "base.html" %}
 
 {% block content %}
-<style>
-    /* Styles pour la boîte à outils de notes */
-    .notes-container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 20px auto;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        overflow: hidden;
-        height: 70vh;
-    }
-
-    .notes-sidebar {
-        width: 30%;
-        background-color: #f8f9fa;
-        border-right: 1px solid #ddd;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-
-    .sidebar-header {
-        padding: 15px;
-        border-bottom: 1px solid #ddd;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .sidebar-header h3 {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin: 0;
-    }
-
-    .search-box {
-        padding: 10px 15px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .search-box input {
-        width: 100%;
-        padding: 8px 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 14px;
-    }
-
-    .notes-list {
-        list-style: none;
-        overflow-y: auto;
-        flex: 1;
-        padding: 0;
-        margin: 0;
-    }
-
-    .note-item {
-        padding: 12px 15px;
-        border-bottom: 1px solid #eee;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .note-item:hover {
-        background-color: #f0f0f0;
-    }
-
-    .note-item.active {
-        background-color: #e3f2fd;
-        border-left: 3px solid #3498db;
-    }
-
-    .note-title {
-        font-weight: 500;
-        margin-bottom: 5px;
-    }
-
-    .note-preview {
-        font-size: 0.85rem;
-        color: #95a5a6;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .note-date {
-        font-size: 0.75rem;
-        color: #95a5a6;
-        margin-top: 5px;
-    }
-
-    .notes-editor {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-
-    .editor-header {
-        padding: 15px;
-        border-bottom: 1px solid #ddd;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .editor-header input {
-        flex: 1;
-        padding: 8px 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-        margin-right: 10px;
-    }
-
-    .editor-tools {
-        display: flex;
-        gap: 5px;
-    }
-
-    .editor-tools button {
-        background: none;
-        color: #2c3e50;
-        padding: 5px 8px;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-
-    .editor-tools button:hover {
-        background-color: #f0f0f0;
-    }
-
-    .editor-content {
-        flex: 1;
-        padding: 15px;
-        overflow-y: auto;
-        outline: none;
-        line-height: 1.6;
-    }
-
-    .editor-footer {
-        padding: 10px 15px;
-        border-top: 1px solid #ddd;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    #saveStatus {
-        font-size: 0.85rem;
-        color: #95a5a6;
-    }
-
-    .editor-actions {
-        display: flex;
-        gap: 10px;
-    }
-
-    .editor-actions button {
-        padding: 8px 12px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-
-    #saveNote {
-        background-color: #3498db;
-        color: white;
-    }
-
-    #saveNote:hover {
-        background-color: #2980b9;
-    }
-
-    #deleteNote {
-        background-color: #e74c3c;
-        color: white;
-    }
-
-    #deleteNote:hover {
-        background-color: #c0392b;
-    }
-
-    /* Styles responsifs */
-    @media (max-width: 768px) {
-        .notes-container {
-            width: 95%;
-        }
-        
-        .notes-sidebar {
-            width: 40%;
-        }
-        
-        .editor-tools {
-            flex-wrap: wrap;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .notes-container {
-            flex-direction: column;
-            height: auto;
-        }
-        
-        .notes-sidebar {
-            width: 100%;
-            height: 200px;
-            border-right: none;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .notes-editor {
-            height: 400px;
-        }
-    }
-</style>
-
-<h1 class="page-title">NOTES</h1>
-
 <div class="notes-container">
-    <div class="notes-sidebar">
-        <div class="sidebar-header">
-            <h3>Mes notes</h3>
-            <button id="newNote">+ Nouvelle note</button>
-        </div>
-        <div class="search-box">
-            <input type="text" id="searchNotes" placeholder="Rechercher...">
-        </div>
-        <ul class="notes-list" id="notesList">
-            <!-- Les notes seront ajoutées ici dynamiquement -->
-        </ul>
+    <div class="notes-header">
+        <h1>Notes</h1>
+        <p class="notes-subtitle">Organisez vos idées et vos révisions</p>
     </div>
-    <div class="notes-editor">
-        <div class="editor-header">
-            <input type="text" id="noteTitle" placeholder="Titre de la note">
-            <div class="editor-tools">
-                <button data-command="bold" title="Gras"><i class="fas fa-bold"></i></button>
-                <button data-command="italic" title="Italique"><i class="fas fa-italic"></i></button>
-                <button data-command="underline" title="Souligné"><i class="fas fa-underline"></i></button>
-                <button data-command="insertUnorderedList" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
-                <button data-command="insertOrderedList" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
+
+    <div class="notes-app">
+        <div class="notes-sidebar">
+            <div class="sidebar-header">
+                <h2>Mes notes</h2>
+                <button class="btn-new-note" id="createNewNote">
+                    <i class="fas fa-plus"></i> Nouvelle note
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchNotes" placeholder="Rechercher...">
+            </div>
+            
+            <div class="notes-list" id="notesList">
+                <!-- Les notes seront générées dynamiquement ici -->
             </div>
         </div>
-        <div class="editor-content" id="noteContent" contenteditable="true"></div>
-        <div class="editor-footer">
-            <span id="saveStatus">Toutes les modifications sont enregistrées</span>
-            <div class="editor-actions">
-                <button id="saveNote"><i class="fas fa-save"></i> Enregistrer</button>
-                <button id="deleteNote"><i class="fas fa-trash"></i> Supprimer</button>
+        
+        <div class="notes-editor">
+            <div class="editor-header">
+                <input type="text" id="noteTitle" placeholder="Titre de la note" class="note-title-input">
+                <div class="note-info" id="noteInfo">
+                    <span class="note-date">Dernière modification: <span id="lastModified">-</span></span>
+                </div>
+            </div>
+            
+            <div class="editor-toolbar">
+                <button class="toolbar-btn" data-command="bold" title="Gras">
+                    <i class="fas fa-bold"></i>
+                </button>
+                <button class="toolbar-btn" data-command="italic" title="Italique">
+                    <i class="fas fa-italic"></i>
+                </button>
+                <button class="toolbar-btn" data-command="underline" title="Souligné">
+                    <i class="fas fa-underline"></i>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="toolbar-btn" data-command="insertUnorderedList" title="Liste à puces">
+                    <i class="fas fa-list-ul"></i>
+                </button>
+                <button class="toolbar-btn" data-command="insertOrderedList" title="Liste numérotée">
+                    <i class="fas fa-list-ol"></i>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="toolbar-btn" data-command="justifyLeft" title="Aligner à gauche">
+                    <i class="fas fa-align-left"></i>
+                </button>
+                <button class="toolbar-btn" data-command="justifyCenter" title="Centrer">
+                    <i class="fas fa-align-center"></i>
+                </button>
+                <button class="toolbar-btn" data-command="justifyRight" title="Aligner à droite">
+                    <i class="fas fa-align-right"></i>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="toolbar-btn" data-command="createLink" title="Insérer un lien">
+                    <i class="fas fa-link"></i>
+                </button>
+                <button class="toolbar-btn" data-command="insertImage" title="Insérer une image">
+                    <i class="fas fa-image"></i>
+                </button>
+            </div>
+            
+            <div class="editor-content" id="noteContent" contenteditable="true"></div>
+            
+            <div class="editor-footer">
+                <span class="save-status" id="saveStatus">Toutes les modifications sont enregistrées</span>
+                <div class="editor-actions">
+                    <button class="btn-save" id="saveNote">
+                        <i class="fas fa-save"></i> Enregistrer
+                    </button>
+                    <button class="btn-delete" id="deleteNote">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal de confirmation de suppression -->
+<div class="modal" id="deleteModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Confirmer la suppression</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Êtes-vous sûr de vouloir supprimer cette note ?</p>
+            <p class="warning">Cette action est irréversible.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-cancel">Annuler</button>
+            <button class="btn-confirm-delete">Supprimer</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.notes-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+    color: #fff;
+}
+
+.notes-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.notes-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.notes-subtitle {
+    font-size: 1.2rem;
+    color: #a8b2d1;
+    margin-bottom: 30px;
+}
+
+.notes-app {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    height: 70vh;
+    min-height: 500px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notes-sidebar {
+    width: 300px;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.btn-new-note {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s;
+}
+
+.btn-new-note:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-container {
+    padding: 15px;
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#searchNotes {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+#searchNotes:focus {
+    outline: none;
+    border-color: rgba(110, 142, 251, 0.5);
+}
+
+#searchNotes::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.notes-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.note-item {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+}
+
+.note-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.note-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: #6e8efb;
+}
+
+.note-item-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note-item-preview {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note-item-date {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 5px;
+}
+
+.notes-editor {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.editor-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.note-title-input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+}
+
+.note-title-input:focus {
+    outline: none;
+    border-bottom-color: #6e8efb;
+}
+
+.note-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.editor-toolbar {
+    padding: 10px 20px;
+    display: flex;
+    gap: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+}
+
+.toolbar-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.toolbar-btn.active {
+    background: rgba(110, 142, 251, 0.2);
+    color: #6e8efb;
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 5px;
+}
+
+.editor-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.editor-content:focus {
+    outline: none;
+}
+
+.editor-content p {
+    margin-bottom: 15px;
+}
+
+.editor-content ul, .editor-content ol {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.editor-content a {
+    color: #6e8efb;
+    text-decoration: none;
+}
+
+.editor-content a:hover {
+    text-decoration: underline;
+}
+
+.editor-footer {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.save-status {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-save, .btn-delete {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-delete {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #1a1f36;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body p {
+    margin: 0 0 15px 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.warning {
+    color: #e74c3c !important;
+    font-weight: 500;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-cancel {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-confirm-delete {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    background: #e74c3c;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-confirm-delete:hover {
+    background: #c0392b;
+}
+
+/* Styles pour les notifications */
+.notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+}
+
+.notification {
+    background: #1a1f36;
+    border-left: 4px solid #3498db;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification.success {
+    border-left-color: #2ecc71;
+}
+
+.notification.error {
+    border-left-color: #e74c3c;
+}
+
+.notification.warning {
+    border-left-color: #f39c12;
+}
+
+.notification i:first-child {
+    font-size: 1.2rem;
+    color: #3498db;
+}
+
+.notification.success i:first-child {
+    color: #2ecc71;
+}
+
+.notification.error i:first-child {
+    color: #e74c3c;
+}
+
+.notification.warning i:first-child {
+    color: #f39c12;
+}
+
+.notification span {
+    flex-grow: 1;
+    color: #fff;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-notification:hover {
+    color: #fff;
+}
+
+/* État vide */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.empty-state p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.empty-notes {
+    padding: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .notes-container {
+        padding: 15px;
+    }
+    
+    .notes-app {
+        flex-direction: column;
+        height: auto;
+        min-height: 0;
+    }
+    
+    .notes-sidebar {
+        width: 100%;
+        height: 300px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .notes-editor {
+        height: 500px;
+    }
+    
+    .editor-toolbar {
+        overflow-x: auto;
+        padding: 10px;
+    }
+    
+    .toolbar-btn {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.note-item {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Styles pour le contenu de l'éditeur */
+.editor-content h1, .editor-content h2, .editor-content h3, 
+.editor-content h4, .editor-content h5, .editor-content h6 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.editor-content h1 {
+    font-size: 1.8rem;
+}
+
+.editor-content h2 {
+    font-size: 1.5rem;
+}
+
+.editor-content h3 {
+    font-size: 1.3rem;
+}
+
+.editor-content blockquote {
+    border-left: 3px solid #6e8efb;
+    margin: 0 0 15px 0;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    font-style: italic;
+}
+
+.editor-content pre {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin-bottom: 15px;
+    font-family: monospace;
+}
+
+.editor-content code {
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.editor-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.editor-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.editor-content table th, .editor-content table td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+}
+
+.editor-content table th {
+    background: rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
+.editor-content table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Effet de focus sur l'éditeur */
+.editor-content:focus {
+    box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.1);
+}
+
+/* Styles pour les boutons désactivés */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+</style>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("Script de notes chargé");
+document.addEventListener('DOMContentLoaded', function() {
+    // Variables globales
+    let currentNoteId = null;
+    let notes = [];
+    let unsavedChanges = false;
+    
+    // Éléments DOM
+    const notesList = document.getElementById('notesList');
+    const noteTitle = document.getElementById('noteTitle');
+    const noteContent = document.getElementById('noteContent');
+    const saveStatus = document.getElementById('saveStatus');
+    const lastModified = document.getElementById('lastModified');
+    const searchInput = document.getElementById('searchNotes');
+    const deleteModal = document.getElementById('deleteModal');
+    
+    // Boutons
+    const createNewNoteBtn = document.getElementById('createNewNote');
+    const saveNoteBtn = document.getElementById('saveNote');
+    const deleteNoteBtn = document.getElementById('deleteNote');
+    const confirmDeleteBtn = document.querySelector('.btn-confirm-delete');
+    const cancelDeleteBtn = document.querySelector('.btn-cancel');
+    const closeModalBtn = document.querySelector('.close-modal');
+    
+    // Boutons de la barre d'outils
+    const toolbarButtons = document.querySelectorAll('.toolbar-btn');
+    
+    // Initialisation
+    initEditor();
+    loadNotes();
+    
+    // Fonction pour initialiser l'éditeur
+    function initEditor() {
+        // Désactiver l'éditeur au démarrage
+        noteTitle.disabled = true;
+        noteContent.contentEditable = "false";
+        saveNoteBtn.disabled = true;
+        deleteNoteBtn.disabled = true;
         
-        // Éléments DOM
-        const notesList = document.getElementById('notesList');
-        const newNoteBtn = document.getElementById('newNote');
-        const noteTitle = document.getElementById('noteTitle');
-        const noteContent = document.getElementById('noteContent');
-        const saveNoteBtn = document.getElementById('saveNote');
-        const deleteNoteBtn = document.getElementById('deleteNote');
-        const searchNotesInput = document.getElementById('searchNotes');
-        const saveStatus = document.getElementById('saveStatus');
-        const editorTools = document.querySelectorAll('.editor-tools button');
+        // Ajouter les écouteurs d'événements pour l'éditeur
+        noteTitle.addEventListener('input', markAsUnsaved);
+        noteContent.addEventListener('input', markAsUnsaved);
         
-        // Variables
-        let currentNoteId = null;
-        let notes = [];
-        let autoSaveTimer = null;
+        // Écouteurs pour les boutons
+        createNewNoteBtn.addEventListener('click', createNewNote);
+        saveNoteBtn.addEventListener('click', saveNote);
+        deleteNoteBtn.addEventListener('click', showDeleteModal);
         
-        // Charger les notes depuis l'API
-        loadNotes();
+        // Écouteurs pour le modal de suppression
+        confirmDeleteBtn.addEventListener('click', deleteNote);
+        cancelDeleteBtn.addEventListener('click', hideDeleteModal);
+        closeModalBtn.addEventListener('click', hideDeleteModal);
         
-        // Événements
-        newNoteBtn.addEventListener('click', function() {
-            console.log("Création d'une nouvelle note");
-            createNewNote();
-        });
+        // Écouteur pour la recherche
+        searchInput.addEventListener('input', filterNotes);
         
-        saveNoteBtn.addEventListener('click', function() {
-            console.log("Sauvegarde de la note");
-            saveNote();
-        });
-        
-        deleteNoteBtn.addEventListener('click', function() {
-            console.log("Suppression de la note");
-            confirmDeleteNote();
-        });
-        
-        noteContent.addEventListener('input', function() {
-            saveStatus.textContent = "Modifications non enregistrées...";
-            clearTimeout(autoSaveTimer);
-            autoSaveTimer = setTimeout(saveNote, 3000);
-        });
-        
-        noteTitle.addEventListener('input', function() {
-            saveStatus.textContent = "Modifications non enregistrées...";
-            clearTimeout(autoSaveTimer);
-            autoSaveTimer = setTimeout(saveNote, 3000);
-        });
-        
-        searchNotesInput.addEventListener('input', searchNotes);
-        
-        // Outils d'édition
-        editorTools.forEach(tool => {
-            tool.addEventListener('click', function() {
-                document.execCommand(tool.dataset.command, false, null);
-                noteContent.focus();
-            });
-        });
-        
-        // Fonctions
-        function loadNotes() {
-            fetch('/api/notes')
-                .then(response => response.json())
-                .then(data => {
-                    notes = data;
-                    console.log(`${notes.length} notes chargées`);
-                    renderNotesList();
-                    
-                    // Charger la note la plus récente si aucune n'est sélectionnée
-                    if (!currentNoteId && notes.length > 0) {
-                        loadNote(notes[0].id);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur lors du chargement des notes:', error);
-                });
-        }
-        
-        function createNewNote() {
-            const newNoteData = {
-                title: 'Nouvelle note',
-                content: ''
-            };
-            
-            fetch('/api/notes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newNoteData)
-            })
-            .then(response => response.json())
-                            .then(data => {
-                    if (data.status === 'success') {
-                        currentNoteId = data.id;
-                        noteTitle.value = 'Nouvelle note';
-                        noteContent.innerHTML = '';
-                        saveStatus.textContent = "Note créée avec succès";
-                        
-                        // Recharger la liste des notes
-                        loadNotes();
-                    } else {
-                        console.error('Erreur lors de la création de la note:', data.message);
-                        saveStatus.textContent = "Erreur lors de la création de la note";
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la création de la note:', error);
-                    saveStatus.textContent = "Erreur lors de la création de la note";
-                });
-        }
-        
-        function saveNote() {
-            if (!currentNoteId) return;
-            
-            const title = noteTitle.value.trim() || 'Sans titre';
-            const content = noteContent.innerHTML;
-            
-            const noteData = {
-                title: title,
-                content: content
-            };
-            
-            fetch(`/api/notes/${currentNoteId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(noteData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    saveStatus.textContent = "Toutes les modifications sont enregistrées";
-                    
-                    // Mettre à jour la liste des notes
-                    loadNotes();
-                } else {
-                    console.error('Erreur lors de la sauvegarde de la note:', data.message);
-                    saveStatus.textContent = "Erreur lors de la sauvegarde";
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de la sauvegarde de la note:', error);
-                saveStatus.textContent = "Erreur lors de la sauvegarde";
-            });
-        }
-        
-        function deleteNote() {
-            if (!currentNoteId) return;
-            
-            fetch(`/api/notes/${currentNoteId}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Réinitialiser l'éditeur
-                    currentNoteId = null;
-                    noteTitle.value = '';
-                    noteContent.innerHTML = '';
-                    saveStatus.textContent = "Note supprimée";
-                    
-                    // Recharger la liste des notes
-                    loadNotes();
-                } else {
-                    console.error('Erreur lors de la suppression de la note:', data.message);
-                    saveStatus.textContent = "Erreur lors de la suppression";
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de la suppression de la note:', error);
-                saveStatus.textContent = "Erreur lors de la suppression";
-            });
-        }
-        
-        function confirmDeleteNote() {
-            if (!currentNoteId) return;
-            
-            if (confirm("Êtes-vous sûr de vouloir supprimer cette note ?")) {
-                deleteNote();
-            }
-        }
-        
-        function loadNote(id) {
-            const note = notes.find(note => note.id === id);
-            if (note) {
-                currentNoteId = note.id;
-                noteTitle.value = note.title;
-                noteContent.innerHTML = note.content;
-                saveStatus.textContent = "Toutes les modifications sont enregistrées";
+        // Configurer les boutons de la barre d'outils
+        toolbarButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const command = this.dataset.command;
                 
-                // Mettre à jour la sélection dans la liste
-                const noteItems = document.querySelectorAll('.note-item');
-                noteItems.forEach(item => {
-                    if (parseInt(item.dataset.id) === id) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-            }
+                if (command === 'createLink') {
+                    const url = prompt('Entrez l\'URL du lien:', 'https://');
+                    if (url) document.execCommand(command, false, url);
+                } else if (command === 'insertImage') {
+                    const url = prompt('Entrez l\'URL de l\'image:', 'https://');
+                    if (url) document.execCommand(command, false, url);
+                } else {
+                    document.execCommand(command, false, null);
+                    this.classList.toggle('active');
+                }
+            });
+        });
+    }
+    
+    // Fonction pour charger les notes depuis l'API
+    function loadNotes() {
+        fetch('/api/notes')
+            .then(response => response.json())
+            .then(data => {
+                notes = data;
+                renderNotesList();
+                
+                // Si des notes existent, sélectionner la première
+                if (notes.length > 0) {
+                    selectNote(notes[0].id);
+                } else {
+                    // Sinon, afficher un message
+                    noteContent.innerHTML = '<div class="empty-state"><i class="fas fa-sticky-note"></i><p>Aucune note pour le moment</p><p>Cliquez sur "Nouvelle note" pour commencer</p></div>';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des notes:', error);
+                showNotification('Erreur lors du chargement des notes', 'error');
+            });
+    }
+    
+    // Fonction pour afficher la liste des notes
+    function renderNotesList() {
+        notesList.innerHTML = '';
+        
+        if (notes.length === 0) {
+            notesList.innerHTML = '<div class="empty-notes">Aucune note trouvée</div>';
+            return;
         }
         
-        function renderNotesList() {
-            notesList.innerHTML = '';
+        notes.forEach(note => {
+            const noteItem = document.createElement('div');
+            noteItem.className = 'note-item';
+            noteItem.dataset.id = note.id;
             
-            if (notes.length === 0) {
-                const emptyMessage = document.createElement('li');
-                emptyMessage.className = 'note-item empty';
-                emptyMessage.textContent = 'Aucune note. Cliquez sur "Nouvelle note" pour commencer.';
-                notesList.appendChild(emptyMessage);
+            if (currentNoteId === note.id) {
+                noteItem.classList.add('active');
+            }
+            
+            // Créer un aperçu du contenu (sans les balises HTML)
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = note.content;
+            const contentPreview = tempDiv.textContent || tempDiv.innerText || '';
+            
+            // Formater la date
+            const date = new Date(note.updated_at);
+            const formattedDate = date.toLocaleDateString('fr-FR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            noteItem.innerHTML = `
+                <div class="note-item-title">${note.title || 'Sans titre'}</div>
+                <div class="note-item-preview">${contentPreview.substring(0, 60)}${contentPreview.length > 60 ? '...' : ''}</div>
+                <div class="note-item-date">${formattedDate}</div>
+            `;
+            
+            noteItem.addEventListener('click', () => selectNote(note.id));
+            notesList.appendChild(noteItem);
+        });
+    }
+    
+    // Fonction pour sélectionner une note
+    function selectNote(id) {
+        // Vérifier s'il y a des modifications non sauvegardées
+        if (unsavedChanges) {
+            if (!confirm('Vous avez des modifications non sauvegardées. Voulez-vous continuer sans sauvegarder ?')) {
                 return;
             }
-            
-            notes.forEach(note => {
-                const noteItem = document.createElement('li');
-                noteItem.className = 'note-item';
-                noteItem.dataset.id = note.id;
+        }
+        
+        const note = notes.find(n => n.id === id);
+        if (!note) return;
+        
+        currentNoteId = id;
+        
+        // Mettre à jour l'interface
+        noteTitle.value = note.title || '';
+        noteContent.innerHTML = note.content || '';
+        
+        // Formater la date de dernière modification
+        const date = new Date(note.updated_at);
+        lastModified.textContent = date.toLocaleDateString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+                // Activer l'éditeur
+        noteTitle.disabled = false;
+        noteContent.contentEditable = "true";
+        saveNoteBtn.disabled = false;
+        deleteNoteBtn.disabled = false;
+        
+        // Mettre à jour la liste des notes
+        document.querySelectorAll('.note-item').forEach(item => {
+            item.classList.remove('active');
+            if (parseInt(item.dataset.id) === id) {
+                item.classList.add('active');
+            }
+        });
+        
+        // Réinitialiser le statut des modifications
+        unsavedChanges = false;
+        saveStatus.textContent = 'Toutes les modifications sont enregistrées';
+    }
+    
+    // Fonction pour créer une nouvelle note
+    function createNewNote() {
+        // Vérifier s'il y a des modifications non sauvegardées
+        if (unsavedChanges) {
+            if (!confirm('Vous avez des modifications non sauvegardées. Voulez-vous continuer sans sauvegarder ?')) {
+                return;
+            }
+        }
+        
+        // Créer une nouvelle note vide
+        fetch('/api/notes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: 'Nouvelle note',
+                content: ''
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Ajouter la nouvelle note à la liste
+                const newNote = {
+                    id: data.id,
+                    title: 'Nouvelle note',
+                    content: '',
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                };
                 
-                if (currentNoteId === note.id) {
-                    noteItem.classList.add('active');
+                notes.unshift(newNote);
+                renderNotesList();
+                selectNote(newNote.id);
+                
+                // Mettre le focus sur le titre
+                noteTitle.focus();
+                
+                showNotification('Nouvelle note créée', 'success');
+            } else {
+                throw new Error(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la création de la note:', error);
+            showNotification('Erreur lors de la création de la note', 'error');
+        });
+    }
+    
+    // Fonction pour sauvegarder une note
+    function saveNote() {
+        if (!currentNoteId) return;
+        
+        const title = noteTitle.value.trim() || 'Sans titre';
+        const content = noteContent.innerHTML;
+        
+        fetch(`/api/notes/${currentNoteId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: title,
+                content: content
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Mettre à jour la note dans la liste
+                const noteIndex = notes.findIndex(n => n.id === currentNoteId);
+                if (noteIndex !== -1) {
+                    notes[noteIndex].title = title;
+                    notes[noteIndex].content = content;
+                    notes[noteIndex].updated_at = new Date().toISOString();
                 }
                 
-                // Créer un aperçu du contenu sans les balises HTML
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = note.content;
-                const contentPreview = tempDiv.textContent || tempDiv.innerText;
+                renderNotesList();
                 
-                // Formater la date
-                const noteDate = new Date(note.updated_at);
-                const formattedDate = noteDate.toLocaleDateString('fr-FR', {
+                // Mettre à jour la date de dernière modification
+                const date = new Date();
+                lastModified.textContent = date.toLocaleDateString('fr-FR', {
                     day: '2-digit',
                     month: '2-digit',
                     year: 'numeric',
@@ -501,37 +1074,241 @@
                     minute: '2-digit'
                 });
                 
-                noteItem.innerHTML = `
-                    <div class="note-title">${note.title}</div>
-                    <div class="note-preview">${contentPreview.substring(0, 60)}${contentPreview.length > 60 ? '...' : ''}</div>
-                    <div class="note-date">${formattedDate}</div>
-                `;
+                // Réinitialiser le statut des modifications
+                unsavedChanges = false;
+                saveStatus.textContent = 'Toutes les modifications sont enregistrées';
                 
-                noteItem.addEventListener('click', function() {
-                    loadNote(note.id);
-                });
+                showNotification('Note sauvegardée', 'success');
+            } else {
+                throw new Error(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la sauvegarde de la note:', error);
+            showNotification('Erreur lors de la sauvegarde', 'error');
+        });
+    }
+    
+    // Fonction pour supprimer une note
+    function deleteNote() {
+        if (!currentNoteId) return;
+        
+        fetch(`/api/notes/${currentNoteId}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Supprimer la note de la liste
+                notes = notes.filter(n => n.id !== currentNoteId);
                 
-                notesList.appendChild(noteItem);
-            });
+                // Cacher le modal
+                hideDeleteModal();
+                
+                // Réinitialiser l'éditeur
+                currentNoteId = null;
+                noteTitle.value = '';
+                noteContent.innerHTML = '';
+                noteTitle.disabled = true;
+                noteContent.contentEditable = "false";
+                saveNoteBtn.disabled = true;
+                deleteNoteBtn.disabled = true;
+                lastModified.textContent = '-';
+                
+                // Afficher un message si aucune note
+                if (notes.length === 0) {
+                    noteContent.innerHTML = '<div class="empty-state"><i class="fas fa-sticky-note"></i><p>Aucune note pour le moment</p><p>Cliquez sur "Nouvelle note" pour commencer</p></div>';
+                } else {
+                    // Sinon, sélectionner la première note
+                    selectNote(notes[0].id);
+                }
+                
+                renderNotesList();
+                showNotification('Note supprimée', 'success');
+            } else {
+                throw new Error(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la suppression de la note:', error);
+            showNotification('Erreur lors de la suppression', 'error');
+            hideDeleteModal();
+        });
+    }
+    
+    // Fonction pour marquer les modifications comme non sauvegardées
+    function markAsUnsaved() {
+        if (!unsavedChanges) {
+            unsavedChanges = true;
+            saveStatus.textContent = 'Modifications non sauvegardées';
+        }
+    }
+    
+    // Fonction pour filtrer les notes
+    function filterNotes() {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        if (searchTerm === '') {
+            renderNotesList();
+            return;
         }
         
-        function searchNotes() {
-            const searchTerm = searchNotesInput.value.toLowerCase();
-            const noteItems = document.querySelectorAll('.note-item');
+        const filteredNotes = notes.filter(note => {
+            const title = note.title.toLowerCase();
             
-            noteItems.forEach(item => {
-                if (item.classList.contains('empty')) return;
-                
-                const title = item.querySelector('.note-title').textContent.toLowerCase();
-                const preview = item.querySelector('.note-preview').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || preview.includes(searchTerm)) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            // Créer un aperçu du contenu (sans les balises HTML)
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = note.content;
+            const content = tempDiv.textContent || tempDiv.innerText || '';
+            
+            return title.includes(searchTerm) || content.toLowerCase().includes(searchTerm);
+        });
+        
+        notesList.innerHTML = '';
+        
+        if (filteredNotes.length === 0) {
+            notesList.innerHTML = '<div class="empty-notes">Aucune note trouvée</div>';
+            return;
         }
-    });
+        
+        filteredNotes.forEach(note => {
+            const noteItem = document.createElement('div');
+            noteItem.className = 'note-item';
+            noteItem.dataset.id = note.id;
+            
+            if (currentNoteId === note.id) {
+                noteItem.classList.add('active');
+            }
+            
+            // Créer un aperçu du contenu (sans les balises HTML)
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = note.content;
+            const contentPreview = tempDiv.textContent || tempDiv.innerText || '';
+            
+            // Formater la date
+            const date = new Date(note.updated_at);
+            const formattedDate = date.toLocaleDateString('fr-FR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            noteItem.innerHTML = `
+                <div class="note-item-title">${note.title || 'Sans titre'}</div>
+                <div class="note-item-preview">${contentPreview.substring(0, 60)}${contentPreview.length > 60 ? '...' : ''}</div>
+                <div class="note-item-date">${formattedDate}</div>
+            `;
+            
+            noteItem.addEventListener('click', () => selectNote(note.id));
+            notesList.appendChild(noteItem);
+        });
+    }
+    
+    // Fonction pour afficher le modal de suppression
+    function showDeleteModal() {
+        if (!currentNoteId) return;
+        
+        const note = notes.find(n => n.id === currentNoteId);
+        if (!note) return;
+        
+        deleteModal.classList.add('active');
+    }
+    
+    // Fonction pour cacher le modal de suppression
+    function hideDeleteModal() {
+        deleteModal.classList.remove('active');
+    }
+    
+    // Fonction pour afficher une notification
+    function showNotification(message, type = 'info') {
+        // Créer le conteneur de notifications s'il n'existe pas
+        if (!document.querySelector('.notifications-container')) {
+            const container = document.createElement('div');
+            container.className = 'notifications-container';
+            document.body.appendChild(container);
+        }
+        
+        // Créer la notification
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        
+        // Ajouter l'icône en fonction du type
+        let icon = 'info-circle';
+        if (type === 'success') icon = 'check-circle';
+        if (type === 'error') icon = 'exclamation-circle';
+        if (type === 'warning') icon = 'exclamation-triangle';
+        
+        notification.innerHTML = `
+            <i class="fas fa-${icon}"></i>
+            <span>${message}</span>
+            <button class="close-notification"><i class="fas fa-times"></i></button>
+        `;
+        
+        // Ajouter au DOM
+        document.querySelector('.notifications-container').appendChild(notification);
+        
+        // Animation d'entrée
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // Fermer automatiquement après 5 secondes
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 5000);
+        
+        // Fermer manuellement
+        notification.querySelector('.close-notification').addEventListener('click', function() {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        });
+    }
+    
+    // Fonction pour simuler des données pour le développement
+    function simulateData() {
+        notes = [
+            {
+                id: 1,
+                title: 'Cours de mathématiques',
+                content: '<h2>Théorème de Pythagore</h2><p>Dans un triangle rectangle, le carré de l\'hypoténuse est égal à la somme des carrés des deux autres côtés.</p><p>a² + b² = c²</p>',
+                created_at: '2023-05-15T10:30:00Z',
+                updated_at: '2023-05-15T10:30:00Z'
+            },
+            {
+                id: 2,
+                title: 'Liste de tâches',
+                content: '<ul><li>Réviser pour l\'examen de physique</li><li>Terminer le projet d\'histoire</li><li>Préparer la présentation de français</li></ul>',
+                created_at: '2023-05-14T08:15:00Z',
+                updated_at: '2023-05-14T08:15:00Z'
+            },
+            {
+                id: 3,
+                title: 'Idées de projet',
+                content: '<p>Voici quelques idées pour mon projet de sciences :</p><ol><li>Étude sur l\'impact des plantes sur la qualité de l\'air</li><li>Création d\'un système d\'irrigation automatique</li><li>Analyse de la qualité de l\'eau dans différents quartiers</li></ol>',
+                created_at: '2023-05-10T14:45:00Z',
+                updated_at: '2023-05-10T14:45:00Z'
+            }
+        ];
+        
+        renderNotesList();
+        selectNote(1);
+    }
+    
+    // Pour le développement, utiliser des données simulées si l'API n'est pas disponible
+    window.addEventListener('error', function(e) {
+        if (e.message.includes('Failed to fetch') || e.message.includes('NetworkError')) {
+            console.warn('API non disponible, utilisation de données simulées');
+            simulateData();
+            return true;
+        }
+    }, true);
+});
 </script>
 {% endblock %}

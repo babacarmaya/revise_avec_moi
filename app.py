@@ -9,6 +9,26 @@ import pytz
 from flask_mail import Mail, Message
 from flask_apscheduler import APScheduler
 from dotenv import load_dotenv
+# Dans votre app.py, après vos autres imports
+import secrets
+from functools import wraps
+from flask import session, redirect, url_for, flash, request, render_template
+
+# Ajouter cette variable globale au début de votre fichier
+valid_tokens = set()
+
+# Ajouter ce décorateur après vos autres fonctions utilitaires
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('is_admin'):
+            flash("Accès non autorisé.", "danger")
+            return redirect(url_for('home'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+# Ajouter ces routes à la fin de vos autres routes
+
 
 # Charger les variables d'environnement
 load_dotenv()
@@ -241,6 +261,8 @@ def check_reminders():
         # Libérer le contexte si nous l'avons créé
         if ctx:
             ctx.pop()
+            # Dans app.py, après avoir créé l'application Flask
+
 
 # Planifier la tâche pour qu'elle s'exécute toutes les 5 minutes
 @scheduler.task('interval', id='check_reminders', seconds=30)
@@ -1075,6 +1097,114 @@ def scheduler_status():
         'jobs': jobs
     }
 
+@app.route('/verify_admin', methods=['POST'])
+def verify_admin():
+    admin_password = request.form.get('admin_password')
+    
+    # Vérifier le mot de passe (en production, utilisez une méthode plus sécurisée)
+    if admin_password == 'baBa_18082004':  # Utilisez votre mot de passe choisi
+        # Définir la session comme admin
+        session['is_admin'] = True
+        return redirect(url_for('admin_dashboard'))
+    else:
+        flash("Mot de passe incorrect.", "danger")
+        return redirect(url_for('home'))
+
+@app.route('/admin/dashboard')
+@admin_required
+def admin_dashboard():
+    # Compter les utilisateurs
+    users_count = User.query.count()
+    
+    # Compter les événements
+    events_count = CalendarEvent.query.count()
+    
+    # Compter les notes
+    notes_count = Note.query.count()
+    
+    # Compter les quiz
+    quiz_count = Quiz.query.count()
+    
+    # Récupérer les utilisateurs récents (5 derniers)
+    recent_users = User.query.order_by(User.date_inscription.desc()).limit(5).all()
+    
+    return render_template('admin/dashboard.html', 
+                          users_count=users_count,
+                          events_count=events_count,
+                          notes_count=notes_count,
+                          quiz_count=quiz_count,
+                          recent_users=recent_users)
+
+
+
+@app.route('/admin_test')
+def admin_test():
+    # Définir la session comme admin directement
+    session['is_admin'] = True
+    return redirect(url_for('admin_dashboard'))
+
+
+@app.route('/admin/users')
+@admin_required
+def admin_users():
+    users = User.query.all()
+    return render_template('admin/users.html', users=users)
+
+# Ajoutez ici les autres routes d'administration que vous souhaitez
+
+@app.route('/register_admin_token', methods=['POST'])
+def register_admin_token():
+    try:
+        data = request.json
+        token = data.get('token')
+        
+        print(f"Tentative d'enregistrement du token: {token}")
+        
+        if not token:
+            print("Erreur: Token manquant")
+            return jsonify({
+                'status': 'error',
+                'message': 'Token manquant'
+            }), 400
+        
+        # Ajouter le token à la liste des tokens valides
+        valid_tokens.add(token)
+        print(f"Token ajouté avec succès. Tokens valides: {valid_tokens}")
+        
+        return jsonify({
+            'status': 'success',
+            'message': 'Token enregistré'
+        })
+    except Exception as e:
+        print(f"Erreur lors de l'enregistrement du token: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/admin_secret_<token>')
+def admin_secret_access(token):
+    print(f"Tentative d'accès avec le token: {token}")
+    print(f"Tokens valides: {valid_tokens}")
+    
+    # Vérifier si le token est valide
+    if token in valid_tokens:
+        print(f"Token valide trouvé: {token}")
+        # Supprimer le token après utilisation
+        valid_tokens.remove(token)
+        print(f"Token supprimé. Tokens restants: {valid_tokens}")
+        
+        # Afficher la page d'authentification admin
+        return render_template('admin_auth.html')
+    else:
+        print(f"Token invalide: {token}")
+        # Rediriger vers la page d'accueil si le token est invalide
+        flash("Accès non autorisé.", "danger")
+        return redirect(url_for('home'))
+
+
+
+
 # Routes pour les matières de terminale
 # PHILO
 @app.route('/cours/philo/terminale')
@@ -1408,6 +1538,8 @@ def test_db():
     
     except Exception as e:
         return f"Erreur de connexion à la base de données : {str(e)}"
+    
+
 
 # Initialisation de la base de données
 with app.app_context():

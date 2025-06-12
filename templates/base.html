@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Dans la section <head> de votre base.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
 <body>
     <div class="theme-switch-wrapper">
@@ -164,7 +167,102 @@
                 console.log('Toggle non trouvé');
             }
         });
-        </script>
-</body>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables pour stocker la séquence
+            let secretCode = '';
+            const adminCode = 'babslegoat1234'; // Votre code secret
+            let lastKeyTime = 0;
+            const resetDelay = 2000; // 2 secondes pour réinitialiser la séquence
+            
+            // Écouter les événements de saisie dans les champs de texte
+            document.addEventListener('keydown', function(e) {
+                // Vérifier si l'élément actif est un champ de texte
+                const activeElement = document.activeElement;
+                const isInputField = activeElement.tagName === 'INPUT' || 
+                                    activeElement.tagName === 'TEXTAREA' ||
+                                    activeElement.isContentEditable;
+                
+                if (isInputField) {
+                    const currentTime = new Date().getTime();
+                    
+                    // Réinitialiser si trop de temps s'est écoulé
+                    if (currentTime - lastKeyTime > resetDelay) {
+                        secretCode = '';
+                    }
+                    
+                    // Mettre à jour le temps de la dernière touche
+                    lastKeyTime = currentTime;
+                    
+                    // Ajouter la touche à la séquence
+                    if (e.key.length === 1) { // Ignorer les touches spéciales
+                        secretCode += e.key;
+                        
+                        // Vérifier si le code secret est entré
+                        if (secretCode.includes(adminCode)) {
+                            // Empêcher l'ajout du caractère au champ
+                            e.preventDefault();
+                            
+                            // Générer un token et l'envoyer au serveur
+                            const token = generateSecureToken();
+                            
+                            // Envoyer le token au serveur via une requête AJAX
+                            fetch('/register_admin_token', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': getCsrfToken() // Si vous utilisez CSRF
+                                },
+                                body: JSON.stringify({ token: token })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === 'success') {
+                                    // Rediriger vers la page admin
+                                    window.location.href = '/admin_secret_' + token;
+                                } else {
+                                    console.error('Erreur:', data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erreur:', error);
+                            });
+                            
+                            // Réinitialiser le code
+                            secretCode = '';
+                        }
+                        
+                        // Limiter la longueur du code stocké
+                        if (secretCode.length > 20) {
+                            secretCode = secretCode.substring(secretCode.length - 20);
+                        }
+                    }
+                }
+            });
+            
+            // Fonction pour générer un token temporaire
+            function generateSecureToken() {
+                return Math.random().toString(36).substring(2, 15) + 
+                    Math.random().toString(36).substring(2, 15);
+            }
+            
+            // Fonction pour obtenir le token CSRF (si vous utilisez CSRF)
+            function getCsrfToken() {
+                // Si vous avez un élément meta avec le token CSRF
+                const metaTag = document.querySelector('meta[name="csrf-token"]');
+                if (metaTag) {
+                    return metaTag.getAttribute('content');
+                }
+                // Sinon, essayez de trouver un input caché dans un formulaire
+                const csrfInput = document.querySelector('input[name="csrf_token"]');
+                if (csrfInput) {
+                    return csrfInput.value;
+                }
+                return '';
+            }
+        });
+    </script>
+        <!-- À la fin de votre base.html, juste avant la fermeture de </body> -->
+
 </body>
 </html>

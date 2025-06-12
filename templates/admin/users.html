@@ -1,0 +1,1131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-users-container">
+    <div class="admin-header">
+        <h1>Gestion des utilisateurs</h1>
+        <div class="header-actions">
+            <div class="search-container">
+                <input type="text" id="userSearch" placeholder="Rechercher un utilisateur...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn-return">
+                <i class="fas fa-arrow-left"></i> Retour au tableau de bord
+            </a>
+            <button class="btn-add-user">
+                <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+            </button>
+        </div>
+    </div>
+
+    <div class="users-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ users|length }}</h3>
+                <p>Utilisateurs total</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ users|selectattr('niveau', 'equalto', 'terminale')|list|length }}</h3>
+                <p>Terminale</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ users|selectattr('niveau', 'equalto', 'premiere')|list|length }}</h3>
+                <p>Première</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ users|selectattr('niveau', 'equalto', 'seconde')|list|length }}</h3>
+                <p>Seconde</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="users-table-container">
+        <table class="users-table" id="usersTable">
+            <thead>
+                <tr>
+                    <th class="sortable" data-sort="id">ID <i class="fas fa-sort"></i></th>
+                    <th class="sortable" data-sort="nom">Nom <i class="fas fa-sort"></i></th>
+                    <th class="sortable" data-sort="prenom">Prénom <i class="fas fa-sort"></i></th>
+                    <th class="sortable" data-sort="email">Email <i class="fas fa-sort"></i></th>
+                    <th class="sortable" data-sort="niveau">Niveau <i class="fas fa-sort"></i></th>
+                    <th class="sortable" data-sort="date">Date d'inscription <i class="fas fa-sort"></i></th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>
+                        <a href="mailto:{{ user.email }}" class="email-link">
+                            {{ user.email }}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="niveau-badge niveau-{{ user.niveau }}">{{ user.niveau }}</span>
+                    </td>
+                    <td>{{ user.date_inscription.strftime('%d/%m/%Y') }}</td>
+                    <td class="actions">
+                        <button class="btn-action view-user" data-id="{{ user.id }}" title="Voir le profil">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-action edit-user" data-id="{{ user.id }}" title="Modifier">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-action delete-user" data-id="{{ user.id }}" title="Supprimer">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <button class="pagination-btn" id="prevPage" disabled>
+            <i class="fas fa-chevron-left"></i> Précédent
+        </button>
+        <div class="pagination-info">
+            Page <span id="currentPage">1</span> sur <span id="totalPages">1</span>
+        </div>
+        <button class="pagination-btn" id="nextPage" disabled>
+            Suivant <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Modal de confirmation de suppression -->
+<div class="modal" id="deleteModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Confirmer la suppression</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Êtes-vous sûr de vouloir supprimer l'utilisateur <span id="deleteUserName"></span> ?</p>
+            <p class="warning">Cette action est irréversible.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-cancel">Annuler</button>
+            <button class="btn-confirm-delete">Supprimer</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de détails utilisateur -->
+<div class="modal" id="userDetailsModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Détails de l'utilisateur</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body user-details">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+                <span class="user-status active"></span>
+            </div>
+            <div class="user-info-container">
+                <div class="user-info-group">
+                    <div class="user-info">
+                        <label>Nom complet</label>
+                        <p id="userFullName">-</p>
+                    </div>
+                    <div class="user-info">
+                        <label>Email</label>
+                        <p id="userEmail">-</p>
+                    </div>
+                </div>
+                <div class="user-info-group">
+                    <div class="user-info">
+                        <label>Niveau</label>
+                        <p id="userNiveau">-</p>
+                    </div>
+                    <div class="user-info">
+                        <label>Date d'inscription</label>
+                        <p id="userDate">-</p>
+                    </div>
+                </div>
+                <div class="user-info-group">
+                    <div class="user-info">
+                        <label>Téléphone</label>
+                        <p id="userPhone">-</p>
+                    </div>
+                    <div class="user-info">
+                        <label>Âge</label>
+                        <p id="userAge">-</p>
+                    </div>
+                </div>
+                <div class="user-stats">
+                    <div class="user-stat">
+                        <div class="stat-value" id="userQuizCount">0</div>
+                        <div class="stat-label">Quiz complétés</div>
+                    </div>
+                    <div class="user-stat">
+                        <div class="stat-value" id="userEventsCount">0</div>
+                        <div class="stat-label">Événements</div>
+                    </div>
+                    <div class="user-stat">
+                        <div class="stat-value" id="userNotesCount">0</div>
+                        <div class="stat-label">Notes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-edit-user">Modifier</button>
+            <button class="btn-close-modal">Fermer</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-users-container {
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.admin-header {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.admin-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-container input {
+    padding: 10px 15px 10px 40px;
+    border-radius: 30px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 250px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.search-container input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.4);
+    width: 300px;
+}
+
+.search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-return, .btn-add-user {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.btn-return {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-return:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-add-user {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add-user:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.users-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon i {
+    font-size: 1.4rem;
+    color: white;
+}
+
+.stat-info h3 {
+    font-size: 1.6rem;
+    margin: 0 0 5px 0;
+    font-weight: 700;
+}
+
+.stat-info p {
+    margin: 0;
+    color: #a8b2d1;
+    font-size: 0.9rem;
+}
+
+.users-table-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.users-table th, .users-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.users-table th {
+    background: rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.sortable i {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.sortable:hover i {
+    opacity: 1;
+}
+
+.users-table tbody tr {
+    transition: background 0.3s;
+}
+
+.users-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.email-link {
+    color: #6e8efb;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.email-link:hover {
+    color: #a777e3;
+    text-decoration: underline;
+}
+
+.niveau-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.niveau-terminale {
+    background: linear-gradient(135deg, #ff9966, #ff5e62);
+    color: white;
+}
+
+.niveau-premiere {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+}
+
+.niveau-seconde {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    color: white;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-action {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.view-user:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.edit-user:hover {
+    background: #f39c12;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.delete-user:hover {
+    background: #e74c3c;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #1a1f36;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body p {
+    margin: 0 0 15px 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.warning {
+    color: #e74c3c !important;
+    font-weight: 500;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-cancel, .btn-close-modal {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel:hover, .btn-close-modal:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-confirm-delete, .btn-edit-user {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-confirm-delete {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-confirm-delete:hover {
+    background: #c0392b;
+}
+
+.btn-edit-user {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-edit-user:hover {
+    background: #d35400;
+}
+
+/* User details modal */
+.user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-avatar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.user-avatar i {
+    font-size: 5rem;
+    color: #6e8efb;
+}
+
+.user-status {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    bottom: 10px;
+    right: calc(50% - 30px);
+    border: 2px solid #1a1f36;
+}
+
+.user-status.active {
+    background: #2ecc71;
+}
+
+.user-status.inactive {
+    background: #95a5a6;
+}
+
+.user-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-info-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.user-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.user-info label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 5px;
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.user-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.user-stat {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #6e8efb;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+    .admin-users-container {
+        padding: 15px;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-container input {
+        width: 100%;
+    }
+    
+    .users-table-container {
+        overflow-x: auto;
+    }
+    
+    .user-info-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Variables pour la pagination
+    const rowsPerPage = 10;
+    let currentPage = 1;
+    const table = document.getElementById('usersTable');
+    const rows = table.querySelectorAll('tbody tr');
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    
+    document.getElementById('totalPages').textContent = totalPages;
+    
+    // Fonction pour afficher les lignes de la page actuelle
+    function displayRows() {
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        
+        rows.forEach((row, index) => {
+            row.style.display = (index >= start && index < end) ? '' : 'none';
+        });
+        
+        // Mettre à jour les boutons de pagination
+        document.getElementById('prevPage').disabled = currentPage === 1;
+        document.getElementById('nextPage').disabled = currentPage === totalPages;
+        document.getElementById('currentPage').textContent = currentPage;
+    }
+    
+    // Initialiser l'affichage
+    displayRows();
+    
+    // Événements pour la pagination
+    document.getElementById('prevPage').addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayRows();
+        }
+    });
+    
+    document.getElementById('nextPage').addEventListener('click', function() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayRows();
+        }
+    });
+    
+    // Recherche d'utilisateurs
+    const searchInput = document.getElementById('userSearch');
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+        
+        // Réinitialiser la pagination si on fait une recherche
+        if (searchTerm) {
+            document.querySelector('.pagination').style.display = 'none';
+        } else {
+            document.querySelector('.pagination').style.display = 'flex';
+            currentPage = 1;
+            displayRows();
+        }
+    });
+    
+    // Tri des colonnes
+    const sortableHeaders = document.querySelectorAll('.sortable');
+    sortableHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const column = this.dataset.sort;
+            const isAscending = this.classList.contains('asc');
+            
+            // Réinitialiser toutes les colonnes
+            sortableHeaders.forEach(h => h.classList.remove('asc', 'desc'));
+            
+            // Définir la direction du tri
+            this.classList.add(isAscending ? 'desc' : 'asc');
+            
+            // Trier les lignes
+            const sortedRows = Array.from(rows).sort((a, b) => {
+                let aValue = a.querySelector(`td:nth-child(${getColumnIndex(column)})`).textContent;
+                let bValue = b.querySelector(`td:nth-child(${getColumnIndex(column)})`).textContent;
+                
+                // Convertir en nombre si c'est un ID
+                if (column === 'id') {
+                    aValue = parseInt(aValue);
+                    bValue = parseInt(bValue);
+                }
+                
+                if (isAscending) {
+                    return aValue > bValue ? -1 : 1;
+                } else {
+                    return aValue < bValue ? -1 : 1;
+                }
+            });
+            
+            // Réorganiser les lignes dans le tableau
+            const tbody = table.querySelector('tbody');
+            sortedRows.forEach(row => tbody.appendChild(row));
+            
+            // Réinitialiser la pagination
+            currentPage = 1;
+            displayRows();
+        });
+    });
+    
+    // Fonction pour obtenir l'index de la colonne
+    function getColumnIndex(columnName) {
+        switch(columnName) {
+            case 'id': return 1;
+            case 'nom': return 2;
+            case 'prenom': return 3;
+            case 'email': return 4;
+            case 'niveau': return 5;
+            case 'date': return 6;
+            default: return 1;
+        }
+    }
+    
+    // Gestion des modals
+    const deleteModal = document.getElementById('deleteModal');
+    const userDetailsModal = document.getElementById('userDetailsModal');
+    const closeButtons = document.querySelectorAll('.close-modal, .btn-cancel, .btn-close-modal');
+    
+    // Ouvrir modal de suppression
+    document.querySelectorAll('.delete-user').forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.dataset.id;
+            const userName = this.closest('tr').querySelector('td:nth-child(3)').textContent + ' ' + 
+                            this.closest('tr').querySelector('td:nth-child(2)').textContent;
+            
+            document.getElementById('deleteUserName').textContent = userName;
+            deleteModal.classList.add('active');
+            
+            // Configurer le bouton de confirmation
+            document.querySelector('.btn-confirm-delete').dataset.id = userId;
+        });
+    });
+    
+    // Ouvrir modal de détails utilisateur
+    document.querySelectorAll('.view-user').forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const userId = this.dataset.id;
+            
+            // Remplir les informations de l'utilisateur
+            document.getElementById('userFullName').textContent = row.querySelector('td:nth-child(3)').textContent + ' ' + 
+                                                                row.querySelector('td:nth-child(2)').textContent;
+            document.getElementById('userEmail').textContent = row.querySelector('td:nth-child(4)').textContent;
+            document.getElementById('userNiveau').textContent = row.querySelector('td:nth-child(5)').textContent;
+            document.getElementById('userDate').textContent = row.querySelector('td:nth-child(6)').textContent;
+            
+            // Simuler des données pour l'exemple
+            document.getElementById('userPhone').textContent = '+33 6 XX XX XX XX';
+            document.getElementById('userAge').textContent = '18 ans';
+            document.getElementById('userQuizCount').textContent = Math.floor(Math.random() * 20);
+            document.getElementById('userEventsCount').textContent = Math.floor
+                        document.getElementById('userEventsCount').textContent = Math.floor(Math.random() * 15);
+            document.getElementById('userNotesCount').textContent = Math.floor(Math.random() * 30);
+            
+            // Configurer le bouton d'édition
+            document.querySelector('.btn-edit-user').dataset.id = userId;
+            
+            userDetailsModal.classList.add('active');
+        });
+    });
+    
+    // Fermer les modals
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            deleteModal.classList.remove('active');
+            userDetailsModal.classList.remove('active');
+        });
+    });
+    
+    // Confirmer la suppression
+    document.querySelector('.btn-confirm-delete').addEventListener('click', function() {
+        const userId = this.dataset.id;
+        
+        // Ici, vous feriez normalement une requête AJAX pour supprimer l'utilisateur
+        // Pour cet exemple, nous allons simplement simuler la suppression
+        
+        // Simuler une requête réussie
+        setTimeout(() => {
+            // Trouver et supprimer la ligne du tableau
+            const rowToRemove = document.querySelector(`.delete-user[data-id="${userId}"]`).closest('tr');
+            rowToRemove.remove();
+            
+            // Mettre à jour le compteur d'utilisateurs
+            const userCountElement = document.querySelector('.stat-card:first-child .stat-info h3');
+            userCountElement.textContent = parseInt(userCountElement.textContent) - 1;
+            
+            // Fermer le modal
+            deleteModal.classList.remove('active');
+            
+            // Afficher une notification
+            showNotification('Utilisateur supprimé avec succès', 'success');
+            
+            // Mettre à jour la pagination
+            const newTotalPages = Math.ceil(document.querySelectorAll('#usersTable tbody tr').length / rowsPerPage);
+            document.getElementById('totalPages').textContent = newTotalPages;
+            
+            if (currentPage > newTotalPages) {
+                currentPage = newTotalPages || 1;
+            }
+            
+            displayRows();
+        }, 500);
+    });
+    
+    // Fonction pour afficher une notification
+    function showNotification(message, type = 'info') {
+        // Créer l'élément de notification
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        
+        // Ajouter l'icône en fonction du type
+        let icon = 'info-circle';
+        if (type === 'success') icon = 'check-circle';
+        if (type === 'error') icon = 'exclamation-circle';
+        if (type === 'warning') icon = 'exclamation-triangle';
+        
+        notification.innerHTML = `
+            <i class="fas fa-${icon}"></i>
+            <span>${message}</span>
+            <button class="close-notification"><i class="fas fa-times"></i></button>
+        `;
+        
+        // Ajouter au DOM
+        if (!document.querySelector('.notifications-container')) {
+            const container = document.createElement('div');
+            container.className = 'notifications-container';
+            document.body.appendChild(container);
+        }
+        
+        document.querySelector('.notifications-container').appendChild(notification);
+        
+        // Animation d'entrée
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // Fermer automatiquement après 5 secondes
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 5000);
+        
+        // Fermer manuellement
+        notification.querySelector('.close-notification').addEventListener('click', function() {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        });
+    }
+});
+</script>
+
+<style>
+/* Styles pour les notifications */
+.notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+}
+
+.notification {
+    background: #1a1f36;
+    border-left: 4px solid #3498db;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification.success {
+    border-left-color: #2ecc71;
+}
+
+.notification.error {
+    border-left-color: #e74c3c;
+}
+
+.notification.warning {
+    border-left-color: #f39c12;
+}
+
+.notification i:first-child {
+    font-size: 1.2rem;
+    color: #3498db;
+}
+
+.notification.success i:first-child {
+    color: #2ecc71;
+}
+
+.notification.error i:first-child {
+    color: #e74c3c;
+}
+
+.notification.warning i:first-child {
+    color: #f39c12;
+}
+
+.notification span {
+    flex-grow: 1;
+    color: #fff;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-notification:hover {
+    color: #fff;
+}
+
+/* Styles pour le tri des colonnes */
+.sortable.asc i:before {
+    content: "\f0de"; /* fa-sort-up */
+    opacity: 1;
+    color: #6e8efb;
+}
+
+.sortable.desc i:before {
+    content: "\f0dd"; /* fa-sort-down */
+    opacity: 1;
+    color: #6e8efb;
+}
+</style>
+{% endblock %}
